@@ -35,6 +35,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inventario));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
             Cedula = new DataGridViewTextBoxColumn();
@@ -48,6 +52,8 @@
             guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -202,12 +208,52 @@
             pictureBox3.TabIndex = 152;
             pictureBox3.TabStop = false;
             // 
+            // guna2Button2
+            // 
+            guna2Button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2Button2.BorderRadius = 8;
+            guna2Button2.CustomizableEdges = customizableEdges5;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = SystemColors.HotTrack;
+            guna2Button2.Font = new Font("Segoe UI", 9F);
+            guna2Button2.ForeColor = Color.White;
+            guna2Button2.Image = (Image)resources.GetObject("guna2Button2.Image");
+            guna2Button2.Location = new Point(901, 773);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2Button2.Size = new Size(50, 23);
+            guna2Button2.TabIndex = 154;
+            // 
+            // guna2Button3
+            // 
+            guna2Button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2Button3.BorderRadius = 8;
+            guna2Button3.CustomizableEdges = customizableEdges7;
+            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button3.FillColor = SystemColors.HotTrack;
+            guna2Button3.Font = new Font("Segoe UI", 9F);
+            guna2Button3.ForeColor = Color.White;
+            guna2Button3.Image = (Image)resources.GetObject("guna2Button3.Image");
+            guna2Button3.Location = new Point(845, 773);
+            guna2Button3.Name = "guna2Button3";
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2Button3.Size = new Size(50, 23);
+            guna2Button3.TabIndex = 155;
+            // 
             // Inventario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(965, 808);
+            Controls.Add(guna2Button3);
+            Controls.Add(guna2Button2);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox3);
             Controls.Add(guna2TextBox2);
@@ -239,5 +285,7 @@
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button guna2Button3;
     }
 }

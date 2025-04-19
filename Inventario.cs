@@ -15,6 +15,7 @@ namespace ejemplo
         public Inventario()
         {
             InitializeComponent();
+            //ggdfgdf
         }
     }
 }
