@@ -1,10 +1,15 @@
 using System.Runtime.InteropServices;
 using Examen2Grupo3;
+using static Examen2Grupo3.GenerarPedido;
 
 namespace ejemplo
 {
     public partial class Form1 : Form
+
     {
+
+        private List<Pedido> historialPedidos = new List<Pedido>();
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -162,7 +167,7 @@ namespace ejemplo
 
         private void button8_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new GenerarPedido());
+            AbrirFormulario(new GenerarPedido(historialPedidos));
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -207,6 +212,7 @@ namespace ejemplo
 
         private void guna2Button8_Click(object sender, EventArgs e)
         {
+    
             AbrirFormulario(new PedidosHistorial());
         }
 
@@ -228,7 +234,7 @@ namespace ejemplo
 
         private void guna2Button12_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new GenerarPedido());
+            AbrirFormulario(new GenerarPedido(historialPedidos));
         }
 
         private void guna2Button11_Click(object sender, EventArgs e)

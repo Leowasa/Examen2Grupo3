@@ -146,6 +146,7 @@
             guna2Button1.Size = new Size(82, 23);
             guna2Button1.TabIndex = 130;
             guna2Button1.Text = "Agregar";
+            guna2Button1.Click += guna2Button1_Click;
             // 
             // pictureBox2
             // 

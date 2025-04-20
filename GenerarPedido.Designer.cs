@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            components = new System.ComponentModel.Container();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -46,6 +45,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel3 = new Panel();
             Cliente = new Label();
             label15 = new Label();
@@ -64,12 +65,6 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            dataGridView1 = new DataGridView();
-            Cedula = new DataGridViewTextBoxColumn();
-            Nombre = new DataGridViewTextBoxColumn();
-            Usuariosd = new DataGridViewButtonColumn();
-            Rol = new DataGridViewTextBoxColumn();
-            Column1 = new DataGridViewTextBoxColumn();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
@@ -79,6 +74,8 @@
             guna2TextBox3 = new Guna.UI2.WinForms.Guna2TextBox();
             guna2TextBox4 = new Guna.UI2.WinForms.Guna2TextBox();
             panel5 = new Panel();
+            guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(components);
+            dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -137,7 +134,7 @@
             label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label13.AutoSize = true;
             label13.ForeColor = Color.Gainsboro;
-            label13.Location = new Point(841, 674);
+            label13.Location = new Point(834, 750);
             label13.Name = "label13";
             label13.Size = new Size(84, 15);
             label13.TabIndex = 118;
@@ -148,7 +145,7 @@
             label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label12.AutoSize = true;
             label12.ForeColor = Color.Gainsboro;
-            label12.Location = new Point(841, 689);
+            label12.Location = new Point(834, 765);
             label12.Name = "label12";
             label12.Size = new Size(58, 15);
             label12.TabIndex = 117;
@@ -159,7 +156,7 @@
             label11.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label11.AutoSize = true;
             label11.ForeColor = Color.Gainsboro;
-            label11.Location = new Point(841, 659);
+            label11.Location = new Point(834, 735);
             label11.Name = "label11";
             label11.Size = new Size(77, 15);
             label11.TabIndex = 116;
@@ -267,70 +264,6 @@
             label1.TabIndex = 100;
             label1.Text = "Datos del Cliente:";
             // 
-            // dataGridView1
-            // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.HotTrack;
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeight = 30;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Rol, Column1 });
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(22, 577);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(896, 79);
-            dataGridView1.TabIndex = 126;
-            // 
-            // Cedula
-            // 
-            Cedula.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Cedula.HeaderText = "ID";
-            Cedula.Name = "Cedula";
-            Cedula.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Nombre";
-            Nombre.Name = "Nombre";
-            // 
-            // Usuariosd
-            // 
-            Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Usuariosd.FlatStyle = FlatStyle.Flat;
-            Usuariosd.HeaderText = "Correo Electronico";
-            Usuariosd.Name = "Usuariosd";
-            Usuariosd.ReadOnly = true;
-            // 
-            // Rol
-            // 
-            Rol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Rol.HeaderText = "Direccion";
-            Rol.Name = "Rol";
-            // 
-            // Column1
-            // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column1.HeaderText = "Tipo de cliente ";
-            Column1.Name = "Column1";
-            // 
             // guna2Button1
             // 
             guna2Button1.BorderRadius = 8;
@@ -366,6 +299,7 @@
             guna2Button2.Size = new Size(111, 23);
             guna2Button2.TabIndex = 129;
             guna2Button2.Text = "Agregar";
+            guna2Button2.Click += guna2Button2_Click;
             // 
             // guna2Button3
             // 
@@ -378,12 +312,13 @@
             guna2Button3.FillColor = SystemColors.HotTrack;
             guna2Button3.Font = new Font("Segoe UI", 9F);
             guna2Button3.ForeColor = Color.White;
-            guna2Button3.Location = new Point(22, 666);
+            guna2Button3.Location = new Point(25, 773);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2Button3.Size = new Size(111, 23);
             guna2Button3.TabIndex = 130;
             guna2Button3.Text = "Confirmar";
+            guna2Button3.Click += guna2Button3_Click;
             // 
             // guna2DateTimePicker1
             // 
@@ -493,6 +428,38 @@
             panel5.Size = new Size(892, 10);
             panel5.TabIndex = 126;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.AccessibleRole = AccessibleRole.TitleBar;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.HotTrack;
+            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.ColumnHeadersHeight = 40;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.SteelBlue;
+            dataGridView1.Location = new Point(26, 569);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.Size = new Size(890, 87);
+            dataGridView1.TabIndex = 136;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
             // GenerarPedido
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -500,6 +467,7 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(965, 808);
+            Controls.Add(dataGridView1);
             Controls.Add(panel5);
             Controls.Add(guna2TextBox4);
             Controls.Add(guna2TextBox3);
@@ -509,7 +477,6 @@
             Controls.Add(guna2Button3);
             Controls.Add(guna2Button2);
             Controls.Add(guna2Button1);
-            Controls.Add(dataGridView1);
             Controls.Add(panel3);
             Controls.Add(Cliente);
             Controls.Add(label15);
@@ -531,7 +498,6 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "GenerarPedido";
             Text = "GenerarPedido";
-            Load += GenerarPedido_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -559,12 +525,6 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Cedula;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewButtonColumn Usuariosd;
-        private DataGridViewTextBoxColumn Rol;
-        private DataGridViewTextBoxColumn Column1;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
@@ -575,5 +535,8 @@
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox4;
         private Panel panel4;
         private Panel panel5;
+        private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridView dataGridView1;
     }
 }
