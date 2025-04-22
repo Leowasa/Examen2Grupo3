@@ -189,7 +189,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 35);
             panel1.Name = "panel1";
-            panel1.Size = new Size(250, 808);
+            panel1.Size = new Size(250, 753);
             panel1.TabIndex = 140;
             // 
             // panelVentas
@@ -201,7 +201,7 @@
             panelVentas.ForeColor = SystemColors.ControlLight;
             panelVentas.Location = new Point(0, 671);
             panelVentas.Name = "panelVentas";
-            panelVentas.Size = new Size(250, 93);
+            panelVentas.Size = new Size(233, 93);
             panelVentas.TabIndex = 141;
             // 
             // guna2Button11
@@ -214,14 +214,14 @@
             guna2Button11.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button11.Dock = DockStyle.Top;
             guna2Button11.FillColor = Color.Transparent;
-            guna2Button11.Font = new Font("Century Gothic", 9.75F);
+            guna2Button11.Font = new Font("Microsoft Sans Serif", 9.75F);
             guna2Button11.ForeColor = Color.White;
             guna2Button11.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button11.Location = new Point(0, 45);
             guna2Button11.Name = "guna2Button11";
             guna2Button11.PressedColor = Color.DimGray;
             guna2Button11.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button11.Size = new Size(250, 45);
+            guna2Button11.Size = new Size(233, 45);
             guna2Button11.TabIndex = 146;
             guna2Button11.Text = "Ordenes de entrega";
             guna2Button11.TextAlign = HorizontalAlignment.Left;
@@ -237,14 +237,14 @@
             guna2Button12.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button12.Dock = DockStyle.Top;
             guna2Button12.FillColor = Color.Transparent;
-            guna2Button12.Font = new Font("Century Gothic", 9.75F);
+            guna2Button12.Font = new Font("Microsoft Sans Serif", 9.75F);
             guna2Button12.ForeColor = Color.White;
             guna2Button12.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button12.Location = new Point(0, 0);
             guna2Button12.Name = "guna2Button12";
             guna2Button12.PressedColor = Color.DimGray;
             guna2Button12.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button12.Size = new Size(250, 45);
+            guna2Button12.Size = new Size(233, 45);
             guna2Button12.TabIndex = 145;
             guna2Button12.Text = "Pedidos Preventivos";
             guna2Button12.TextAlign = HorizontalAlignment.Left;
@@ -260,7 +260,7 @@
             guna2Button9.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button9.Dock = DockStyle.Top;
             guna2Button9.FillColor = Color.Transparent;
-            guna2Button9.Font = new Font("Century Gothic", 11.25F);
+            guna2Button9.Font = new Font("Microsoft Sans Serif", 11.25F);
             guna2Button9.ForeColor = Color.White;
             guna2Button9.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button9.Image = (Image)resources.GetObject("guna2Button9.Image");
@@ -270,7 +270,7 @@
             guna2Button9.Name = "guna2Button9";
             guna2Button9.PressedColor = Color.DimGray;
             guna2Button9.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2Button9.Size = new Size(250, 45);
+            guna2Button9.Size = new Size(233, 45);
             guna2Button9.TabIndex = 140;
             guna2Button9.Text = "Ventas";
             guna2Button9.Click += guna2Button9_Click;
@@ -285,7 +285,7 @@
             panelhistorial.ForeColor = SystemColors.ControlLight;
             panelhistorial.Location = new Point(0, 487);
             panelhistorial.Name = "panelhistorial";
-            panelhistorial.Size = new Size(250, 139);
+            panelhistorial.Size = new Size(233, 139);
             panelhistorial.TabIndex = 139;
             // 
             // guna2Button7
@@ -298,14 +298,14 @@
             guna2Button7.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button7.Dock = DockStyle.Top;
             guna2Button7.FillColor = Color.Transparent;
-            guna2Button7.Font = new Font("Century Gothic", 9.75F);
+            guna2Button7.Font = new Font("Microsoft Sans Serif", 9.75F);
             guna2Button7.ForeColor = Color.White;
             guna2Button7.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button7.Location = new Point(0, 90);
             guna2Button7.Name = "guna2Button7";
             guna2Button7.PressedColor = Color.DimGray;
             guna2Button7.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button7.Size = new Size(250, 45);
+            guna2Button7.Size = new Size(233, 45);
             guna2Button7.TabIndex = 144;
             guna2Button7.Text = "Facturas";
             guna2Button7.TextAlign = HorizontalAlignment.Left;
@@ -321,14 +321,14 @@
             guna2Button6.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button6.Dock = DockStyle.Top;
             guna2Button6.FillColor = Color.Transparent;
-            guna2Button6.Font = new Font("Century Gothic", 9.75F);
+            guna2Button6.Font = new Font("Microsoft Sans Serif", 9.75F);
             guna2Button6.ForeColor = Color.White;
             guna2Button6.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button6.Location = new Point(0, 45);
             guna2Button6.Name = "guna2Button6";
             guna2Button6.PressedColor = Color.DimGray;
             guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2Button6.Size = new Size(250, 45);
+            guna2Button6.Size = new Size(233, 45);
             guna2Button6.TabIndex = 143;
             guna2Button6.Text = "Ordenes de entrega";
             guna2Button6.TextAlign = HorizontalAlignment.Left;
@@ -344,14 +344,14 @@
             guna2Button8.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button8.Dock = DockStyle.Top;
             guna2Button8.FillColor = Color.Transparent;
-            guna2Button8.Font = new Font("Century Gothic", 9.75F);
+            guna2Button8.Font = new Font("Microsoft Sans Serif", 9.75F);
             guna2Button8.ForeColor = Color.White;
             guna2Button8.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button8.Location = new Point(0, 0);
             guna2Button8.Name = "guna2Button8";
             guna2Button8.PressedColor = Color.DimGray;
             guna2Button8.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2Button8.Size = new Size(250, 45);
+            guna2Button8.Size = new Size(233, 45);
             guna2Button8.TabIndex = 142;
             guna2Button8.Text = "Pedidos Preventivos";
             guna2Button8.TextAlign = HorizontalAlignment.Left;
@@ -367,7 +367,7 @@
             guna2Button5.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button5.Dock = DockStyle.Top;
             guna2Button5.FillColor = Color.Transparent;
-            guna2Button5.Font = new Font("Century Gothic", 11.25F);
+            guna2Button5.Font = new Font("Microsoft Sans Serif", 11.25F);
             guna2Button5.ForeColor = Color.White;
             guna2Button5.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button5.Image = (Image)resources.GetObject("guna2Button5.Image");
@@ -377,7 +377,7 @@
             guna2Button5.Name = "guna2Button5";
             guna2Button5.PressedColor = Color.DimGray;
             guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2Button5.Size = new Size(250, 45);
+            guna2Button5.Size = new Size(233, 45);
             guna2Button5.TabIndex = 138;
             guna2Button5.Text = "Historial";
             guna2Button5.Click += guna2Button5_Click;
@@ -392,7 +392,7 @@
             guna2Button4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button4.Dock = DockStyle.Top;
             guna2Button4.FillColor = Color.Transparent;
-            guna2Button4.Font = new Font("Century Gothic", 11.25F);
+            guna2Button4.Font = new Font("Microsoft Sans Serif", 11.25F);
             guna2Button4.ForeColor = Color.White;
             guna2Button4.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button4.Image = (Image)resources.GetObject("guna2Button4.Image");
@@ -402,7 +402,7 @@
             guna2Button4.Name = "guna2Button4";
             guna2Button4.PressedColor = Color.DimGray;
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            guna2Button4.Size = new Size(250, 45);
+            guna2Button4.Size = new Size(233, 45);
             guna2Button4.TabIndex = 137;
             guna2Button4.Text = "Clientes";
             guna2Button4.Click += guna2Button4_Click;
@@ -417,7 +417,7 @@
             guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button3.Dock = DockStyle.Top;
             guna2Button3.FillColor = Color.Transparent;
-            guna2Button3.Font = new Font("Century Gothic", 11.25F);
+            guna2Button3.Font = new Font("Microsoft Sans Serif", 11.25F);
             guna2Button3.ForeColor = Color.White;
             guna2Button3.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button3.Image = (Image)resources.GetObject("guna2Button3.Image");
@@ -427,7 +427,7 @@
             guna2Button3.Name = "guna2Button3";
             guna2Button3.PressedColor = Color.DimGray;
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            guna2Button3.Size = new Size(250, 45);
+            guna2Button3.Size = new Size(233, 45);
             guna2Button3.TabIndex = 136;
             guna2Button3.Text = "Inventario";
             guna2Button3.Click += guna2Button3_Click;
@@ -442,7 +442,7 @@
             guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button1.Dock = DockStyle.Top;
             guna2Button1.FillColor = Color.Transparent;
-            guna2Button1.Font = new Font("Century Gothic", 11.25F);
+            guna2Button1.Font = new Font("Microsoft Sans Serif", 11.25F);
             guna2Button1.ForeColor = Color.White;
             guna2Button1.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button1.Image = (Image)resources.GetObject("guna2Button1.Image");
@@ -452,7 +452,7 @@
             guna2Button1.Name = "guna2Button1";
             guna2Button1.PressedColor = Color.DimGray;
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            guna2Button1.Size = new Size(250, 45);
+            guna2Button1.Size = new Size(233, 45);
             guna2Button1.TabIndex = 135;
             guna2Button1.Text = "Distribuidora";
             guna2Button1.Click += guna2Button1_Click;
@@ -467,7 +467,7 @@
             guna2Button13.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button13.Dock = DockStyle.Top;
             guna2Button13.FillColor = Color.Transparent;
-            guna2Button13.Font = new Font("Century Gothic", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guna2Button13.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2Button13.ForeColor = Color.White;
             guna2Button13.HoverState.FillColor = SystemColors.HotTrack;
             guna2Button13.Image = (Image)resources.GetObject("guna2Button13.Image");
@@ -477,7 +477,7 @@
             guna2Button13.Name = "guna2Button13";
             guna2Button13.PressedColor = Color.DimGray;
             guna2Button13.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            guna2Button13.Size = new Size(250, 45);
+            guna2Button13.Size = new Size(233, 45);
             guna2Button13.TabIndex = 134;
             guna2Button13.Text = "Usuarios";
             guna2Button13.Click += guna2Button13_Click;
@@ -491,17 +491,17 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(250, 262);
+            panel3.Size = new Size(233, 262);
             panel3.TabIndex = 11;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Gainsboro;
             label2.Location = new Point(80, 134);
             label2.Name = "label2";
-            label2.Size = new Size(91, 17);
+            label2.Size = new Size(83, 15);
             label2.TabIndex = 133;
             label2.Text = "Administrador";
             // 
@@ -550,7 +550,7 @@
             PanelPrincipal.Dock = DockStyle.Fill;
             PanelPrincipal.Location = new Point(250, 35);
             PanelPrincipal.Name = "PanelPrincipal";
-            PanelPrincipal.Size = new Size(965, 808);
+            PanelPrincipal.Size = new Size(965, 753);
             PanelPrincipal.TabIndex = 141;
             // 
             // Form1
@@ -560,7 +560,7 @@
             AutoScroll = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(1215, 843);
+            ClientSize = new Size(1215, 788);
             Controls.Add(PanelPrincipal);
             Controls.Add(panel1);
             Controls.Add(guna2CustomGradientPanel1);

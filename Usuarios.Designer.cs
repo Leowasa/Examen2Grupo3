@@ -35,12 +35,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Usuarios));
             Cliente = new Label();
             dataGridView1 = new DataGridView();
-            Cedula = new DataGridViewTextBoxColumn();
-            Nombre = new DataGridViewTextBoxColumn();
-            Usuariosd = new DataGridViewButtonColumn();
-            Rol = new DataGridViewTextBoxColumn();
             textBox1 = new TextBox();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            btnAgregarUsuario = new Guna.UI2.WinForms.Guna2Button();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -52,7 +48,7 @@
             // 
             Cliente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             Cliente.BackColor = Color.Transparent;
-            Cliente.Font = new Font("Century Gothic", 21.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            Cliente.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
             Cliente.ForeColor = Color.Gainsboro;
             Cliente.Location = new Point(403, 9);
             Cliente.Name = "Cliente";
@@ -69,7 +65,7 @@
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.HotTrack;
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.White;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -77,47 +73,20 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Rol });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(54, 345);
+            dataGridView1.Location = new Point(50, 387);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(989, 405);
+            dataGridView1.Size = new Size(989, 145);
             dataGridView1.TabIndex = 95;
-            // 
-            // Cedula
-            // 
-            Cedula.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Cedula.HeaderText = "ID";
-            Cedula.Name = "Cedula";
-            Cedula.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Nombre";
-            Nombre.Name = "Nombre";
-            // 
-            // Usuariosd
-            // 
-            Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Usuariosd.FlatStyle = FlatStyle.Flat;
-            Usuariosd.HeaderText = "Usuario";
-            Usuariosd.Name = "Usuariosd";
-            Usuariosd.ReadOnly = true;
-            // 
-            // Rol
-            // 
-            Rol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Rol.HeaderText = "Rol";
-            Rol.Name = "Rol";
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // textBox1
             // 
@@ -126,27 +95,27 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(150, 23);
             textBox1.TabIndex = 94;
-            textBox1.Text = "Ingresar Nombre o ID";
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
-            // guna2Button1
+            // btnAgregarUsuario
             // 
-            guna2Button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2Button1.BorderRadius = 8;
-            guna2Button1.CustomizableEdges = customizableEdges1;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = SystemColors.HotTrack;
-            guna2Button1.Font = new Font("Segoe UI", 9F);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(961, 316);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button1.Size = new Size(82, 23);
-            guna2Button1.TabIndex = 130;
-            guna2Button1.Text = "Agregar";
-            guna2Button1.Click += guna2Button1_Click;
+            btnAgregarUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAgregarUsuario.BorderRadius = 8;
+            btnAgregarUsuario.CustomizableEdges = customizableEdges1;
+            btnAgregarUsuario.DisabledState.BorderColor = Color.DarkGray;
+            btnAgregarUsuario.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnAgregarUsuario.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnAgregarUsuario.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnAgregarUsuario.FillColor = SystemColors.HotTrack;
+            btnAgregarUsuario.Font = new Font("Segoe UI", 9F);
+            btnAgregarUsuario.ForeColor = Color.White;
+            btnAgregarUsuario.Location = new Point(961, 316);
+            btnAgregarUsuario.Name = "btnAgregarUsuario";
+            btnAgregarUsuario.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnAgregarUsuario.Size = new Size(82, 23);
+            btnAgregarUsuario.TabIndex = 130;
+            btnAgregarUsuario.Text = "Agregar";
+            btnAgregarUsuario.Click += guna2Button1_Click;
             // 
             // pictureBox2
             // 
@@ -175,10 +144,10 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(1094, 872);
+            ClientSize = new Size(1094, 788);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
-            Controls.Add(guna2Button1);
+            Controls.Add(btnAgregarUsuario);
             Controls.Add(Cliente);
             Controls.Add(dataGridView1);
             Controls.Add(textBox1);
@@ -197,11 +166,7 @@
         private Label Cliente;
         private DataGridView dataGridView1;
         private TextBox textBox1;
-        private DataGridViewTextBoxColumn Cedula;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewButtonColumn Usuariosd;
-        private DataGridViewTextBoxColumn Rol;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnAgregarUsuario;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
     }
