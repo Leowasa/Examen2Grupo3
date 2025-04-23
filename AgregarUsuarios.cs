@@ -34,7 +34,7 @@ namespace Examen2Grupo3
 
                
                 string rutaImagen = Path.Combine(Application.StartupPath, @"..\img\fondo.jpg");
-                Bitmap img = new Bitmap(rutaImagen);
+                Bitmap img = new Bitmap(rutaImagen);///
                 formAgregar.BackgroundImage = img;
                 formAgregar.BackgroundImageLayout = ImageLayout.Stretch;
 
