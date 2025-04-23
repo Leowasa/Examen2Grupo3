@@ -154,6 +154,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Usuarios";
             Text = "Usuarios";
+            Load += Usuarios_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

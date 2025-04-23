@@ -8,7 +8,7 @@ namespace ejemplo
 
     {
 
-        private List<Pedido> historialPedidos = new List<Pedido>();
+    
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -167,7 +167,7 @@ namespace ejemplo
 
         private void button8_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new GenerarPedido(historialPedidos));
+            AbrirFormulario(new GenerarPedido());
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -234,7 +234,7 @@ namespace ejemplo
 
         private void guna2Button12_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new GenerarPedido(historialPedidos));
+            AbrirFormulario(new GenerarPedido());
         }
 
         private void guna2Button11_Click(object sender, EventArgs e)

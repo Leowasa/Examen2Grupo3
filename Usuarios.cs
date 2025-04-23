@@ -152,6 +152,11 @@ namespace ejemplo
             dataGridViewDecorativa.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
             dataGridViewDecorativa.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
         }
+
+        private void Usuarios_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

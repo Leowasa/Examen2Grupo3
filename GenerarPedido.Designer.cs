@@ -46,7 +46,9 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel3 = new Panel();
             Cliente = new Label();
             label15 = new Label();
@@ -76,6 +78,17 @@
             panel5 = new Panel();
             guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(components);
             dataGridView1 = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Columna4 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
+            Column7 = new DataGridViewTextBoxColumn();
+            label14 = new Label();
+            label18 = new Label();
+            label19 = new Label();
+            label20 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -85,18 +98,18 @@
             panel3.BackColor = SystemColors.HotTrack;
             panel3.Location = new Point(26, 477);
             panel3.Name = "panel3";
-            panel3.Size = new Size(892, 10);
+            panel3.Size = new Size(917, 10);
             panel3.TabIndex = 125;
             // 
             // Cliente
             // 
             Cliente.Font = new Font("Bell MT", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Cliente.ForeColor = Color.Gainsboro;
-            Cliente.Location = new Point(31, 9);
+            Cliente.Location = new Point(25, 9);
             Cliente.Name = "Cliente";
-            Cliente.Size = new Size(270, 35);
+            Cliente.Size = new Size(178, 35);
             Cliente.TabIndex = 123;
-            Cliente.Text = "Pedido Nº: 0001230";
+            Cliente.Text = "Pedido Nº: ";
             Cliente.TextAlign = ContentAlignment.TopCenter;
             // 
             // label15
@@ -134,33 +147,33 @@
             label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label13.AutoSize = true;
             label13.ForeColor = Color.Gainsboro;
-            label13.Location = new Point(834, 750);
+            label13.Location = new Point(753, 728);
             label13.Name = "label13";
-            label13.Size = new Size(84, 15);
+            label13.Size = new Size(69, 15);
             label13.TabIndex = 118;
-            label13.Text = "Descuento: ---";
+            label13.Text = "Descuento: ";
             // 
             // label12
             // 
             label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label12.AutoSize = true;
             label12.ForeColor = Color.Gainsboro;
-            label12.Location = new Point(834, 765);
+            label12.Location = new Point(789, 764);
             label12.Name = "label12";
-            label12.Size = new Size(58, 15);
+            label12.Size = new Size(38, 15);
             label12.TabIndex = 117;
-            label12.Text = "Total: ----";
+            label12.Text = "Total: ";
             // 
             // label11
             // 
             label11.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label11.AutoSize = true;
             label11.ForeColor = Color.Gainsboro;
-            label11.Location = new Point(834, 735);
+            label11.Location = new Point(789, 743);
             label11.Name = "label11";
-            label11.Size = new Size(77, 15);
+            label11.Size = new Size(57, 15);
             label11.TabIndex = 116;
-            label11.Text = "Subtotal: ----";
+            label11.Text = "Subtotal: ";
             // 
             // label4
             // 
@@ -177,7 +190,7 @@
             label10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label10.AutoSize = true;
             label10.ForeColor = Color.Gainsboro;
-            label10.Location = new Point(735, 367);
+            label10.Location = new Point(762, 367);
             label10.Name = "label10";
             label10.Size = new Size(60, 15);
             label10.TabIndex = 112;
@@ -238,7 +251,7 @@
             label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.ForeColor = Color.Gainsboro;
-            label3.Location = new Point(735, 300);
+            label3.Location = new Point(762, 300);
             label3.Name = "label3";
             label3.Size = new Size(108, 15);
             label3.TabIndex = 106;
@@ -312,13 +325,13 @@
             guna2Button3.FillColor = SystemColors.HotTrack;
             guna2Button3.Font = new Font("Segoe UI", 9F);
             guna2Button3.ForeColor = Color.White;
-            guna2Button3.Location = new Point(25, 773);
+            guna2Button3.Location = new Point(23, 735);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2Button3.Size = new Size(111, 23);
             guna2Button3.TabIndex = 130;
             guna2Button3.Text = "Confirmar";
-            guna2Button3.Click += guna2Button3_Click;
+            guna2Button3.Click += guna2Button3_Click_1;
             // 
             // guna2DateTimePicker1
             // 
@@ -390,7 +403,7 @@
             guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Font = new Font("Segoe UI", 9F);
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(735, 323);
+            guna2TextBox3.Location = new Point(762, 320);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
             guna2TextBox3.SelectedText = "";
@@ -411,7 +424,7 @@
             guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Font = new Font("Segoe UI", 9F);
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(735, 385);
+            guna2TextBox4.Location = new Point(762, 385);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
             guna2TextBox4.SelectedText = "";
@@ -425,7 +438,7 @@
             panel5.BackColor = SystemColors.HotTrack;
             panel5.Location = new Point(26, 257);
             panel5.Name = "panel5";
-            panel5.Size = new Size(892, 10);
+            panel5.Size = new Size(927, 10);
             panel5.TabIndex = 126;
             // 
             // dataGridView1
@@ -445,20 +458,117 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 40;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Columna4, Column5, Column6, Column7 });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(26, 569);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(890, 87);
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridView1.Size = new Size(917, 148);
             dataGridView1.TabIndex = 136;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "ID";
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Column2.HeaderText = "Nombre";
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Column3.HeaderText = "Descripcion";
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            // 
+            // Columna4
+            // 
+            Columna4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Columna4.HeaderText = "Categoria";
+            Columna4.Name = "Columna4";
+            Columna4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            Column5.HeaderText = "Cantidad";
+            Column5.Name = "Column5";
+            Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            Column6.DefaultCellStyle = dataGridViewCellStyle2;
+            Column6.HeaderText = "Precio unit";
+            Column6.Name = "Column6";
+            Column6.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            Column7.DefaultCellStyle = dataGridViewCellStyle3;
+            Column7.HeaderText = "Total";
+            Column7.Name = "Column7";
+            Column7.ReadOnly = true;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Bell MT", 21.75F, FontStyle.Bold);
+            label14.ForeColor = Color.Gainsboro;
+            label14.Location = new Point(184, 10);
+            label14.Name = "label14";
+            label14.Size = new Size(107, 34);
+            label14.TabIndex = 137;
+            label14.Text = "label14";
+            label14.Click += label14_Click;
+            // 
+            // label18
+            // 
+            label18.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label18.AutoSize = true;
+            label18.ForeColor = Color.Gainsboro;
+            label18.Location = new Point(819, 726);
+            label18.Name = "label18";
+            label18.Size = new Size(30, 15);
+            label18.TabIndex = 138;
+            label18.Text = " ----";
+            label18.Click += label18_Click;
+            // 
+            // label19
+            // 
+            label19.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label19.AutoSize = true;
+            label19.ForeColor = Color.Gainsboro;
+            label19.Location = new Point(838, 743);
+            label19.Name = "label19";
+            label19.Size = new Size(30, 15);
+            label19.TabIndex = 139;
+            label19.Text = " ----";
+            // 
+            // label20
+            // 
+            label20.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label20.AutoSize = true;
+            label20.ForeColor = Color.Gainsboro;
+            label20.Location = new Point(854, 758);
+            label20.Name = "label20";
+            label20.Size = new Size(30, 15);
+            label20.TabIndex = 140;
+            label20.Text = " ----";
             // 
             // GenerarPedido
             // 
@@ -466,7 +576,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(965, 808);
+            ClientSize = new Size(965, 788);
+            Controls.Add(label20);
+            Controls.Add(label19);
+            Controls.Add(label18);
+            Controls.Add(label14);
             Controls.Add(dataGridView1);
             Controls.Add(panel5);
             Controls.Add(guna2TextBox4);
@@ -498,6 +612,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "GenerarPedido";
             Text = "GenerarPedido";
+            Load += GenerarPedido_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -538,5 +653,16 @@
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private DataGridViewTextBoxColumn Column4;
         private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Columna4;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn Column7;
+        private Label label14;
+        private Label label18;
+        private Label label19;
+        private Label label20;
     }
 }

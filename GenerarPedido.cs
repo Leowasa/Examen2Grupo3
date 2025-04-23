@@ -11,42 +11,26 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using static Examen2Grupo3.GenerarPedido;
+using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.PedidoManager;
+using System.Text.Json; // Agregar esta directiva para usar JsonSerializerOptions
+
 
 namespace Examen2Grupo3
 {
     public partial class GenerarPedido : Form
     {
-        public class Pedido
-        {
-            public DateTime Fecha { get; set; }
-            public string? NombreCliente { get; set; }
-            public int? IDCliente { get; set; }
-            public string? Direccion { get; set; }
-            public string? Correo { get; set; }
-            public List<Producto>? Productos { get; set; }
-            public decimal Total { get; set; }
-        }
-
-        public class Producto
-        {
-            public int ID { get; set; }
-            public string? Nombre { get; set; }
-            public string? Descripcion { get; set; }
-            public string? Categoria { get; set; }
-            public int Cantidad { get; set; }
-            public decimal PrecioUnitario { get; set; }
-            public decimal Total => Cantidad * PrecioUnitario;
-        }
-        private List<Pedido> historialPedidos;
-        private List<Producto>? productos; // Lista de productos para el DataGridView
-
-        public GenerarPedido(List<Pedido> historial)
+        private Cliente clienteActual;
+        private Pedido pedido = new Pedido();
+        private static List<Pedido> Lista = new List<Pedido>();
+        private static int NumeroPedido = 1;
+        public GenerarPedido()
         {
             InitializeComponent();
-            historialPedidos = historial;
-            dataGridView1.AutoGenerateColumns = true; // Activa la generación automática de columnas
-
+            label14.Text = NumeroPedido.ToString("D6");
         }
+
+
         public class RoundButton : Button
         {
             protected override void OnPaint(PaintEventArgs pevent)
@@ -58,70 +42,205 @@ namespace Examen2Grupo3
             }
         }
 
-        private void guna2Button3_Click(object sender, EventArgs e)
-        {
-            // Crear un nuevo pedido
-            Pedido nuevoPedido = new Pedido
-            {
-                Fecha = DateTime.Now,
-                NombreCliente = guna2TextBox1.Text,
-                IDCliente = int.Parse(guna2TextBox2.Text),
-                Direccion = guna2TextBox3.Text,
-                Correo = guna2TextBox4.Text,
-                Productos = productos, // Usar la lista de productos actual
-                Total = CalcularTotal()
-            };
-
-            // Agregar el pedido al historial
-            historialPedidos.Add(nuevoPedido);
-
-            // Mostrar un mensaje de confirmación
-            MessageBox.Show("Pedido registrado correctamente.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        }
-
-
-        private decimal CalcularTotal()
-        {
-            decimal total = 0;
-            foreach (var producto in productos)
-            {
-                total += producto.Total;
-            }
-            return total;
-        }
-
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            // Crear una instancia del formulario Agregar_Productos y pasarle la lista de productos y el formulario actual
-            Agregar_Productos ventana = new Agregar_Productos(productos, this);
-
-            // Mostrar la ventana emergente como modal
-            if (ventana.ShowDialog() == DialogResult.OK)
+            Agregar_Productos formProductos = new Agregar_Productos();
+            if (formProductos.ShowDialog() == DialogResult.OK)
             {
-                // Actualizar el DataGridView con los productos agregados
-                ActualizarDataGridView();
+                try
+                {
+                    Producto ProductoNuevo = new Producto
+                    {
+                        Nombre = formProductos.Nombre,
+                        ID = formProductos.Id,
+                        Categoria = formProductos.Categoria,
+                        PrecioUnitario = formProductos.PrecioUnitario,
+                        Cantidad = formProductos.Cantidad,
+                        Descripcion = formProductos.Descripcion
+                    };
+                    //  listaProductos.Add(ProductoNuevo);
+                    if (pedido.Productos == null)
+                    {
+                        pedido.Productos = new List<Producto>();
+
+                    }
+                    pedido.Productos.Add(ProductoNuevo); //codigo anterior  pedido.Productos = ListaProductos
+                    label18.Text += ProductoNuevo.Total;
+                    dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario, ProductoNuevo.Cantidad * ProductoNuevo.PrecioUnitario);
+
+                }
+                catch
+                {
+                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los datos");
+                }
+
             }
         }
 
-
-        public void ActualizarDataGridView()
+        public string? GuardarCliente()
         {
-            if (productos == null)
+            try
             {
-                productos = new List<Producto>(); // Inicializar la lista si es null
+                pedido.Cliente = new Cliente
+                {
+                    ID = int.Parse(guna2TextBox1.Text),
+                    Nombre = guna2TextBox2.Text,
+                    Direccion = guna2TextBox3.Text,
+                    Correo = guna2TextBox4.Text
+                };
+                pedido.Cliente = pedido.Cliente;
+                return "";
+            }
+            catch
+            {
+                MessageBox.Show("error crack");
+                return null;
             }
 
-            dataGridView1.AutoGenerateColumns = true; // Asegurar que las columnas se generen automáticamente
-            dataGridView1.DataSource = null; // Desvincular la fuente de datos actual
-            dataGridView1.DataSource = productos; // Volver a vincular la lista actualizada
-            dataGridView1.Refresh(); // Refrescar el DataGridView
+        }
+        private void GuardarDatosEnJson(List<Pedido> pedido)
+        {
+            string rutaArchivo = "datos.json";
+            string json = JsonSerializer.Serialize(pedido, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(rutaArchivo, json);
         }
 
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        // Guardar el pedido cuando el usuario presione el botón
+        private void guna2Button3_Click_1(object sender, EventArgs e)
+        {
+            if (pedido.Productos == null || GuardarCliente() == null)
+            {
+                MessageBox.Show("Faltan Datos por rellenar");
+                return;
+            }
+            pedido.ID = int.Parse(label14.Text);
+            pedido.Fecha = guna2DateTimePicker1.Value;
+            Lista.Add(pedido);
+            GuardarDatosEnJson(Lista);
+            NumeroPedido++;
+            dataGridView1.Rows.Clear();
+            label14.Text = NumeroPedido.ToString("D6");
+            
+            foreach (Control control in this.Controls)
+            {
+                if (control is Guna.UI2.WinForms.Guna2TextBox gunaTextBox)
+                {
+                    gunaTextBox.Clear();
+                }
+            }
+        }
+
+        private void GenerarPedido_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label18_Click(object sender, EventArgs e)
         {
 
         }
     }
 }
+//    dataGridView1.Rows.Clear();
+/*  public partial class Form1 : Form
+{
+    private List<Persona> listaPersonas = new List<Persona>();
+
+    public Form1()
+    {
+        InitializeComponent();
+        CargarDatosDesdeJson(); // Cargar datos previos al iniciar
+    }
+
+    private void btnAbrirFormulario_Click(object sender, EventArgs e)
+    {
+        Form2 form2 = new Form2();
+        if (form2.ShowDialog() == DialogResult.OK)
+        {
+            Persona nuevaPersona = new Persona { Nombre = form2.Nombre, Edad = form2.Edad };
+            listaPersonas.Add(nuevaPersona);
+            dataGridView1.Rows.Add(nuevaPersona.Nombre, nuevaPersona.Edad);
+
+            GuardarDatosEnJson(); // Guardar datos actualizados
+        }
+    }
+
+    private void GuardarDatosEnJson()
+    {
+        string rutaArchivo = "datos.json";
+        string json = JsonSerializer.Serialize(listaPersonas, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(rutaArchivo, json);
+    }
+
+    private void CargarDatosDesdeJson()
+    {
+        string rutaArchivo = "datos.json";
+        if (File.Exists(rutaArchivo))
+        {
+            string json = File.ReadAllText(rutaArchivo);
+            listaPersonas = JsonSerializer.Deserialize<List<Persona>>(json);
+
+            foreach (var persona in listaPersonas)
+            {
+                dataGridView1.Rows.Add(persona.Nombre, persona.Edad);
+            }
+        }
+    }
+}
+
+public class Persona
+{
+    public string Nombre { get; set; }
+    public int Edad { get; set; }
+}
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Windows.Forms;
+
+public partial class Form3 : Form
+{
+    private List<Persona> listaPersonas = new List<Persona>();
+
+    public Form3()
+    {
+        InitializeComponent();
+        CargarDatosDesdeJson();
+    }
+
+    private void CargarDatosDesdeJson()
+    {
+        string rutaArchivo = "datos.json";
+        if (File.Exists(rutaArchivo))
+        {
+            string json = File.ReadAllText(rutaArchivo);
+            listaPersonas = JsonSerializer.Deserialize<List<Persona>>(json);
+
+            foreach (var persona in listaPersonas)
+            {
+                dataGridView2.Rows.Add(persona.Nombre, persona.Edad);
+            }
+        }
+    }
+}
+
+*/
+
+/* if (pedido == null || clienteActual == null)
+            {
+                MessageBox.Show("Faltan datos por rellenar en el pedido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }*/
