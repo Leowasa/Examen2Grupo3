@@ -21,5 +21,10 @@ namespace ejemplo
         {
 
         }
+
+        private void Usuarios_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

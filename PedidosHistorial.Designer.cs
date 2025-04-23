@@ -73,7 +73,7 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(941, 405);
+            dataGridView1.Size = new Size(941, 385);
             dataGridView1.TabIndex = 107;
             // 
             // Cedula
@@ -141,13 +141,13 @@
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Century Gothic", 21.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Gainsboro;
             label1.Location = new Point(259, 9);
             label1.Name = "label1";
-            label1.Size = new Size(505, 70);
+            label1.Size = new Size(505, 50);
             label1.TabIndex = 151;
             label1.Text = "Historial de Pedidos Preventivos";
             label1.TextAlign = ContentAlignment.TopCenter;
@@ -157,14 +157,14 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(965, 808);
+            ClientSize = new Size(965, 788);
             Controls.Add(label1);
             Controls.Add(guna2TextBox1);
             Controls.Add(dataGridView1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "PedidosHistorial";
             Text = "PedidosHistorial";
-            Load += PedidosHistorial_Load;
+     
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
