@@ -32,7 +32,9 @@ namespace Examen2Grupo3
                 formAgregar.Text = "Añadir Usuario";
                 formAgregar.Size = new Size(300, 350);
 
-                Bitmap img = new Bitmap(Application.StartupPath + @"\img\fondo.jpg");
+               
+                string rutaImagen = Path.Combine(Application.StartupPath, @"..\img\fondo.jpg");
+                Bitmap img = new Bitmap(rutaImagen);
                 formAgregar.BackgroundImage = img;
                 formAgregar.BackgroundImageLayout = ImageLayout.Stretch;
 
