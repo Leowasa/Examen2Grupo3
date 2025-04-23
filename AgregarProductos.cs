@@ -31,13 +31,20 @@ namespace Examen2Grupo3
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-
+            try
+            {
                 Id = int.Parse(guna2TextBox1.Text);
                 Nombre = guna2TextBox2.Text;
                 Descripcion = guna2TextBox3.Text;
                 Categoria = guna2TextBox4.Text;
-                PrecioUnitario = decimal.Parse(guna2TextBox5.Text);
-                Cantidad = int.Parse(guna2TextBox6.Text);
+                PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
+                Cantidad = int.Parse(guna2TextBox5.Text);
+            } 
+            catch 
+            {
+                MessageBox.Show("Datos incompletos o erróneos. Intente nuevamente");
+            }
+               
             
             
             this.DialogResult = DialogResult.OK;

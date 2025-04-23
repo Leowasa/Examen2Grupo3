@@ -17,7 +17,9 @@ namespace Examen2Grupo3
             public int ID { get; set; }
             public Cliente Cliente { get; set; }    
             public List<Producto> Productos { get; set; }
-            public decimal Total => Productos.Sum(p => p.Total);
+            public String Estado { get; set; }
+            public decimal SubtTotal => Productos.Sum(p => p.Total);
+            public decimal Total;
         }
 
         public class Cliente

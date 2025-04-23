@@ -33,12 +33,14 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Usuarios));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
-            textBox1 = new TextBox();
             btnAgregarUsuario = new Guna.UI2.WinForms.Guna2Button();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
+            textBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -88,15 +90,6 @@
             dataGridView1.TabIndex = 95;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // textBox1
-            // 
-            textBox1.ForeColor = SystemColors.ActiveCaptionText;
-            textBox1.Location = new Point(54, 316);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 23);
-            textBox1.TabIndex = 94;
-            textBox1.TextChanged += textBox1_TextChanged;
-            // 
             // btnAgregarUsuario
             // 
             btnAgregarUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -139,18 +132,38 @@
             pictureBox1.TabIndex = 152;
             pictureBox1.TabStop = false;
             // 
+            // textBox1
+            // 
+            textBox1.BorderRadius = 7;
+            textBox1.CustomizableEdges = customizableEdges3;
+            textBox1.DefaultText = "";
+            textBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            textBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            textBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            textBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            textBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBox1.Font = new Font("Segoe UI", 9F);
+            textBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBox1.Location = new Point(50, 316);
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "";
+            textBox1.SelectedText = "";
+            textBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            textBox1.Size = new Size(154, 23);
+            textBox1.TabIndex = 154;
+            // 
             // Usuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(1094, 788);
+            Controls.Add(textBox1);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(btnAgregarUsuario);
             Controls.Add(Cliente);
             Controls.Add(dataGridView1);
-            Controls.Add(textBox1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Usuarios";
             Text = "Usuarios";
@@ -159,16 +172,15 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Label Cliente;
         private DataGridView dataGridView1;
-        private TextBox textBox1;
         private Guna.UI2.WinForms.Guna2Button btnAgregarUsuario;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
+        private Guna.UI2.WinForms.Guna2TextBox textBox1;
     }
 }

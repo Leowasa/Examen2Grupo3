@@ -20,9 +20,8 @@ namespace Examen2Grupo3
 {
     public partial class GenerarPedido : Form
     {
-        private Cliente clienteActual;
-        private Pedido pedido = new Pedido();
-        private static List<Pedido> Lista = new List<Pedido>();
+        private Pedido pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
+        private static List<Pedido> ListaPedidos = new List<Pedido>();
         private static int NumeroPedido = 1;
         public GenerarPedido()
         {
@@ -64,8 +63,10 @@ namespace Examen2Grupo3
                         pedido.Productos = new List<Producto>();
 
                     }
+                    pedido.Estado = "Pendiente";
                     pedido.Productos.Add(ProductoNuevo); //codigo anterior  pedido.Productos = ListaProductos
-                    label18.Text += ProductoNuevo.Total;
+                    label18.Text = pedido.SubtTotal.ToString();
+                    Descuento();
                     dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario, ProductoNuevo.Cantidad * ProductoNuevo.PrecioUnitario);
 
                 }
@@ -76,7 +77,25 @@ namespace Examen2Grupo3
 
             }
         }
+        public void Descuento()
+        {
+            if (pedido.Productos.Count > 3)
+            {
+                decimal descuento = 0.20m;
+                descuento = pedido.SubtTotal * descuento;
+                pedido.Total = pedido.SubtTotal - descuento;
 
+                label20.Text = pedido.Total.ToString();
+                label19.Text = "20%";
+
+            }
+            else
+            {
+                label20.Text = pedido.SubtTotal.ToString();
+            }
+
+
+        }
         public string? GuardarCliente()
         {
             try
@@ -93,7 +112,6 @@ namespace Examen2Grupo3
             }
             catch
             {
-                MessageBox.Show("error crack");
                 return null;
             }
 
@@ -116,12 +134,16 @@ namespace Examen2Grupo3
             }
             pedido.ID = int.Parse(label14.Text);
             pedido.Fecha = guna2DateTimePicker1.Value;
-            Lista.Add(pedido);
-            GuardarDatosEnJson(Lista);
+            ListaPedidos.Add(pedido);
+            GuardarDatosEnJson(ListaPedidos);
             NumeroPedido++;
             dataGridView1.Rows.Clear();
             label14.Text = NumeroPedido.ToString("D6");
-            
+            label18.Text = ": ";
+            label19.Text = ": ";
+            label20.Text = ": ";
+
+
             foreach (Control control in this.Controls)
             {
                 if (control is Guna.UI2.WinForms.Guna2TextBox gunaTextBox)
@@ -145,102 +167,10 @@ namespace Examen2Grupo3
         {
 
         }
-    }
-}
-//    dataGridView1.Rows.Clear();
-/*  public partial class Form1 : Form
-{
-    private List<Persona> listaPersonas = new List<Persona>();
 
-    public Form1()
-    {
-        InitializeComponent();
-        CargarDatosDesdeJson(); // Cargar datos previos al iniciar
-    }
-
-    private void btnAbrirFormulario_Click(object sender, EventArgs e)
-    {
-        Form2 form2 = new Form2();
-        if (form2.ShowDialog() == DialogResult.OK)
+        private void panel5_Paint(object sender, PaintEventArgs e)
         {
-            Persona nuevaPersona = new Persona { Nombre = form2.Nombre, Edad = form2.Edad };
-            listaPersonas.Add(nuevaPersona);
-            dataGridView1.Rows.Add(nuevaPersona.Nombre, nuevaPersona.Edad);
 
-            GuardarDatosEnJson(); // Guardar datos actualizados
-        }
-    }
-
-    private void GuardarDatosEnJson()
-    {
-        string rutaArchivo = "datos.json";
-        string json = JsonSerializer.Serialize(listaPersonas, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(rutaArchivo, json);
-    }
-
-    private void CargarDatosDesdeJson()
-    {
-        string rutaArchivo = "datos.json";
-        if (File.Exists(rutaArchivo))
-        {
-            string json = File.ReadAllText(rutaArchivo);
-            listaPersonas = JsonSerializer.Deserialize<List<Persona>>(json);
-
-            foreach (var persona in listaPersonas)
-            {
-                dataGridView1.Rows.Add(persona.Nombre, persona.Edad);
-            }
         }
     }
 }
-
-public class Persona
-{
-    public string Nombre { get; set; }
-    public int Edad { get; set; }
-}
-
-
-
-
-
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-using System.Windows.Forms;
-
-public partial class Form3 : Form
-{
-    private List<Persona> listaPersonas = new List<Persona>();
-
-    public Form3()
-    {
-        InitializeComponent();
-        CargarDatosDesdeJson();
-    }
-
-    private void CargarDatosDesdeJson()
-    {
-        string rutaArchivo = "datos.json";
-        if (File.Exists(rutaArchivo))
-        {
-            string json = File.ReadAllText(rutaArchivo);
-            listaPersonas = JsonSerializer.Deserialize<List<Persona>>(json);
-
-            foreach (var persona in listaPersonas)
-            {
-                dataGridView2.Rows.Add(persona.Nombre, persona.Edad);
-            }
-        }
-    }
-}
-
-*/
-
-/* if (pedido == null || clienteActual == null)
-            {
-                MessageBox.Show("Faltan datos por rellenar en el pedido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }*/

@@ -49,6 +49,10 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel3 = new Panel();
             Cliente = new Label();
             label15 = new Label();
@@ -89,6 +93,8 @@
             label18 = new Label();
             label19 = new Label();
             label20 = new Label();
+            guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
+            guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -147,33 +153,33 @@
             label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label13.AutoSize = true;
             label13.ForeColor = Color.Gainsboro;
-            label13.Location = new Point(753, 728);
+            label13.Location = new Point(820, 735);
             label13.Name = "label13";
-            label13.Size = new Size(69, 15);
+            label13.Size = new Size(63, 15);
             label13.TabIndex = 118;
-            label13.Text = "Descuento: ";
+            label13.Text = "Descuento";
             // 
             // label12
             // 
             label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label12.AutoSize = true;
             label12.ForeColor = Color.Gainsboro;
-            label12.Location = new Point(789, 764);
+            label12.Location = new Point(820, 750);
             label12.Name = "label12";
-            label12.Size = new Size(38, 15);
+            label12.Size = new Size(32, 15);
             label12.TabIndex = 117;
-            label12.Text = "Total: ";
+            label12.Text = "Total";
             // 
             // label11
             // 
             label11.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label11.AutoSize = true;
             label11.ForeColor = Color.Gainsboro;
-            label11.Location = new Point(789, 743);
+            label11.Location = new Point(819, 720);
             label11.Name = "label11";
-            label11.Size = new Size(57, 15);
+            label11.Size = new Size(51, 15);
             label11.TabIndex = 116;
-            label11.Text = "Subtotal: ";
+            label11.Text = "Subtotal";
             // 
             // label4
             // 
@@ -440,6 +446,7 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(927, 10);
             panel5.TabIndex = 126;
+            panel5.Paint += panel5_Paint;
             // 
             // dataGridView1
             // 
@@ -541,11 +548,11 @@
             label18.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label18.AutoSize = true;
             label18.ForeColor = Color.Gainsboro;
-            label18.Location = new Point(819, 726);
+            label18.Location = new Point(868, 720);
             label18.Name = "label18";
-            label18.Size = new Size(30, 15);
+            label18.Size = new Size(13, 15);
             label18.TabIndex = 138;
-            label18.Text = " ----";
+            label18.Text = ": ";
             label18.Click += label18_Click;
             // 
             // label19
@@ -553,22 +560,58 @@
             label19.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label19.AutoSize = true;
             label19.ForeColor = Color.Gainsboro;
-            label19.Location = new Point(838, 743);
+            label19.Location = new Point(882, 735);
             label19.Name = "label19";
-            label19.Size = new Size(30, 15);
+            label19.Size = new Size(13, 15);
             label19.TabIndex = 139;
-            label19.Text = " ----";
+            label19.Text = ": ";
             // 
             // label20
             // 
             label20.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label20.AutoSize = true;
             label20.ForeColor = Color.Gainsboro;
-            label20.Location = new Point(854, 758);
+            label20.Location = new Point(847, 750);
             label20.Name = "label20";
-            label20.Size = new Size(30, 15);
+            label20.Size = new Size(13, 15);
             label20.TabIndex = 140;
-            label20.Text = " ----";
+            label20.Text = ": ";
+            // 
+            // guna2Button4
+            // 
+            guna2Button4.BorderRadius = 8;
+            guna2Button4.CustomizableEdges = customizableEdges17;
+            guna2Button4.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button4.FillColor = SystemColors.HotTrack;
+            guna2Button4.Font = new Font("Segoe UI", 9F);
+            guna2Button4.ForeColor = Color.White;
+            guna2Button4.Location = new Point(762, 448);
+            guna2Button4.Name = "guna2Button4";
+            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            guna2Button4.Size = new Size(111, 23);
+            guna2Button4.TabIndex = 141;
+            guna2Button4.Text = "Limpiar";
+            // 
+            // guna2Button5
+            // 
+            guna2Button5.BorderRadius = 8;
+            guna2Button5.CustomizableEdges = customizableEdges19;
+            guna2Button5.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button5.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button5.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button5.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button5.FillColor = SystemColors.HotTrack;
+            guna2Button5.Font = new Font("Segoe UI", 9F);
+            guna2Button5.ForeColor = Color.White;
+            guna2Button5.Location = new Point(140, 530);
+            guna2Button5.Name = "guna2Button5";
+            guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            guna2Button5.Size = new Size(111, 23);
+            guna2Button5.TabIndex = 142;
+            guna2Button5.Text = "Limpiar";
             // 
             // GenerarPedido
             // 
@@ -577,6 +620,8 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(965, 788);
+            Controls.Add(guna2Button5);
+            Controls.Add(guna2Button4);
             Controls.Add(label20);
             Controls.Add(label19);
             Controls.Add(label18);
@@ -664,5 +709,7 @@
         private Label label18;
         private Label label19;
         private Label label20;
+        private Guna.UI2.WinForms.Guna2Button guna2Button4;
+        private Guna.UI2.WinForms.Guna2Button guna2Button5;
     }
 }

@@ -123,9 +123,6 @@
   <metadata name="dataGridView1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="textBox1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="btnAgregarUsuario.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -136,7 +133,7 @@
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAAU9JREFUWEftlz9qAkEUh6fPCZIihZdIkbSBBMTZEQI5QiB/yqRQ0TJnyQUiNjay
+        DwAACw8BkvkDpQAAAU9JREFUWEftlz9qAkEUh6fPCZIihZdIkbSBBMTZEQI5QiB/yqRQ0TJnyQUiNjay
         bwwWOUOKQLTyAibzdh+omx2ZcZ7rCvvBr9h5zG8/hnVAUXGYNEYnItIPQsKLcyK4pt2MJCIwMzK/foGF
         iMZ31MKEgqf8l7mEW0hCL/9FrjFCSt9TWyDBMhguIRYZDIcQmwwmVIhVBoNC8RW1e8Iuk6RL7Sn1yamR
         vKCnDexCBjtXieArnUGbViwUI9NfzqFFqzkUIXP5eWTWhyvzDk0yFCGDOAl5y5gjV3Ar1PjGGuyU8PY/
@@ -151,7 +148,6 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-
         DAAACwwBP0AiyAAAAV5JREFUWEftlT1Ow0AQRvcAVEhIFHARev5EMXbhi9DQB5CAiyBxCSRQMms6KKjh
         AFBwAfDPrJyQLyb+diUEypNekx0/jyLLdiv+B7k/cqInS5vpsSsm63Z1QjI9d5n/JHxyxd2GVRKR+fdv
         NxniY9qF8E2WV/yzK8pNq0WCbjDUZAuhOGOShVCYNXohFI1RdGJlAhTsU/x95Qs8C9Kg2CLFnzbX5H4L

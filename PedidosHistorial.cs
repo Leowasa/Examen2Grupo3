@@ -12,7 +12,7 @@ namespace ejemplo
     public partial class PedidosHistorial : Form
     {
         private List<Producto> listaPersonas = new List<Producto>();
-        private List<Pedido> listaPedido = new List<Pedido>(); 
+        private List<Pedido> listaPedido = new List<Pedido>();
         public PedidosHistorial()
         {
             InitializeComponent();
@@ -26,22 +26,27 @@ namespace ejemplo
             if (File.Exists(rutaArchivo))
             {
                 string jsonString = File.ReadAllText(rutaArchivo);
-                 var pedidos = JsonConvert.DeserializeObject<List<Pedido>>(jsonString);
+                var pedidos = JsonConvert.DeserializeObject<List<Pedido>>(jsonString);
 
                 if (pedidos != null) // Check for null to avoid CS8601
                 {
-                    
 
-                   foreach (var persona in pedidos) 
+
+                    foreach (var datos in pedidos)
                     {
-                        dataGridView1.Rows.Add(persona.ID, persona.Cliente.Nombre, persona.Fecha, persona.Total); 
+                        dataGridView1.Rows.Add(datos.ID, datos.Cliente.Nombre, datos.Fecha, datos.Total, datos.Estado);
 
                     }
-                    
-                        
-                    
+
+
+
                 }
             }
+        }
+
+        private void PedidosHistorial_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

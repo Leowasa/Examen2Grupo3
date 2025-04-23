@@ -42,6 +42,9 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngresarDatosEmpresa));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
@@ -55,6 +58,9 @@
             guna2TextBox5 = new Guna.UI2.WinForms.Guna2TextBox();
             Cliente = new Label();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            pictureBox1 = new PictureBox();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label5
@@ -62,7 +68,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.ForeColor = Color.Gainsboro;
-            label5.Location = new Point(450, 189);
+            label5.Location = new Point(456, 350);
             label5.Name = "label5";
             label5.Size = new Size(55, 15);
             label5.TabIndex = 99;
@@ -73,7 +79,7 @@
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
             label6.ForeColor = Color.Gainsboro;
-            label6.Location = new Point(450, 121);
+            label6.Location = new Point(456, 282);
             label6.Name = "label6";
             label6.Size = new Size(171, 15);
             label6.TabIndex = 98;
@@ -84,7 +90,7 @@
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
             label7.ForeColor = Color.Gainsboro;
-            label7.Location = new Point(163, 247);
+            label7.Location = new Point(169, 408);
             label7.Name = "label7";
             label7.Size = new Size(116, 15);
             label7.TabIndex = 97;
@@ -95,7 +101,7 @@
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
             label8.ForeColor = Color.Gainsboro;
-            label8.Location = new Point(164, 121);
+            label8.Location = new Point(170, 282);
             label8.Name = "label8";
             label8.Size = new Size(76, 15);
             label8.TabIndex = 96;
@@ -106,7 +112,7 @@
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
             label9.ForeColor = Color.Gainsboro;
-            label9.Location = new Point(163, 189);
+            label9.Location = new Point(169, 350);
             label9.Name = "label9";
             label9.Size = new Size(199, 15);
             label9.TabIndex = 95;
@@ -123,7 +129,7 @@
             guna2Button1.FillColor = SystemColors.HotTrack;
             guna2Button1.Font = new Font("Segoe UI", 9F);
             guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(358, 406);
+            guna2Button1.Location = new Point(358, 475);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2Button1.Size = new Size(123, 20);
@@ -142,7 +148,7 @@
             guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Font = new Font("Segoe UI", 9F);
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(164, 142);
+            guna2TextBox1.Location = new Point(170, 303);
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderText = "";
             guna2TextBox1.SelectedText = "";
@@ -162,7 +168,7 @@
             guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox2.Font = new Font("Segoe UI", 9F);
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(450, 142);
+            guna2TextBox2.Location = new Point(456, 303);
             guna2TextBox2.Name = "guna2TextBox2";
             guna2TextBox2.PlaceholderText = "";
             guna2TextBox2.SelectedText = "";
@@ -182,7 +188,7 @@
             guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Font = new Font("Segoe UI", 9F);
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(163, 208);
+            guna2TextBox3.Location = new Point(169, 369);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
             guna2TextBox3.SelectedText = "";
@@ -202,7 +208,7 @@
             guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Font = new Font("Segoe UI", 9F);
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(450, 208);
+            guna2TextBox4.Location = new Point(456, 369);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
             guna2TextBox4.SelectedText = "";
@@ -222,7 +228,7 @@
             guna2TextBox5.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox5.Font = new Font("Segoe UI", 9F);
             guna2TextBox5.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox5.Location = new Point(163, 265);
+            guna2TextBox5.Location = new Point(169, 426);
             guna2TextBox5.Name = "guna2TextBox5";
             guna2TextBox5.PlaceholderText = "";
             guna2TextBox5.SelectedText = "";
@@ -238,7 +244,7 @@
             Cliente.ForeColor = Color.Gainsboro;
             Cliente.Location = new Point(170, 38);
             Cliente.Name = "Cliente";
-            Cliente.Size = new Size(480, 52);
+            Cliente.Size = new Size(480, 109);
             Cliente.TabIndex = 137;
             Cliente.Text = "Ingrese los datos de su empresa";
             Cliente.TextAlign = ContentAlignment.TopCenter;
@@ -258,12 +264,42 @@
             guna2CustomGradientPanel1.Size = new Size(800, 35);
             guna2CustomGradientPanel1.TabIndex = 138;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(348, 94);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(144, 113);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 139;
+            pictureBox1.TabStop = false;
+            // 
+            // guna2Button2
+            // 
+            guna2Button2.BorderRadius = 8;
+            guna2Button2.CustomizableEdges = customizableEdges15;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = SystemColors.HotTrack;
+            guna2Button2.Font = new Font("Segoe UI", 9F);
+            guna2Button2.ForeColor = Color.White;
+            guna2Button2.Location = new Point(358, 241);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2Button2.Size = new Size(123, 20);
+            guna2Button2.TabIndex = 140;
+            guna2Button2.Text = "Cambiar imagen";
+            // 
             // IngresarDatosEmpresa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 507);
+            Controls.Add(guna2Button2);
+            Controls.Add(pictureBox1);
             Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(Cliente);
             Controls.Add(guna2TextBox5);
@@ -280,6 +316,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "IngresarDatosEmpresa";
             Text = "IngresarDatosEmpresa";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -298,5 +335,7 @@
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox5;
         private Label Cliente;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
+        private PictureBox pictureBox1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
     }
 }
