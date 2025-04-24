@@ -34,14 +34,14 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
+            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             Cedula = new DataGridViewTextBoxColumn();
-            Nombre = new DataGridViewTextBoxColumn();
             Usuariosd = new DataGridViewButtonColumn();
+            Nombre = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
+            Column3 = new DataGridViewImageColumn();
+            Column5 = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -75,7 +75,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Column1, Column2, Column3, Column5 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Usuariosd, Nombre, Column1, Column2, Column3, Column5 });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(12, 161);
@@ -89,48 +89,6 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Size = new Size(931, 385);
             dataGridView1.TabIndex = 111;
-            // 
-            // Cedula
-            // 
-            Cedula.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Cedula.HeaderText = "ID";
-            Cedula.Name = "Cedula";
-            Cedula.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Fecha de creacion";
-            Nombre.Name = "Nombre";
-            // 
-            // Usuariosd
-            // 
-            Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Usuariosd.FlatStyle = FlatStyle.Flat;
-            Usuariosd.HeaderText = "Cliente";
-            Usuariosd.Name = "Usuariosd";
-            Usuariosd.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column1.HeaderText = "Monto total";
-            Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Estado";
-            Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "ver detalles";
-            Column3.Name = "Column3";
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Eliminar";
-            Column5.Name = "Column5";
             // 
             // guna2TextBox2
             // 
@@ -153,6 +111,52 @@
             guna2TextBox2.Size = new Size(202, 23);
             guna2TextBox2.TabIndex = 149;
             // 
+            // Cedula
+            // 
+            Cedula.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Cedula.HeaderText = "Numero";
+            Cedula.Name = "Cedula";
+            Cedula.ReadOnly = true;
+            // 
+            // Usuariosd
+            // 
+            Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Usuariosd.FlatStyle = FlatStyle.Flat;
+            Usuariosd.HeaderText = "Cliente";
+            Usuariosd.Name = "Usuariosd";
+            Usuariosd.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.HeaderText = "Fecha de creacion";
+            Nombre.Name = "Nombre";
+            // 
+            // Column1
+            // 
+            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Column1.HeaderText = "Monto total";
+            Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Estado";
+            Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "ver detalles";
+            Column3.Name = "Column3";
+            Column3.Resizable = DataGridViewTriState.True;
+            Column3.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // Column5
+            // 
+            Column5.HeaderText = "Eliminar";
+            Column5.Name = "Column5";
+            Column5.Resizable = DataGridViewTriState.True;
+            Column5.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
             // OrdenesHistorial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -174,13 +178,13 @@
 
         private Label Cliente;
         private DataGridView dataGridView1;
+        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private DataGridViewTextBoxColumn Cedula;
-        private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn Usuariosd;
+        private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column5;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
+        private DataGridViewImageColumn Column3;
+        private DataGridViewImageColumn Column5;
     }
 }
