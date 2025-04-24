@@ -33,11 +33,7 @@ namespace Examen2Grupo3
                 formAgregar.Size = new Size(300, 350);
 
                
-                string rutaImagen = Path.Combine(Application.StartupPath, @"..\img\fondo.jpg");
-                Bitmap img = new Bitmap(rutaImagen);///
-                formAgregar.BackgroundImage = img;
-                formAgregar.BackgroundImageLayout = ImageLayout.Stretch;
-
+                
                 var lblId = new Label { Text = "ID:", Location = new Point(10, 20), AutoSize = true, ForeColor = Color.White, BackColor = Color.Transparent };
                 var txtId = new TextBox { Location = new Point(110, 20), Width = 150 };
 

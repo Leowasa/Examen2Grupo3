@@ -43,10 +43,9 @@ namespace Examen2Grupo3
             catch 
             {
                 MessageBox.Show("Datos incompletos o erróneos. Intente nuevamente");
+                return;
             }
-               
-            
-            
+        
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

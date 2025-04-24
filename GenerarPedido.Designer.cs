@@ -451,6 +451,7 @@
             // dataGridView1
             // 
             dataGridView1.AccessibleRole = AccessibleRole.TitleBar;
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
             dataGridView1.BorderStyle = BorderStyle.None;
@@ -479,6 +480,7 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Size = new Size(917, 148);
             dataGridView1.TabIndex = 136;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // Column1
             // 
@@ -579,6 +581,7 @@
             // 
             // guna2Button4
             // 
+            guna2Button4.Anchor = AnchorStyles.Right;
             guna2Button4.BorderRadius = 8;
             guna2Button4.CustomizableEdges = customizableEdges17;
             guna2Button4.DisabledState.BorderColor = Color.DarkGray;
@@ -588,12 +591,13 @@
             guna2Button4.FillColor = SystemColors.HotTrack;
             guna2Button4.Font = new Font("Segoe UI", 9F);
             guna2Button4.ForeColor = Color.White;
-            guna2Button4.Location = new Point(762, 448);
+            guna2Button4.Location = new Point(832, 448);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges18;
             guna2Button4.Size = new Size(111, 23);
             guna2Button4.TabIndex = 141;
             guna2Button4.Text = "Limpiar";
+            guna2Button4.Click += guna2Button4_Click;
             // 
             // guna2Button5
             // 
@@ -612,6 +616,7 @@
             guna2Button5.Size = new Size(111, 23);
             guna2Button5.TabIndex = 142;
             guna2Button5.Text = "Limpiar";
+            guna2Button5.Click += guna2Button5_Click;
             // 
             // GenerarPedido
             // 

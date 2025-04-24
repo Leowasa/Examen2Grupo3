@@ -56,6 +56,7 @@
             // dataGridView1
             // 
             dataGridView1.AccessibleRole = AccessibleRole.TitleBar;
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
             dataGridView1.BorderStyle = BorderStyle.None;
@@ -73,7 +74,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Rol, Column1, Column2, Column3 });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(12, 345);
+            dataGridView1.Location = new Point(12, 161);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
@@ -82,7 +83,7 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(941, 405);
+            dataGridView1.Size = new Size(941, 615);
             dataGridView1.TabIndex = 99;
             // 
             // Cedula
@@ -154,7 +155,7 @@
             guna2TextBox2.Font = new Font("Segoe UI", 9F);
             guna2TextBox2.ForeColor = SystemColors.ControlDarkDark;
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(12, 316);
+            guna2TextBox2.Location = new Point(12, 132);
             guna2TextBox2.Name = "guna2TextBox2";
             guna2TextBox2.PlaceholderText = "";
             guna2TextBox2.SelectedText = "";
@@ -175,7 +176,7 @@
             guna2Button2.FillColor = SystemColors.HotTrack;
             guna2Button2.Font = new Font("Segoe UI", 9F);
             guna2Button2.ForeColor = Color.White;
-            guna2Button2.Location = new Point(842, 316);
+            guna2Button2.Location = new Point(842, 132);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2Button2.Size = new Size(111, 23);
@@ -186,7 +187,7 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(746, 297);
+            pictureBox1.Location = new Point(746, 113);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(42, 42);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -197,7 +198,7 @@
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(794, 297);
+            pictureBox2.Location = new Point(794, 113);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(42, 42);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -209,7 +210,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(965, 808);
+            ClientSize = new Size(965, 788);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(guna2Button2);

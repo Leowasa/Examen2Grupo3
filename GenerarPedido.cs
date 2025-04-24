@@ -12,8 +12,8 @@ using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using static Examen2Grupo3.GenerarPedido;
 using static Examen2Grupo3.RegistroPedidos;
-using static Examen2Grupo3.PedidoManager;
-using System.Text.Json; // Agregar esta directiva para usar JsonSerializerOptions
+using System.Text.Json;
+using System.Drawing.Text; // Agregar esta directiva para usar JsonSerializerOptions
 
 
 namespace Examen2Grupo3
@@ -76,6 +76,10 @@ namespace Examen2Grupo3
                 }
 
             }
+            else 
+            {
+                //nada xd
+             }
         }
         public void Descuento()
         {
@@ -91,6 +95,7 @@ namespace Examen2Grupo3
             }
             else
             {
+                pedido.Total = pedido.SubtTotal;
                 label20.Text = pedido.SubtTotal.ToString();
             }
 
@@ -102,10 +107,11 @@ namespace Examen2Grupo3
             {
                 pedido.Cliente = new Cliente
                 {
-                    ID = int.Parse(guna2TextBox1.Text),
-                    Nombre = guna2TextBox2.Text,
-                    Direccion = guna2TextBox3.Text,
-                    Correo = guna2TextBox4.Text
+                    Nombre = guna2TextBox1.Text,
+                    ID = int.Parse(guna2TextBox2.Text),
+                    Correo = guna2TextBox3.Text,
+                    Direccion = guna2TextBox4.Text,
+
                 };
                 pedido.Cliente = pedido.Cliente;
                 return "";
@@ -138,12 +144,20 @@ namespace Examen2Grupo3
             GuardarDatosEnJson(ListaPedidos);
             NumeroPedido++;
             dataGridView1.Rows.Clear();
+            LimpiarTextBox();
             label14.Text = NumeroPedido.ToString("D6");
             label18.Text = ": ";
             label19.Text = ": ";
             label20.Text = ": ";
+            MessageBox.Show("Pedido generado exitosamente!");
 
 
+
+        }
+
+
+        private void LimpiarTextBox()
+        {
             foreach (Control control in this.Controls)
             {
                 if (control is Guna.UI2.WinForms.Guna2TextBox gunaTextBox)
@@ -152,7 +166,6 @@ namespace Examen2Grupo3
                 }
             }
         }
-
         private void GenerarPedido_Load(object sender, EventArgs e)
         {
 
@@ -169,6 +182,26 @@ namespace Examen2Grupo3
         }
 
         private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void guna2Button5_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            label18.Text = ": ";
+            label19.Text = ": ";
+            label20.Text = ": ";
+            Pedido borrar = new Pedido();
+            pedido = borrar;
+        }
+
+        private void guna2Button4_Click(object sender, EventArgs e)
+        {
+            LimpiarTextBox();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

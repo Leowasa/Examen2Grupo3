@@ -30,16 +30,11 @@ namespace ejemplo
 
                 if (pedidos != null) // Check for null to avoid CS8601
                 {
-
-
                     foreach (var datos in pedidos)
                     {
                         dataGridView1.Rows.Add(datos.ID, datos.Cliente.Nombre, datos.Fecha.ToString("dd/MM/yyyy"), datos.Total, datos.Estado);
 
                     }
-
-
-
                 }
             }
         }

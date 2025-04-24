@@ -19,7 +19,7 @@ namespace Examen2Grupo3
             public List<Producto> Productos { get; set; }
             public String Estado { get; set; }
             public decimal SubtTotal => Productos.Sum(p => p.Total);
-            public decimal Total;
+            public decimal Total { get; set; }
         }
 
         public class Cliente
