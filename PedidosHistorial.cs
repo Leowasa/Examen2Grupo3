@@ -34,7 +34,7 @@ namespace ejemplo
 
                     foreach (var datos in pedidos)
                     {
-                        dataGridView1.Rows.Add(datos.ID, datos.Cliente.Nombre, datos.Fecha, datos.Total, datos.Estado);
+                        dataGridView1.Rows.Add(datos.ID, datos.Cliente.Nombre, datos.Fecha.ToString("dd/MM/yyyy"), datos.Total, datos.Estado);
 
                     }
 
