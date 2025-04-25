@@ -20,7 +20,6 @@ namespace ejemplo
                 this.PanelPrincipal.Controls.RemoveAt(0);
 
             ConfigurarDataGridView();
-            ConfigurarDataGridViewDecorativa();
             ConfigurarTextBox();
         }
 
@@ -101,7 +100,6 @@ namespace ejemplo
             public string Id { get; set; }
             public string Nombre { get; set; }
             public string Username { get; set; }
-            public string Password { get; set; }
             public string Tipo { get; set; }
         }
 
@@ -119,8 +117,8 @@ namespace ejemplo
         private void ConfigurarDataGridView()
         {
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Location = new Point(45, 360); // Mover el DataGridView a la posición (0, 40)  
-            dataGridView1.Size = new Size(989, 400);
+            dataGridView1.Location = new Point(45, 170); 
+            dataGridView1.Size = new Size(1000, 400);
             dataGridView1.ScrollBars = ScrollBars.Both;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
@@ -133,26 +131,7 @@ namespace ejemplo
             textBox1.Enter += textBox1_Enter;
             textBox1.Leave += textBox1_Leave;
         }
-        private void ConfigurarDataGridViewDecorativa()
-        {
-            DataGridView dataGridViewDecorativa = new DataGridView
-            {
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                Location = new Point(45, 760), // Posición debajo del DataGridView principal
-                Size = new Size(989, 400),
-                ScrollBars = ScrollBars.None,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                MultiSelect = false,
-                Enabled = false // Deshabilitar interacción
-            };
-
-            // Opcional: Estilo decorativo
-            dataGridViewDecorativa.DefaultCellStyle.BackColor = Color.LightGray;
-            dataGridViewDecorativa.DefaultCellStyle.ForeColor = Color.DarkGray;
-            dataGridViewDecorativa.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
-            dataGridViewDecorativa.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-        }
-
+       
         private void Usuarios_Load(object sender, EventArgs e)
         {
 

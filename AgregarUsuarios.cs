@@ -18,8 +18,8 @@ namespace Examen2Grupo3
 
     public Agregar_Usuarios()
         {
-
-         // Crear el archivo JSON si no existe      
+            
+            // Crear el archivo JSON si no existe      
             if (!File.Exists(FilePath))
             {
                 File.WriteAllText(FilePath, "[]"); // Crear un archivo vacío con una lista JSON vacía      
@@ -29,11 +29,13 @@ namespace Examen2Grupo3
 
             using (var formAgregar = new Form())
             {
+                Bitmap img = new Bitmap(Application.StartupPath + @"\img\Fondo.jpg");
+                formAgregar.BackgroundImage = img;
+                formAgregar.BackgroundImageLayout = ImageLayout.Stretch;
                 formAgregar.Text = "Añadir Usuario";
                 formAgregar.Size = new Size(300, 350);
 
-               
-                
+
                 var lblId = new Label { Text = "ID:", Location = new Point(10, 20), AutoSize = true, ForeColor = Color.White, BackColor = Color.Transparent };
                 var txtId = new TextBox { Location = new Point(110, 20), Width = 150 };
 
