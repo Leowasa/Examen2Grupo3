@@ -122,10 +122,26 @@ namespace Examen2Grupo3
             }
 
         }
-        private void GuardarDatosEnJson(List<Pedido> pedido)
+        private void GuardarDatosEnJson(List<Pedido> pedidos)
         {
             string rutaArchivo = "datos.json";
-            string json = JsonSerializer.Serialize(pedido, new JsonSerializerOptions { WriteIndented = true });
+            List<Pedido> pedidosExistentes = new List<Pedido>();
+
+            // Verificar si el archivo ya existe y contiene datos
+            if (File.Exists(rutaArchivo))
+            {
+                string contenidoExistente = File.ReadAllText(rutaArchivo);
+                if (!string.IsNullOrWhiteSpace(contenidoExistente))
+                {
+                    pedidosExistentes = JsonSerializer.Deserialize<List<Pedido>>(contenidoExistente) ?? new List<Pedido>();
+                }
+            }
+
+            // Agregar los nuevos pedidos a la lista existente
+            pedidosExistentes.AddRange(pedidos);
+
+            // Serializar y guardar todos los pedidos
+            string json = JsonSerializer.Serialize(pedidosExistentes, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(rutaArchivo, json);
         }
 

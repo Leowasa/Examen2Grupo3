@@ -50,12 +50,7 @@ namespace Examen2Grupo3
 
                 var lblTipo = new Label { Text = "Tipo de Usuario:", Location = new Point(10, 180), AutoSize = true, ForeColor = Color.White, BackColor = Color.Transparent };
                 var cmbTipo = new ComboBox { Location = new Point(110, 180), Width = 150 };
-                cmbTipo.Items.AddRange(new[] { "Administrador", "Usuario", "Registrador", "Aprobador" });
-
-                if (existeAdministrador)
-                {
-                    cmbTipo.Items.Remove("Administrador");
-                }
+                cmbTipo.Items.AddRange(new[] { "Registrador", "Aprobador" });
 
                 var btnGuardarUsuario = new Button { Text = "Guardar", Location = new Point(100, 220), Width = 80 };
                 btnGuardarUsuario.Click += (s, args) =>
