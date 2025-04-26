@@ -43,7 +43,7 @@ namespace ejemplo
                     filaSeleccionada.Cells["Nombre"].Value.ToString(),
                     filaSeleccionada.Cells["Categoria"].Value.ToString(),
                     filaSeleccionada.Cells["Descripcion"].Value.ToString(),
-                     filaSeleccionada.Cells["Stock"].Value.ToString(),
+                    filaSeleccionada.Cells["Stock"].Value.ToString(),
                     filaSeleccionada.Cells["PrecioUnitario"].Value.ToString()
                 );
 

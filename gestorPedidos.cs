@@ -29,6 +29,7 @@ namespace Examen2Grupo3
             public string Correo { get; set; }
             public int ID { get; set; } 
             public string direccion { get; set; }
+            public string Tipo { get; set; }
         }
 
         public class Producto
