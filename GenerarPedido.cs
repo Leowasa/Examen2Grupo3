@@ -13,7 +13,8 @@ using Guna.UI2.WinForms;
 using static Examen2Grupo3.GenerarPedido;
 using static Examen2Grupo3.RegistroPedidos;
 using System.Text.Json;
-using System.Drawing.Text; // Agregar esta directiva para usar JsonSerializerOptions
+using System.Drawing.Text;
+using Newtonsoft.Json; // Agregar esta directiva para usar JsonSerializerOptions
 
 
 namespace Examen2Grupo3
@@ -22,13 +23,27 @@ namespace Examen2Grupo3
     {
         private Pedido pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
         private static List<Pedido> ListaPedidos = new List<Pedido>();
-        private static int NumeroPedido = 1;
+        private static int NumeroPedido;
         public GenerarPedido()
         {
             InitializeComponent();
             label14.Text = NumeroPedido.ToString("D6");
         }
+        private int CargarDatosDesdeJson()
+        {
+            string rutaArchivo = "datos.json";
+            if (File.Exists(rutaArchivo))
+            {
+                string jsonString = File.ReadAllText(rutaArchivo);
+                var pedidos = JsonConvert.DeserializeObject<List<Pedido>>(jsonString);
 
+                if (pedidos.Count > 0)
+                {
+                    //return pedidos.Max(p => p.NumeroPedido); // Encuentra el mayor número de pedido
+                }
+            }
+            return 0; // Si no hay pedidos, empieza desde 0
+        }
 
         public class RoundButton : Button
         {
@@ -125,7 +140,7 @@ namespace Examen2Grupo3
         private void GuardarDatosEnJson(List<Pedido> pedido)
         {
             string rutaArchivo = "datos.json";
-            string json = JsonSerializer.Serialize(pedido, new JsonSerializerOptions { WriteIndented = true });
+            string json = System.Text.Json.JsonSerializer.Serialize(pedido, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(rutaArchivo, json);
         }
 

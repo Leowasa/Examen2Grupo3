@@ -41,5 +41,10 @@ namespace Examen2Grupo3
         {
 
         }
+
+        private void Cliente_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
