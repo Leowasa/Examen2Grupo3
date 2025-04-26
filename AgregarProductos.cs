@@ -49,6 +49,42 @@ namespace Examen2Grupo3
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+        public void SetDatosProducto(string id, string nombre, string categoria, string Cantidad, string descripcion, string precio)
+        {
+            try
+            {
+                guna2TextBox1.Text = id;
+                guna2TextBox2.Text = nombre;
+                guna2TextBox4.Text = categoria;
+                guna2TextBox3.Text = descripcion;
+                guna2TextBox6.Text = precio;
+                guna2TextBox5.Text = Cantidad;
+
+                guna2TextBox1.ReadOnly = true;
+                guna2TextBox1.BackColor = Color.LightGray;
+            }
+            catch
+
+            {
+
+            }
+        }
+
+        public Producto ObtenerProductoEditado()
+        {
+            Producto productoEditado = new Producto
+            {
+                ID = int.Parse(guna2TextBox1.Text),
+                Nombre = guna2TextBox2.Text,
+                Categoria = guna2TextBox4.Text,
+                Descripcion = guna2TextBox3.Text,
+                PrecioUnitario = decimal.Parse(guna2TextBox6.Text),
+                Cantidad = int.Parse(guna2TextBox5.Text) // Asegúrate de que esta propiedad exista en la clase Producto de Gestor_inventario
+            };
+            return productoEditado;
+        }
+
+
 
         private void Agregar_Productos_Load(object sender, EventArgs e)
         {
