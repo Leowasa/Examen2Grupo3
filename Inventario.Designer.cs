@@ -41,20 +41,20 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
-            ID = new DataGridViewTextBoxColumn();
-            Nombre = new DataGridViewTextBoxColumn();
-            Descripcion = new DataGridViewButtonColumn();
-            Categoria = new DataGridViewTextBoxColumn();
-            Stock = new DataGridViewTextBoxColumn();
-            PrecioUnitario = new DataGridViewTextBoxColumn();
-            Editar = new DataGridViewTextBoxColumn();
-            Eliminar = new DataGridViewTextBoxColumn();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
+            ID = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Descripcion = new DataGridViewButtonColumn();
+            Categoria = new DataGridViewTextBoxColumn();
+            Stock = new DataGridViewTextBoxColumn();
+            PrecioUnitario = new DataGridViewTextBoxColumn();
+            Editar = new DataGridViewImageColumn();
+            Eliminar = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -107,54 +107,6 @@
             dataGridView1.TabIndex = 103;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
-            // ID
-            // 
-            ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ID.HeaderText = "ID";
-            ID.Name = "ID";
-            ID.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Nombre";
-            Nombre.Name = "Nombre";
-            // 
-            // Descripcion
-            // 
-            Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Descripcion.FlatStyle = FlatStyle.Flat;
-            Descripcion.HeaderText = "Descripcion";
-            Descripcion.Name = "Descripcion";
-            Descripcion.ReadOnly = true;
-            // 
-            // Categoria
-            // 
-            Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Categoria.HeaderText = "Categoria";
-            Categoria.Name = "Categoria";
-            // 
-            // Stock
-            // 
-            Stock.HeaderText = "Stock";
-            Stock.Name = "Stock";
-            // 
-            // PrecioUnitario
-            // 
-            PrecioUnitario.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            PrecioUnitario.HeaderText = "Precio unitario";
-            PrecioUnitario.Name = "PrecioUnitario";
-            // 
-            // Editar
-            // 
-            Editar.HeaderText = "Editar";
-            Editar.Name = "Editar";
-            // 
-            // Eliminar
-            // 
-            Eliminar.HeaderText = "Eliminar";
-            Eliminar.Name = "Eliminar";
-            // 
             // guna2Button1
             // 
             guna2Button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -190,10 +142,10 @@
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox2.Location = new Point(12, 132);
             guna2TextBox2.Name = "guna2TextBox2";
-            guna2TextBox2.PlaceholderText = "";
+            guna2TextBox2.PlaceholderText = "Ingrese un ID o Nombre...";
             guna2TextBox2.SelectedText = "";
             guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2TextBox2.Size = new Size(139, 23);
+            guna2TextBox2.Size = new Size(154, 23);
             guna2TextBox2.TabIndex = 149;
             guna2TextBox2.TextChanged += guna2TextBox2_TextChanged;
             // 
@@ -259,6 +211,62 @@
             guna2Button3.Size = new Size(50, 23);
             guna2Button3.TabIndex = 155;
             // 
+            // ID
+            // 
+            ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ID.HeaderText = "ID";
+            ID.Name = "ID";
+            ID.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.HeaderText = "Nombre";
+            Nombre.Name = "Nombre";
+            // 
+            // Descripcion
+            // 
+            Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Descripcion.FlatStyle = FlatStyle.Flat;
+            Descripcion.HeaderText = "Descripcion";
+            Descripcion.Name = "Descripcion";
+            Descripcion.ReadOnly = true;
+            // 
+            // Categoria
+            // 
+            Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Categoria.HeaderText = "Categoria";
+            Categoria.Name = "Categoria";
+            // 
+            // Stock
+            // 
+            Stock.HeaderText = "Stock";
+            Stock.Name = "Stock";
+            // 
+            // PrecioUnitario
+            // 
+            PrecioUnitario.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            PrecioUnitario.HeaderText = "Precio unitario";
+            PrecioUnitario.Name = "PrecioUnitario";
+            // 
+            // Editar
+            // 
+            Editar.HeaderText = "Editar";
+            Editar.Image = Examen2Grupo3.Properties.Resources.icons8_edit_24;
+            Editar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Editar.Name = "Editar";
+            Editar.Resizable = DataGridViewTriState.True;
+            Editar.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // Eliminar
+            // 
+            Eliminar.HeaderText = "Eliminar";
+            Eliminar.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_48;
+            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Eliminar.Name = "Eliminar";
+            Eliminar.Resizable = DataGridViewTriState.True;
+            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
             // Inventario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -306,7 +314,7 @@
         private DataGridViewTextBoxColumn Categoria;
         private DataGridViewTextBoxColumn Stock;
         private DataGridViewTextBoxColumn PrecioUnitario;
-        private DataGridViewTextBoxColumn Editar;
-        private DataGridViewTextBoxColumn Eliminar;
+        private DataGridViewImageColumn Editar;
+        private DataGridViewImageColumn Eliminar;
     }
 }

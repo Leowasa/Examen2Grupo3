@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using static Examen2Grupo3.GenerarPedido;
 using static Examen2Grupo3.RegistroPedidos;
-using System.Text.Json;
 using System.Drawing.Text;
 using Newtonsoft.Json; // Agregar esta directiva para usar JsonSerializerOptions
 
@@ -27,9 +26,9 @@ namespace Examen2Grupo3
         public GenerarPedido()
         {
             InitializeComponent();
-            label14.Text = NumeroPedido.ToString("D6");
+            label14.Text = CargarNum().ToString("D6");
         }
-        private int CargarDatosDesdeJson()
+        private int CargarNum()
         {
             string rutaArchivo = "datos.json";
             if (File.Exists(rutaArchivo))
@@ -39,10 +38,10 @@ namespace Examen2Grupo3
 
                 if (pedidos.Count > 0)
                 {
-                    //return pedidos.Max(p => p.NumeroPedido); // Encuentra el mayor número de pedido
+                    return NumeroPedido = pedidos.Max(p => p.ID) + 1; // Encuentra el mayor número de pedido
                 }
             }
-            return 0; // Si no hay pedidos, empieza desde 0
+            return 1; // Si no hay pedidos, empieza desde 0
         }
 
         public class RoundButton : Button
@@ -140,14 +139,20 @@ namespace Examen2Grupo3
         private void GuardarDatosEnJson(List<Pedido> pedidos)
         {
             string rutaArchivo = "datos.json";
-            // Verificar si el archivo ya existe y contiene datos
-            if (File.Exists(rutaArchivo))
+
+            try
             {
-                string contenidoExistente = File.ReadAllText(rutaArchivo);
-                if (!string.IsNullOrWhiteSpace(contenidoExistente))
-                {
-                    string json = System.Text.Json.JsonSerializer.Serialize(pedido, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
-                }
+                // Serializar la lista de pedidos correctamente
+                string json = JsonConvert.SerializeObject(pedidos, Formatting.Indented);
+
+                // Escribir el JSON en el archivo
+                File.WriteAllText(rutaArchivo, json);
+
+              
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -164,10 +169,9 @@ namespace Examen2Grupo3
             pedido.Fecha = guna2DateTimePicker1.Value;
             ListaPedidos.Add(pedido);
             GuardarDatosEnJson(ListaPedidos);
-            NumeroPedido++;
             dataGridView1.Rows.Clear();
             LimpiarTextBox();
-            label14.Text = NumeroPedido.ToString("D6");
+            label14.Text = CargarNum().ToString("D6");
             label18.Text = ": ";
             label19.Text = ": ";
             label20.Text = ": ";
@@ -176,8 +180,6 @@ namespace Examen2Grupo3
 
 
         }
-
-
         private void LimpiarTextBox()
         {
             foreach (Control control in this.Controls)

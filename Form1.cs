@@ -8,7 +8,7 @@ namespace ejemplo
 
     {
 
-    
+
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -240,6 +240,11 @@ namespace ejemplo
         private void guna2Button11_Click(object sender, EventArgs e)
         {
             AbrirFormulario(new GenerarOrden());
+        }
+
+        private void PanelPrincipal_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

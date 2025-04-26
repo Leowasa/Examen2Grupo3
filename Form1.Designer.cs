@@ -552,6 +552,7 @@
             PanelPrincipal.Name = "PanelPrincipal";
             PanelPrincipal.Size = new Size(965, 753);
             PanelPrincipal.TabIndex = 141;
+            PanelPrincipal.Paint += PanelPrincipal_Paint;
             // 
             // Form1
             // 

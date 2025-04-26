@@ -60,7 +60,9 @@
             // ID
             // 
             ID.AutoSize = true;
-            ID.Location = new Point(36, 59);
+            ID.BackColor = Color.Transparent;
+            ID.ForeColor = Color.White;
+            ID.Location = new Point(12, 21);
             ID.Name = "ID";
             ID.Size = new Size(18, 15);
             ID.TabIndex = 0;
@@ -69,7 +71,9 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(36, 115);
+            label1.BackColor = Color.Transparent;
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(12, 77);
             label1.Name = "label1";
             label1.Size = new Size(51, 15);
             label1.TabIndex = 1;
@@ -78,7 +82,9 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(36, 172);
+            label2.BackColor = Color.Transparent;
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(12, 134);
             label2.Name = "label2";
             label2.Size = new Size(69, 15);
             label2.TabIndex = 2;
@@ -87,7 +93,9 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(36, 287);
+            label3.BackColor = Color.Transparent;
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(12, 249);
             label3.Name = "label3";
             label3.Size = new Size(55, 15);
             label3.TabIndex = 3;
@@ -95,6 +103,7 @@
             // 
             // guna2TextBox1
             // 
+            guna2TextBox1.BackColor = Color.Transparent;
             guna2TextBox1.BorderRadius = 5;
             guna2TextBox1.CustomizableEdges = customizableEdges1;
             guna2TextBox1.DefaultText = "";
@@ -105,7 +114,7 @@
             guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Font = new Font("Segoe UI", 9F);
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(36, 77);
+            guna2TextBox1.Location = new Point(12, 39);
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderText = "";
             guna2TextBox1.SelectedText = "";
@@ -115,6 +124,7 @@
             // 
             // guna2TextBox2
             // 
+            guna2TextBox2.BackColor = Color.Transparent;
             guna2TextBox2.BorderRadius = 5;
             guna2TextBox2.CustomizableEdges = customizableEdges3;
             guna2TextBox2.DefaultText = "";
@@ -125,7 +135,7 @@
             guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox2.Font = new Font("Segoe UI", 9F);
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(36, 133);
+            guna2TextBox2.Location = new Point(12, 95);
             guna2TextBox2.Name = "guna2TextBox2";
             guna2TextBox2.PlaceholderText = "";
             guna2TextBox2.SelectedText = "";
@@ -135,6 +145,7 @@
             // 
             // guna2TextBox3
             // 
+            guna2TextBox3.BackColor = Color.Transparent;
             guna2TextBox3.BorderRadius = 5;
             guna2TextBox3.CustomizableEdges = customizableEdges5;
             guna2TextBox3.DefaultText = "";
@@ -145,7 +156,7 @@
             guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Font = new Font("Segoe UI", 9F);
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(36, 190);
+            guna2TextBox3.Location = new Point(12, 152);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
             guna2TextBox3.SelectedText = "";
@@ -156,7 +167,9 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(36, 341);
+            label4.BackColor = Color.Transparent;
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(12, 303);
             label4.Name = "label4";
             label4.Size = new Size(84, 15);
             label4.TabIndex = 136;
@@ -164,6 +177,7 @@
             // 
             // guna2TextBox4
             // 
+            guna2TextBox4.BackColor = Color.Transparent;
             guna2TextBox4.BorderRadius = 5;
             guna2TextBox4.CustomizableEdges = customizableEdges7;
             guna2TextBox4.DefaultText = "";
@@ -174,7 +188,7 @@
             guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Font = new Font("Segoe UI", 9F);
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(36, 249);
+            guna2TextBox4.Location = new Point(12, 211);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
             guna2TextBox4.SelectedText = "";
@@ -194,7 +208,7 @@
             guna2TextBox5.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox5.Font = new Font("Segoe UI", 9F);
             guna2TextBox5.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox5.Location = new Point(36, 305);
+            guna2TextBox5.Location = new Point(12, 267);
             guna2TextBox5.Name = "guna2TextBox5";
             guna2TextBox5.PlaceholderText = "";
             guna2TextBox5.SelectedText = "";
@@ -204,15 +218,18 @@
             // 
             // guna2Button1
             // 
+            guna2Button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            guna2Button1.BackColor = Color.Transparent;
             guna2Button1.BorderRadius = 8;
             guna2Button1.CustomizableEdges = customizableEdges11;
             guna2Button1.DisabledState.BorderColor = Color.DarkGray;
             guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button1.FillColor = SystemColors.HotTrack;
             guna2Button1.Font = new Font("Segoe UI", 9F);
             guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(304, 388);
+            guna2Button1.Location = new Point(12, 366);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2Button1.Size = new Size(111, 36);
@@ -232,7 +249,7 @@
             guna2TextBox6.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox6.Font = new Font("Segoe UI", 9F);
             guna2TextBox6.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox6.Location = new Point(36, 359);
+            guna2TextBox6.Location = new Point(12, 321);
             guna2TextBox6.Name = "guna2TextBox6";
             guna2TextBox6.PlaceholderText = "";
             guna2TextBox6.SelectedText = "";
@@ -243,7 +260,9 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(36, 231);
+            label5.BackColor = Color.Transparent;
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(12, 193);
             label5.Name = "label5";
             label5.Size = new Size(58, 15);
             label5.TabIndex = 140;
@@ -253,7 +272,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(427, 436);
+            BackgroundImage = Properties.Resources.Fondo;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(297, 414);
             Controls.Add(guna2TextBox6);
             Controls.Add(label5);
             Controls.Add(guna2Button1);
