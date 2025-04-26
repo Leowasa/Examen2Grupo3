@@ -98,11 +98,11 @@ namespace Examen2Grupo3
 
         }
 
-<<<<<<< HEAD
+
         private void Cliente_Click(object sender, EventArgs e)
         {
 
-=======
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             MostrarDatosDesdeNuevoJson();
@@ -126,7 +126,6 @@ namespace Examen2Grupo3
                     }
                 }
             }
->>>>>>> 47be1fb6086a34f5652394d8df76df8fca778a59
         }
     }
 }
