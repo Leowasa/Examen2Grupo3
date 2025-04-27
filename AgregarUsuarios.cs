@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
+﻿using System.Data;
 
 namespace Examen2Grupo3
 
@@ -16,9 +7,9 @@ namespace Examen2Grupo3
     {
         private Button btnAgregarUsuario;
 
-    public Agregar_Usuarios()
+        public Agregar_Usuarios()
         {
-            
+
             // Crear el archivo JSON si no existe      
             if (!File.Exists(FilePath))
             {
@@ -29,8 +20,8 @@ namespace Examen2Grupo3
 
             using (var formAgregar = new Form())
             {
-                Bitmap img = new Bitmap(Application.StartupPath + @"\img\Fondo.jpg");
-                formAgregar.BackgroundImage = img;
+                // Bitmap img = new Bitmap(Application.StartupPath + @"\img\Fondo.jpg");
+                // formAgregar.BackgroundImage = img;
                 formAgregar.BackgroundImageLayout = ImageLayout.Stretch;
                 formAgregar.Text = "Añadir Usuario";
                 formAgregar.Size = new Size(300, 350);
@@ -111,7 +102,7 @@ namespace Examen2Grupo3
         {
             using (var formBuscar = new Form())
             {
-                formBuscar.Text = "Buscar Usuario";
+                // formBuscar.Text = "Buscar Usuario";
                 formBuscar.Size = new Size(600, 400);
 
                 Bitmap img = new Bitmap(Application.StartupPath + @"\img\fondo.jpg");

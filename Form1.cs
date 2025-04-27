@@ -1,14 +1,12 @@
-using System.Runtime.InteropServices;
 using Examen2Grupo3;
-using static Examen2Grupo3.GenerarPedido;
+using System.Runtime.InteropServices;
 
 namespace ejemplo
 {
     public partial class Form1 : Form
 
     {
-
-
+        public Guna.UI2.WinForms.Guna2Button guna2Button14;
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -19,6 +17,7 @@ namespace ejemplo
             InitializeComponent();
             customizemenu();
         }
+
         private void customizemenu()
         {
             panelhistorial.Visible = false;
@@ -97,6 +96,10 @@ namespace ejemplo
         {
             customizemenu();
             AbrirFormulario(new Clientes());
+        }
+        public void prueba()
+        {
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -208,6 +211,7 @@ namespace ejemplo
         {
             customizemenu();
             showmenu(panelhistorial);
+
         }
 
         private void guna2Button8_Click(object sender, EventArgs e)
@@ -219,7 +223,7 @@ namespace ejemplo
         private void guna2Button6_Click(object sender, EventArgs e)
         {
             AbrirFormulario(new OrdenesHistorial());
-        }//hjgjhfkjhfvjkfkjfgfk
+        }
 
         private void guna2Button7_Click(object sender, EventArgs e)
         {

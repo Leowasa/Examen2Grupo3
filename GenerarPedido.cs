@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Newtonsoft.Json; // Agregar esta directiva para usar JsonSerializerOptions
 using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using Guna.UI2.WinForms;
-using static Examen2Grupo3.GenerarPedido;
 using static Examen2Grupo3.RegistroPedidos;
-using System.Drawing.Text;
-using Newtonsoft.Json; // Agregar esta directiva para usar JsonSerializerOptions
 
 
 namespace Examen2Grupo3
@@ -21,7 +8,7 @@ namespace Examen2Grupo3
     public partial class GenerarPedido : Form
     {
         private Pedido pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
-        private static List<Pedido> ListaPedidos = new List<Pedido>();
+        private List<Pedido> ListaPedidos = new List<Pedido>();
         private static int NumeroPedido;
         public GenerarPedido()
         {
@@ -90,10 +77,10 @@ namespace Examen2Grupo3
                 }
 
             }
-            else 
+            else
             {
                 //nada xd
-             }
+            }
         }
         public void Descuento()
         {
@@ -136,25 +123,30 @@ namespace Examen2Grupo3
             }
 
         }
-        private void GuardarDatosEnJson(List<Pedido> pedidos)
+        private void GuardarDatosEnJson(Pedido nuevoPedido)
         {
             string rutaArchivo = "datos.json";
 
             try
             {
-                // Serializar la lista de pedidos correctamente
-                string json = JsonConvert.SerializeObject(pedidos, Formatting.Indented);
+                // Cargar los pedidos existentes
+                List<Pedido> pedidosExistentes = LeerPedidos();
+
+                // Agregar el nuevo pedido a la lista
+                pedidosExistentes.Add(nuevoPedido);
+
+                // Serializar la lista actualizada de pedidos
+                var json = JsonConvert.SerializeObject(pedidosExistentes, Formatting.Indented);
 
                 // Escribir el JSON en el archivo
                 File.WriteAllText(rutaArchivo, json);
-
-              
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al guardar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         // Guardar el pedido cuando el usuario presione el botón
@@ -167,8 +159,7 @@ namespace Examen2Grupo3
             }
             pedido.ID = int.Parse(label14.Text);
             pedido.Fecha = guna2DateTimePicker1.Value;
-            ListaPedidos.Add(pedido);
-            GuardarDatosEnJson(ListaPedidos);
+            GuardarDatosEnJson(pedido);
             dataGridView1.Rows.Clear();
             LimpiarTextBox();
             label14.Text = CargarNum().ToString("D6");
@@ -193,6 +184,16 @@ namespace Examen2Grupo3
         private void GenerarPedido_Load(object sender, EventArgs e)
         {
 
+        }
+        public List<Pedido> LeerPedidos()
+        {
+            string rutaArchivo = "datos.json";
+            if (File.Exists(rutaArchivo))
+            {
+                string contenido = File.ReadAllText(rutaArchivo);
+                return JsonConvert.DeserializeObject<List<Pedido>>(contenido) ?? new List<Pedido>();
+            }
+            return new List<Pedido>();
         }
 
         private void label14_Click(object sender, EventArgs e)

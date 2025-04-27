@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-
-namespace Examen2Grupo3 
+﻿namespace Examen2Grupo3
 {
     public class RegistroPedidos
     {
@@ -15,7 +7,7 @@ namespace Examen2Grupo3
         {
             public DateTime Fecha { get; set; }
             public int ID { get; set; }
-            public Cliente Cliente { get; set; }    
+            public Cliente Cliente { get; set; }
             public List<Producto> Productos { get; set; }
             public String Estado { get; set; }
             public decimal SubtTotal => Productos.Sum(p => p.Total);
@@ -27,9 +19,10 @@ namespace Examen2Grupo3
             public string Nombre { get; set; }
             public string Direccion { get; set; }
             public string Correo { get; set; }
-            public int ID { get; set; } 
+            public int ID { get; set; }
             public string direccion { get; set; }
             public string Tipo { get; set; }
+
         }
 
         public class Producto
@@ -42,10 +35,17 @@ namespace Examen2Grupo3
             public decimal PrecioUnitario { get; set; }
             public decimal Total => Cantidad * PrecioUnitario;
         }
+
+        public class Usuarios
+        {
+            public int ID { get; set; }
+            public string Username { get; set; }
+            public string Nombre { get; set; }
+            public string Password { get; set; }
+            public string Tipo { get; set; }
+
+        }
     }
-
-
-
 
 }
 

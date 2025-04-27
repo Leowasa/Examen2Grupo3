@@ -7,6 +7,8 @@
         /// </summary>  
         private System.ComponentModel.IContainer components = null;
 
+        public object guna2Button14 { get; internal set; }
+
         /// <summary>  
         /// Clean up any resources being used.  
         /// </summary>  

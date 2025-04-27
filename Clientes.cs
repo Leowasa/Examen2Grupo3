@@ -1,15 +1,5 @@
 ﻿using Examen2Grupo3;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Examen2Grupo3.RegistroPedidos;
 
 
@@ -26,33 +16,45 @@ namespace ejemplo
 
         private void guna2TextBox2_TextChanged(object sender, EventArgs e)
         {
+            BuscarProducto();
+        }
+        public void BuscarProducto()
+        {
+            string criterio = guna2TextBox2.Text;
+
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            {
+                if (fila.Cells["ID"].Value != null && fila.Cells["Nombre"].Value != null)
+                {
+                    string? id = fila.Cells["ID"].Value?.ToString();
+                    string nombre = fila.Cells["Nombre"].Value?.ToString()?.ToLower();
+
+                    fila.Visible = id.Contains(criterio) || nombre.Contains(criterio);
+                }
+            }
 
         }
-
         private void guna2Button2_Click(object sender, EventArgs e)
         {
             AgregarCliente agregarCliente = new AgregarCliente();
             if (agregarCliente.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    Cliente Clientenuevo = new Cliente()
-                    {
-                        ID = agregarCliente.Datos.ID,
-                        Nombre = agregarCliente.Datos.Nombre,
-                        Direccion = agregarCliente.Datos.Direccion,
-                        Correo = agregarCliente.Datos.Correo,
-                        Tipo = agregarCliente.Datos.Tipo
-                    };
 
-                    cliente.Add(Clientenuevo);
-                    dataGridView1.Rows.Add(Clientenuevo.ID, Clientenuevo.Nombre, Clientenuevo.Direccion, Clientenuevo.Correo, Clientenuevo.Tipo);
 
-                }
-                catch
+                Cliente Clientenuevo = new Cliente()
                 {
-                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los campos");
-                }
+                    ID = agregarCliente.Datos.ID,
+                    Nombre = agregarCliente.Datos.Nombre,
+                    Direccion = agregarCliente.Datos.Direccion,
+                    Correo = agregarCliente.Datos.Correo,
+                    Tipo = agregarCliente.Datos.Tipo
+                };
+
+                cliente.Add(Clientenuevo);
+                dataGridView1.Rows.Add(Clientenuevo.ID, Clientenuevo.Nombre, Clientenuevo.Direccion, Clientenuevo.Correo, Clientenuevo.Tipo);
+                GuardarClientes("Clientes.Json");
+
+
 
             }
         }
@@ -62,13 +64,13 @@ namespace ejemplo
             {
                 using (StreamWriter sw = new StreamWriter(rutaArchivo))
                 {
-                    sw.WriteLine("ID,Nombre,Categoria,Descripcion,PrecioUnitario"); // Encabezado CSV
+                    sw.WriteLine("ID,Nombre,CorreoElectronico,Direccion,Tipo"); // Encabezado CSV
 
                     foreach (DataGridViewRow fila in dataGridView1.Rows)
                     {
                         if (fila.Cells["ID"].Value != null)
                         {
-                            sw.WriteLine($"{fila.Cells["ID"].Value},{fila.Cells["Nombre"].Value},{fila.Cells["Categoria"].Value},{fila.Cells["Descripcion"].Value},{fila.Cells["Stock"].Value},{fila.Cells["PrecioUnitario"].Value}");
+                            sw.WriteLine($"{fila.Cells["ID"].Value},{fila.Cells["Nombre"].Value},{fila.Cells["CorreoElectronico"].Value},{fila.Cells["Direccion"].Value},{fila.Cells["Tipo"].Value}");
                         }
                     }
                 }
@@ -97,7 +99,7 @@ namespace ejemplo
                         clientes.Nombre = fila.Cells["Nombre"].Value.ToString();
                         clientes.Direccion = fila.Cells["Direccion"].Value.ToString();
                         clientes.Correo = fila.Cells["CorreoElectronico"].Value.ToString();
-                        clientes.Tipo = fila.Cells["Stock"].Value.ToString();
+                        clientes.Tipo = fila.Cells["Tipo"].Value.ToString();
                     }
                     catch (Exception ex)
                     {
@@ -119,7 +121,7 @@ namespace ejemplo
             {
 
                 string json = File.ReadAllText(rutaArchivo);
-                List<Producto>? listaProductos = JsonSerializer.Deserialize<List<Producto>>(json);
+                List<Cliente>? listaProductos = JsonSerializer.Deserialize<List<Cliente>>(json);
 
                 if (listaProductos != null) // Verificar que la lista no sea nula
                 {
@@ -127,7 +129,7 @@ namespace ejemplo
 
                     foreach (var producto in listaProductos)
                     {
-                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario);
+                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Correo, producto.Direccion, producto.Tipo);
                     }
                 }
             }
@@ -145,7 +147,7 @@ namespace ejemplo
                     {
                         var datos = linea.Split(',');
 
-                        dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5]);
+                        dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4]);
                     }
 
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
