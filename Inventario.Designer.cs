@@ -49,8 +49,8 @@
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             ID = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
-            Descripcion = new DataGridViewButtonColumn();
             Categoria = new DataGridViewTextBoxColumn();
+            Descripcion = new DataGridViewButtonColumn();
             Stock = new DataGridViewTextBoxColumn();
             PrecioUnitario = new DataGridViewTextBoxColumn();
             Editar = new DataGridViewImageColumn();
@@ -91,7 +91,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Descripcion, Categoria, Stock, PrecioUnitario, Editar, Eliminar });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Categoria, Descripcion, Stock, PrecioUnitario, Editar, Eliminar });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(12, 161);
@@ -224,6 +224,12 @@
             Nombre.HeaderText = "Nombre";
             Nombre.Name = "Nombre";
             // 
+            // Categoria
+            // 
+            Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Categoria.HeaderText = "Categoria";
+            Categoria.Name = "Categoria";
+            // 
             // Descripcion
             // 
             Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -231,12 +237,6 @@
             Descripcion.HeaderText = "Descripcion";
             Descripcion.Name = "Descripcion";
             Descripcion.ReadOnly = true;
-            // 
-            // Categoria
-            // 
-            Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Categoria.HeaderText = "Categoria";
-            Categoria.Name = "Categoria";
             // 
             // Stock
             // 
@@ -297,7 +297,6 @@
         private DataGridView dataGridView1;
         private TextBox textBox1;
         private DataGridViewTextBoxColumn Cedula;
-        private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn Usuariosd;
         private DataGridViewTextBoxColumn Rol;
         private DataGridViewTextBoxColumn Column1;
@@ -310,8 +309,9 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private DataGridViewTextBoxColumn ID;
-        private DataGridViewButtonColumn Descripcion;
+        private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn Categoria;
+        private DataGridViewButtonColumn Descripcion;
         private DataGridViewTextBoxColumn Stock;
         private DataGridViewTextBoxColumn PrecioUnitario;
         private DataGridViewImageColumn Editar;

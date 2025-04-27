@@ -41,8 +41,8 @@
             Usuariosd = new DataGridViewButtonColumn();
             Rol = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewImageColumn();
+            Column3 = new DataGridViewImageColumn();
             Cliente = new Label();
             guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
@@ -85,6 +85,7 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Size = new Size(941, 615);
             dataGridView1.TabIndex = 99;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // Cedula
             // 
@@ -122,12 +123,20 @@
             // Column2
             // 
             Column2.HeaderText = "Editar";
+            Column2.Image = Examen2Grupo3.Properties.Resources.icons8_edit_24;
+            Column2.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Column2.Name = "Column2";
+            Column2.Resizable = DataGridViewTriState.True;
+            Column2.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // Column3
             // 
             Column3.HeaderText = "Eliminar";
+            Column3.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_48;
+            Column3.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Column3.Name = "Column3";
+            Column3.Resizable = DataGridViewTriState.True;
+            Column3.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // Cliente
             // 
@@ -194,6 +203,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 150;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // pictureBox2
             // 
@@ -205,6 +215,7 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 151;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // Clientes
             // 
@@ -237,11 +248,11 @@
         private DataGridViewButtonColumn Usuariosd;
         private DataGridViewTextBoxColumn Rol;
         private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private DataGridViewImageColumn Column2;
+        private DataGridViewImageColumn Column3;
     }
 }

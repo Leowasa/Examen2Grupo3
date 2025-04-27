@@ -40,8 +40,8 @@
             Usuariosd = new DataGridViewButtonColumn();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewImageColumn();
+            Column5 = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -146,12 +146,20 @@
             // Column3
             // 
             Column3.HeaderText = "ver detalles";
+            Column3.Image = Examen2Grupo3.Properties.Resources.icons8_view_details_241;
+            Column3.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Column3.Name = "Column3";
+            Column3.Resizable = DataGridViewTriState.True;
+            Column3.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // Column5
             // 
             Column5.HeaderText = "Eliminar";
+            Column5.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_48;
+            Column5.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Column5.Name = "Column5";
+            Column5.Resizable = DataGridViewTriState.True;
+            Column5.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // PedidosHistorial
             // 
@@ -179,7 +187,7 @@
         private DataGridViewButtonColumn Usuariosd;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewImageColumn Column3;
+        private DataGridViewImageColumn Column5;
     }
 }

@@ -57,8 +57,9 @@ namespace Examen2Grupo3
                 guna2TextBox2.Text = nombre;
                 guna2TextBox4.Text = categoria;
                 guna2TextBox3.Text = descripcion;
-                guna2TextBox6.Text = precio;
                 guna2TextBox5.Text = Cantidad;
+                guna2TextBox6.Text = precio;
+               
 
                 guna2TextBox1.ReadOnly = true;
                 guna2TextBox1.BackColor = Color.LightGray;

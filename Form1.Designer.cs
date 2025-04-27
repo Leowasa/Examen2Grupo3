@@ -110,6 +110,7 @@
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2CustomGradientPanel1.Size = new Size(1215, 35);
             guna2CustomGradientPanel1.TabIndex = 139;
+            guna2CustomGradientPanel1.Paint += guna2CustomGradientPanel1_Paint;
             guna2CustomGradientPanel1.MouseDown += guna2CustomGradientPanel1_MouseDown;
             // 
             // Btnrest

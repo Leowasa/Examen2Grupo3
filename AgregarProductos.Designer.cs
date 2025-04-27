@@ -84,7 +84,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(12, 134);
+            label2.Location = new Point(12, 201);
             label2.Name = "label2";
             label2.Size = new Size(69, 15);
             label2.TabIndex = 2;
@@ -156,7 +156,7 @@
             guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Font = new Font("Segoe UI", 9F);
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(12, 152);
+            guna2TextBox3.Location = new Point(12, 219);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
             guna2TextBox3.SelectedText = "";
@@ -188,7 +188,7 @@
             guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Font = new Font("Segoe UI", 9F);
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(12, 211);
+            guna2TextBox4.Location = new Point(12, 157);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
             guna2TextBox4.SelectedText = "";
@@ -198,6 +198,7 @@
             // 
             // guna2TextBox5
             // 
+            guna2TextBox5.BackColor = Color.Transparent;
             guna2TextBox5.BorderRadius = 5;
             guna2TextBox5.CustomizableEdges = customizableEdges9;
             guna2TextBox5.DefaultText = "";
@@ -239,6 +240,7 @@
             // 
             // guna2TextBox6
             // 
+            guna2TextBox6.BackColor = Color.Transparent;
             guna2TextBox6.BorderRadius = 5;
             guna2TextBox6.CustomizableEdges = customizableEdges13;
             guna2TextBox6.DefaultText = "";
@@ -262,7 +264,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.ForeColor = Color.White;
-            label5.Location = new Point(12, 193);
+            label5.Location = new Point(12, 139);
             label5.Name = "label5";
             label5.Size = new Size(58, 15);
             label5.TabIndex = 140;

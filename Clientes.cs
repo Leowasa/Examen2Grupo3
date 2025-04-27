@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Examen2Grupo3.RegistroPedidos;
@@ -16,10 +17,11 @@ namespace ejemplo
 {
     public partial class Clientes : Form
     {
-        public List<Cliente> cliente = new List<Cliente>();
+        public List<Cliente>? cliente = new List<Cliente>();
         public Clientes()
         {
             InitializeComponent();
+            CargarClientes("Clientes.Json");
         }
 
         private void guna2TextBox2_TextChanged(object sender, EventArgs e)
@@ -42,7 +44,7 @@ namespace ejemplo
                         Correo = agregarCliente.Datos.Correo,
                         Tipo = agregarCliente.Datos.Tipo
                     };
-                    
+
                     cliente.Add(Clientenuevo);
                     dataGridView1.Rows.Add(Clientenuevo.ID, Clientenuevo.Nombre, Clientenuevo.Direccion, Clientenuevo.Correo, Clientenuevo.Tipo);
 
@@ -54,10 +56,186 @@ namespace ejemplo
 
             }
         }
+        public void ExportarCSV(string rutaArchivo)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(rutaArchivo))
+                {
+                    sw.WriteLine("ID,Nombre,Categoria,Descripcion,PrecioUnitario"); // Encabezado CSV
 
+                    foreach (DataGridViewRow fila in dataGridView1.Rows)
+                    {
+                        if (fila.Cells["ID"].Value != null)
+                        {
+                            sw.WriteLine($"{fila.Cells["ID"].Value},{fila.Cells["Nombre"].Value},{fila.Cells["Categoria"].Value},{fila.Cells["Descripcion"].Value},{fila.Cells["Stock"].Value},{fila.Cells["PrecioUnitario"].Value}");
+                        }
+                    }
+                }
+
+                MessageBox.Show("Exportación realizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        public void GuardarClientes(string rutaArchivo)
+        {
+            cliente = new List<Cliente>();
+
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            {
+                if (fila.Cells["ID"].Value != null) // Validamos que la fila tenga datos
+                {
+                    Cliente clientes = new Cliente();
+                    try
+                    {
+                        clientes.ID = int.Parse(fila.Cells["ID"].Value.ToString());
+                        clientes.Nombre = fila.Cells["Nombre"].Value.ToString();
+                        clientes.Direccion = fila.Cells["Direccion"].Value.ToString();
+                        clientes.Correo = fila.Cells["CorreoElectronico"].Value.ToString();
+                        clientes.Tipo = fila.Cells["Stock"].Value.ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                    }
+                    cliente.Add(clientes); // Agregamos al inicio para mantener el orden
+                }
+            }
+            string json = JsonSerializer.Serialize(cliente, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(rutaArchivo, json);
+            CargarClientes("Clientes.Json");
+        }
+        public void CargarClientes(string rutaArchivo)
+        {
+
+            if (File.Exists(rutaArchivo))
+            {
+
+                string json = File.ReadAllText(rutaArchivo);
+                List<Producto>? listaProductos = JsonSerializer.Deserialize<List<Producto>>(json);
+
+                if (listaProductos != null) // Verificar que la lista no sea nula
+                {
+                    dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos
+
+                    foreach (var producto in listaProductos)
+                    {
+                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario);
+                    }
+                }
+            }
+        }
+        public void ImportarCSV(string rutaArchivo)
+        {
+            try
+            {
+                if (File.Exists(rutaArchivo))
+                {
+                    var lineas = File.ReadAllLines(rutaArchivo);
+                    dataGridView1.Rows.Clear();
+
+                    foreach (var linea in lineas.Skip(1)) // Omitimos el encabezado
+                    {
+                        var datos = linea.Split(',');
+
+                        dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5]);
+                    }
+
+                    MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    GuardarClientes("Clientes.Json");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
         private void Clientes_Load(object sender, EventArgs e)
         {
-           
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verificamos que la columna seleccionada sea la de "Editar"
+            if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
+            {
+                DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
+
+                // Creamos una instancia del formulario de edición y pasamos los datos
+                AgregarCliente formEditar = new AgregarCliente();
+                formEditar.SetDatosProducto(
+                    filaSeleccionada.Cells["ID"].Value.ToString(),
+                    filaSeleccionada.Cells["Nombre"].Value.ToString(),
+                    filaSeleccionada.Cells["Direccion"].Value.ToString(),
+                    filaSeleccionada.Cells["CorreoElectronico"].Value.ToString(),
+                    filaSeleccionada.Cells["Tipo"].Value.ToString()
+                );
+
+                formEditar.ShowDialog(); // Mostramos el formulario de edición como una ventana modal
+                if (formEditar.DialogResult == DialogResult.OK)
+                {
+                    DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
+                    Cliente productoEditado = formEditar.ObtenerClienteEditado();
+                    fila.Cells["Nombre"].Value = productoEditado.Nombre;
+                    fila.Cells["CorreoElectronico"].Value = productoEditado.Correo;
+                    fila.Cells["Direccion"].Value = productoEditado.Direccion;
+                    fila.Cells["Tipo"].Value = productoEditado.Tipo;
+                    GuardarClientes("Clientes.Json");
+                    CargarClientes("Clientes.Json");
+                }
+            }
+            else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
+            {
+                // Verificar que la celda pertenece a la columna de botones y no es el encabezado
+
+                DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    dataGridView1.Rows.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada
+                    GuardarClientes("Clientes.Json");
+                }
+
+
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Archivos CSV (*.csv)|*.csv";
+                sfd.Title = "Selecciona dónde guardar el archivo CSV";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    ExportarCSV(sfd.FileName);
+                }
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Archivos CSV (*.csv)|*.csv";
+                ofd.Title = "Selecciona un archivo CSV para importar";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    ImportarCSV(ofd.FileName);
+                }
+            }
         }
     }
 }

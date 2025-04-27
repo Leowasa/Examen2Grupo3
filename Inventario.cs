@@ -41,7 +41,7 @@ namespace ejemplo
                 formEditar.SetDatosProducto(
                     filaSeleccionada.Cells["ID"].Value.ToString(),
                     filaSeleccionada.Cells["Nombre"].Value.ToString(),
-                    filaSeleccionada.Cells["Categoria"].Value.ToString(),
+                    filaSeleccionada.Cells["Categoria"].Value.ToString(),                   
                     filaSeleccionada.Cells["Descripcion"].Value.ToString(),
                     filaSeleccionada.Cells["Stock"].Value.ToString(),
                     filaSeleccionada.Cells["PrecioUnitario"].Value.ToString()
@@ -135,7 +135,7 @@ namespace ejemplo
                         Cantidad = formProductos.Cantidad
 
                     };
-                    //  listaProductos.Add(ProductoNuevo);
+                    
                     inventario.Add(ProductoNuevo);
                     dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario);
                     GuardarInventario("Inventario.Json");
