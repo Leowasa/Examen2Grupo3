@@ -132,9 +132,16 @@ namespace ejemplo
             textBox1.Leave += textBox1_Leave;
         }
        
+        
         private void Usuarios_Load(object sender, EventArgs e)
         {
+            CargarDatosEnDataGridView();
+        }
 
+        private void CargarDatosEnDataGridView()
+        {
+            var usuarios = LeerUsuarios();
+            dataGridView1.DataSource = usuarios;
         }
     }
 }
