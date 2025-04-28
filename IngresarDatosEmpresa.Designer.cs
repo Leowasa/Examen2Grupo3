@@ -40,11 +40,9 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngresarDatosEmpresa));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngresarDatosEmpresa));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
@@ -57,7 +55,6 @@
             guna2TextBox4 = new Guna.UI2.WinForms.Guna2TextBox();
             guna2TextBox5 = new Guna.UI2.WinForms.Guna2TextBox();
             Cliente = new Label();
-            guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             pictureBox1 = new PictureBox();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -135,6 +132,7 @@
             guna2Button1.Size = new Size(123, 20);
             guna2Button1.TabIndex = 131;
             guna2Button1.Text = "Confirmar";
+            guna2Button1.Click += guna2Button1_Click_1;
             // 
             // guna2TextBox1
             // 
@@ -244,25 +242,10 @@
             Cliente.ForeColor = Color.Gainsboro;
             Cliente.Location = new Point(170, 38);
             Cliente.Name = "Cliente";
-            Cliente.Size = new Size(480, 109);
+            Cliente.Size = new Size(480, 53);
             Cliente.TabIndex = 137;
             Cliente.Text = "Ingrese los datos de su empresa";
             Cliente.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // guna2CustomGradientPanel1
-            // 
-            guna2CustomGradientPanel1.BackColor = Color.Transparent;
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges13;
-            guna2CustomGradientPanel1.Dock = DockStyle.Top;
-            guna2CustomGradientPanel1.FillColor = Color.FromArgb(0, 80, 200);
-            guna2CustomGradientPanel1.FillColor2 = SystemColors.MenuHighlight;
-            guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(0, 80, 200);
-            guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(0, 80, 200);
-            guna2CustomGradientPanel1.Location = new Point(0, 0);
-            guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2CustomGradientPanel1.Size = new Size(800, 35);
-            guna2CustomGradientPanel1.TabIndex = 138;
             // 
             // pictureBox1
             // 
@@ -277,7 +260,7 @@
             // guna2Button2
             // 
             guna2Button2.BorderRadius = 8;
-            guna2Button2.CustomizableEdges = customizableEdges15;
+            guna2Button2.CustomizableEdges = customizableEdges13;
             guna2Button2.DisabledState.BorderColor = Color.DarkGray;
             guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -287,7 +270,7 @@
             guna2Button2.ForeColor = Color.White;
             guna2Button2.Location = new Point(358, 241);
             guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges14;
             guna2Button2.Size = new Size(123, 20);
             guna2Button2.TabIndex = 140;
             guna2Button2.Text = "Cambiar imagen";
@@ -300,7 +283,6 @@
             ClientSize = new Size(800, 507);
             Controls.Add(guna2Button2);
             Controls.Add(pictureBox1);
-            Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(Cliente);
             Controls.Add(guna2TextBox5);
             Controls.Add(guna2TextBox4);
@@ -313,7 +295,6 @@
             Controls.Add(label7);
             Controls.Add(label8);
             Controls.Add(label9);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "IngresarDatosEmpresa";
             Text = "IngresarDatosEmpresa";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -334,7 +315,6 @@
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox4;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox5;
         private Label Cliente;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private PictureBox pictureBox1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
     }

@@ -26,7 +26,8 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        /// 
+        public void InitializeComponent()
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -604,7 +605,6 @@
         private Button button3;
         private Button button2;
         private Button button11;
-        private Panel panelhistorial;
         private PictureBox pictureBox1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Label label3;
@@ -617,11 +617,12 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button guna2Button7;
-        private Guna.UI2.WinForms.Guna2Button guna2Button6;
         private Guna.UI2.WinForms.Guna2Button guna2Button8;
-        private Panel panelVentas;
-        private Guna.UI2.WinForms.Guna2Button guna2Button11;
-        private Guna.UI2.WinForms.Guna2Button guna2Button12;
         private Guna.UI2.WinForms.Guna2Button guna2Button9;
+        public Panel panelhistorial;
+        public Guna.UI2.WinForms.Guna2Button guna2Button6;
+        public Panel panelVentas;
+        public Guna.UI2.WinForms.Guna2Button guna2Button11;
+        public Guna.UI2.WinForms.Guna2Button guna2Button12;
     }
 }

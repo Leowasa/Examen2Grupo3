@@ -45,6 +45,15 @@
             public string Tipo { get; set; }
 
         }
+        public class Empresa
+        {
+            public string RazonSocial { get; set; }
+            public string Direccion { get; set; }
+            public string Numero { get; set; }
+            public string Correo { get; set; }
+            public string Website { get; set; }
+
+        }
     }
 
 }

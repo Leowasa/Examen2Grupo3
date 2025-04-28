@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static Examen2Grupo3.RegistroPedidos;
-using static Examen2Grupo3.GestorInventario;
+﻿using Examen2Grupo3;
 using System.Text.Json;
-using Examen2Grupo3;
+using static Examen2Grupo3.RegistroPedidos;
 
 namespace ejemplo
 {
@@ -21,7 +11,7 @@ namespace ejemplo
         public Inventario()
         {
             InitializeComponent();
-            GuardarInventario("Inventario.Json");
+            CargarInventario("Inventario.Json");
         }
 
         private void Inventario_Load(object sender, EventArgs e)
@@ -41,7 +31,7 @@ namespace ejemplo
                 formEditar.SetDatosProducto(
                     filaSeleccionada.Cells["ID"].Value.ToString(),
                     filaSeleccionada.Cells["Nombre"].Value.ToString(),
-                    filaSeleccionada.Cells["Categoria"].Value.ToString(),                   
+                    filaSeleccionada.Cells["Categoria"].Value.ToString(),
                     filaSeleccionada.Cells["Descripcion"].Value.ToString(),
                     filaSeleccionada.Cells["Stock"].Value.ToString(),
                     filaSeleccionada.Cells["PrecioUnitario"].Value.ToString()
@@ -58,7 +48,6 @@ namespace ejemplo
                     fila.Cells["Stock"].Value = productoEditado.Descripcion;
                     fila.Cells["PrecioUnitario"].Value = productoEditado.PrecioUnitario;
                     GuardarInventario("Inventario.Json");
-                    CargarInventario("Inventario.Json");
                 }
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
@@ -135,7 +124,7 @@ namespace ejemplo
                         Cantidad = formProductos.Cantidad
 
                     };
-                    
+
                     inventario.Add(ProductoNuevo);
                     dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario);
                     GuardarInventario("Inventario.Json");

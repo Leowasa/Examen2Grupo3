@@ -82,17 +82,21 @@ public partial class Login : Form
         {
             case "Administrador":
                 Form1 form1 = new Form1();
+                this.Hide();
+                form1.Show();
                 break;
             case "Aprobador":
                 Form1 form2 = new Form1();
-                //form2.guna2Button14.Visible = false;
+                form2.guna2Button12.Visible = false;
                 this.Hide();
                 // Assuming "Mibotn" is a control or property, it must be accessed correctly.
                 // Replace "Mibotn" with the correct property or method name.
                 form2.Show();
                 break;
             case "Registrador":
-                Form form3 = new Form1();
+                Form1 form3 = new Form1();
+                form3.guna2Button11.Visible = false;
+                this.Hide();
                 form3.Show();
                 break;
         }

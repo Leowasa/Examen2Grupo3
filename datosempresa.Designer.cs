@@ -109,6 +109,7 @@
             guna2Button1.Size = new Size(74, 23);
             guna2Button1.TabIndex = 130;
             guna2Button1.Text = "Editar";
+            guna2Button1.Click += guna2Button1_Click;
             // 
             // pictureBox1
             // 
@@ -125,7 +126,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(965, 808);
+            ClientSize = new Size(965, 749);
             Controls.Add(pictureBox1);
             Controls.Add(guna2Button1);
             Controls.Add(label5);
@@ -135,7 +136,6 @@
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "datosempresa";
-            Text = "datosempresa";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

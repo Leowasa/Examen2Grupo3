@@ -4,9 +4,7 @@ using System.Runtime.InteropServices;
 namespace ejemplo
 {
     public partial class Form1 : Form
-
     {
-        public Guna.UI2.WinForms.Guna2Button guna2Button14;
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
