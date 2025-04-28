@@ -230,5 +230,24 @@ namespace Examen2Grupo3
         {
 
         }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            BuscarClientes frmClientes = new BuscarClientes();
+
+            frmClientes.ShowDialog();
+            if (frmClientes.DialogResult == DialogResult.OK)
+            {
+
+                Cliente Cliente = frmClientes.Clientes;
+                guna2TextBox1.Text = Cliente.Nombre;
+                guna2TextBox2.Text = Cliente.ID.ToString();
+                guna2TextBox4.Text = Cliente.Direccion;
+                guna2TextBox3.Text = Cliente.Correo;
+            }
+            // Suscribirse al evento y actualizar los TextBox cuando se seleccione un client
+
+
+        }
     }
 }

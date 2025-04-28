@@ -1,9 +1,10 @@
-﻿using Examen2Grupo3;
+﻿using System.Runtime.Versioning;
 using System.Text.Json;
 using static Examen2Grupo3.RegistroPedidos;
 
-namespace ejemplo
+namespace Examen2Grupo3
 {
+    [SupportedOSPlatform("windows6.1")]
     public partial class Inventario : Form
     {
         private Producto Producto;
@@ -11,33 +12,28 @@ namespace ejemplo
         public Inventario()
         {
             InitializeComponent();
+            Producto = new Producto();
             CargarInventario("Inventario.Json");
         }
 
-        private void Inventario_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        [SupportedOSPlatform("windows6.1")] // Add this attribute to suppress CA1416 warnings
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verificamos que la columna seleccionada sea la de "Editar"
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
 
-                // Creamos una instancia del formulario de edición y pasamos los datos
                 Agregar_Productos formEditar = new Agregar_Productos();
                 formEditar.SetDatosProducto(
-                    filaSeleccionada.Cells["ID"].Value.ToString(),
-                    filaSeleccionada.Cells["Nombre"].Value.ToString(),
-                    filaSeleccionada.Cells["Categoria"].Value.ToString(),
-                    filaSeleccionada.Cells["Descripcion"].Value.ToString(),
-                    filaSeleccionada.Cells["Stock"].Value.ToString(),
-                    filaSeleccionada.Cells["PrecioUnitario"].Value.ToString()
+                    filaSeleccionada.Cells["ID"].Value.ToString() ?? "0",
+                    filaSeleccionada.Cells["Nombre"].Value.ToString() ?? "",
+                    filaSeleccionada.Cells["Categoria"].Value.ToString() ?? "",
+                    filaSeleccionada.Cells["Descripcion"].Value.ToString() ?? "",
+                    filaSeleccionada.Cells["Stock"].Value.ToString() ?? "",
+                    filaSeleccionada.Cells["PrecioUnitario"].Value.ToString() ?? ""
                 );
 
-                formEditar.ShowDialog(); // Mostramos el formulario de edición como una ventana modal
+                formEditar.ShowDialog();
                 if (formEditar.DialogResult == DialogResult.OK)
                 {
                     DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
@@ -52,20 +48,17 @@ namespace ejemplo
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-                // Verificar que la celda pertenece a la columna de botones y no es el encabezado
-
                 DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
-                    dataGridView1.Rows.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada
+                    dataGridView1.Rows.RemoveAt(e.RowIndex);
                     GuardarInventario("Inventario.Json");
                 }
-
-
             }
         }
+
         public void GuardarInventario(string rutaArchivo)
         {
             List<Producto> listaProductos = new List<Producto>();
@@ -77,11 +70,12 @@ namespace ejemplo
                     Producto producto = new Producto();
                     try
                     {
-                        producto.ID = int.Parse(fila.Cells["ID"].Value.ToString());
-                        producto.Nombre = fila.Cells["Nombre"].Value.ToString();
-                        producto.Categoria = fila.Cells["Categoria"].Value.ToString();
-                        producto.Descripcion = fila.Cells["Descripcion"].Value.ToString();
-                        producto.Cantidad = int.Parse(fila.Cells["Stock"].Value.ToString());
+                        // Fix for CS0019 and CS8604 in the problematic line
+                        producto.ID = int.TryParse(fila.Cells["ID"].Value?.ToString(), out int id) ? id : 0;
+                        producto.Nombre = fila.Cells["Nombre"].Value.ToString() ?? "";
+                        producto.Categoria = fila.Cells["Categoria"].Value.ToString() ?? "";
+                        producto.Descripcion = fila.Cells["Descripcion"].Value.ToString() ?? "";
+                        producto.Cantidad = int.TryParse(fila.Cells["Stock"].Value.ToString(), out int Cantidad) ? Cantidad : 0;
                         if (fila.Cells["PrecioUnitario"].Value != null)
                         {
                             producto.PrecioUnitario = decimal.Parse(fila.Cells["PrecioUnitario"].Value.ToString());
@@ -91,6 +85,10 @@ namespace ejemplo
                             producto.PrecioUnitario = 0; // Or handle the default value appropriately
 
                         }
+                    }
+                    catch (FormatException ex)
+                    {
+                        MessageBox.Show($"Error de formato: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     catch (Exception ex)
                     {
@@ -106,46 +104,13 @@ namespace ejemplo
             File.WriteAllText(rutaArchivo, json);
             CargarInventario("Inventario.Json");
         }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-            Agregar_Productos formProductos = new Agregar_Productos();
-            if (formProductos.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    Producto ProductoNuevo = new Producto
-                    {
-                        ID = formProductos.Id,
-                        Nombre = formProductos.Nombre,
-                        Categoria = formProductos.Categoria,
-                        Descripcion = formProductos.Descripcion,
-                        PrecioUnitario = formProductos.PrecioUnitario,
-                        Cantidad = formProductos.Cantidad
-
-                    };
-
-                    inventario.Add(ProductoNuevo);
-                    dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario);
-                    GuardarInventario("Inventario.Json");
-                }
-                catch
-                {
-                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los datos");
-                }
-
-            }
-            else
-            {
-                //nada xd
-            }
-        }
         public void EliminarProducto(int id)
         {
             Producto producto = inventario.Find(p => p.ID == id);
             if (producto != null)
                 inventario.Remove(producto);
         }
+        [SupportedOSPlatform("windows6.1")]
         public void BuscarProducto()
         {
             string criterio = guna2TextBox2.Text;
@@ -162,6 +127,7 @@ namespace ejemplo
             }
 
         }
+        [SupportedOSPlatform("windows6.1")]
         public void CargarInventario(string rutaArchivo)
         {
 
@@ -182,6 +148,7 @@ namespace ejemplo
                 }
             }
         }
+        [SupportedOSPlatform("windows6.1")]
         public void ExportarCSV(string rutaArchivo)
         {
             try
@@ -208,7 +175,7 @@ namespace ejemplo
             }
 
         }
-
+        [SupportedOSPlatform("windows6.1")]
         public void ImportarCSV(string rutaArchivo)
         {
             try
@@ -231,19 +198,23 @@ namespace ejemplo
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
+
         private void guna2TextBox2_TextChanged(object sender, EventArgs e)
         {
             BuscarProducto();
         }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
+        [SupportedOSPlatform("windows6.1")]
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
+
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
+
                 sfd.Filter = "Archivos CSV (*.csv)|*.csv";
                 sfd.Title = "Selecciona dónde guardar el archivo CSV";
 
@@ -251,6 +222,39 @@ namespace ejemplo
                 {
                     ExportarCSV(sfd.FileName);
                 }
+            }
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            Agregar_Productos formProductos = new Agregar_Productos();
+            if (formProductos.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    Producto ProductoNuevo = new Producto
+                    {
+                        ID = formProductos.Id,
+                        Nombre = formProductos.Nombre,
+                        Categoria = formProductos.Categoria,
+                        Descripcion = formProductos.Descripcion,
+                        PrecioUnitario = formProductos.PrecioUnitario,
+                        Cantidad = formProductos.Cantidad
+                    };
+
+                    inventario.Add(ProductoNuevo);
+                    dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario);
+                    GuardarInventario("Inventario.Json");
+                }
+                catch
+                {
+                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los datos");
+                }
+
+            }
+            else
+            {
+                //nada xd
             }
         }
 
@@ -268,9 +272,11 @@ namespace ejemplo
             }
         }
 
-        private void Cliente_Click(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
+
+        // Existing code...
     }
 }

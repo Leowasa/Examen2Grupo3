@@ -300,6 +300,7 @@
             guna2Button1.Size = new Size(111, 23);
             guna2Button1.TabIndex = 128;
             guna2Button1.Text = "Selecion rapida";
+            guna2Button1.Click += guna2Button1_Click;
             // 
             // guna2Button2
             // 

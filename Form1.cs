@@ -1,8 +1,10 @@
 using Examen2Grupo3;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace ejemplo
 {
+    [SupportedOSPlatform("windows6.1")]
     public partial class Form1 : Form
     {
 
@@ -10,6 +12,7 @@ namespace ejemplo
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
+
         public Form1()
         {
             InitializeComponent();

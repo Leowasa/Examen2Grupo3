@@ -1,4 +1,4 @@
-﻿namespace ejemplo
+﻿namespace Examen2Grupo3
 {
     partial class Inventario
     {
@@ -28,104 +28,75 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inventario));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inventario));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            pictureBox2 = new PictureBox();
+            pictureBox1 = new PictureBox();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             ID = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
-            Categoria = new DataGridViewTextBoxColumn();
-            Descripcion = new DataGridViewButtonColumn();
+            Categoria = new DataGridViewButtonColumn();
+            Descripcion = new DataGridViewTextBoxColumn();
             Stock = new DataGridViewTextBoxColumn();
             PrecioUnitario = new DataGridViewTextBoxColumn();
             Editar = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // Cliente
+            // pictureBox2
             // 
-            Cliente.Anchor = AnchorStyles.Top;
-            Cliente.BackColor = Color.Transparent;
-            Cliente.Font = new Font("Century Gothic", 21.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            Cliente.ForeColor = Color.Gainsboro;
-            Cliente.Location = new Point(400, 8);
-            Cliente.Name = "Cliente";
-            Cliente.Size = new Size(234, 70);
-            Cliente.TabIndex = 105;
-            Cliente.Text = "Inventario";
-            Cliente.TextAlign = ContentAlignment.TopCenter;
-            Cliente.Click += Cliente_Click;
+            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(794, 115);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(42, 42);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 157;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
-            // dataGridView1
+            // pictureBox1
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.HotTrack;
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeight = 30;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Categoria, Descripcion, Stock, PrecioUnitario, Editar, Eliminar });
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(12, 161);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(941, 385);
-            dataGridView1.TabIndex = 103;
-            dataGridView1.CellClick += dataGridView1_CellClick;
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(746, 115);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(42, 42);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 156;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
-            // guna2Button1
+            // guna2Button2
             // 
-            guna2Button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2Button1.BorderRadius = 8;
-            guna2Button1.CustomizableEdges = customizableEdges1;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = SystemColors.HotTrack;
-            guna2Button1.Font = new Font("Segoe UI", 9F);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(871, 132);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button1.Size = new Size(82, 23);
-            guna2Button1.TabIndex = 129;
-            guna2Button1.Text = "Agregar";
-            guna2Button1.Click += guna2Button1_Click;
+            guna2Button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2Button2.BorderRadius = 8;
+            guna2Button2.CustomizableEdges = customizableEdges1;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = SystemColors.HotTrack;
+            guna2Button2.Font = new Font("Segoe UI", 9F);
+            guna2Button2.ForeColor = Color.White;
+            guna2Button2.Location = new Point(842, 134);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Button2.Size = new Size(111, 23);
+            guna2Button2.TabIndex = 155;
+            guna2Button2.Text = "Agregar";
+            guna2Button2.Click += guna2Button2_Click;
             // 
             // guna2TextBox2
             // 
@@ -140,76 +111,61 @@
             guna2TextBox2.Font = new Font("Segoe UI", 9F);
             guna2TextBox2.ForeColor = SystemColors.ControlDarkDark;
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(12, 132);
+            guna2TextBox2.Location = new Point(12, 134);
             guna2TextBox2.Name = "guna2TextBox2";
-            guna2TextBox2.PlaceholderText = "Ingrese un ID o Nombre...";
+            guna2TextBox2.PlaceholderText = "Ingresar Nombre o ID...";
             guna2TextBox2.SelectedText = "";
             guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2TextBox2.Size = new Size(154, 23);
-            guna2TextBox2.TabIndex = 149;
+            guna2TextBox2.Size = new Size(139, 23);
+            guna2TextBox2.TabIndex = 154;
             guna2TextBox2.TextChanged += guna2TextBox2_TextChanged;
             // 
-            // pictureBox2
+            // Cliente
             // 
-            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(814, 113);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(42, 42);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 153;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            Cliente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Cliente.BackColor = Color.Transparent;
+            Cliente.Font = new Font("Century Gothic", 21.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            Cliente.ForeColor = Color.Gainsboro;
+            Cliente.Location = new Point(409, 11);
+            Cliente.Name = "Cliente";
+            Cliente.Size = new Size(234, 70);
+            Cliente.TabIndex = 153;
+            Cliente.Text = "Inventario";
+            Cliente.TextAlign = ContentAlignment.TopCenter;
             // 
-            // pictureBox3
+            // dataGridView1
             // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(766, 113);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(42, 42);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 152;
-            pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
-            // 
-            // guna2Button2
-            // 
-            guna2Button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2Button2.BorderRadius = 8;
-            guna2Button2.CustomizableEdges = customizableEdges5;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = SystemColors.HotTrack;
-            guna2Button2.Font = new Font("Segoe UI", 9F);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Image = (Image)resources.GetObject("guna2Button2.Image");
-            guna2Button2.Location = new Point(901, 773);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button2.Size = new Size(50, 23);
-            guna2Button2.TabIndex = 154;
-            // 
-            // guna2Button3
-            // 
-            guna2Button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2Button3.BorderRadius = 8;
-            guna2Button3.CustomizableEdges = customizableEdges7;
-            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button3.FillColor = SystemColors.HotTrack;
-            guna2Button3.Font = new Font("Segoe UI", 9F);
-            guna2Button3.ForeColor = Color.White;
-            guna2Button3.Image = (Image)resources.GetObject("guna2Button3.Image");
-            guna2Button3.Location = new Point(845, 773);
-            guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2Button3.Size = new Size(50, 23);
-            guna2Button3.TabIndex = 155;
+            dataGridView1.AccessibleRole = AccessibleRole.TitleBar;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.HotTrack;
+            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.ColumnHeadersHeight = 40;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Categoria, Descripcion, Stock, PrecioUnitario, Editar, Eliminar });
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.SteelBlue;
+            dataGridView1.Location = new Point(12, 163);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.Size = new Size(941, 615);
+            dataGridView1.TabIndex = 152;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // ID
             // 
@@ -227,16 +183,16 @@
             // Categoria
             // 
             Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Categoria.FlatStyle = FlatStyle.Flat;
             Categoria.HeaderText = "Categoria";
             Categoria.Name = "Categoria";
+            Categoria.ReadOnly = true;
             // 
             // Descripcion
             // 
             Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Descripcion.FlatStyle = FlatStyle.Flat;
             Descripcion.HeaderText = "Descripcion";
             Descripcion.Name = "Descripcion";
-            Descripcion.ReadOnly = true;
             // 
             // Stock
             // 
@@ -246,13 +202,13 @@
             // PrecioUnitario
             // 
             PrecioUnitario.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            PrecioUnitario.HeaderText = "Precio unitario";
+            PrecioUnitario.HeaderText = "PrecioUnitario";
             PrecioUnitario.Name = "PrecioUnitario";
             // 
             // Editar
             // 
             Editar.HeaderText = "Editar";
-            Editar.Image = Examen2Grupo3.Properties.Resources.icons8_edit_24;
+            Editar.Image = Properties.Resources.icons8_edit_24;
             Editar.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Editar.Name = "Editar";
             Editar.Resizable = DataGridViewTriState.True;
@@ -261,57 +217,45 @@
             // Eliminar
             // 
             Eliminar.HeaderText = "Eliminar";
-            Eliminar.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_48;
+            Eliminar.Image = Properties.Resources.icons8_trash_can_48;
             Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Eliminar.Name = "Eliminar";
             Eliminar.Resizable = DataGridViewTriState.True;
             Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
-            // Inventario
+            // Formprueba
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(965, 788);
-            Controls.Add(guna2Button3);
-            Controls.Add(guna2Button2);
             Controls.Add(pictureBox2);
-            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox1);
+            Controls.Add(guna2Button2);
             Controls.Add(guna2TextBox2);
-            Controls.Add(guna2Button1);
             Controls.Add(Cliente);
             Controls.Add(dataGridView1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Inventario";
-            Text = "v";
-            Load += Inventario_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Name = "Formprueba";
+            Text = "Formprueba";
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private Label Cliente;
         private DataGridView dataGridView1;
-        private TextBox textBox1;
-        private DataGridViewTextBoxColumn Cedula;
-        private DataGridViewButtonColumn Usuariosd;
-        private DataGridViewTextBoxColumn Rol;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private DataGridViewTextBoxColumn ID;
         private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewTextBoxColumn Categoria;
-        private DataGridViewButtonColumn Descripcion;
+        private DataGridViewButtonColumn Categoria;
+        private DataGridViewTextBoxColumn Descripcion;
         private DataGridViewTextBoxColumn Stock;
         private DataGridViewTextBoxColumn PrecioUnitario;
         private DataGridViewImageColumn Editar;

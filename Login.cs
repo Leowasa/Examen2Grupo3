@@ -88,6 +88,7 @@ public partial class Login : Form
             case "Aprobador":
                 Form1 form2 = new Form1();
                 form2.guna2Button12.Visible = false;
+                Inventario form4 = new Inventario();
                 this.Hide();
                 // Assuming "Mibotn" is a control or property, it must be accessed correctly.
                 // Replace "Mibotn" with the correct property or method name.
