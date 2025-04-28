@@ -41,6 +41,7 @@ namespace ejemplo
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             AbrirFormulario(new Agregar_Usuarios());
+            CargarDatosEnDataGridView();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -57,9 +58,8 @@ namespace ejemplo
             }
             else
             {
-                // Mostrar los últimos 3 usuarios añadidos si no hay coincidencias  
-                var ultimosUsuarios = usuarios.OrderByDescending(u => usuarios.IndexOf(u)).Take(3).ToList();
-                dataGridView1.DataSource = ultimosUsuarios;
+                // Mostrar toda la lista de usuarios si no hay coincidencias
+                dataGridView1.DataSource = usuarios;
             }
         }
 

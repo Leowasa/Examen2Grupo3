@@ -22,38 +22,44 @@ namespace Examen2Grupo3
 
         private void CargarDatosDesdeJson()
         {
-            string rutaArchivo = "datos.json";
-            if (File.Exists(rutaArchivo))
+            string rutaArchivoOriginal = "datos.json";
+            string rutaArchivoGenerarOrden = "datosGenerarOrden.json";
+
+            // Verificar si el archivo original existe
+            if (File.Exists(rutaArchivoOriginal))
             {
-                string jsonString = File.ReadAllText(rutaArchivo);
+                string jsonString = File.ReadAllText(rutaArchivoOriginal);
                 var pedidos = JsonConvert.DeserializeObject<List<Pedido>>(jsonString);
 
                 if (pedidos != null) // Check for null to avoid CS8601
                 {
+                   
+                    // Cargar los datos en el DataGridView desde "datosGenerarOrden.json"
                     foreach (var datos in pedidos)
                     {
                         dataGridView1.Rows.Add(datos.ID, datos.Cliente.Nombre, datos.Fecha.ToString("dd/MM/yyyy"), datos.Total, datos.Estado);
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("El archivo 'datos.json' no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-       
         private void GenerarOrden_Load(object sender, EventArgs e)
         {
 
         }
 
-
         private void Cliente_Click(object sender, EventArgs e)
         {
 
         }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+
         }
-
-
     }
 }
