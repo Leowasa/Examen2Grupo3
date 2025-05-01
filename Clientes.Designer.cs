@@ -36,11 +36,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Clientes));
             dataGridView1 = new DataGridView();
-            Cliente = new Label();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
             ID = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             CorreoElectronico = new DataGridViewButtonColumn();
@@ -48,6 +43,11 @@
             Tipo = new DataGridViewTextBoxColumn();
             Editar = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
+            Cliente = new Label();
+            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -86,6 +86,57 @@
             dataGridView1.Size = new Size(941, 615);
             dataGridView1.TabIndex = 99;
             dataGridView1.CellClick += dataGridView1_CellClick;
+            // 
+            // ID
+            // 
+            ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ID.HeaderText = "ID";
+            ID.Name = "ID";
+            ID.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.HeaderText = "Nombre";
+            Nombre.Name = "Nombre";
+            // 
+            // CorreoElectronico
+            // 
+            CorreoElectronico.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            CorreoElectronico.FlatStyle = FlatStyle.Flat;
+            CorreoElectronico.HeaderText = "Correo Electronico";
+            CorreoElectronico.Name = "CorreoElectronico";
+            CorreoElectronico.ReadOnly = true;
+            // 
+            // Direccion
+            // 
+            Direccion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Direccion.HeaderText = "Direccion";
+            Direccion.Name = "Direccion";
+            // 
+            // Tipo
+            // 
+            Tipo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Tipo.HeaderText = "Tipo de cliente ";
+            Tipo.Name = "Tipo";
+            // 
+            // Editar
+            // 
+            Editar.HeaderText = "Editar";
+            Editar.Image = Examen2Grupo3.Properties.Resources.icons8_edit_24;
+            Editar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Editar.Name = "Editar";
+            Editar.Resizable = DataGridViewTriState.True;
+            Editar.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // Eliminar
+            // 
+            Eliminar.HeaderText = "Eliminar";
+            Eliminar.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_48;
+            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Eliminar.Name = "Eliminar";
+            Eliminar.Resizable = DataGridViewTriState.True;
+            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // Cliente
             // 
@@ -145,7 +196,7 @@
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Image = Examen2Grupo3.Properties.Resources.icons8_importOtravez_30;
             pictureBox1.Location = new Point(746, 113);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(42, 42);
@@ -153,6 +204,7 @@
             pictureBox1.TabIndex = 150;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
+            pictureBox1.MouseEnter += pictureBox1_MouseEnter;
             // 
             // pictureBox2
             // 
@@ -165,57 +217,6 @@
             pictureBox2.TabIndex = 151;
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
-            // 
-            // ID
-            // 
-            ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ID.HeaderText = "ID";
-            ID.Name = "ID";
-            ID.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Nombre";
-            Nombre.Name = "Nombre";
-            // 
-            // CorreoElectronico
-            // 
-            CorreoElectronico.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            CorreoElectronico.FlatStyle = FlatStyle.Flat;
-            CorreoElectronico.HeaderText = "Correo Electronico";
-            CorreoElectronico.Name = "CorreoElectronico";
-            CorreoElectronico.ReadOnly = true;
-            // 
-            // Direccion
-            // 
-            Direccion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Direccion.HeaderText = "Direccion";
-            Direccion.Name = "Direccion";
-            // 
-            // Tipo
-            // 
-            Tipo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Tipo.HeaderText = "Tipo de cliente ";
-            Tipo.Name = "Tipo";
-            // 
-            // Editar
-            // 
-            Editar.HeaderText = "Editar";
-            Editar.Image = Examen2Grupo3.Properties.Resources.icons8_edit_24;
-            Editar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Editar.Name = "Editar";
-            Editar.Resizable = DataGridViewTriState.True;
-            Editar.SortMode = DataGridViewColumnSortMode.Automatic;
-            // 
-            // Eliminar
-            // 
-            Eliminar.HeaderText = "Eliminar";
-            Eliminar.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_48;
-            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Eliminar.Name = "Eliminar";
-            Eliminar.Resizable = DataGridViewTriState.True;
-            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // Clientes
             // 
@@ -250,7 +251,6 @@
         private DataGridViewTextBoxColumn Column1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private DataGridViewImageColumn Column2;
         private DataGridViewImageColumn Column3;
@@ -260,5 +260,6 @@
         private DataGridViewButtonColumn CorreoElectronico;
         private DataGridViewTextBoxColumn Direccion;
         private DataGridViewTextBoxColumn Tipo;
+        public PictureBox pictureBox1;
     }
 }

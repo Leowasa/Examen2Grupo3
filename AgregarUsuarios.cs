@@ -20,8 +20,8 @@ namespace Examen2Grupo3
 
             using (var formAgregar = new Form())
             {
-                // Bitmap img = new Bitmap(Application.StartupPath + @"\img\Fondo.jpg");
-                // formAgregar.BackgroundImage = img;
+                Bitmap img = new Bitmap(Application.StartupPath + @"\img\Fondo.jpg");
+                formAgregar.BackgroundImage = img;
                 formAgregar.BackgroundImageLayout = ImageLayout.Stretch;
                 formAgregar.Text = "Añadir Usuario";
                 formAgregar.Size = new Size(300, 350);

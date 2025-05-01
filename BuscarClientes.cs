@@ -39,10 +39,14 @@ namespace Examen2Grupo3
             if (e.RowIndex >= 0)
             {
                 // Obtén los datos del cliente desde la fila seleccionada
-                Clientes = ObtenerClienteDesdeFila(e.RowIndex);
+                Clientes.ID = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                Clientes.Nombre = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                Clientes.Correo = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                Clientes.Direccion = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
 
                 // Dispara el evento enviando el cliente seleccionado
                 //ClienteSeleccionado?.Invoke(clienteSeleccionado);
+                ClienteSeleccionado?.Invoke(Clientes);
 
                 // Cierra el formulario
                 this.Close();
@@ -50,15 +54,24 @@ namespace Examen2Grupo3
         }
         private Cliente ObtenerClienteDesdeFila(int rowIndex)
         {
-            // Aquí lees los datos del DataGridView y los conviertes en un objeto Cliente
             return new Cliente
             {
-                Nombre = dataGridView1.Rows[rowIndex].Cells["Nombre"].Value.ToString() ?? "",
-                ID = int.Parse(dataGridView1.Rows[rowIndex].Cells["ID"].Value.ToString()),
-                Direccion = dataGridView1.Rows[rowIndex].Cells["Direccion"].Value.ToString() ?? "",
-                Correo = dataGridView1.Rows[rowIndex].Cells["CorreoElectronico"].Value.ToString() ?? "",
-                Tipo = dataGridView1.Rows[rowIndex].Cells["Tipo"].Value.ToString() ?? ""
+                Nombre = dataGridView1.Rows[rowIndex].Cells["Nombre"].Value?.ToString() ?? "",
+                ID = int.Parse(dataGridView1.Rows[rowIndex].Cells["ID"].Value?.ToString() ?? "0"),
+                Direccion = dataGridView1.Rows[rowIndex].Cells["Direccion"].Value?.ToString() ?? "",
+                Correo = dataGridView1.Rows[rowIndex].Cells["Correo"].Value?.ToString() ?? "",
+                Tipo = dataGridView1.Rows[rowIndex].Cells["Tipo"].Value?.ToString() ?? ""
             };
+        }
+
+        private void BuscarClientes_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

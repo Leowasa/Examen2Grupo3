@@ -5,10 +5,21 @@ namespace Examen2Grupo3
     public partial class datosempresa : Form
     {
         public Empresa empresactual = new Empresa();
-        public datosempresa()
+        public datosempresa(Usuarios UsuarioActual)
         {
             InitializeComponent();
             leerEmpresa();
+            ControlUsuario(UsuarioActual);
+        }
+
+        public void ControlUsuario(Usuarios UsuarioActual)
+        {
+            if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
+            {
+                guna2Button1.Visible = false;
+
+            }
+
         }
         public void leerEmpresa()
         {

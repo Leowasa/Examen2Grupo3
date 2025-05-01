@@ -6,10 +6,13 @@ namespace ejemplo
     public partial class Usuarios : Form
     {
         private Panel PanelPrincipal;
+        RegistroPedidos.Usuarios Usuarioactual = new RegistroPedidos.Usuarios();
 
-        public Usuarios()
+        public Usuarios(RegistroPedidos.Usuarios usuarioactual)
         {
             InitializeComponent();
+            this.Usuarioactual = usuarioactual;
+            ControlUsuario1(usuarioactual);
             PanelPrincipal = new Panel
             {
                 Dock = DockStyle.Fill
@@ -21,6 +24,7 @@ namespace ejemplo
 
             ConfigurarDataGridView();
             ConfigurarTextBox();
+            Usuarioactual = usuarioactual;
         }
 
         private void AbrirFormulario(object? formhija)
@@ -117,7 +121,7 @@ namespace ejemplo
         private void ConfigurarDataGridView()
         {
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Location = new Point(45, 170); 
+            dataGridView1.Location = new Point(45, 170);
             dataGridView1.Size = new Size(1000, 400);
             dataGridView1.ScrollBars = ScrollBars.Both;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -131,8 +135,19 @@ namespace ejemplo
             textBox1.Enter += textBox1_Enter;
             textBox1.Leave += textBox1_Leave;
         }
-       
-        
+        public void ControlUsuario1(RegistroPedidos.Usuarios Usuarioactual)
+        {
+
+            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
+            {
+                pictureBox1.Visible = false;
+                pictureBox2.Visible = false;
+            }
+
+        }
+
+
+
         private void Usuarios_Load(object sender, EventArgs e)
         {
             CargarDatosEnDataGridView();

@@ -1,4 +1,5 @@
 ﻿using Examen2Grupo3;
+using Newtonsoft.Json;
 using System.Text.Json;
 using static Examen2Grupo3.RegistroPedidos;
 
@@ -7,11 +8,15 @@ namespace ejemplo
 {
     public partial class Clientes : Form
     {
+        //  public List<RegistroPedidos.Usuarios> Usuarioss = new List<RegistroPedidos.Usuarios>();
         public List<Cliente>? cliente = new List<Cliente>();
-        public Clientes()
+        public RegistroPedidos.Usuarios usuarioActual = new RegistroPedidos.Usuarios();
+        public Clientes(RegistroPedidos.Usuarios UsuarioActual)
         {
             InitializeComponent();
             CargarClientes("Clientes.Json");
+            this.usuarioActual = UsuarioActual;
+            ControlUsuario1(usuarioActual);
         }
 
         private void guna2TextBox2_TextChanged(object sender, EventArgs e)
@@ -110,7 +115,7 @@ namespace ejemplo
                     cliente.Add(clientes); // Agregamos al inicio para mantener el orden
                 }
             }
-            string json = JsonSerializer.Serialize(cliente, new JsonSerializerOptions { WriteIndented = true });
+            string json = System.Text.Json.JsonSerializer.Serialize(cliente, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(rutaArchivo, json);
             CargarClientes("Clientes.Json");
         }
@@ -121,7 +126,7 @@ namespace ejemplo
             {
 
                 string json = File.ReadAllText(rutaArchivo);
-                List<Cliente>? listaProductos = JsonSerializer.Deserialize<List<Cliente>>(json);
+                List<Cliente>? listaProductos = System.Text.Json.JsonSerializer.Deserialize<List<Cliente>>(json);
 
                 if (listaProductos != null) // Verificar que la lista no sea nula
                 {
@@ -167,7 +172,24 @@ namespace ejemplo
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verificamos que la columna seleccionada sea la de "Editar"
+            Codigo_especial Form = new Codigo_especial();
+            if (usuarioActual.Tipo == "Aprobador" || usuarioActual.Tipo == "Registrador")
+            {
+                Form.ShowDialog();
+                if (Form.DialogResult == DialogResult.OK)
+                {
+                    editar(e);
+                }
+            }
+
+
+
+
+
+        }
+        public void editar(DataGridViewCellEventArgs e)
+        {
+
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
@@ -209,6 +231,7 @@ namespace ejemplo
                 }
 
 
+
             }
         }
 
@@ -239,5 +262,42 @@ namespace ejemplo
                 }
             }
         }
+        public void ControlUsuario1(RegistroPedidos.Usuarios Usuarioactual)
+        {
+
+            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
+            {
+                pictureBox1.Visible = false;
+                pictureBox2.Visible = false;
+            }
+
+        }
+
+        public void CargarUsuarios(List<RegistroPedidos.Usuarios> Lista)
+        {
+            string rutarchivo = "usuarios.json";
+            if (File.Exists(rutarchivo))
+            {
+                string usuarios = File.ReadAllText(rutarchivo);
+                try
+                {
+                    Lista = JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(usuarios);
+                }
+                catch
+                {
+                    MessageBox.Show("error");
+                }
+
+            }
+
+        }
+
+
+        private void pictureBox1_MouseEnter(object sender, EventArgs e)
+        {
+
+
+        }
+
     }
 }

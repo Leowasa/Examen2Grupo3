@@ -81,25 +81,34 @@ public partial class Login : Form
         switch (usuarios.Tipo)
         {
             case "Administrador":
-                Form1 form1 = new Form1();
+                Form1 form1 = new Form1(usuarios);
                 this.Hide();
                 form1.Show();
                 break;
             case "Aprobador":
-                Form1 form2 = new Form1();
+                Form1 form2 = new Form1(usuarios);
                 form2.guna2Button12.Visible = false;
-                Inventario form4 = new Inventario();
                 this.Hide();
                 // Assuming "Mibotn" is a control or property, it must be accessed correctly.
                 // Replace "Mibotn" with the correct property or method name.
                 form2.Show();
                 break;
             case "Registrador":
-                Form1 form3 = new Form1();
+                Form1 form3 = new Form1(usuarios);
                 form3.guna2Button11.Visible = false;
                 this.Hide();
                 form3.Show();
                 break;
+            case "SuperUsuario":
+                SuperUsuario form = new SuperUsuario();
+                this.Hide();
+                form.Show();
+                break;
         }
+    }
+
+    private void Login_Load(object sender, EventArgs e)
+    {
+
     }
 }
