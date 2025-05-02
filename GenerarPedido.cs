@@ -10,6 +10,7 @@ namespace Examen2Grupo3
         private Pedido pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
         private List<Pedido> ListaPedidos = new List<Pedido>();
         private static int NumeroPedido;
+        private Producto ProductoNuevo;
         public GenerarPedido()
         {
             InitializeComponent();
@@ -44,19 +45,19 @@ namespace Examen2Grupo3
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            Agregar_Productos formProductos = new Agregar_Productos();
+            BuscarProducto formProductos = new BuscarProducto();
             if (formProductos.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    Producto ProductoNuevo = new Producto
+                    ProductoNuevo = new Producto
                     {
-                        Nombre = formProductos.Nombre,
-                        ID = formProductos.Id,
-                        Categoria = formProductos.Categoria,
-                        PrecioUnitario = formProductos.PrecioUnitario,
-                        Cantidad = formProductos.Cantidad,
-                        Descripcion = formProductos.Descripcion
+                        Nombre = formProductos.Producto.Nombre,
+                        ID = formProductos.Producto.ID,
+                        Categoria = formProductos.Producto.Categoria,
+                        PrecioUnitario = formProductos.Producto.PrecioUnitario,
+                        Cantidad = formProductos.Producto.Cantidad,
+                        Descripcion = formProductos.Producto.Descripcion
                     };
                     //  listaProductos.Add(ProductoNuevo);
                     if (pedido.Productos == null)
@@ -217,8 +218,8 @@ namespace Examen2Grupo3
             label18.Text = ": ";
             label19.Text = ": ";
             label20.Text = ": ";
-            Pedido borrar = new Pedido();
-            pedido = borrar;
+            pedido.Productos.Clear(); // Limpiar la lista de productos del pedido actual
+            ;
         }
 
         private void guna2Button4_Click(object sender, EventArgs e)
@@ -235,19 +236,18 @@ namespace Examen2Grupo3
         {
             BuscarClientes frmClientes = new BuscarClientes();
 
+            frmClientes.ClienteSeleccionado += RellenarTextBoxes;
             frmClientes.ShowDialog();
-            if (frmClientes.DialogResult == DialogResult.OK)
-            {
-
-                Cliente Cliente = frmClientes.Clientes;
-                guna2TextBox1.Text = Cliente.Nombre;
-                guna2TextBox2.Text = Cliente.ID.ToString();
-                guna2TextBox4.Text = Cliente.Direccion;
-                guna2TextBox3.Text = Cliente.Correo;
-            }
             // Suscribirse al evento y actualizar los TextBox cuando se seleccione un client
 
 
+        }
+        private void RellenarTextBoxes(Cliente Clientes)
+        {
+            guna2TextBox1.Text = Clientes.Nombre;
+            guna2TextBox2.Text = Clientes.ID.ToString();
+            guna2TextBox4.Text = Clientes.Direccion;
+            guna2TextBox3.Text = Clientes.Correo;
         }
     }
 }

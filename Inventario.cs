@@ -9,15 +9,33 @@ namespace Examen2Grupo3
     {
         private Producto Producto;
         private List<Producto> inventario = new List<Producto>();
-        public Inventario()
+        RegistroPedidos.Usuarios Usuarioactual = new RegistroPedidos.Usuarios();
+        public Inventario(Usuarios usuarioactual)
         {
             InitializeComponent();
             Producto = new Producto();
             CargarInventario("Inventario.Json");
+            Usuarioactual = usuarioactual;
+            ControlUsuario1(usuarioactual);
         }
 
         [SupportedOSPlatform("windows6.1")] // Add this attribute to suppress CA1416 warnings
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Codigo_especial Codigo = new Codigo_especial();
+            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
+            {
+                Codigo.ShowDialog();
+                if (Codigo.DialogResult == DialogResult.OK)
+                {
+                    casillaSeleccionada(e);
+
+                }
+            }
+            else casillaSeleccionada(e);
+
+        }
+        public void casillaSeleccionada(DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
@@ -57,6 +75,9 @@ namespace Examen2Grupo3
                     GuardarInventario("Inventario.Json");
                 }
             }
+
+
+
         }
 
         public void GuardarInventario(string rutaArchivo)
@@ -276,7 +297,16 @@ namespace Examen2Grupo3
         {
 
         }
+        public void ControlUsuario1(RegistroPedidos.Usuarios Usuarioactual)
+        {
 
+            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
+            {
+                pictureBox1.Visible = false;
+                pictureBox2.Visible = false;
+            }
+
+        }
         // Existing code...
     }
 }

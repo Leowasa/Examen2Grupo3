@@ -93,6 +93,26 @@ namespace Examen2Grupo3.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_importEditado_30 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-importEditado-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_importOtravez_30 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-importOtravez-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_trash_can_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-trash-can-48", resourceCulture);
@@ -106,6 +126,16 @@ namespace Examen2Grupo3.Properties {
         internal static System.Drawing.Bitmap icons8_trash_can_481 {
             get {
                 object obj = ResourceManager.GetObject("icons8-trash-can-481", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_user_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-user-48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

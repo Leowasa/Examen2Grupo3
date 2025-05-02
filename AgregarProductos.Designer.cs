@@ -62,7 +62,7 @@
             ID.AutoSize = true;
             ID.BackColor = Color.Transparent;
             ID.ForeColor = Color.White;
-            ID.Location = new Point(12, 21);
+            ID.Location = new Point(16, 43);
             ID.Name = "ID";
             ID.Size = new Size(18, 15);
             ID.TabIndex = 0;
@@ -73,7 +73,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 77);
+            label1.Location = new Point(12, 94);
             label1.Name = "label1";
             label1.Size = new Size(51, 15);
             label1.TabIndex = 1;
@@ -84,7 +84,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(12, 201);
+            label2.Location = new Point(12, 193);
             label2.Name = "label2";
             label2.Size = new Size(69, 15);
             label2.TabIndex = 2;
@@ -95,7 +95,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(12, 249);
+            label3.Location = new Point(12, 241);
             label3.Name = "label3";
             label3.Size = new Size(55, 15);
             label3.TabIndex = 3;
@@ -103,6 +103,7 @@
             // 
             // guna2TextBox1
             // 
+            guna2TextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2TextBox1.BackColor = Color.Transparent;
             guna2TextBox1.BorderRadius = 5;
             guna2TextBox1.CustomizableEdges = customizableEdges1;
@@ -114,7 +115,7 @@
             guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Font = new Font("Segoe UI", 9F);
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(12, 39);
+            guna2TextBox1.Location = new Point(108, 43);
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderText = "";
             guna2TextBox1.SelectedText = "";
@@ -124,6 +125,7 @@
             // 
             // guna2TextBox2
             // 
+            guna2TextBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2TextBox2.BackColor = Color.Transparent;
             guna2TextBox2.BorderRadius = 5;
             guna2TextBox2.CustomizableEdges = customizableEdges3;
@@ -135,7 +137,7 @@
             guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox2.Font = new Font("Segoe UI", 9F);
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(12, 95);
+            guna2TextBox2.Location = new Point(108, 94);
             guna2TextBox2.Name = "guna2TextBox2";
             guna2TextBox2.PlaceholderText = "";
             guna2TextBox2.SelectedText = "";
@@ -145,6 +147,7 @@
             // 
             // guna2TextBox3
             // 
+            guna2TextBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2TextBox3.BackColor = Color.Transparent;
             guna2TextBox3.BorderRadius = 5;
             guna2TextBox3.CustomizableEdges = customizableEdges5;
@@ -156,7 +159,7 @@
             guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Font = new Font("Segoe UI", 9F);
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(12, 219);
+            guna2TextBox3.Location = new Point(108, 193);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
             guna2TextBox3.SelectedText = "";
@@ -169,7 +172,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(12, 303);
+            label4.Location = new Point(12, 295);
             label4.Name = "label4";
             label4.Size = new Size(84, 15);
             label4.TabIndex = 136;
@@ -177,6 +180,7 @@
             // 
             // guna2TextBox4
             // 
+            guna2TextBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2TextBox4.BackColor = Color.Transparent;
             guna2TextBox4.BorderRadius = 5;
             guna2TextBox4.CustomizableEdges = customizableEdges7;
@@ -188,7 +192,7 @@
             guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Font = new Font("Segoe UI", 9F);
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(12, 157);
+            guna2TextBox4.Location = new Point(108, 139);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
             guna2TextBox4.SelectedText = "";
@@ -198,6 +202,7 @@
             // 
             // guna2TextBox5
             // 
+            guna2TextBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2TextBox5.BackColor = Color.Transparent;
             guna2TextBox5.BorderRadius = 5;
             guna2TextBox5.CustomizableEdges = customizableEdges9;
@@ -209,7 +214,7 @@
             guna2TextBox5.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox5.Font = new Font("Segoe UI", 9F);
             guna2TextBox5.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox5.Location = new Point(12, 267);
+            guna2TextBox5.Location = new Point(108, 241);
             guna2TextBox5.Name = "guna2TextBox5";
             guna2TextBox5.PlaceholderText = "";
             guna2TextBox5.SelectedText = "";
@@ -230,7 +235,7 @@
             guna2Button1.FillColor = SystemColors.HotTrack;
             guna2Button1.Font = new Font("Segoe UI", 9F);
             guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(12, 366);
+            guna2Button1.Location = new Point(97, 340);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2Button1.Size = new Size(111, 36);
@@ -240,6 +245,7 @@
             // 
             // guna2TextBox6
             // 
+            guna2TextBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2TextBox6.BackColor = Color.Transparent;
             guna2TextBox6.BorderRadius = 5;
             guna2TextBox6.CustomizableEdges = customizableEdges13;
@@ -251,7 +257,7 @@
             guna2TextBox6.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox6.Font = new Font("Segoe UI", 9F);
             guna2TextBox6.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox6.Location = new Point(12, 321);
+            guna2TextBox6.Location = new Point(108, 295);
             guna2TextBox6.Name = "guna2TextBox6";
             guna2TextBox6.PlaceholderText = "";
             guna2TextBox6.SelectedText = "";
@@ -276,7 +282,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Fondo;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(297, 414);
+            ClientSize = new Size(308, 388);
             Controls.Add(guna2TextBox6);
             Controls.Add(label5);
             Controls.Add(guna2Button1);
@@ -312,5 +318,13 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox6;
         private Label label5;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Columna4;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn Column7;
     }
 }

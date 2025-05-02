@@ -95,6 +95,7 @@
             // 
             // guna2CustomGradientPanel1
             // 
+            guna2CustomGradientPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             guna2CustomGradientPanel1.BackColor = Color.Transparent;
             guna2CustomGradientPanel1.Controls.Add(Btnrest);
             guna2CustomGradientPanel1.Controls.Add(Btnmaximi);
@@ -109,7 +110,7 @@
             guna2CustomGradientPanel1.Location = new Point(0, 0);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2CustomGradientPanel1.Size = new Size(1215, 35);
+            guna2CustomGradientPanel1.Size = new Size(1200, 35);
             guna2CustomGradientPanel1.TabIndex = 139;
             guna2CustomGradientPanel1.Paint += guna2CustomGradientPanel1_Paint;
             guna2CustomGradientPanel1.MouseDown += guna2CustomGradientPanel1_MouseDown;
@@ -121,7 +122,7 @@
             Btnrest.Cursor = Cursors.Hand;
             Btnrest.ErrorImage = (Image)resources.GetObject("Btnrest.ErrorImage");
             Btnrest.Image = (Image)resources.GetObject("Btnrest.Image");
-            Btnrest.Location = new Point(1147, 7);
+            Btnrest.Location = new Point(1132, 7);
             Btnrest.Name = "Btnrest";
             Btnrest.Size = new Size(25, 25);
             Btnrest.SizeMode = PictureBoxSizeMode.Zoom;
@@ -137,7 +138,7 @@
             Btnmaximi.Cursor = Cursors.Hand;
             Btnmaximi.ErrorImage = (Image)resources.GetObject("Btnmaximi.ErrorImage");
             Btnmaximi.Image = (Image)resources.GetObject("Btnmaximi.Image");
-            Btnmaximi.Location = new Point(1147, 7);
+            Btnmaximi.Location = new Point(1132, 7);
             Btnmaximi.Name = "Btnmaximi";
             Btnmaximi.Size = new Size(25, 25);
             Btnmaximi.SizeMode = PictureBoxSizeMode.Zoom;
@@ -152,7 +153,7 @@
             Btnmini.Cursor = Cursors.Hand;
             Btnmini.ErrorImage = (Image)resources.GetObject("Btnmini.ErrorImage");
             Btnmini.Image = (Image)resources.GetObject("Btnmini.Image");
-            Btnmini.Location = new Point(1116, 7);
+            Btnmini.Location = new Point(1101, 7);
             Btnmini.Name = "Btnmini";
             Btnmini.Size = new Size(25, 25);
             Btnmini.SizeMode = PictureBoxSizeMode.Zoom;
@@ -167,7 +168,7 @@
             btncerrarr.Cursor = Cursors.Hand;
             btncerrarr.ErrorImage = (Image)resources.GetObject("btncerrarr.ErrorImage");
             btncerrarr.Image = (Image)resources.GetObject("btncerrarr.Image");
-            btncerrarr.Location = new Point(1178, 7);
+            btncerrarr.Location = new Point(1163, 7);
             btncerrarr.Name = "btncerrarr";
             btncerrarr.Size = new Size(25, 25);
             btncerrarr.SizeMode = PictureBoxSizeMode.Zoom;
@@ -191,7 +192,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 35);
             panel1.Name = "panel1";
-            panel1.Size = new Size(250, 753);
+            panel1.Size = new Size(250, 565);
             panel1.TabIndex = 140;
             // 
             // panelVentas
@@ -552,7 +553,7 @@
             PanelPrincipal.Dock = DockStyle.Fill;
             PanelPrincipal.Location = new Point(250, 35);
             PanelPrincipal.Name = "PanelPrincipal";
-            PanelPrincipal.Size = new Size(965, 753);
+            PanelPrincipal.Size = new Size(950, 565);
             PanelPrincipal.TabIndex = 141;
             PanelPrincipal.Paint += PanelPrincipal_Paint;
             // 
@@ -563,7 +564,7 @@
             AutoScroll = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(1215, 788);
+            ClientSize = new Size(1200, 600);
             Controls.Add(PanelPrincipal);
             Controls.Add(panel1);
             Controls.Add(guna2CustomGradientPanel1);
