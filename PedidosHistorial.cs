@@ -87,68 +87,34 @@ namespace ejemplo
 
         }
 
-        // Botón para agregar un nuevo pedido
-        private void btnAgregarPedido_Click(object sender, EventArgs e)
+        // Me permite actualizar el estado del pedido
+        private void CambiarEstadoPedido(int idPedido, string nuevoEstado)
         {
-            // Simulación de agregar un pedido (Aquí puedes abrir un formulario o ingresar datos manualmente)
-            Pedido nuevoPedido = new Pedido
+
+            List<string> estadosValidos = new List<string> { "En proceso", "Entregado", "Cancelado" };
+
+            // Validar que el nuevo estado sea válido
+            if (!estadosValidos.Contains(nuevoEstado))
             {
-                ID = listaPedido.Count + 1,
-                Cliente = new Cliente { Nombre = "Nuevo Cliente" },
-                Fecha = DateTime.Now,
-                Total = 100.0m,
-                Estado = "En proceso"
-            };
+                MessageBox.Show($"El estado '{nuevoEstado}' no es válido. Los estados permitidos son: {string.Join(", ", estadosValidos)}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            listaPedido.Add(nuevoPedido);
-            ActualizarDataGridView();
-            GuardarDatosJson();
-        }
+            // Buscar el pedido con el ID indicado
+            Pedido pedidoSeleccionado = listaPedido.Find(p => p.ID == idPedido);
 
-        // Botón para editar un pedido
-        private void btnEditarPedido_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (pedidoSeleccionado != null)
             {
-                int idPedido = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                Pedido pedidoSeleccionado = listaPedido.Find(p => p.ID == idPedido);
+                // Cambiar el estado del pedido
+                pedidoSeleccionado.Estado = nuevoEstado;
+                ActualizarDataGridView();
+                GuardarDatosJson();
 
-                if (pedidoSeleccionado != null)
-                {
-                    // Modificar estado del pedido
-                    pedidoSeleccionado.Estado = "Entregado";  // Cambiar según lo que necesites
-
-                    // Actualizar en el DataGridView
-                    ActualizarDataGridView();
-                    GuardarDatosJson();
-                }
+                MessageBox.Show($"El estado del pedido con ID {idPedido} ha sido cambiado a '{nuevoEstado}'.", "Estado Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Por favor, seleccione un pedido para editar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-
-
-        // Botón para eliminar un pedido
-        private void btnEliminarPedido_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                int idPedido = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                Pedido pedidoAEliminar = listaPedido.Find(p => p.ID == idPedido);
-
-                if (pedidoAEliminar != null)
-                {
-                    listaPedido.Remove(pedidoAEliminar);
-                    ActualizarDataGridView();
-                    GuardarDatosJson();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Por favor, seleccione un pedido para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"No se encontró ningún pedido con ID {idPedido}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -174,6 +140,51 @@ namespace ejemplo
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+       
+
+        //Botones en DataGridView
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Si el usuario hizo clic en el botón "Editar"
+            if (e.ColumnIndex == dataGridView1.Columns["btnEditar"].Index && e.RowIndex >= 0)
+            {
+                int idPedido = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
+
+                // Pedir el nuevo estado al usuario
+                string nuevoEstado = Microsoft.VisualBasic.Interaction.InputBox("Ingrese el nuevo estado (En proceso, Entregado, Cancelado):",
+                    "Editar Estado del Pedido", "En proceso");
+
+                CambiarEstadoPedido(idPedido, nuevoEstado); // Llamar la función para cambiar el estado
+            }
+
+            // Si el usuario hizo clic en el botón "Eliminar"
+            if (e.ColumnIndex == dataGridView1.Columns["btnEliminar"].Index && e.RowIndex >= 0)
+            {
+                int idPedido = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
+
+                // Confirmación antes de eliminar
+                DialogResult resultado = MessageBox.Show($"¿Seguro que quieres eliminar el pedido {idPedido}?",
+                    "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    // Buscar y eliminar el pedido de la lista
+                    Pedido pedidoAEliminar = listaPedido.Find(p => p.ID == idPedido);
+                    if (pedidoAEliminar != null)
+                    {
+                        listaPedido.Remove(pedidoAEliminar);
+
+                        // Actualizar el DataGridView y guardar cambios
+                        ActualizarDataGridView();
+                        GuardarDatosJson();
+
+                        MessageBox.Show($"Pedido {idPedido} eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+
 
         }
     }

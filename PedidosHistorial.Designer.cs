@@ -32,25 +32,15 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             dataGridView1 = new DataGridView();
+            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            label1 = new Label();
             Cedula = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Usuariosd = new DataGridViewButtonColumn();
             Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewImageColumn();
-            Column5 = new DataGridViewImageColumn();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            label1 = new Label();
-            btnAgregarPedido = new Guna.UI2.WinForms.Guna2Button();
-            btnEliminarPedido = new Guna.UI2.WinForms.Guna2Button();
-            btnEditarPedido = new Guna.UI2.WinForms.Guna2Button();
+            btnEditar = new DataGridViewButtonColumn();
+            btnEliminar = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -71,10 +61,10 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Column1, Column2, Column3, Column5 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Column1, btnEditar, btnEliminar });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(17, 268);
+            dataGridView1.Location = new Point(13, 276);
             dataGridView1.Margin = new Padding(4, 5, 4, 5);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
@@ -87,67 +77,8 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Size = new Size(1344, 642);
             dataGridView1.TabIndex = 107;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // Cedula
-            // 
-            Cedula.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Cedula.HeaderText = "Numero";
-            Cedula.MinimumWidth = 8;
-            Cedula.Name = "Cedula";
-            Cedula.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Cliente";
-            Nombre.MinimumWidth = 8;
-            Nombre.Name = "Nombre";
-            // 
-            // Usuariosd
-            // 
-            Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Usuariosd.FlatStyle = FlatStyle.Flat;
-            Usuariosd.HeaderText = "Fecha de creacion";
-            Usuariosd.MinimumWidth = 8;
-            Usuariosd.Name = "Usuariosd";
-            Usuariosd.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column1.HeaderText = "Monto Total";
-            Column1.MinimumWidth = 8;
-            Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Estado";
-            Column2.MinimumWidth = 8;
-            Column2.Name = "Column2";
-            Column2.Width = 150;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "ver detalles";
-            Column3.Image = Examen2Grupo3.Properties.Resources.icons8_view_details_241;
-            Column3.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Column3.MinimumWidth = 8;
-            Column3.Name = "Column3";
-            Column3.Resizable = DataGridViewTriState.True;
-            Column3.SortMode = DataGridViewColumnSortMode.Automatic;
-            Column3.Width = 150;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Eliminar";
-            Column5.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_48;
-            Column5.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Column5.MinimumWidth = 8;
-            Column5.Name = "Column5";
-            Column5.Resizable = DataGridViewTriState.True;
-            Column5.SortMode = DataGridViewColumnSortMode.Automatic;
-            Column5.Width = 150;
             // 
             // guna2TextBox1
             // 
@@ -186,62 +117,54 @@
             label1.Text = "Historial de Pedidos Preventivos";
             label1.TextAlign = ContentAlignment.TopCenter;
             // 
-            // btnAgregarPedido
+            // Cedula
             // 
-            btnAgregarPedido.BorderRadius = 8;
-            btnAgregarPedido.CustomizableEdges = customizableEdges3;
-            btnAgregarPedido.DisabledState.BorderColor = Color.DarkGray;
-            btnAgregarPedido.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnAgregarPedido.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnAgregarPedido.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnAgregarPedido.FillColor = SystemColors.HotTrack;
-            btnAgregarPedido.Font = new Font("Segoe UI", 9F);
-            btnAgregarPedido.ForeColor = Color.White;
-            btnAgregarPedido.Location = new Point(818, 200);
-            btnAgregarPedido.Margin = new Padding(4, 5, 4, 5);
-            btnAgregarPedido.Name = "btnAgregarPedido";
-            btnAgregarPedido.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnAgregarPedido.Size = new Size(159, 38);
-            btnAgregarPedido.TabIndex = 152;
-            btnAgregarPedido.Text = "Agregar";
+            Cedula.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Cedula.HeaderText = "Numero";
+            Cedula.MinimumWidth = 8;
+            Cedula.Name = "Cedula";
+            Cedula.ReadOnly = true;
             // 
-            // btnEliminarPedido
+            // Nombre
             // 
-            btnEliminarPedido.BorderRadius = 8;
-            btnEliminarPedido.CustomizableEdges = customizableEdges5;
-            btnEliminarPedido.DisabledState.BorderColor = Color.DarkGray;
-            btnEliminarPedido.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnEliminarPedido.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnEliminarPedido.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnEliminarPedido.FillColor = SystemColors.HotTrack;
-            btnEliminarPedido.Font = new Font("Segoe UI", 9F);
-            btnEliminarPedido.ForeColor = Color.White;
-            btnEliminarPedido.Location = new Point(1184, 200);
-            btnEliminarPedido.Margin = new Padding(4, 5, 4, 5);
-            btnEliminarPedido.Name = "btnEliminarPedido";
-            btnEliminarPedido.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnEliminarPedido.Size = new Size(159, 38);
-            btnEliminarPedido.TabIndex = 153;
-            btnEliminarPedido.Text = "Eliminar";
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.HeaderText = "Cliente";
+            Nombre.MinimumWidth = 8;
+            Nombre.Name = "Nombre";
             // 
-            // btnEditarPedido
+            // Usuariosd
             // 
-            btnEditarPedido.BorderRadius = 8;
-            btnEditarPedido.CustomizableEdges = customizableEdges7;
-            btnEditarPedido.DisabledState.BorderColor = Color.DarkGray;
-            btnEditarPedido.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnEditarPedido.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnEditarPedido.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnEditarPedido.FillColor = SystemColors.HotTrack;
-            btnEditarPedido.Font = new Font("Segoe UI", 9F);
-            btnEditarPedido.ForeColor = Color.White;
-            btnEditarPedido.Location = new Point(1001, 200);
-            btnEditarPedido.Margin = new Padding(4, 5, 4, 5);
-            btnEditarPedido.Name = "btnEditarPedido";
-            btnEditarPedido.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnEditarPedido.Size = new Size(159, 38);
-            btnEditarPedido.TabIndex = 154;
-            btnEditarPedido.Text = "Editar";
+            Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Usuariosd.FlatStyle = FlatStyle.Flat;
+            Usuariosd.HeaderText = "Fecha de creacion";
+            Usuariosd.MinimumWidth = 8;
+            Usuariosd.Name = "Usuariosd";
+            Usuariosd.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Column1.HeaderText = "Monto Total";
+            Column1.MinimumWidth = 8;
+            Column1.Name = "Column1";
+            // 
+            // btnEditar
+            // 
+            btnEditar.HeaderText = "Estado";
+            btnEditar.MinimumWidth = 8;
+            btnEditar.Name = "btnEditar";
+            btnEditar.Text = "Editar";
+            btnEditar.UseColumnTextForButtonValue = true;
+            btnEditar.Width = 150;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.HeaderText = "Eliminar";
+            btnEliminar.MinimumWidth = 8;
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseColumnTextForButtonValue = true;
+            btnEliminar.Width = 150;
             // 
             // PedidosHistorial
             // 
@@ -249,9 +172,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(1379, 1106);
-            Controls.Add(btnEditarPedido);
-            Controls.Add(btnEliminarPedido);
-            Controls.Add(btnAgregarPedido);
             Controls.Add(label1);
             Controls.Add(guna2TextBox1);
             Controls.Add(dataGridView1);
@@ -272,11 +192,7 @@
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn Usuariosd;
         private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewImageColumn Column3;
-        private DataGridViewImageColumn Column5;
-        private Guna.UI2.WinForms.Guna2Button btnAgregarPedido;
-        private Guna.UI2.WinForms.Guna2Button btnEliminarPedido;
-        private Guna.UI2.WinForms.Guna2Button btnEditarPedido;
+        private DataGridViewButtonColumn btnEditar;
+        private DataGridViewButtonColumn btnEliminar;
     }
 }
