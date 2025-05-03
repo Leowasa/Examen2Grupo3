@@ -21,7 +21,7 @@ namespace ejemplo
             CargarDatosDesdeJson();
         }
 
-        
+
         private void CargarDatosDesdeJson()
         {
             string rutaArchivo = "datos.json";
@@ -64,29 +64,45 @@ namespace ejemplo
         }
 
 
-        // Actualizar el DataGridView con la lista de pedidow
+        // Actualizar el DataGridView con la lista de pedido
         private void ActualizarDataGridView()
         {
-
             dataGridView1.Rows.Clear();
+
+            if (listaPedido == null || listaPedido.Count == 0)
+                return;
+
+            decimal totalConDescuento = 0;
+            int cantidadProductos = 0;
+
             foreach (var datos in listaPedido)
             {
                 string nombreCliente = datos.Cliente?.Nombre ?? "Desconocido";
                 string fechaCreacion = datos.Fecha != null ? datos.Fecha.ToString("dd/MM/yyyy") : "Desconocida";
 
+                cantidadProductos += datos.Productos?.Count ?? 0;
+                totalConDescuento += MontoTotal(datos);
+
                 dataGridView1.Rows.Add(
-                datos.ID,               // Número de Pedido
-                nombreCliente,           // Nombre del Cliente
-                fechaCreacion,           // Fecha de creación
-                datos.Total.ToString("C2"), // Total formateado como moneda
-                datos.Estado             // Estado del pedido
-
-
-                 );
-
+                    datos.ID,
+                    nombreCliente,
+                    fechaCreacion,
+                    datos.Total.ToString("C2"),
+                    MontoTotal(datos).ToString("C2"),
+                    datos.Estado,
+                    datos.Productos.Count > 3 ? "20%" : "0%"  // Nueva columna de descuento
+                );
             }
 
+            // Mostrar el descuento aplicado y el total final
+            MessageBox.Show($"Descuento aplicado: {(cantidadProductos > 3 ? "20%" : "0%")}\nTotal final: {totalConDescuento.ToString("C")}",
+                            "Resumen de Pedido",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+
+
         }
+
 
         // Me permite actualizar el estado del pedido
         private void CambiarEstadoPedido(int idPedido, string nuevoEstado)
@@ -118,6 +134,26 @@ namespace ejemplo
                 MessageBox.Show($"No se encontró ningún pedido con ID {idPedido}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+        //Metodo para calcular el monto total de la proforma
+
+        private decimal MontoTotal(Pedido pedido)
+        {
+            if (pedido?.Productos == null || pedido.Productos.Count == 0)
+            {
+                return 0;
+            }
+
+            decimal subtotal = pedido.SubtTotal;
+            decimal descuento = pedido.Productos.Count > 3 ? subtotal * 0.20m : 0;
+
+            decimal totaldescuento = subtotal - descuento;
+
+            return totaldescuento;
+
+        }
+
 
         // Guardar los datos actualizados en el archivo JSON
         private void GuardarDatosJson()
