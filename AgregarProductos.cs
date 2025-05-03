@@ -21,6 +21,7 @@ namespace Examen2Grupo3
         public string Categoria { get; set; }
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
+
         public Agregar_Productos()
         {
             InitializeComponent();

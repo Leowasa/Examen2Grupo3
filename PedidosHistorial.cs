@@ -13,6 +13,7 @@ namespace ejemplo
     public partial class PedidosHistorial : Form
     {
         private List<Producto> listaPersonas = new List<Producto>();
+
         private List<Pedido> listaPedido = new List<Pedido>();
         public PedidosHistorial()
         {
@@ -20,7 +21,7 @@ namespace ejemplo
             CargarDatosDesdeJson();
         }
 
-        // Fix for CS1503: Use JsonConvert from Newtonsoft.Json instead of JsonSerializer
+        
         private void CargarDatosDesdeJson()
         {
             string rutaArchivo = "datos.json";

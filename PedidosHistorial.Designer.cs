@@ -39,6 +39,7 @@
             Nombre = new DataGridViewTextBoxColumn();
             Usuariosd = new DataGridViewButtonColumn();
             Column1 = new DataGridViewTextBoxColumn();
+            Detalles = new DataGridViewTextBoxColumn();
             btnEditar = new DataGridViewButtonColumn();
             btnEliminar = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -61,7 +62,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Column1, btnEditar, btnEliminar });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Column1, Detalles, btnEditar, btnEliminar });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(13, 276);
@@ -75,7 +76,7 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(1344, 642);
+            dataGridView1.Size = new Size(1344, 728);
             dataGridView1.TabIndex = 107;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
@@ -148,6 +149,13 @@
             Column1.MinimumWidth = 8;
             Column1.Name = "Column1";
             // 
+            // Detalles
+            // 
+            Detalles.HeaderText = "Detalles";
+            Detalles.MinimumWidth = 8;
+            Detalles.Name = "Detalles";
+            Detalles.Width = 150;
+            // 
             // btnEditar
             // 
             btnEditar.HeaderText = "Estado";
@@ -192,6 +200,7 @@
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn Usuariosd;
         private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Detalles;
         private DataGridViewButtonColumn btnEditar;
         private DataGridViewButtonColumn btnEliminar;
     }
