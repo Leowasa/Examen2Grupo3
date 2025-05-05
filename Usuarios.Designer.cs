@@ -102,10 +102,10 @@
             btnAgregarUsuario.FillColor = SystemColors.HotTrack;
             btnAgregarUsuario.Font = new Font("Segoe UI", 9F);
             btnAgregarUsuario.ForeColor = Color.White;
-            btnAgregarUsuario.Location = new Point(961, 140);
+            btnAgregarUsuario.Location = new Point(970, 135);
             btnAgregarUsuario.Name = "btnAgregarUsuario";
             btnAgregarUsuario.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnAgregarUsuario.Size = new Size(82, 23);
+            btnAgregarUsuario.Size = new Size(111, 23);
             btnAgregarUsuario.TabIndex = 130;
             btnAgregarUsuario.Text = "Agregar";
             btnAgregarUsuario.Click += guna2Button1_Click;
@@ -114,7 +114,7 @@
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(913, 120);
+            pictureBox2.Location = new Point(920, 115);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(42, 42);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -126,7 +126,7 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(865, 120);
+            pictureBox1.Location = new Point(870, 115);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(42, 42);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -147,12 +147,12 @@
             textBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             textBox1.Font = new Font("Segoe UI", 9F);
             textBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBox1.Location = new Point(50, 137);
+            textBox1.Location = new Point(12, 135);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "";
             textBox1.SelectedText = "";
             textBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            textBox1.Size = new Size(173, 25);
+            textBox1.Size = new Size(139, 23);
             textBox1.TabIndex = 154;
             textBox1.TextChanged += textBox1_TextChanged_1;
             // 

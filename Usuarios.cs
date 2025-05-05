@@ -124,8 +124,8 @@ namespace ejemplo
         private void ConfigurarDataGridView()
         {
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Location = new Point(45, 170);
-            dataGridView1.Size = new Size(1000, 400);
+            dataGridView1.Location = new Point(12, 165);
+            dataGridView1.Size = new Size(1070, 800);
             dataGridView1.ScrollBars = ScrollBars.Both;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
