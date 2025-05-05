@@ -9,7 +9,6 @@ namespace Examen2Grupo3
 
         public Agregar_Usuarios()
         {
-
             // Crear el archivo JSON si no existe      
             if (!File.Exists(FilePath))
             {
@@ -20,30 +19,75 @@ namespace Examen2Grupo3
 
             using (var formAgregar = new Form())
             {
-                Bitmap img = new Bitmap(Application.StartupPath + @"\img\Fondo.jpg");
+                Bitmap img = new Bitmap(Path.Combine(Application.StartupPath, @"Img/Fondo.jpg"));
                 formAgregar.BackgroundImage = img;
                 formAgregar.BackgroundImageLayout = ImageLayout.Stretch;
                 formAgregar.Text = "Añadir Usuario";
                 formAgregar.Size = new Size(300, 350);
 
-
                 var lblId = new Label { Text = "ID:", Location = new Point(10, 20), AutoSize = true, ForeColor = Color.White, BackColor = Color.Transparent };
-                var txtId = new TextBox { Location = new Point(110, 20), Width = 150 };
+                var txtId = new Guna.UI2.WinForms.Guna2TextBox
+                {
+                    Location = new Point(110, 20),
+                    Width = 150,
+                    Height = 22,
+                    BackColor = Color.Transparent,
+                    BorderRadius = 6
+                };
 
                 var lblNombre = new Label { Text = "Nombre:", Location = new Point(10, 60), AutoSize = true, ForeColor = Color.White, BackColor = Color.Transparent };
-                var txtNombre = new TextBox { Location = new Point(110, 60), Width = 150 };
+                var txtNombre = new Guna.UI2.WinForms.Guna2TextBox
+                {
+                    Location = new Point(110, 60),
+                    Width = 150,
+                    Height = 22,
+                    BackColor = Color.Transparent,
+                    BorderRadius = 6
+                };
 
                 var lblUsername = new Label { Text = "Username:", Location = new Point(10, 100), AutoSize = true, ForeColor = Color.White, BackColor = Color.Transparent };
-                var txtUsername = new TextBox { Location = new Point(110, 100), Width = 150 };
+                var txtUsername = new Guna.UI2.WinForms.Guna2TextBox
+                {
+                    Location = new Point(110, 100),
+                    Width = 150,
+                    Height = 22,
+                    BackColor = Color.Transparent,
+                    BorderRadius = 6
+                };
 
                 var lblPassword = new Label { Text = "Contraseña:", Location = new Point(10, 140), AutoSize = true, ForeColor = Color.White, BackColor = Color.Transparent };
-                var txtPassword = new TextBox { Location = new Point(110, 140), Width = 150, PasswordChar = '*' };
+                var txtPassword = new Guna.UI2.WinForms.Guna2TextBox
+                {
+                    Location = new Point(110, 140),
+                    Width = 150,
+                    Height = 22,
+                    BackColor = Color.Transparent,
+                    BorderRadius = 6,
+                    PasswordChar = '*'
+                };
 
-                var lblTipo = new Label { Text = "Tipo de Usuario:", Location = new Point(10, 180), AutoSize = true, ForeColor = Color.White, BackColor = Color.Transparent };
-                var cmbTipo = new ComboBox { Location = new Point(110, 180), Width = 150 };
+                var lblTipo = new Label { Text = "Tipo de Usuario:", Location = new Point(10, 180), AutoSize = false, ForeColor = Color.White, BackColor = Color.Transparent };
+                var cmbTipo = new Guna.UI2.WinForms.Guna2ComboBox
+                { 
+                    Location = new Point(110, 180),
+                    ItemHeight = 18,
+                    Width = 150,
+                    BackColor = Color.Transparent,
+                    BorderRadius = 6
+                };
                 cmbTipo.Items.AddRange(new[] { "Registrador", "Aprobador" });
 
-                var btnGuardarUsuario = new Button { Text = "Guardar", Location = new Point(100, 220), Width = 80 };
+
+                var btnGuardarUsuario = new Guna.UI2.WinForms.Guna2Button
+                {
+                    Text = "Confirmar",
+                    Location = new Point(100, 240),
+                    Width = 90,
+                    Height = 22,
+                    FillColor = SystemColors.HotTrack,
+                    BackColor = Color.Transparent,
+                    BorderRadius = 6
+                };
                 btnGuardarUsuario.Click += (s, args) =>
                 {
                     if (string.IsNullOrWhiteSpace(txtId.Text) || string.IsNullOrWhiteSpace(txtNombre.Text) ||
@@ -98,81 +142,7 @@ namespace Examen2Grupo3
             }
         }
 
-        private void BtnBuscarUsuario_Click(object sender, EventArgs e)
-        {
-            using (var formBuscar = new Form())
-            {
-                // formBuscar.Text = "Buscar Usuario";
-                formBuscar.Size = new Size(600, 400);
-
-                Bitmap img = new Bitmap(Application.StartupPath + @"\img\fondo.jpg");
-                formBuscar.BackgroundImage = img;
-                formBuscar.BackgroundImageLayout = ImageLayout.Stretch;
-
-                var lblCriterio = new Label { Text = "Buscar por (ID o Nombre):", Location = new Point(10, 20), AutoSize = true, ForeColor = Color.White, BackColor = Color.Transparent };
-                var txtCriterio = new TextBox { Location = new Point(170, 20), Width = 300 };
-
-                var lstSugerencias = new ListBox { Location = new Point(50, 60), Width = 500, Height = 200, Visible = false };
-
-                var btnBuscarUsuario = new Button { Text = "Buscar", Location = new Point(250, 280), Width = 80 };
-                btnBuscarUsuario.Click += (s, args) =>
-                {
-                    if (string.IsNullOrWhiteSpace(txtCriterio.Text))
-                    {
-                        MessageBox.Show("Por favor, ingrese un criterio de búsqueda.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    var usuarios = LeerUsuarios();
-                    var usuario = usuarios.FirstOrDefault(u => u.Id == txtCriterio.Text || u.Nombre.Equals(txtCriterio.Text, StringComparison.OrdinalIgnoreCase));
-
-                    if (usuario == null)
-                    {
-                        MessageBox.Show("Usuario no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Usuario encontrado:\n\nNombre: {usuario.Nombre}\nUsername: {usuario.Username}\nTipo: {usuario.Tipo}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                };
-
-                txtCriterio.TextChanged += (s, args) =>
-                {
-                    if (txtCriterio.Text.Length >= 4)
-                    {
-                        var usuarios = LeerUsuarios();
-                        var sugerencias = usuarios
-                            .Where(u => u.Id.Contains(txtCriterio.Text) || u.Nombre.IndexOf(txtCriterio.Text, StringComparison.OrdinalIgnoreCase) >= 0)
-                            .Select(u => $"{u.Id} - {u.Nombre} ({u.Tipo})")
-                            .ToList();
-
-                        lstSugerencias.Items.Clear();
-                        lstSugerencias.Items.AddRange(sugerencias.ToArray());
-                        lstSugerencias.Visible = sugerencias.Any();
-                    }
-                    else
-                    {
-                        lstSugerencias.Visible = false;
-                    }
-                };
-
-                lstSugerencias.DoubleClick += (s, args) =>
-                {
-                    if (lstSugerencias.SelectedItem != null)
-                    {
-                        txtCriterio.Text = lstSugerencias.SelectedItem.ToString().Split('-')[0].Trim();
-                        lstSugerencias.Visible = false;
-                    }
-                };
-
-                formBuscar.Controls.Add(lblCriterio);
-                formBuscar.Controls.Add(txtCriterio);
-                formBuscar.Controls.Add(lstSugerencias);
-                formBuscar.Controls.Add(btnBuscarUsuario);
-
-                formBuscar.ShowDialog();
-            }
-        }
+        
 
         private const string FilePath = "usuarios.json";
 
