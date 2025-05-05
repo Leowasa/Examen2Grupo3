@@ -91,5 +91,10 @@ namespace Examen2Grupo3
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -49,7 +49,7 @@ namespace ejemplo
             CargarDatosEnDataGridView();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
             var usuarios = LeerUsuarios();
 
@@ -92,7 +92,7 @@ namespace ejemplo
             {
                 var usuarios = LeerUsuarios();
                 var usuarioSeleccionado = usuarios[e.RowIndex];
-                
+
                 MessageBox.Show($"Usuario seleccionado:\n\nNombre: {usuarioSeleccionado.Nombre}\nUsername: {usuarioSeleccionado.Username}\nTipo: {usuarioSeleccionado.Tipo}",
                                 "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -330,7 +330,7 @@ namespace ejemplo
                 var datos = linea.Split(',');
                 if (datos.Length >= 4)
                 {
-                    
+
                     usuarios.Add(new Usuario
                     {
                         Id = datos[0],
@@ -344,6 +344,8 @@ namespace ejemplo
 
             return usuarios;
         }
+
+       
     }
 }
 
