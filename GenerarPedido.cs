@@ -70,8 +70,7 @@ namespace Examen2Grupo3
                     Direccion = guna2TextBox4.Text,
 
                 };
-                pedido.Cliente = pedido.Cliente;
-                return "";
+                return"";
             }
             catch
             {
