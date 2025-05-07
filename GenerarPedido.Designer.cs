@@ -137,7 +137,7 @@
             lblDescuento.Anchor = AnchorStyles.Right;
             lblDescuento.AutoSize = true;
             lblDescuento.ForeColor = Color.Gainsboro;
-            lblDescuento.Location = new Point(832, 749);
+            lblDescuento.Location = new Point(832, 755);
             lblDescuento.Name = "lblDescuento";
             lblDescuento.Size = new Size(69, 15);
             lblDescuento.TabIndex = 118;
@@ -148,7 +148,7 @@
             lblTotal.Anchor = AnchorStyles.Right;
             lblTotal.AutoSize = true;
             lblTotal.ForeColor = Color.Gainsboro;
-            lblTotal.Location = new Point(832, 764);
+            lblTotal.Location = new Point(832, 770);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(38, 15);
             lblTotal.TabIndex = 117;
@@ -159,7 +159,7 @@
             lblSubtotal.Anchor = AnchorStyles.Right;
             lblSubtotal.AutoSize = true;
             lblSubtotal.ForeColor = Color.Gainsboro;
-            lblSubtotal.Location = new Point(831, 734);
+            lblSubtotal.Location = new Point(831, 740);
             lblSubtotal.Name = "lblSubtotal";
             lblSubtotal.Size = new Size(57, 15);
             lblSubtotal.TabIndex = 116;
@@ -297,7 +297,7 @@
             guna2Button3.FillColor = SystemColors.HotTrack;
             guna2Button3.Font = new Font("Segoe UI", 9F);
             guna2Button3.ForeColor = Color.White;
-            guna2Button3.Location = new Point(25, 734);
+            guna2Button3.Location = new Point(25, 740);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2Button3.Size = new Size(111, 23);
@@ -542,7 +542,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(965, 788);
+            ClientSize = new Size(965, 800);
             Controls.Add(guna2Button5);
             Controls.Add(guna2Button4);
             Controls.Add(dataGridView1);

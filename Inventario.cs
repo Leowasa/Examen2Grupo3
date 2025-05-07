@@ -181,7 +181,7 @@ namespace Examen2Grupo3
 
                     foreach (var producto in listaProductos)
                     {
-                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario.ToString("C", CultureInfo.GetCultureInfo("en-US")));
+                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario);
                     }
                 }
             }
