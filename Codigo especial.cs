@@ -26,6 +26,7 @@ namespace Examen2Grupo3
                 MessageBox.Show("No hay codigo de autorizacion establecido. Por favor solicite al superusuario ingresar un codigo al programa");
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
+                
             }
             else if (codigoIngresado == empresactual.Codigo)
             {

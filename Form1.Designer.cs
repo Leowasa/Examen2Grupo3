@@ -197,6 +197,7 @@
             // 
             // panelVentas
             // 
+            panelVentas.AutoSize = true;
             panelVentas.BackColor = Color.FromArgb(45, 66, 91);
             panelVentas.Controls.Add(btnGeneraOrden);
             panelVentas.Controls.Add(btnGenerarPedido);
@@ -204,7 +205,7 @@
             panelVentas.ForeColor = SystemColors.ControlLight;
             panelVentas.Location = new Point(0, 671);
             panelVentas.Name = "panelVentas";
-            panelVentas.Size = new Size(233, 139);
+            panelVentas.Size = new Size(233, 90);
             panelVentas.TabIndex = 141;
             // 
             // btnGeneraOrden
@@ -580,6 +581,7 @@
             ((System.ComponentModel.ISupportInitialize)Btnmini).EndInit();
             ((System.ComponentModel.ISupportInitialize)btncerrarr).EndInit();
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             panelVentas.ResumeLayout(false);
             panelhistorial.ResumeLayout(false);
             panel3.ResumeLayout(false);

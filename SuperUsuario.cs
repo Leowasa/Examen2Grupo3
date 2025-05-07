@@ -5,15 +5,16 @@ namespace Examen2Grupo3
     public partial class SuperUsuario : Form
     {
         private int opcion;
-        private Usuarios Admin = new Usuarios();
+        private static Usuarios Admin = new Usuarios();
         public SuperUsuario()
         {
             InitializeComponent();
+            cargarAdmin();
         }
 
         private void SuperUsuario_Load(object sender, EventArgs e)
         {
-
+            cargarAdmin();
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)
@@ -35,13 +36,14 @@ namespace Examen2Grupo3
         }
         private void cargarAdmin() 
         {
-            if (!File.Exists("usuarios.json")) 
+            string rutarchivo = "usuarios.json";
+            if (File.Exists(rutarchivo)) 
             {
-                string json = File.ReadAllText("usuarios.json");
+                string json = File.ReadAllText(rutarchivo);
                 List<Usuarios>? listaUsuarios = System.Text.Json.JsonSerializer.Deserialize<List<Usuarios>>(json)?? new List<Usuarios>();
                 foreach (var lista in listaUsuarios)
                 {
-                    if (lista.Tipo=="Administrador" ) 
+                    if (lista.Tipo== "Administrador") 
                     {
                         Admin = lista;
                     }

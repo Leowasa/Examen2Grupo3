@@ -87,7 +87,7 @@ namespace Examen2Grupo3
                     break;
                 case 1:
                     GuardarCodigo();
-                    MessageBox.Show("Operacion realizada exitosamenteeeee", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Operacion realizada exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;         
             }
             this.Close();

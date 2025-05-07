@@ -55,7 +55,7 @@
             guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox2.Font = new Font("Segoe UI", 9F);
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(144, 71);
+            guna2TextBox2.Location = new Point(200, 71);
             guna2TextBox2.Name = "guna2TextBox2";
             guna2TextBox2.PlaceholderText = "";
             guna2TextBox2.SelectedText = "";
@@ -77,7 +77,7 @@
             guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Font = new Font("Segoe UI", 9F);
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(143, 20);
+            guna2TextBox1.Location = new Point(199, 20);
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderText = "";
             guna2TextBox1.SelectedText = "";
@@ -92,9 +92,9 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(12, 71);
             label2.Name = "label2";
-            label2.Size = new Size(127, 15);
+            label2.Size = new Size(130, 15);
             label2.TabIndex = 136;
-            label2.Text = "Confirmar Contrasenia";
+            label2.Text = "Confirmar Contraseña: ";
             // 
             // label1
             // 
@@ -103,9 +103,9 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(12, 20);
             label1.Name = "label1";
-            label1.Size = new Size(118, 15);
+            label1.Size = new Size(121, 15);
             label1.TabIndex = 135;
-            label1.Text = "Cambiar Contrasenia";
+            label1.Text = "Cambiar Contraseña: ";
             label1.Click += lael1_Click;
             // 
             // guna2Button1
@@ -132,7 +132,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(336, 147);
+            ClientSize = new Size(392, 147);
             Controls.Add(guna2Button1);
             Controls.Add(guna2TextBox2);
             Controls.Add(guna2TextBox1);

@@ -234,7 +234,7 @@ namespace Examen2Grupo3
             //Numero y fecha de factura
             htmlContent = htmlContent.Replace("@Numero", Actual.ID.ToString("D6"));
             htmlContent = htmlContent.Replace("@Validacion", Actual.Fecha.ToString("dd/MM/yy"));
-            htmlContent = htmlContent.Replace("@Emision", "actual nada");
+            htmlContent = htmlContent.Replace("@Emision", Actual.Fecha.ToString("dd/MM/yy"));
 
             //Datos de precio
             htmlContent = htmlContent.Replace("@SUBTOTAL", Actual.SubtTotal.ToString());

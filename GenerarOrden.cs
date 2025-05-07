@@ -19,12 +19,12 @@ namespace Examen2Grupo3
     {
         public static Pedido seleccionado = new Pedido();
         public static List<Pedido> Lista = new List<Pedido>();
-        public static RegistroPedidos.Usuarios UsuarioActual = new RegistroPedidos.Usuarios();
+        public  RegistroPedidos.Usuarios UsuarioActual = new RegistroPedidos.Usuarios();
         // private bool _cargandoDatos = false;
         Form1 form = new Form1();
         public GenerarOrden(RegistroPedidos.Usuarios UsuarioActual)
         {
-
+            UsuarioActual = UsuarioActual;
             InitializeComponent();
             CargarDatosDesdeJson();
         }
@@ -231,6 +231,20 @@ namespace Examen2Grupo3
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            Codigo_especial Form = new Codigo_especial();
+            if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
+            {
+                Form.ShowDialog();
+                if (Form.DialogResult == DialogResult.OK)
+                {
+                    editar(e);
+                }
+            }
+            editar(e);
+        }
+        public void editar(DataGridViewCellEventArgs e)
+        {
+
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
             {
                 int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
@@ -258,7 +272,6 @@ namespace Examen2Grupo3
 
             }
         }
-
         private void dataGridView1_EditModeChanged(object sender, EventArgs e)
         {
 
