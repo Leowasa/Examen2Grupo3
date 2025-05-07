@@ -57,11 +57,11 @@ namespace Examen2Grupo3
 
             datos.setDatos
             (
-                label2.Text,
-                label1.Text,
-                label4.Text,
-                label3.Text,
-                label5.Text
+                empresactual.RazonSocial,
+                empresactual.Numero,
+                empresactual.Direccion,
+                empresactual.Correo,
+               empresactual.Website
             );
 
             datos.ShowDialog();
