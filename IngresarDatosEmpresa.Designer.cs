@@ -250,9 +250,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(348, 94);
+            pictureBox1.Location = new Point(341, 94);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(144, 113);
+            pictureBox1.Size = new Size(150, 125);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 139;
             pictureBox1.TabStop = false;
@@ -274,6 +274,7 @@
             guna2Button2.Size = new Size(123, 20);
             guna2Button2.TabIndex = 140;
             guna2Button2.Text = "Cambiar imagen";
+            guna2Button2.Visible = false;
             // 
             // IngresarDatosEmpresa
             // 
