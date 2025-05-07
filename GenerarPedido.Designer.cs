@@ -95,9 +95,9 @@
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel3.BackColor = SystemColors.HotTrack;
-            panel3.Location = new Point(26, 477);
+            panel3.Location = new Point(22, 441);
             panel3.Name = "panel3";
-            panel3.Size = new Size(917, 10);
+            panel3.Size = new Size(930, 10);
             panel3.TabIndex = 125;
             // 
             // Cliente
@@ -137,7 +137,7 @@
             lblDescuento.Anchor = AnchorStyles.Right;
             lblDescuento.AutoSize = true;
             lblDescuento.ForeColor = Color.Gainsboro;
-            lblDescuento.Location = new Point(769, 737);
+            lblDescuento.Location = new Point(832, 749);
             lblDescuento.Name = "lblDescuento";
             lblDescuento.Size = new Size(69, 15);
             lblDescuento.TabIndex = 118;
@@ -148,7 +148,7 @@
             lblTotal.Anchor = AnchorStyles.Right;
             lblTotal.AutoSize = true;
             lblTotal.ForeColor = Color.Gainsboro;
-            lblTotal.Location = new Point(769, 752);
+            lblTotal.Location = new Point(832, 764);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(38, 15);
             lblTotal.TabIndex = 117;
@@ -159,7 +159,7 @@
             lblSubtotal.Anchor = AnchorStyles.Right;
             lblSubtotal.AutoSize = true;
             lblSubtotal.ForeColor = Color.Gainsboro;
-            lblSubtotal.Location = new Point(768, 722);
+            lblSubtotal.Location = new Point(831, 734);
             lblSubtotal.Name = "lblSubtotal";
             lblSubtotal.Size = new Size(57, 15);
             lblSubtotal.TabIndex = 116;
@@ -180,7 +180,7 @@
             label10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label10.AutoSize = true;
             label10.ForeColor = Color.Gainsboro;
-            label10.Location = new Point(762, 367);
+            label10.Location = new Point(761, 331);
             label10.Name = "label10";
             label10.Size = new Size(60, 15);
             label10.TabIndex = 112;
@@ -200,7 +200,7 @@
             // 
             label6.AutoSize = true;
             label6.ForeColor = Color.Gainsboro;
-            label6.Location = new Point(25, 502);
+            label6.Location = new Point(21, 466);
             label6.Name = "label6";
             label6.Size = new Size(64, 15);
             label6.TabIndex = 108;
@@ -210,7 +210,7 @@
             // 
             label5.AutoSize = true;
             label5.ForeColor = Color.Gainsboro;
-            label5.Location = new Point(23, 364);
+            label5.Location = new Point(22, 328);
             label5.Name = "label5";
             label5.Size = new Size(54, 15);
             label5.TabIndex = 107;
@@ -221,7 +221,7 @@
             label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.ForeColor = Color.Gainsboro;
-            label3.Location = new Point(762, 300);
+            label3.Location = new Point(761, 264);
             label3.Name = "label3";
             label3.Size = new Size(108, 15);
             label3.TabIndex = 106;
@@ -231,7 +231,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.Gainsboro;
-            label2.Location = new Point(25, 413);
+            label2.Location = new Point(24, 377);
             label2.Name = "label2";
             label2.Size = new Size(21, 15);
             label2.TabIndex = 105;
@@ -241,7 +241,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.Gainsboro;
-            label1.Location = new Point(25, 287);
+            label1.Location = new Point(24, 251);
             label1.Name = "label1";
             label1.Size = new Size(99, 15);
             label1.TabIndex = 100;
@@ -258,7 +258,7 @@
             guna2Button1.FillColor = SystemColors.HotTrack;
             guna2Button1.Font = new Font("Segoe UI", 9F);
             guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(23, 320);
+            guna2Button1.Location = new Point(22, 284);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2Button1.Size = new Size(111, 23);
@@ -277,10 +277,10 @@
             guna2Button2.FillColor = SystemColors.HotTrack;
             guna2Button2.Font = new Font("Segoe UI", 9F);
             guna2Button2.ForeColor = Color.White;
-            guna2Button2.Location = new Point(23, 530);
+            guna2Button2.Location = new Point(19, 494);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button2.Size = new Size(111, 23);
+            guna2Button2.Size = new Size(124, 23);
             guna2Button2.TabIndex = 129;
             guna2Button2.Text = "Agregar";
             guna2Button2.Click += btnagregarProductoClick;
@@ -297,7 +297,7 @@
             guna2Button3.FillColor = SystemColors.HotTrack;
             guna2Button3.Font = new Font("Segoe UI", 9F);
             guna2Button3.ForeColor = Color.White;
-            guna2Button3.Location = new Point(23, 735);
+            guna2Button3.Location = new Point(25, 734);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2Button3.Size = new Size(111, 23);
@@ -334,7 +334,7 @@
             guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Font = new Font("Segoe UI", 9F);
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(25, 387);
+            guna2TextBox1.Location = new Point(24, 351);
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderText = "";
             guna2TextBox1.SelectedText = "";
@@ -354,7 +354,7 @@
             guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox2.Font = new Font("Segoe UI", 9F);
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(23, 431);
+            guna2TextBox2.Location = new Point(22, 395);
             guna2TextBox2.Name = "guna2TextBox2";
             guna2TextBox2.PlaceholderText = "";
             guna2TextBox2.SelectedText = "";
@@ -375,7 +375,7 @@
             guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Font = new Font("Segoe UI", 9F);
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(762, 320);
+            guna2TextBox3.Location = new Point(761, 284);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
             guna2TextBox3.SelectedText = "";
@@ -396,7 +396,7 @@
             guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Font = new Font("Segoe UI", 9F);
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(762, 385);
+            guna2TextBox4.Location = new Point(761, 349);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
             guna2TextBox4.SelectedText = "";
@@ -408,7 +408,7 @@
             // 
             panel5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel5.BackColor = SystemColors.HotTrack;
-            panel5.Location = new Point(26, 257);
+            panel5.Location = new Point(25, 221);
             panel5.Name = "panel5";
             panel5.Size = new Size(927, 10);
             panel5.TabIndex = 126;
@@ -434,7 +434,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Columna4, Column5, Column6, Column7 });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(25, 559);
+            dataGridView1.Location = new Point(21, 523);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
@@ -443,7 +443,7 @@
             dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle4.SelectionForeColor = Color.White;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridView1.Size = new Size(917, 148);
+            dataGridView1.Size = new Size(930, 148);
             dataGridView1.TabIndex = 136;
             // 
             // Column1
@@ -509,7 +509,7 @@
             guna2Button4.FillColor = SystemColors.HotTrack;
             guna2Button4.Font = new Font("Segoe UI", 9F);
             guna2Button4.ForeColor = Color.White;
-            guna2Button4.Location = new Point(832, 448);
+            guna2Button4.Location = new Point(831, 412);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges18;
             guna2Button4.Size = new Size(111, 23);
@@ -528,10 +528,10 @@
             guna2Button5.FillColor = SystemColors.HotTrack;
             guna2Button5.Font = new Font("Segoe UI", 9F);
             guna2Button5.ForeColor = Color.White;
-            guna2Button5.Location = new Point(140, 530);
+            guna2Button5.Location = new Point(149, 494);
             guna2Button5.Name = "guna2Button5";
             guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            guna2Button5.Size = new Size(111, 23);
+            guna2Button5.Size = new Size(124, 23);
             guna2Button5.TabIndex = 142;
             guna2Button5.Text = "Limpiar";
             guna2Button5.Click += guna2Button5_Click;

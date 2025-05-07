@@ -1,4 +1,5 @@
-﻿using System.Runtime.Versioning;
+﻿using System.Globalization;
+using System.Runtime.Versioning;
 using System.Text.Json;
 using static Examen2Grupo3.RegistroPedidos;
 
@@ -63,7 +64,7 @@ namespace Examen2Grupo3
                     fila.Cells["Descripcion"].Value = productoEditado.Descripcion;
                     fila.Cells["Stock"].Value = productoEditado.Cantidad;
 
-                    fila.Cells["PrecioUnitario"].Value = productoEditado.PrecioUnitario;
+                    fila.Cells["PrecioUnitario"].Value = productoEditado.PrecioUnitario.ToString("C"); ;
                     GuardarInventario("Inventario.Json");
                 }
             }
@@ -180,7 +181,7 @@ namespace Examen2Grupo3
 
                     foreach (var producto in listaProductos)
                     {
-                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario);
+                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario.ToString("C", CultureInfo.GetCultureInfo("en-US")));
                     }
                 }
             }
@@ -226,7 +227,7 @@ namespace Examen2Grupo3
                     {
                         var datos = linea.Split(',');
 
-                        dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5]);
+                        dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4], decimal.Parse(datos[5]).ToString("C", CultureInfo.GetCultureInfo("en-US")));
                     }
 
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -1,5 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Xml;
+using Newtonsoft.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static Examen2Grupo3.RegistroPedidos;
+using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 
 namespace Examen2Grupo3
 {
@@ -23,9 +26,19 @@ namespace Examen2Grupo3
 
         public void ObtenerDatos()
         {
-
             try
             {
+                // Corrected the if condition to properly check for empty or whitespace values in all text boxes  
+                if (string.IsNullOrWhiteSpace(guna2TextBox1.Text) ||
+                    string.IsNullOrWhiteSpace(guna2TextBox2.Text) ||
+                    string.IsNullOrWhiteSpace(guna2TextBox3.Text) ||
+                    string.IsNullOrWhiteSpace(guna2TextBox4.Text) ||
+                    string.IsNullOrWhiteSpace(guna2TextBox5.Text))
+                {
+                    MessageBox.Show("Campos vacíos. Intente nuevamente");
+                    return;
+                }
+
                 datos = new Empresa
                 {
                     RazonSocial = guna2TextBox1.Text,
@@ -33,20 +46,18 @@ namespace Examen2Grupo3
                     Numero = guna2TextBox3.Text,
                     Correo = guna2TextBox5.Text,
                     Website = guna2TextBox4.Text,
-
                 };
+
                 MessageBox.Show("Cambios aplicados exitosamente!");
                 GuardarEmpresa(datos);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-
-
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Campos vacios. Intente nuevamente");
+                // Added exception parameter to catch block for better debugging  
+                MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         public void GuardarEmpresa(Empresa empresactual)
         {
@@ -54,7 +65,7 @@ namespace Examen2Grupo3
             try
             {
                 // Corrected the use of Newtonsoft.Json's SerializeObject method  
-                string json = JsonConvert.SerializeObject(empresactual, Formatting.Indented);
+                string json = JsonConvert.SerializeObject(empresactual, Newtonsoft.Json.Formatting.Indented);
                 File.WriteAllText(rutaarchivo, json);
             }
             catch (Exception ex)
