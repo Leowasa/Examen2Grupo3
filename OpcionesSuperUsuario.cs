@@ -8,8 +8,10 @@ namespace Examen2Grupo3
         public int opcion;
         private static Empresa empresactual = new Empresa();
         List<Usuarios> lista = new List<Usuarios>();
-        public OpcionesSuperUsuario(int opcion)
+        public Usuarios Usuarios { get; set; }
+        public OpcionesSuperUsuario(int opcion, Usuarios usuarioActual)
         {
+            Usuarios = usuarioActual;
             InitializeComponent();
             CargarCodigo();
             this.opcion = opcion;
@@ -47,22 +49,24 @@ namespace Examen2Grupo3
         }
         public void GuardarClave()
         {
-            if (File.Exists("Usuarios.json"))
+            if (File.Exists("usuarios.json"))
             {
-                var jsonContent = File.ReadAllText("Usuarios.json"); // Renamed variable to avoid conflict
+                var jsonContent = File.ReadAllText("usuarios.json"); // Renamed variable to avoid conflict
                 List<Usuarios>? listaUsuarios = JsonConvert.DeserializeObject<List<Usuarios>>(jsonContent);
 
                 if (listaUsuarios != null) // Check for null to avoid CS8602
                 {
                     foreach (var usuario in listaUsuarios)
                     {
-                        if (usuario.Tipo == "Administrador") // Example condition
+                        if (usuario.ID == Usuarios.ID) // Example condition
                         {
                             usuario.Password = guna2TextBox1.Text; // Update the password
+                        
                         }
+                       
                     }
                     var updatedJson = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented); // Renamed variable to avoid conflict
-                    File.WriteAllText("Usuarios.json", updatedJson);
+                    File.WriteAllText("usuarios.json", updatedJson);
                 }
             }
         }
@@ -74,7 +78,7 @@ namespace Examen2Grupo3
                 MessageBox.Show("Texto Erroneo o incompleto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            string dato = guna2Button1.Text;
             switch (opcion)
             {
                 case 0:
@@ -83,8 +87,8 @@ namespace Examen2Grupo3
                     break;
                 case 1:
                     GuardarCodigo();
-                    MessageBox.Show("Operacion realizada exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    break;
+                    MessageBox.Show("Operacion realizada exitosamenteeeee", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;         
             }
             this.Close();
         }

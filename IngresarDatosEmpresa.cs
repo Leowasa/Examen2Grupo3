@@ -1,4 +1,5 @@
-﻿using static Examen2Grupo3.RegistroPedidos;
+﻿using Newtonsoft.Json;
+using static Examen2Grupo3.RegistroPedidos;
 
 namespace Examen2Grupo3
 {
@@ -35,6 +36,7 @@ namespace Examen2Grupo3
 
                 };
                 MessageBox.Show("Cambios aplicados exitosamente!");
+                GuardarEmpresa(datos);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
 
@@ -45,6 +47,20 @@ namespace Examen2Grupo3
                 MessageBox.Show("Campos vacios. Intente nuevamente");
             }
 
+        }
+        public void GuardarEmpresa(Empresa empresactual)
+        {
+            string rutaarchivo = "Empresa.json";
+            try
+            {
+                // Corrected the use of Newtonsoft.Json's SerializeObject method  
+                string json = JsonConvert.SerializeObject(empresactual, Formatting.Indented);
+                File.WriteAllText(rutaarchivo, json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)

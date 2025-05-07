@@ -1,8 +1,11 @@
 ﻿using Examen2Grupo3;
 using Newtonsoft.Json;
 using System.Text.Json;
+using System.Windows.Forms;
 using static Examen2Grupo3.RegistroPedidos;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace ejemplo
 {
@@ -11,33 +14,47 @@ namespace ejemplo
         //  public List<RegistroPedidos.Usuarios> Usuarioss = new List<RegistroPedidos.Usuarios>();
         public List<Cliente>? cliente = new List<Cliente>();
         public RegistroPedidos.Usuarios usuarioActual = new RegistroPedidos.Usuarios();
+        BindingSource bindingSource = new BindingSource();
         public Clientes(RegistroPedidos.Usuarios UsuarioActual)
         {
             InitializeComponent();
             CargarClientes("Clientes.Json");
             this.usuarioActual = UsuarioActual;
             ControlUsuario1(usuarioActual);
+           
+
         }
 
         private void guna2TextBox2_TextChanged(object sender, EventArgs e)
         {
-            BuscarProducto();
+            BuscarElemento(guna2TextBox2.Text);
         }
-        public void BuscarProducto()
+        private void BuscarElemento(string textoBusqueda)
         {
-            string criterio = guna2TextBox2.Text;
-
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            if (textoBusqueda.Length < 3)
             {
-                if (fila.Cells["ID"].Value != null && fila.Cells["Nombre"].Value != null)
+                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
-                    string? id = fila.Cells["ID"].Value?.ToString();
-                    string nombre = fila.Cells["Nombre"].Value?.ToString()?.ToLower();
-
-                    fila.Visible = id.Contains(criterio) || nombre.Contains(criterio);
+                    fila.Visible = true;
                 }
+                return;
             }
 
+            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
+            string filtro = textoBusqueda.ToLower();
+
+            // Iterar sobre las filas del DataGridView
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            {
+                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
+                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().ToLower().Contains(filtro)) ||
+                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+
+                // Mostrar u ocultar la fila según si coincide con el filtro
+                fila.Visible = coincide;
+            }
         }
         private void guna2Button2_Click(object sender, EventArgs e)
         {
@@ -181,7 +198,7 @@ namespace ejemplo
                     editar(e);
                 }
             }
-
+            editar(e);
 
 
 

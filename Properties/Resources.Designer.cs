@@ -83,6 +83,16 @@ namespace Examen2Grupo3.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_company_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-company-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_edit_24 {
             get {
                 object obj = ResourceManager.GetObject("icons8-edit-24", resourceCulture);
@@ -106,6 +116,16 @@ namespace Examen2Grupo3.Properties {
         internal static System.Drawing.Bitmap icons8_importOtravez_30 {
             get {
                 object obj = ResourceManager.GetObject("icons8-importOtravez-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_pdf_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-pdf-64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -157,6 +177,16 @@ namespace Examen2Grupo3.Properties {
             get {
                 object obj = ResourceManager.GetObject("icons8-view-details-241", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Byte[].
+        /// </summary>
+        internal static byte[] plantilla_factura {
+            get {
+                object obj = ResourceManager.GetObject("plantilla_factura", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

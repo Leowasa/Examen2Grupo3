@@ -1,6 +1,7 @@
 ﻿
 using System.Text.Json;
 using Examen2Grupo3;
+using static Examen2Grupo3.RegistroPedidos;
 
 namespace ejemplo
 {
@@ -56,17 +57,21 @@ namespace ejemplo
             if (textBox1.Text.Length >= 4)
             {
                 var sugerencias = usuarios
-                    .Where(u => u.Id.Contains(textBox1.Text) || u.Nombre.IndexOf(textBox1.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .Where(u => u.ID.ToString().Contains(textBox1.Text, StringComparison.OrdinalIgnoreCase) ||
+                                u.Nombre.Contains(textBox1.Text, StringComparison.OrdinalIgnoreCase))
                     .ToList();
 
                 dataGridView1.DataSource = sugerencias;
             }
             else
             {
-                // Mostrar toda la lista de usuarios si no hay coincidencias
+                // Mostrar toda la lista de usuarios si no hay coincidencias  
                 dataGridView1.DataSource = usuarios;
             }
+            
+            
         }
+
 
         private void textBox1_Enter(object sender, EventArgs e)
         {
@@ -100,25 +105,16 @@ namespace ejemplo
 
         private const string FilePath = "usuarios.json";
 
-        public class Usuario
-        {
-            public string Id { get; set; }
-            public string Nombre { get; set; }
-            public string Username { get; set; }
-            public string Password { get; set; }
-            public string Tipo { get; set; }
-        }
-
-        private List<Usuario> LeerUsuarios()
+        private List<RegistroPedidos.Usuarios> LeerUsuarios()
         {
             if (!File.Exists(FilePath))
             {
-                return new List<Usuario>();
+                return new List<RegistroPedidos.Usuarios>();
 
             }
 
             string json = File.ReadAllText(FilePath);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Usuario>>(json) ?? new List<Usuario>();
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(json) ?? new List<RegistroPedidos.Usuarios>();
         }
 
         private void ConfigurarDataGridView()
@@ -176,17 +172,17 @@ namespace ejemplo
         }
         public void GuardarUsuarios(string rutaArchivo)
         {
-            List<Usuario> listaUsuarios = new List<Usuario>();
+            List<RegistroPedidos.Usuarios> listaUsuarios = new List<RegistroPedidos.Usuarios>();
 
             foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
                 if (fila.Cells["Id"].Value != null) // Validamos que la fila tenga datos
                 {
-                    Usuario usuarios = new Usuario();
+                    RegistroPedidos.Usuarios usuarios = new RegistroPedidos.Usuarios();
                     try
                     {
                         // Fix for CS0019 and CS8604 in the problematic line
-                        usuarios.Id = fila.Cells["Id"].Value.ToString() ?? "";
+                        usuarios.ID = Convert.ToInt32(fila.Cells["Id"].Value ?? 0);
                         usuarios.Nombre = fila.Cells["Nombre"].Value.ToString() ?? "";
                         usuarios.Username = fila.Cells["Username"].Value.ToString() ?? "";
                         usuarios.Password = fila.Cells["Password"].Value?.ToString() ?? "";
@@ -297,7 +293,7 @@ namespace ejemplo
                         // Combinar listas evitando duplicados por ID  
                         foreach (var nuevoUsuario in nuevosUsuarios)
                         {
-                            if (!usuariosExistentes.Any(u => u.Id == nuevoUsuario.Id))
+                            if (!usuariosExistentes.Any(u => u.ID == nuevoUsuario.ID))
                             {
                                 usuariosExistentes.Add(nuevoUsuario);
                             }
@@ -320,9 +316,9 @@ namespace ejemplo
             }
         }
 
-        private List<Usuario> LeerUsuariosDesdeCSV(string rutaArchivo)
+        private List<RegistroPedidos.Usuarios> LeerUsuariosDesdeCSV(string rutaArchivo)
         {
-            var usuarios = new List<Usuario>();
+            var usuarios = new List<RegistroPedidos.Usuarios>();
 
             var lineas = File.ReadAllLines(rutaArchivo);
             foreach (var linea in lineas.Skip(1)) // Omitir encabezado  
@@ -331,9 +327,9 @@ namespace ejemplo
                 if (datos.Length >= 4)
                 {
 
-                    usuarios.Add(new Usuario
+                    usuarios.Add(new RegistroPedidos.Usuarios
                     {
-                        Id = datos[0],
+                        ID = int.Parse(datos[0]),
                         Nombre = datos[1],
                         Username = datos[2],
                         Password = datos[3],

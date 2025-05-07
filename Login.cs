@@ -12,8 +12,32 @@ public partial class Login : Form
     public Login()
     {
         InitializeComponent();
+     
+    }
+    private void primeraEjecucion() 
+    {
+        string rutaArchivo = "configuracion.dat";
+        IngresarDatosEmpresa Nuevo = new IngresarDatosEmpresa();
+        if (File.Exists(rutaArchivo))
+        {
+           
+            ProcesarUsuario();
+           
+        }
+        else
+        {
+            File.WriteAllText(rutaArchivo, "Ejecutado"); // Crear el archivo para futuras ejecuciones
+
+            Nuevo.ShowDialog();
+            ProcesarUsuario();
+           
+        }
     }
     private void guna2Button2_Click(object sender, EventArgs e)
+    {
+        primeraEjecucion();
+    }
+    private void ProcesarUsuario() 
     {
         cargarCargarUsuario();
 
@@ -45,17 +69,24 @@ public partial class Login : Form
                 if (!usuarioEncontrado)
                 {
                     MessageBox.Show("Usuario o contraseña incorrectos.", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
             else
             {
                 MessageBox.Show("Error al cargar los usuarios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
         catch (Exception ex)
         {
             MessageBox.Show($"Error al iniciar sesión: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
         }
+
+
+
+
     }
 
     public void cargarCargarUsuario()
@@ -87,7 +118,7 @@ public partial class Login : Form
                 break;
             case "Aprobador":
                 Form1 form2 = new Form1(usuarios);
-                form2.guna2Button12.Visible = false;
+                form2.btnGenerarPedido.Visible = false;
                 this.Hide();
                 // Assuming "Mibotn" is a control or property, it must be accessed correctly.
                 // Replace "Mibotn" with the correct property or method name.
@@ -95,7 +126,7 @@ public partial class Login : Form
                 break;
             case "Registrador":
                 Form1 form3 = new Form1(usuarios);
-                form3.guna2Button11.Visible = false;
+                form3.btnGeneraOrden.Visible = false;
                 this.Hide();
                 form3.Show();
                 break;

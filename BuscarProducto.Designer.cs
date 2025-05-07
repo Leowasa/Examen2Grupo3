@@ -85,7 +85,7 @@
             guna2TextBox6.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox6.Font = new Font("Segoe UI", 9F);
             guna2TextBox6.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox6.Location = new Point(948, 284);
+            guna2TextBox6.Location = new Point(1028, 121);
             guna2TextBox6.Name = "guna2TextBox6";
             guna2TextBox6.PlaceholderText = "";
             guna2TextBox6.SelectedText = "";
@@ -98,7 +98,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.ForeColor = Color.White;
-            label5.Location = new Point(738, 266);
+            label5.Location = new Point(818, 103);
             label5.Name = "label5";
             label5.Size = new Size(58, 15);
             label5.TabIndex = 153;
@@ -117,7 +117,7 @@
             guna2Button1.FillColor = SystemColors.HotTrack;
             guna2Button1.Font = new Font("Segoe UI", 9F);
             guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(778, 386);
+            guna2Button1.Location = new Point(888, 248);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2Button1.Size = new Size(111, 36);
@@ -138,7 +138,7 @@
             guna2TextBox5.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox5.Font = new Font("Segoe UI", 9F);
             guna2TextBox5.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox5.Location = new Point(948, 346);
+            guna2TextBox5.Location = new Point(1028, 183);
             guna2TextBox5.Name = "guna2TextBox5";
             guna2TextBox5.PlaceholderText = "";
             guna2TextBox5.SelectedText = "";
@@ -159,7 +159,7 @@
             guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Font = new Font("Segoe UI", 9F);
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(738, 284);
+            guna2TextBox4.Location = new Point(818, 121);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
             guna2TextBox4.SelectedText = "";
@@ -172,7 +172,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(948, 266);
+            label4.Location = new Point(1028, 103);
             label4.Name = "label4";
             label4.Size = new Size(84, 15);
             label4.TabIndex = 149;
@@ -191,7 +191,7 @@
             guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Font = new Font("Segoe UI", 9F);
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(738, 346);
+            guna2TextBox3.Location = new Point(818, 183);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
             guna2TextBox3.SelectedText = "";
@@ -212,7 +212,7 @@
             guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox2.Font = new Font("Segoe UI", 9F);
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(533, 346);
+            guna2TextBox2.Location = new Point(613, 183);
             guna2TextBox2.Name = "guna2TextBox2";
             guna2TextBox2.PlaceholderText = "";
             guna2TextBox2.SelectedText = "";
@@ -233,7 +233,7 @@
             guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Font = new Font("Segoe UI", 9F);
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(533, 284);
+            guna2TextBox1.Location = new Point(613, 121);
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderText = "";
             guna2TextBox1.SelectedText = "";
@@ -246,7 +246,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(948, 328);
+            label3.Location = new Point(1028, 165);
             label3.Name = "label3";
             label3.Size = new Size(55, 15);
             label3.TabIndex = 145;
@@ -257,7 +257,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(738, 328);
+            label2.Location = new Point(818, 165);
             label2.Name = "label2";
             label2.Size = new Size(69, 15);
             label2.TabIndex = 144;
@@ -268,7 +268,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(533, 328);
+            label1.Location = new Point(613, 165);
             label1.Name = "label1";
             label1.Size = new Size(51, 15);
             label1.TabIndex = 143;
@@ -279,7 +279,7 @@
             ID.AutoSize = true;
             ID.BackColor = Color.Transparent;
             ID.ForeColor = Color.White;
-            ID.Location = new Point(533, 266);
+            ID.Location = new Point(613, 103);
             ID.Name = "ID";
             ID.Size = new Size(18, 15);
             ID.TabIndex = 142;
@@ -315,7 +315,7 @@
             dataGridViewCellStyle3.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle3.SelectionForeColor = Color.White;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridView1.Size = new Size(710, 160);
+            dataGridView1.Size = new Size(602, 319);
             dataGridView1.TabIndex = 155;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
@@ -339,7 +339,7 @@
             guna2TextBox7.PlaceholderText = "Ingrese un ID o nombre...";
             guna2TextBox7.SelectedText = "";
             guna2TextBox7.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2TextBox7.Size = new Size(157, 20);
+            guna2TextBox7.Size = new Size(173, 20);
             guna2TextBox7.TabIndex = 156;
             guna2TextBox7.TextChanged += guna2TextBox7_TextChanged;
             // 
@@ -349,16 +349,16 @@
             Cliente.BackColor = Color.Transparent;
             Cliente.Font = new Font("Century Gothic", 18F, FontStyle.Italic, GraphicsUnit.Point, 0);
             Cliente.ForeColor = Color.Gainsboro;
-            Cliente.Location = new Point(90, 9);
+            Cliente.Location = new Point(-217, 9);
             Cliente.Name = "Cliente";
-            Cliente.Size = new Size(877, 32);
+            Cliente.Size = new Size(1071, 32);
             Cliente.TabIndex = 157;
             Cliente.Text = "Escoja un Producto";
             Cliente.TextAlign = ContentAlignment.TopCenter;
             // 
             // ID2
             // 
-            ID2.HeaderText = "ID2";
+            ID2.HeaderText = "ID";
             ID2.Name = "ID2";
             ID2.ReadOnly = true;
             // 
@@ -404,7 +404,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Fondo;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1030, 434);
+            ClientSize = new Size(1224, 434);
             Controls.Add(Cliente);
             Controls.Add(guna2TextBox7);
             Controls.Add(dataGridView1);

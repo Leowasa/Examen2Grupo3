@@ -55,17 +55,14 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel3 = new Panel();
             Cliente = new Label();
-            label15 = new Label();
-            label17 = new Label();
-            label16 = new Label();
-            label13 = new Label();
-            label12 = new Label();
-            label11 = new Label();
+            lblID = new Label();
+            lblNombre = new Label();
+            lblDescuento = new Label();
+            lblTotal = new Label();
+            lblSubtotal = new Label();
             label4 = new Label();
             label10 = new Label();
-            label9 = new Label();
-            label8 = new Label();
-            label7 = new Label();
+            lblEncargado = new Label();
             label6 = new Label();
             label5 = new Label();
             label3 = new Label();
@@ -89,10 +86,6 @@
             Column5 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
             Column7 = new DataGridViewTextBoxColumn();
-            label14 = new Label();
-            label18 = new Label();
-            label19 = new Label();
-            label20 = new Label();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -109,77 +102,68 @@
             // 
             // Cliente
             // 
+            Cliente.AutoSize = true;
             Cliente.Font = new Font("Bell MT", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Cliente.ForeColor = Color.Gainsboro;
             Cliente.Location = new Point(25, 9);
             Cliente.Name = "Cliente";
-            Cliente.Size = new Size(178, 35);
+            Cliente.Size = new Size(159, 34);
             Cliente.TabIndex = 123;
             Cliente.Text = "Pedido Nº: ";
             Cliente.TextAlign = ContentAlignment.TopCenter;
             // 
-            // label15
+            // lblID
             // 
-            label15.AutoSize = true;
-            label15.ForeColor = Color.Gainsboro;
-            label15.Location = new Point(104, 62);
-            label15.Name = "label15";
-            label15.Size = new Size(53, 15);
-            label15.TabIndex = 122;
-            label15.Text = "Usuario1";
+            lblID.AutoSize = true;
+            lblID.ForeColor = Color.Gainsboro;
+            lblID.Location = new Point(31, 132);
+            lblID.Name = "lblID";
+            lblID.Size = new Size(24, 15);
+            lblID.TabIndex = 120;
+            lblID.Text = "ID: ";
             // 
-            // label17
+            // lblNombre
             // 
-            label17.AutoSize = true;
-            label17.ForeColor = Color.Gainsboro;
-            label17.Location = new Point(31, 132);
-            label17.Name = "label17";
-            label17.Size = new Size(21, 15);
-            label17.TabIndex = 120;
-            label17.Text = "ID:";
+            lblNombre.AutoSize = true;
+            lblNombre.ForeColor = Color.Gainsboro;
+            lblNombre.Location = new Point(31, 97);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(57, 15);
+            lblNombre.TabIndex = 119;
+            lblNombre.Text = "Nombre: ";
             // 
-            // label16
+            // lblDescuento
             // 
-            label16.AutoSize = true;
-            label16.ForeColor = Color.Gainsboro;
-            label16.Location = new Point(31, 97);
-            label16.Name = "label16";
-            label16.Size = new Size(54, 15);
-            label16.TabIndex = 119;
-            label16.Text = "Nombre:";
+            lblDescuento.Anchor = AnchorStyles.Right;
+            lblDescuento.AutoSize = true;
+            lblDescuento.ForeColor = Color.Gainsboro;
+            lblDescuento.Location = new Point(769, 737);
+            lblDescuento.Name = "lblDescuento";
+            lblDescuento.Size = new Size(69, 15);
+            lblDescuento.TabIndex = 118;
+            lblDescuento.Text = "Descuento: ";
             // 
-            // label13
+            // lblTotal
             // 
-            label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label13.AutoSize = true;
-            label13.ForeColor = Color.Gainsboro;
-            label13.Location = new Point(820, 735);
-            label13.Name = "label13";
-            label13.Size = new Size(63, 15);
-            label13.TabIndex = 118;
-            label13.Text = "Descuento";
+            lblTotal.Anchor = AnchorStyles.Right;
+            lblTotal.AutoSize = true;
+            lblTotal.ForeColor = Color.Gainsboro;
+            lblTotal.Location = new Point(769, 752);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(38, 15);
+            lblTotal.TabIndex = 117;
+            lblTotal.Text = "Total: ";
             // 
-            // label12
+            // lblSubtotal
             // 
-            label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label12.AutoSize = true;
-            label12.ForeColor = Color.Gainsboro;
-            label12.Location = new Point(820, 750);
-            label12.Name = "label12";
-            label12.Size = new Size(32, 15);
-            label12.TabIndex = 117;
-            label12.Text = "Total";
-            // 
-            // label11
-            // 
-            label11.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label11.AutoSize = true;
-            label11.ForeColor = Color.Gainsboro;
-            label11.Location = new Point(819, 720);
-            label11.Name = "label11";
-            label11.Size = new Size(51, 15);
-            label11.TabIndex = 116;
-            label11.Text = "Subtotal";
+            lblSubtotal.Anchor = AnchorStyles.Right;
+            lblSubtotal.AutoSize = true;
+            lblSubtotal.ForeColor = Color.Gainsboro;
+            lblSubtotal.Location = new Point(768, 722);
+            lblSubtotal.Name = "lblSubtotal";
+            lblSubtotal.Size = new Size(57, 15);
+            lblSubtotal.TabIndex = 116;
+            lblSubtotal.Text = "Subtotal: ";
             // 
             // label4
             // 
@@ -202,35 +186,15 @@
             label10.TabIndex = 112;
             label10.Text = "Direccion:";
             // 
-            // label9
+            // lblEncargado
             // 
-            label9.AutoSize = true;
-            label9.ForeColor = Color.Gainsboro;
-            label9.Location = new Point(32, 62);
-            label9.Name = "label9";
-            label9.Size = new Size(66, 15);
-            label9.TabIndex = 111;
-            label9.Text = "Encargado:";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.ForeColor = Color.Gainsboro;
-            label8.Location = new Point(91, 97);
-            label8.Name = "label8";
-            label8.Size = new Size(88, 15);
-            label8.TabIndex = 110;
-            label8.Text = "Pedro  Zanches";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.ForeColor = Color.Gainsboro;
-            label7.Location = new Point(58, 132);
-            label7.Name = "label7";
-            label7.Size = new Size(55, 15);
-            label7.TabIndex = 109;
-            label7.Text = "V-453467";
+            lblEncargado.AutoSize = true;
+            lblEncargado.ForeColor = Color.Gainsboro;
+            lblEncargado.Location = new Point(32, 62);
+            lblEncargado.Name = "lblEncargado";
+            lblEncargado.Size = new Size(69, 15);
+            lblEncargado.TabIndex = 111;
+            lblEncargado.Text = "Encargado: ";
             // 
             // label6
             // 
@@ -319,10 +283,11 @@
             guna2Button2.Size = new Size(111, 23);
             guna2Button2.TabIndex = 129;
             guna2Button2.Text = "Agregar";
-            guna2Button2.Click += guna2Button2_Click;
+            guna2Button2.Click += btnagregarProductoClick;
             // 
             // guna2Button3
             // 
+            guna2Button3.Anchor = AnchorStyles.Left;
             guna2Button3.BorderRadius = 8;
             guna2Button3.CustomizableEdges = customizableEdges5;
             guna2Button3.DisabledState.BorderColor = Color.DarkGray;
@@ -447,13 +412,12 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(927, 10);
             panel5.TabIndex = 126;
-            panel5.Paint += panel5_Paint;
             // 
             // dataGridView1
             // 
             dataGridView1.AccessibleRole = AccessibleRole.TitleBar;
             dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -470,7 +434,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Columna4, Column5, Column6, Column7 });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(26, 569);
+            dataGridView1.Location = new Point(25, 559);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
@@ -481,7 +445,6 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Size = new Size(917, 148);
             dataGridView1.TabIndex = 136;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // Column1
             // 
@@ -534,55 +497,9 @@
             Column7.Name = "Column7";
             Column7.ReadOnly = true;
             // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Bell MT", 21.75F, FontStyle.Bold);
-            label14.ForeColor = Color.Gainsboro;
-            label14.Location = new Point(184, 10);
-            label14.Name = "label14";
-            label14.Size = new Size(107, 34);
-            label14.TabIndex = 137;
-            label14.Text = "label14";
-            label14.Click += label14_Click;
-            // 
-            // label18
-            // 
-            label18.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label18.AutoSize = true;
-            label18.ForeColor = Color.Gainsboro;
-            label18.Location = new Point(868, 720);
-            label18.Name = "label18";
-            label18.Size = new Size(13, 15);
-            label18.TabIndex = 138;
-            label18.Text = ": ";
-            label18.Click += label18_Click;
-            // 
-            // label19
-            // 
-            label19.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label19.AutoSize = true;
-            label19.ForeColor = Color.Gainsboro;
-            label19.Location = new Point(882, 735);
-            label19.Name = "label19";
-            label19.Size = new Size(13, 15);
-            label19.TabIndex = 139;
-            label19.Text = ": ";
-            // 
-            // label20
-            // 
-            label20.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label20.AutoSize = true;
-            label20.ForeColor = Color.Gainsboro;
-            label20.Location = new Point(847, 750);
-            label20.Name = "label20";
-            label20.Size = new Size(13, 15);
-            label20.TabIndex = 140;
-            label20.Text = ": ";
-            // 
             // guna2Button4
             // 
-            guna2Button4.Anchor = AnchorStyles.Right;
+            guna2Button4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2Button4.BorderRadius = 8;
             guna2Button4.CustomizableEdges = customizableEdges17;
             guna2Button4.DisabledState.BorderColor = Color.DarkGray;
@@ -628,10 +545,6 @@
             ClientSize = new Size(965, 788);
             Controls.Add(guna2Button5);
             Controls.Add(guna2Button4);
-            Controls.Add(label20);
-            Controls.Add(label19);
-            Controls.Add(label18);
-            Controls.Add(label14);
             Controls.Add(dataGridView1);
             Controls.Add(panel5);
             Controls.Add(guna2TextBox4);
@@ -644,17 +557,14 @@
             Controls.Add(guna2Button1);
             Controls.Add(panel3);
             Controls.Add(Cliente);
-            Controls.Add(label15);
-            Controls.Add(label17);
-            Controls.Add(label16);
-            Controls.Add(label13);
-            Controls.Add(label12);
-            Controls.Add(label11);
+            Controls.Add(lblID);
+            Controls.Add(lblNombre);
+            Controls.Add(lblDescuento);
+            Controls.Add(lblTotal);
+            Controls.Add(lblSubtotal);
             Controls.Add(label4);
             Controls.Add(label10);
-            Controls.Add(label9);
-            Controls.Add(label8);
-            Controls.Add(label7);
+            Controls.Add(lblEncargado);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label3);
@@ -676,14 +586,14 @@
         private Panel panel2;
         private Label Cliente;
         private Label label15;
-        private Label label17;
-        private Label label16;
+        private Label lblID;
+        private Label lblNombre;
         private Label label13;
         private Label label12;
         private Label label11;
         private Label label4;
         private Label label10;
-        private Label label9;
+        private Label lblEncargado;
         private Label label8;
         private Label label7;
         private Label label6;
@@ -717,5 +627,9 @@
         private Label label20;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private Guna.UI2.WinForms.Guna2Button guna2Button5;
+        private Guna.UI2.WinForms.Guna2Button guna2Button6;
+        private Label lblDescuento;
+        private Label lblTotal;
+        private Label lblSubtotal;
     }
 }

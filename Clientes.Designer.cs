@@ -249,7 +249,6 @@
         private DataGridViewButtonColumn Usuariosd;
         private DataGridViewTextBoxColumn Rol;
         private DataGridViewTextBoxColumn Column1;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private PictureBox pictureBox2;
         private DataGridViewImageColumn Column2;
@@ -261,5 +260,6 @@
         private DataGridViewTextBoxColumn Direccion;
         private DataGridViewTextBoxColumn Tipo;
         public PictureBox pictureBox1;
+        public Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
     }
 }

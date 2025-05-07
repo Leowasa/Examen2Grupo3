@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic; // Ensure this is included for List<T>
 using static Examen2Grupo3.RegistroPedidos;
 using System.Drawing.Text;
+using System.Diagnostics;
 
 
 namespace ejemplo
@@ -13,26 +14,26 @@ namespace ejemplo
     public partial class PedidosHistorial : Form
     {
         private List<Producto> listaPersonas = new List<Producto>();
-
-        private List<Pedido> listaPedido = new List<Pedido>();
+        private static List<Pedido> listaPedido = new List<Pedido>();
         public PedidosHistorial()
         {
             InitializeComponent();
             CargarDatosDesdeJson();
         }
 
-
+        // Fix for CS1503: Use JsonConvert from Newtonsoft.Json instead of JsonSerializer
         private void CargarDatosDesdeJson()
         {
-            string rutaArchivo = "datos.json";
+            string rutaArchivo = "pedidos.json";
             if (File.Exists(rutaArchivo))
             {
                 string jsonString = File.ReadAllText(rutaArchivo);
-                var pedidos = JsonConvert.DeserializeObject<List<Pedido>>(jsonString);
+                 listaPedido = JsonConvert.DeserializeObject<List<Pedido>>(jsonString)?? new List<Pedido>();
+                dataGridView1.Rows.Clear();
 
-                if (pedidos != null && pedidos.Count > 0)
+                if (listaPedido != null && listaPedido.Count > 0)
                 {
-                    foreach (var datos in pedidos)
+                    foreach (var datos in listaPedido)
                     {
                         string nombreCliente = datos.Cliente?.Nombre ?? "Desconocido";
 
@@ -44,116 +45,40 @@ namespace ejemplo
                             datos.ID,               // Número de Pedido
                             nombreCliente,           // Nombre del Cliente
                             fechaCreacion,           // Fecha de creación
-                            datos.Total.ToString("C2"), // Total formateado como moneda
+                            datos.Total,            // Total formateado como moneda
                             datos.Estado             // Estado del pedido
                         );
 
                     }
+                   
                 }
-
-                else
-                {
-                    MessageBox.Show("No se encontraron pedidos.", "Historial de Pedidos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-
-            else
-            {
-                MessageBox.Show("El archivo de datos no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
-        // Actualizar el DataGridView con la lista de pedido
-        private void ActualizarDataGridView()
-        {
-            dataGridView1.Rows.Clear();
-
-            if (listaPedido == null || listaPedido.Count == 0)
-                return;
-
-            decimal totalConDescuento = 0;
-            int cantidadProductos = 0;
-
-            foreach (var datos in listaPedido)
-            {
-                string nombreCliente = datos.Cliente?.Nombre ?? "Desconocido";
-                string fechaCreacion = datos.Fecha != null ? datos.Fecha.ToString("dd/MM/yyyy") : "Desconocida";
-
-                cantidadProductos += datos.Productos?.Count ?? 0;
-                totalConDescuento += MontoTotal(datos);
-
-                dataGridView1.Rows.Add(
-                    datos.ID,
-                    nombreCliente,
-                    fechaCreacion,
-                    datos.Total.ToString("C2"),
-                    MontoTotal(datos).ToString("C2"),
-                    datos.Estado,
-                    datos.Productos.Count > 3 ? "20%" : "0%"  // Nueva columna de descuento
-                );
-            }
-
-            // Mostrar el descuento aplicado y el total final
-            MessageBox.Show($"Descuento aplicado: {(cantidadProductos > 3 ? "20%" : "0%")}\nTotal final: {totalConDescuento.ToString("C")}",
-                            "Resumen de Pedido",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-
-
-        }
+        // Actualizar el DataGridView con la lista de pedidow
 
 
         // Me permite actualizar el estado del pedido
-        private void CambiarEstadoPedido(int idPedido, string nuevoEstado)
+        private void GuardarCambios(List<Pedido> orden)
         {
+            string rutaArchivo = "pedidos.json";
 
-            List<string> estadosValidos = new List<string> { "En proceso", "Entregado", "Cancelado" };
-
-            // Validar que el nuevo estado sea válido
-            if (!estadosValidos.Contains(nuevoEstado))
+            try
             {
-                MessageBox.Show($"El estado '{nuevoEstado}' no es válido. Los estados permitidos son: {string.Join(", ", estadosValidos)}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                // Serializar la lista actualizada de pedidos
+                var json = JsonConvert.SerializeObject(orden, Formatting.Indented);
+
+                // Escribir el JSON en el archivo
+                File.WriteAllText(rutaArchivo, json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            // Buscar el pedido con el ID indicado
-            Pedido pedidoSeleccionado = listaPedido.Find(p => p.ID == idPedido);
-
-            if (pedidoSeleccionado != null)
-            {
-                // Cambiar el estado del pedido
-                pedidoSeleccionado.Estado = nuevoEstado;
-                ActualizarDataGridView();
-                GuardarDatosJson();
-
-                MessageBox.Show($"El estado del pedido con ID {idPedido} ha sido cambiado a '{nuevoEstado}'.", "Estado Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show($"No se encontró ningún pedido con ID {idPedido}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        //Metodo para calcular el monto total de la proforma
-
-        private decimal MontoTotal(Pedido pedido)
-        {
-            if (pedido?.Productos == null || pedido.Productos.Count == 0)
-            {
-                return 0;
-            }
-
-            decimal subtotal = pedido.SubtTotal;
-            decimal descuento = pedido.Productos.Count > 3 ? subtotal * 0.20m : 0;
-
-            decimal totaldescuento = subtotal - descuento;
-
-            return totaldescuento;
 
         }
-
 
         // Guardar los datos actualizados en el archivo JSON
         private void GuardarDatosJson()
@@ -167,64 +92,106 @@ namespace ejemplo
         private void PedidosHistorial_Load(object sender, EventArgs e)
         {
             // Cargar los datos desde el archivo JSON al iniciar el formulario
-            CargarDatosDesdeJson();
+           
         }
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
         {
-
+            BuscarElemento(guna2TextBox1.Text);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-       
+        public void AbrirOtroFormulario(Pedido seleccionado)
+        {
+            Form1 principal = (Form1)Application.OpenForms["Form1"];
+            if (principal != null)
+            {
+                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 1)); // Reemplaza con el formulario que desees abrir
+            }
+        }
+        private void BuscarElemento(string textoBusqueda)
+        {
+            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            if (textoBusqueda.Length < 4)
+            {
+                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
+                {
+                    fila.Visible = true;
+                }
+                return;
+            }
+
+            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
+            string filtro = textoBusqueda.ToLower();
+
+            // Iterar sobre las filas del DataGridView
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            {
+                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
+                bool coincide = (fila.Cells["Numero"].Value != null && fila.Cells["Numero"].Value.ToString().ToLower().Contains(filtro)) ||
+                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+
+                // Mostrar u ocultar la fila según si coincide con el filtro
+                fila.Visible = coincide;
+            }
+        }
 
         //Botones en DataGridView
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Si el usuario hizo clic en el botón "Editar"
-            if (e.ColumnIndex == dataGridView1.Columns["btnEditar"].Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
             {
-                int idPedido = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
-
-                // Pedir el nuevo estado al usuario
-                string nuevoEstado = Microsoft.VisualBasic.Interaction.InputBox("Ingrese el nuevo estado (En proceso, Entregado, Cancelado):",
-                    "Editar Estado del Pedido", "En proceso");
-
-                CambiarEstadoPedido(idPedido, nuevoEstado); // Llamar la función para cambiar el estado
+                int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
+                foreach (var lista in listaPedido)
+                {
+                    if (lista.ID == idPedido)
+                        AbrirOtroFormulario(lista);
+                }
             }
 
             // Si el usuario hizo clic en el botón "Eliminar"
             if (e.ColumnIndex == dataGridView1.Columns["btnEliminar"].Index && e.RowIndex >= 0)
             {
-                int idPedido = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
 
-                // Confirmación antes de eliminar
-                DialogResult resultado = MessageBox.Show($"¿Seguro que quieres eliminar el pedido {idPedido}?",
-                    "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                if (resultado == DialogResult.Yes)
+                // Obtener el ID del pedido desde la celda correspondiente
+                int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
+
+                // Buscar el pedido en la lista por su ID
+                Pedido pedidoAEliminar = listaPedido.Find(p => p.ID == idPedido);
+
+                if (pedidoAEliminar != null)
                 {
-                    // Buscar y eliminar el pedido de la lista
-                    Pedido pedidoAEliminar = listaPedido.Find(p => p.ID == idPedido);
-                    if (pedidoAEliminar != null)
-                    {
-                        listaPedido.Remove(pedidoAEliminar);
+                    // Eliminar el pedido de la lista
+                    listaPedido.Remove(pedidoAEliminar);
 
-                        // Actualizar el DataGridView y guardar cambios
-                        ActualizarDataGridView();
-                        GuardarDatosJson();
+                    // Eliminar la fila del DataGridView
+                    dataGridView1.Rows.RemoveAt(e.RowIndex);
 
-                        MessageBox.Show($"Pedido {idPedido} eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    // Guardar los cambios en el archivo JSON
+                    GuardarCambios(listaPedido);
+
+                   // MessageBox.Show($"El pedido con ID {idPedido} ha sido eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else
+                {
+                    MessageBox.Show($"No se encontró ningún pedido con ID {idPedido}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
             }
+        }
 
 
         }
-    }
 }
+
 
 

@@ -29,19 +29,22 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            Cedula = new DataGridViewTextBoxColumn();
+            Numero = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Usuariosd = new DataGridViewButtonColumn();
             Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewImageColumn();
-            Column5 = new DataGridViewImageColumn();
+            Estado = new DataGridViewComboBoxColumn();
+            Ver = new DataGridViewImageColumn();
+            Eliminar = new DataGridViewImageColumn();
+            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -71,54 +74,48 @@
             dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.White;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.Highlight;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Column1, Column2, Column3, Column5 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Numero, Nombre, Usuariosd, Column1, Estado, Ver, Eliminar });
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.Transparent;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.InactiveBorder;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(12, 161);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle5.SelectionForeColor = Color.White;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dataGridView1.Size = new Size(941, 615);
             dataGridView1.TabIndex = 114;
+            dataGridView1.EditModeChanged += dataGridView1_EditModeChanged;
+            dataGridView1.CellBeginEdit += dataGridView1_CellBeginEdit;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.EditingControlShowing += dataGridView1_EditingControlShowing;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
-            // guna2TextBox2
+            // Numero
             // 
-            guna2TextBox2.BorderRadius = 6;
-            guna2TextBox2.CustomizableEdges = customizableEdges1;
-            guna2TextBox2.DefaultText = "";
-            guna2TextBox2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Font = new Font("Segoe UI", 9F);
-            guna2TextBox2.ForeColor = SystemColors.ControlDarkDark;
-            guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(12, 132);
-            guna2TextBox2.Name = "guna2TextBox2";
-            guna2TextBox2.PlaceholderText = "Ingresar Numero o Fecha...";
-            guna2TextBox2.SelectedText = "";
-            guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2TextBox2.Size = new Size(164, 23);
-            guna2TextBox2.TabIndex = 148;
-            // 
-            // Cedula
-            // 
-            Cedula.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Cedula.HeaderText = "Numero";
-            Cedula.Name = "Cedula";
-            Cedula.ReadOnly = true;
+            Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.BackColor = Color.Transparent;
+            Numero.DefaultCellStyle = dataGridViewCellStyle2;
+            Numero.HeaderText = "Numero";
+            Numero.Name = "Numero";
+            Numero.ReadOnly = true;
             // 
             // Nombre
             // 
@@ -140,28 +137,60 @@
             Column1.HeaderText = "Monto Total";
             Column1.Name = "Column1";
             // 
-            // Column2
+            // Estado
             // 
-            Column2.HeaderText = "Estado";
-            Column2.Name = "Column2";
+            dataGridViewCellStyle3.BackColor = Color.Transparent;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.HotTrack;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HotTrack;
+            Estado.DefaultCellStyle = dataGridViewCellStyle3;
+            Estado.DisplayStyleForCurrentCellOnly = true;
+            Estado.HeaderText = "Estado";
+            Estado.Items.AddRange(new object[] { "Pendiente", "Aprobado", "Rechazado", "Entregado" });
+            Estado.Name = "Estado";
+            Estado.Resizable = DataGridViewTriState.True;
+            Estado.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
-            // Column3
+            // Ver
             // 
-            Column3.HeaderText = "ver detalles";
-            Column3.Image = Properties.Resources.icons8_view_details_241;
-            Column3.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Column3.Name = "Column3";
-            Column3.Resizable = DataGridViewTriState.True;
-            Column3.SortMode = DataGridViewColumnSortMode.Automatic;
+            Ver.HeaderText = "ver detalles";
+            Ver.Image = Properties.Resources.icons8_view_details_241;
+            Ver.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Ver.Name = "Ver";
+            Ver.Resizable = DataGridViewTriState.True;
+            Ver.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
-            // Column5
+            // Eliminar
             // 
-            Column5.HeaderText = "Eliminar";
-            Column5.Image = Properties.Resources.icons8_trash_can_48;
-            Column5.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Column5.Name = "Column5";
-            Column5.Resizable = DataGridViewTriState.True;
-            Column5.SortMode = DataGridViewColumnSortMode.Automatic;
+            Eliminar.HeaderText = "Eliminar";
+            Eliminar.Image = Properties.Resources.icons8_trash_can_48;
+            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Eliminar.Name = "Eliminar";
+            Eliminar.Resizable = DataGridViewTriState.True;
+            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // guna2TextBox2
+            // 
+            guna2TextBox2.BorderRadius = 6;
+            guna2TextBox2.CustomizableEdges = customizableEdges1;
+            guna2TextBox2.DefaultText = "";
+            guna2TextBox2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            guna2TextBox2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            guna2TextBox2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox2.Font = new Font("Segoe UI", 9F);
+            guna2TextBox2.ForeColor = SystemColors.ControlDarkDark;
+            guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox2.Location = new Point(12, 132);
+            guna2TextBox2.Name = "guna2TextBox2";
+            guna2TextBox2.PlaceholderText = "Ingresar Numero o Fecha...";
+            guna2TextBox2.SelectedText = "";
+            guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2TextBox2.Size = new Size(164, 23);
+            guna2TextBox2.TabIndex = 148;
+            guna2TextBox2.TextChanged += guna2TextBox2_TextChanged;
             // 
             // GenerarOrden
             // 
@@ -186,11 +215,15 @@
         private DataGridView dataGridView1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private DataGridViewTextBoxColumn Cedula;
+        private DataGridViewImageColumn Column3;
+        private DataGridViewImageColumn Column5;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Numero;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn Usuariosd;
         private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewImageColumn Column3;
-        private DataGridViewImageColumn Column5;
+        private DataGridViewComboBoxColumn Estado;
+        private DataGridViewImageColumn Ver;
+        private DataGridViewImageColumn Eliminar;
     }
 }

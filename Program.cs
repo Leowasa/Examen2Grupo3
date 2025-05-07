@@ -14,7 +14,26 @@ namespace ejemplo
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Login());
+
+            try
+            {
+                RegistroPedidos.Usuarios usuario = new RegistroPedidos.Usuarios();
+                Application.Run(new Login());
+            }
+            catch (System.NullReferenceException ex)
+            {
+                MessageBox.Show($"Se produjo un error: {ex.Message}\n\nPila de llamadas:\n{ex.StackTrace}",
+                                "Error de inicialización",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Se produjo un error inesperado: {ex.Message}\n\nPila de llamadas:\n{ex.StackTrace}",
+                                "Error inesperado",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
         }
     }
 }

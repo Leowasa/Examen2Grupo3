@@ -18,8 +18,30 @@ namespace ejemplo
             this.UsuarioActual = UsuarioActual;
             InitializeComponent();
             customizemenu();
+            lblRol.Text = UsuarioActual.Tipo;
+            lblUsuario.Text = UsuarioActual.Username;  
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.DoubleBuffered = true;
+        }
+
+        public Form1() 
+        {
+            InitializeComponent();
+            customizemenu();
+        }
+        public void AbrirFormularioEnPanel(Form formulario)
+        {
+            // Limpiar el panel antes de agregar el nuevo formulario
+            PanelPrincipal.Controls.Clear();
+
+            // Configurar el formulario dentro del panel
+            formulario.TopLevel = false;
+            formulario.FormBorderStyle = FormBorderStyle.None;
+            formulario.Dock = DockStyle.Fill;
+
+            // Agregar el formulario al panel y mostrarlo
+            PanelPrincipal.Controls.Add(formulario);
+            formulario.Show();
         }
 
         private void customizemenu()
@@ -174,17 +196,17 @@ namespace ejemplo
 
         private void button8_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new GenerarPedido());
+            AbrirFormulario(new GenerarPedido(UsuarioActual));
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new GenerarOrden());
+            AbrirFormulario(new GenerarOrden(UsuarioActual));
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new Verperfil());
+            AbrirFormulario(new Verperfil(UsuarioActual));
         }
 
         private void guna2Button13_Click(object sender, EventArgs e)
@@ -242,12 +264,12 @@ namespace ejemplo
 
         private void guna2Button12_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new GenerarPedido());
+            AbrirFormulario(new GenerarPedido(UsuarioActual));
         }
 
         private void guna2Button11_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new GenerarOrden());
+            AbrirFormulario(new GenerarOrden(UsuarioActual));
         }
 
         private void PanelPrincipal_Paint(object sender, PaintEventArgs e)
@@ -299,5 +321,9 @@ namespace ejemplo
             ControlPaint.DrawSizeGrip(e.Graphics, Color.Transparent, sizeGripRectangle);
         }
 
+        private void guna2Button15_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new GenerarPedido(UsuarioActual));
+        }
     }
 }

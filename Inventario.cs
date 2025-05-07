@@ -7,6 +7,7 @@ namespace Examen2Grupo3
     [SupportedOSPlatform("windows6.1")]
     public partial class Inventario : Form
     {
+        //revisar cuando se elimina, buscar en datagrid, 
         private Producto Producto;
         private List<Producto> inventario = new List<Producto>();
         RegistroPedidos.Usuarios Usuarioactual = new RegistroPedidos.Usuarios();
@@ -19,7 +20,7 @@ namespace Examen2Grupo3
             ControlUsuario1(usuarioactual);
         }
 
-        [SupportedOSPlatform("windows6.1")] // Add this attribute to suppress CA1416 warnings
+       
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Codigo_especial Codigo = new Codigo_especial();
@@ -46,8 +47,9 @@ namespace Examen2Grupo3
                     filaSeleccionada.Cells["ID"].Value.ToString() ?? "0",
                     filaSeleccionada.Cells["Nombre"].Value.ToString() ?? "",
                     filaSeleccionada.Cells["Categoria"].Value.ToString() ?? "",
-                    filaSeleccionada.Cells["Descripcion"].Value.ToString() ?? "",
+                   
                     filaSeleccionada.Cells["Stock"].Value.ToString() ?? "",
+                     filaSeleccionada.Cells["Descripcion"].Value.ToString() ?? "",
                     filaSeleccionada.Cells["PrecioUnitario"].Value.ToString() ?? ""
                 );
 
@@ -59,7 +61,8 @@ namespace Examen2Grupo3
                     fila.Cells["Nombre"].Value = productoEditado.Nombre;
                     fila.Cells["Categoria"].Value = productoEditado.Categoria;
                     fila.Cells["Descripcion"].Value = productoEditado.Descripcion;
-                    fila.Cells["Stock"].Value = productoEditado.Descripcion;
+                    fila.Cells["Stock"].Value = productoEditado.Cantidad;
+
                     fila.Cells["PrecioUnitario"].Value = productoEditado.PrecioUnitario;
                     GuardarInventario("Inventario.Json");
                 }
@@ -130,23 +133,36 @@ namespace Examen2Grupo3
             Producto producto = inventario.Find(p => p.ID == id);
             if (producto != null)
                 inventario.Remove(producto);
+           
         }
         [SupportedOSPlatform("windows6.1")]
-        public void BuscarProducto()
+      
+        private void BuscarElemento(string textoBusqueda)
         {
-            string criterio = guna2TextBox2.Text;
-
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            if (textoBusqueda.Length < 3)
             {
-                if (fila.Cells["ID"].Value != null && fila.Cells["Nombre"].Value != null)
+                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
-                    string? id = fila.Cells["ID"].Value?.ToString();
-                    string nombre = fila.Cells["Nombre"].Value?.ToString()?.ToLower();
-
-                    fila.Visible = id.Contains(criterio) || nombre.Contains(criterio);
+                    fila.Visible = true;
                 }
+                return;
             }
 
+            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
+            string filtro = textoBusqueda.ToLower();
+
+            // Iterar sobre las filas del DataGridView
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            {
+                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
+                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().ToLower().Contains(filtro)) ||
+                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+
+                // Mostrar u ocultar la fila según si coincide con el filtro
+                fila.Visible = coincide;
+            }
         }
         [SupportedOSPlatform("windows6.1")]
         public void CargarInventario(string rutaArchivo)
@@ -227,7 +243,7 @@ namespace Examen2Grupo3
 
         private void guna2TextBox2_TextChanged(object sender, EventArgs e)
         {
-            BuscarProducto();
+            BuscarElemento(guna2TextBox2.Text);
         }
         [SupportedOSPlatform("windows6.1")]
         private void pictureBox1_Click(object sender, EventArgs e)

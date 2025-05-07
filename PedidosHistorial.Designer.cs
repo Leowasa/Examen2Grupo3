@@ -35,13 +35,13 @@
             dataGridView1 = new DataGridView();
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             label1 = new Label();
-            Cedula = new DataGridViewTextBoxColumn();
+            Numero = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Usuariosd = new DataGridViewButtonColumn();
             Column1 = new DataGridViewTextBoxColumn();
-            Detalles = new DataGridViewTextBoxColumn();
-            btnEditar = new DataGridViewButtonColumn();
-            btnEliminar = new DataGridViewButtonColumn();
+            Estado = new DataGridViewTextBoxColumn();
+            Ver = new DataGridViewImageColumn();
+            btnEliminar = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -60,13 +60,12 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeight = 30;
+            dataGridView1.ColumnHeadersHeight = 40;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Column1, Detalles, btnEditar, btnEliminar });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Numero, Nombre, Usuariosd, Column1, Estado, Ver, btnEliminar });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(13, 276);
-            dataGridView1.Margin = new Padding(4, 5, 4, 5);
+            dataGridView1.Location = new Point(9, 166);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
@@ -76,7 +75,7 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(1344, 728);
+            dataGridView1.Size = new Size(941, 385);
             dataGridView1.TabIndex = 107;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
@@ -94,13 +93,13 @@
             guna2TextBox1.Font = new Font("Segoe UI", 9F);
             guna2TextBox1.ForeColor = Color.Gray;
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(32, 200);
-            guna2TextBox1.Margin = new Padding(6, 8, 6, 8);
+            guna2TextBox1.Location = new Point(9, 135);
+            guna2TextBox1.Margin = new Padding(4, 5, 4, 5);
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderText = "";
             guna2TextBox1.SelectedText = "";
             guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2TextBox1.Size = new Size(214, 38);
+            guna2TextBox1.Size = new Size(150, 23);
             guna2TextBox1.TabIndex = 110;
             guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
             // 
@@ -110,21 +109,20 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Century Gothic", 21.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Gainsboro;
-            label1.Location = new Point(370, 15);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(259, 9);
             label1.Name = "label1";
-            label1.Size = new Size(721, 83);
+            label1.Size = new Size(505, 50);
             label1.TabIndex = 151;
             label1.Text = "Historial de Pedidos Preventivos";
             label1.TextAlign = ContentAlignment.TopCenter;
             // 
-            // Cedula
+            // Numero
             // 
-            Cedula.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Cedula.HeaderText = "Numero";
-            Cedula.MinimumWidth = 8;
-            Cedula.Name = "Cedula";
-            Cedula.ReadOnly = true;
+            Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Numero.HeaderText = "Numero";
+            Numero.MinimumWidth = 8;
+            Numero.Name = "Numero";
+            Numero.ReadOnly = true;
             // 
             // Nombre
             // 
@@ -149,42 +147,45 @@
             Column1.MinimumWidth = 8;
             Column1.Name = "Column1";
             // 
-            // Detalles
+            // Estado
             // 
-            Detalles.HeaderText = "Detalles";
-            Detalles.MinimumWidth = 8;
-            Detalles.Name = "Detalles";
-            Detalles.Width = 150;
+            Estado.HeaderText = "Estado";
+            Estado.MinimumWidth = 8;
+            Estado.Name = "Estado";
+            Estado.Resizable = DataGridViewTriState.True;
+            Estado.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Estado.Width = 150;
             // 
-            // btnEditar
+            // Ver
             // 
-            btnEditar.HeaderText = "Estado";
-            btnEditar.MinimumWidth = 8;
-            btnEditar.Name = "btnEditar";
-            btnEditar.Text = "Editar";
-            btnEditar.UseColumnTextForButtonValue = true;
-            btnEditar.Width = 150;
+            Ver.HeaderText = "Ver Detalles";
+            Ver.Image = Examen2Grupo3.Properties.Resources.icons8_view_details_241;
+            Ver.MinimumWidth = 7;
+            Ver.Name = "Ver";
+            Ver.ReadOnly = true;
+            Ver.Resizable = DataGridViewTriState.True;
+            Ver.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // btnEliminar
             // 
             btnEliminar.HeaderText = "Eliminar";
+            btnEliminar.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_481;
+            btnEliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
             btnEliminar.MinimumWidth = 8;
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseColumnTextForButtonValue = true;
+            btnEliminar.Resizable = DataGridViewTriState.True;
             btnEliminar.Width = 150;
             // 
             // PedidosHistorial
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(1379, 1106);
+            ClientSize = new Size(965, 552);
             Controls.Add(label1);
             Controls.Add(guna2TextBox1);
             Controls.Add(dataGridView1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 5, 4, 5);
             Name = "PedidosHistorial";
             Text = "PedidosHistorial";
             Load += PedidosHistorial_Load;
@@ -200,8 +201,10 @@
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn Usuariosd;
         private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Detalles;
-        private DataGridViewButtonColumn btnEditar;
-        private DataGridViewButtonColumn btnEliminar;
+        private DataGridViewImageColumn btnEditar;
+        private DataGridViewImageColumn btnEliminar;
+        private DataGridViewTextBoxColumn Estado;
+        private DataGridViewImageColumn Ver;
+        private DataGridViewTextBoxColumn Numero;
     }
 }

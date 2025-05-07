@@ -34,13 +34,13 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
-            Cedula = new DataGridViewTextBoxColumn();
-            Nombre = new DataGridViewTextBoxColumn();
-            Usuariosd = new DataGridViewButtonColumn();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            Numero = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Fechas = new DataGridViewButtonColumn();
+            Fecha = new DataGridViewTextBoxColumn();
+            Exportar = new DataGridViewImageColumn();
+            Eliminar = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -74,7 +74,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Cedula, Nombre, Usuariosd, Column1, Column3, Column5 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Numero, Nombre, Fechas, Fecha, Exportar, Eliminar });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(12, 161);
@@ -88,49 +88,13 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Size = new Size(941, 615);
             dataGridView1.TabIndex = 111;
-            // 
-            // Cedula
-            // 
-            Cedula.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Cedula.HeaderText = "Numero";
-            Cedula.Name = "Cedula";
-            Cedula.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Cliente";
-            Nombre.Name = "Nombre";
-            // 
-            // Usuariosd
-            // 
-            Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Usuariosd.FlatStyle = FlatStyle.Flat;
-            Usuariosd.HeaderText = "Fecha de creacion";
-            Usuariosd.Name = "Usuariosd";
-            Usuariosd.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column1.HeaderText = "Monto Total";
-            Column1.Name = "Column1";
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "ver detalles";
-            Column3.Name = "Column3";
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Eliminar";
-            Column5.Name = "Column5";
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // guna2TextBox1
             // 
             guna2TextBox1.BorderRadius = 6;
             guna2TextBox1.CustomizableEdges = customizableEdges1;
-            guna2TextBox1.DefaultText = "Ingresar Numero o Fecha...";
+            guna2TextBox1.DefaultText = "";
             guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
             guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
@@ -141,11 +105,56 @@
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Location = new Point(12, 132);
             guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "";
+            guna2TextBox1.PlaceholderText = "Ingresar Numero o Fecha...";
             guna2TextBox1.SelectedText = "";
             guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2TextBox1.Size = new Size(164, 23);
             guna2TextBox1.TabIndex = 149;
+            // 
+            // Numero
+            // 
+            Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Numero.HeaderText = "Numero";
+            Numero.Name = "Numero";
+            Numero.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.HeaderText = "Cliente";
+            Nombre.Name = "Nombre";
+            // 
+            // Fechas
+            // 
+            Fechas.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Fechas.FlatStyle = FlatStyle.Flat;
+            Fechas.HeaderText = "Fecha de creacion";
+            Fechas.Name = "Fechas";
+            Fechas.ReadOnly = true;
+            // 
+            // Fecha
+            // 
+            Fecha.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Fecha.HeaderText = "Monto Total";
+            Fecha.Name = "Fecha";
+            // 
+            // Exportar
+            // 
+            Exportar.HeaderText = "Exportar";
+            Exportar.Image = Properties.Resources.icons8_pdf_64;
+            Exportar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Exportar.Name = "Exportar";
+            Exportar.Resizable = DataGridViewTriState.True;
+            Exportar.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // Eliminar
+            // 
+            Eliminar.HeaderText = "Eliminar";
+            Eliminar.Image = Properties.Resources.icons8_trash_can_481;
+            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Eliminar.Name = "Eliminar";
+            Eliminar.Resizable = DataGridViewTriState.True;
+            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // FacturasHistorial
             // 
@@ -167,12 +176,13 @@
 
         private Label Cliente;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Cedula;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewButtonColumn Usuariosd;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column5;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private DataGridViewTextBoxColumn Numero;
+        private DataGridViewTextBoxColumn Clientes;
+        private DataGridViewButtonColumn Fechas;
+        private DataGridViewTextBoxColumn Fecha;
+        private DataGridViewImageColumn Exportar;
+        private DataGridViewImageColumn Eliminar;
+        private DataGridViewTextBoxColumn Nombre;
     }
 }

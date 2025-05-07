@@ -27,7 +27,7 @@ namespace Examen2Grupo3
             if (File.Exists(rutaArchivo))
             {
                 string jsonString = File.ReadAllText(rutaArchivo);
-                empresactual = JsonConvert.DeserializeObject<Empresa>(jsonString);
+                empresactual = JsonConvert.DeserializeObject<Empresa>(jsonString) ?? new Empresa();
 
                 if (empresactual == null)
                 {
@@ -36,17 +36,17 @@ namespace Examen2Grupo3
                 }
                 else
                 {
-                    label2.Text = empresactual.RazonSocial;
-                    label1.Text = empresactual.Numero?.ToString() ?? string.Empty;
-                    label4.Text = empresactual.Direccion;
-                    label3.Text = empresactual.Correo;
-                    label5.Text = empresactual.Website;
+                    label2.Text ="Razon Social: "+ empresactual.RazonSocial;
+                    label1.Text = "Numero de Telefono: "+empresactual.Numero?.ToString() ?? string.Empty;
+                    label4.Text = "Direccion Fisica: "+empresactual.Direccion;
+                    label3.Text = "Correo Electronico: "+empresactual.Correo;
+                    label5.Text = "Website: "+empresactual.Website;
                 }
 
             }
             else
             {
-                MessageBox.Show("Los campos de su empresa estan vacios. Asegurese de rellenarlos correctamente");
+               // MessageBox.Show("Los campos de su empresa estan vacios. Asegurese de rellenarlos correctamente");
             }
 
 
@@ -67,28 +67,11 @@ namespace Examen2Grupo3
             datos.ShowDialog();
             if (datos.DialogResult == DialogResult.OK)
             {
-                label2.Text = datos.datos.RazonSocial;
-                label1.Text = datos.datos.Numero.ToString();
-                label4.Text = datos.datos.Direccion;
-                label3.Text = datos.datos.Correo;
-                label5.Text = datos.datos.Website;
+                leerEmpresa();
             }
-            empresactual = datos.datos;
-            GuardarEmpresa(empresactual);
+          
+         
         }
-        public void GuardarEmpresa(Empresa empresactual)
-        {
-            string rutaarchivo = "Empresa.json";
-            try
-            {
-                // Corrected the use of Newtonsoft.Json's SerializeObject method  
-                string json = JsonConvert.SerializeObject(empresactual, Formatting.Indented);
-                File.WriteAllText(rutaarchivo, json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al guardar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+    
     }
 }

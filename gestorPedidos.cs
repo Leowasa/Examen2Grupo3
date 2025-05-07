@@ -10,8 +10,13 @@
             public Cliente Cliente { get; set; }
             public List<Producto> Productos { get; set; }
             public String Estado { get; set; }
+            public decimal Descuento = 0.40M;
             public decimal SubtTotal => Productos.Sum(p => p.Total);
             public decimal Total { get; set; }
+            public Usuarios Encargado { get; set; }
+            public decimal IVA = 0.21M;
+            public DateTime FechaValidado { get; set; }
+            public string Observaciones { get; set; }
         }
 
         public class Cliente

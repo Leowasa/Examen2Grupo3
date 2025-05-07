@@ -63,8 +63,8 @@
             btncerrarr = new PictureBox();
             panel1 = new Panel();
             panelVentas = new Panel();
-            guna2Button11 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button12 = new Guna.UI2.WinForms.Guna2Button();
+            btnGeneraOrden = new Guna.UI2.WinForms.Guna2Button();
+            btnGenerarPedido = new Guna.UI2.WinForms.Guna2Button();
             guna2Button9 = new Guna.UI2.WinForms.Guna2Button();
             panelhistorial = new Panel();
             guna2Button7 = new Guna.UI2.WinForms.Guna2Button();
@@ -76,10 +76,10 @@
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button13 = new Guna.UI2.WinForms.Guna2Button();
             panel3 = new Panel();
-            label2 = new Label();
+            lblRol = new Label();
             pictureBox1 = new PictureBox();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            label3 = new Label();
+            lblUsuario = new Label();
             PanelPrincipal = new Panel();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Btnrest).BeginInit();
@@ -192,66 +192,66 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 35);
             panel1.Name = "panel1";
-            panel1.Size = new Size(250, 565);
+            panel1.Size = new Size(250, 698);
             panel1.TabIndex = 140;
             // 
             // panelVentas
             // 
             panelVentas.BackColor = Color.FromArgb(45, 66, 91);
-            panelVentas.Controls.Add(guna2Button11);
-            panelVentas.Controls.Add(guna2Button12);
+            panelVentas.Controls.Add(btnGeneraOrden);
+            panelVentas.Controls.Add(btnGenerarPedido);
             panelVentas.Dock = DockStyle.Top;
             panelVentas.ForeColor = SystemColors.ControlLight;
             panelVentas.Location = new Point(0, 671);
             panelVentas.Name = "panelVentas";
-            panelVentas.Size = new Size(233, 93);
+            panelVentas.Size = new Size(233, 139);
             panelVentas.TabIndex = 141;
             // 
-            // guna2Button11
+            // btnGeneraOrden
             // 
-            guna2Button11.BorderRadius = 8;
-            guna2Button11.CustomizableEdges = customizableEdges3;
-            guna2Button11.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button11.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button11.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button11.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button11.Dock = DockStyle.Top;
-            guna2Button11.FillColor = Color.Transparent;
-            guna2Button11.Font = new Font("Microsoft Sans Serif", 9.75F);
-            guna2Button11.ForeColor = Color.White;
-            guna2Button11.HoverState.FillColor = SystemColors.HotTrack;
-            guna2Button11.Location = new Point(0, 45);
-            guna2Button11.Name = "guna2Button11";
-            guna2Button11.PressedColor = Color.DimGray;
-            guna2Button11.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button11.Size = new Size(233, 45);
-            guna2Button11.TabIndex = 146;
-            guna2Button11.Text = "Ordenes de entrega";
-            guna2Button11.TextAlign = HorizontalAlignment.Left;
-            guna2Button11.Click += guna2Button11_Click;
+            btnGeneraOrden.BorderRadius = 8;
+            btnGeneraOrden.CustomizableEdges = customizableEdges3;
+            btnGeneraOrden.DisabledState.BorderColor = Color.DarkGray;
+            btnGeneraOrden.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnGeneraOrden.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnGeneraOrden.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnGeneraOrden.Dock = DockStyle.Top;
+            btnGeneraOrden.FillColor = Color.Transparent;
+            btnGeneraOrden.Font = new Font("Microsoft Sans Serif", 9.75F);
+            btnGeneraOrden.ForeColor = Color.White;
+            btnGeneraOrden.HoverState.FillColor = SystemColors.HotTrack;
+            btnGeneraOrden.Location = new Point(0, 45);
+            btnGeneraOrden.Name = "btnGeneraOrden";
+            btnGeneraOrden.PressedColor = Color.DimGray;
+            btnGeneraOrden.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnGeneraOrden.Size = new Size(233, 45);
+            btnGeneraOrden.TabIndex = 143;
+            btnGeneraOrden.Text = "Ordenes de entrega";
+            btnGeneraOrden.TextAlign = HorizontalAlignment.Left;
+            btnGeneraOrden.Click += button9_Click;
             // 
-            // guna2Button12
+            // btnGenerarPedido
             // 
-            guna2Button12.BorderRadius = 8;
-            guna2Button12.CustomizableEdges = customizableEdges5;
-            guna2Button12.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button12.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button12.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button12.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button12.Dock = DockStyle.Top;
-            guna2Button12.FillColor = Color.Transparent;
-            guna2Button12.Font = new Font("Microsoft Sans Serif", 9.75F);
-            guna2Button12.ForeColor = Color.White;
-            guna2Button12.HoverState.FillColor = SystemColors.HotTrack;
-            guna2Button12.Location = new Point(0, 0);
-            guna2Button12.Name = "guna2Button12";
-            guna2Button12.PressedColor = Color.DimGray;
-            guna2Button12.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button12.Size = new Size(233, 45);
-            guna2Button12.TabIndex = 145;
-            guna2Button12.Text = "Pedidos Preventivos";
-            guna2Button12.TextAlign = HorizontalAlignment.Left;
-            guna2Button12.Click += guna2Button12_Click;
+            btnGenerarPedido.BorderRadius = 8;
+            btnGenerarPedido.CustomizableEdges = customizableEdges5;
+            btnGenerarPedido.DisabledState.BorderColor = Color.DarkGray;
+            btnGenerarPedido.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnGenerarPedido.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnGenerarPedido.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnGenerarPedido.Dock = DockStyle.Top;
+            btnGenerarPedido.FillColor = Color.Transparent;
+            btnGenerarPedido.Font = new Font("Microsoft Sans Serif", 9.75F);
+            btnGenerarPedido.ForeColor = Color.White;
+            btnGenerarPedido.HoverState.FillColor = SystemColors.HotTrack;
+            btnGenerarPedido.Location = new Point(0, 0);
+            btnGenerarPedido.Name = "btnGenerarPedido";
+            btnGenerarPedido.PressedColor = Color.DimGray;
+            btnGenerarPedido.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnGenerarPedido.Size = new Size(233, 45);
+            btnGenerarPedido.TabIndex = 142;
+            btnGenerarPedido.Text = "Pedidos Preventivos";
+            btnGenerarPedido.TextAlign = HorizontalAlignment.Left;
+            btnGenerarPedido.Click += guna2Button15_Click;
             // 
             // guna2Button9
             // 
@@ -308,7 +308,7 @@
             guna2Button7.Name = "guna2Button7";
             guna2Button7.PressedColor = Color.DimGray;
             guna2Button7.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button7.Size = new Size(233, 45);
+            guna2Button7.Size = new Size(233, 49);
             guna2Button7.TabIndex = 144;
             guna2Button7.Text = "Facturas";
             guna2Button7.TextAlign = HorizontalAlignment.Left;
@@ -487,26 +487,26 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(label2);
+            panel3.Controls.Add(lblRol);
             panel3.Controls.Add(pictureBox1);
             panel3.Controls.Add(guna2Button2);
-            panel3.Controls.Add(label3);
+            panel3.Controls.Add(lblUsuario);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
             panel3.Size = new Size(233, 262);
             panel3.TabIndex = 11;
             // 
-            // label2
+            // lblRol
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.Gainsboro;
-            label2.Location = new Point(80, 134);
-            label2.Name = "label2";
-            label2.Size = new Size(83, 15);
-            label2.TabIndex = 133;
-            label2.Text = "Administrador";
+            lblRol.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRol.ForeColor = Color.Gainsboro;
+            lblRol.Location = new Point(80, 134);
+            lblRol.Name = "lblRol";
+            lblRol.Size = new Size(92, 15);
+            lblRol.TabIndex = 133;
+            lblRol.Text = "Administrador";
+            lblRol.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
@@ -537,23 +537,24 @@
             guna2Button2.Text = "Ver perfil";
             guna2Button2.Click += guna2Button2_Click;
             // 
-            // label3
+            // lblUsuario
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.Gainsboro;
-            label3.Location = new Point(95, 114);
-            label3.Name = "label3";
-            label3.Size = new Size(60, 17);
-            label3.TabIndex = 131;
-            label3.Text = "Usuario1";
+            lblUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblUsuario.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblUsuario.ForeColor = Color.Gainsboro;
+            lblUsuario.Location = new Point(80, 114);
+            lblUsuario.Name = "lblUsuario";
+            lblUsuario.Size = new Size(76, 17);
+            lblUsuario.TabIndex = 131;
+            lblUsuario.Text = "Usuario1";
+            lblUsuario.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // PanelPrincipal
             // 
             PanelPrincipal.Dock = DockStyle.Fill;
             PanelPrincipal.Location = new Point(250, 35);
             PanelPrincipal.Name = "PanelPrincipal";
-            PanelPrincipal.Size = new Size(950, 565);
+            PanelPrincipal.Size = new Size(950, 698);
             PanelPrincipal.TabIndex = 141;
             PanelPrincipal.Paint += PanelPrincipal_Paint;
             // 
@@ -564,7 +565,7 @@
             AutoScroll = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(1200, 600);
+            ClientSize = new Size(1200, 733);
             Controls.Add(PanelPrincipal);
             Controls.Add(panel1);
             Controls.Add(guna2CustomGradientPanel1);
@@ -582,7 +583,6 @@
             panelVentas.ResumeLayout(false);
             panelhistorial.ResumeLayout(false);
             panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -608,8 +608,8 @@
         private Button button11;
         private PictureBox pictureBox1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Label label3;
-        private Label label2;
+        private Label lblUsuario;
+        private Label lblRol;
         private Panel PanelPrincipal;
         private Guna.UI2.WinForms.Guna2Button guna2Button13;
         private Panel panel3;
@@ -625,5 +625,8 @@
         public Panel panelVentas;
         public Guna.UI2.WinForms.Guna2Button guna2Button11;
         public Guna.UI2.WinForms.Guna2Button guna2Button12;
+        public Panel panel2;
+        public Guna.UI2.WinForms.Guna2Button btnGeneraOrden;
+        public Guna.UI2.WinForms.Guna2Button btnGenerarPedido;
     }
 }

@@ -1,0 +1,154 @@
+<!DO
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Factura de Cliente</title>
+    <style>
+        table.border {
+            border-collapse: collapse;
+        }
+
+            table.border th, table.border td {
+                padding: 5px;
+                border: 1px solid black;
+            }
+
+        .productos-table th {
+            background-color: #007bff; /* Azul */
+            color: white; /* Texto blanco */
+        }
+
+        .totals {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .dates {
+            margin-top: 10px;
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <table style="width:100%">
+        <tr>
+            <td style="width:20%"></td>
+            <td style="width:60%" align="center" valign="top">
+                <table>
+                    <tr><td align="center"><h4 style="margin:0px ">Razon social: @Razon</h4></td></tr>
+                    <tr><td align="center">Telefono: @Telefono</td></tr>
+                    <tr><td align="center">Direccion Fisica: @Direccion</td></tr>
+                    <tr><td align="center">Correo Electronico: @Correo</td></tr>
+                    <tr><td align="center">Website: @Website</td></tr>
+                </table>
+            </td>
+            <td style="width:20%">
+                <table class="border" style="width:100%">
+                    <tr><td align="center">RUC: 3434343434</td></tr>
+                    <tr><td align="center" style="background-color:#3399FF">FACTURA</td></tr>
+                    <tr><td align="center">Nro: @Numero</td></tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr><td colspan="3" height="20"></td></tr>
+
+        <!-- Información del Usuario que generó la factura -->
+        <tr>
+            <td colspan="2">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:20%">ID Usuario:</td>
+                        <td style="width:30%;border-bottom:1px solid #3399FF">@IDusuario</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">Nombre Usuario:</td>
+                        <td style="width:80%;border-bottom:1px solid #3399FF">@Nombreusuario</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">Username:</td>
+                        <td style="width:80%;border-bottom:1px solid #3399FF">@Username</td>
+                    </tr>
+                </table>
+            </td>
+            <td></td>
+        </tr>
+
+        <tr><td colspan="3" height="30"></td></tr>
+
+        <!-- Información del Cliente -->
+        <tr>
+            <td colspan="2">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:20%">ID Cliente:</td>
+                        <td style="width:30%;border-bottom:1px solid #3399FF">@IDcliente</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">Nombre:</td>
+                        <td style="width:80%;border-bottom:1px solid #3399FF">@Nombrecliente</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">Direccion:</td>
+                        <td style="width:80%;border-bottom:1px solid #3399FF">@DireccionCliente</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">Correo:</td>
+                        <td style="width:80%;border-bottom:1px solid #3399FF">@CorreoCliente</td>
+                    </tr>
+                </table>
+            </td>
+            <td></td>
+        </tr>
+
+        <tr><td colspan="3" height="30"></td></tr>
+
+        <!-- Tabla de Productos -->
+        <tr>
+            <td colspan="3">
+                <table class="border productos-table" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Categoría</th>
+                            <th>Cantidad</th>
+                            <th>P. Unitario</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @FILAS
+                        <tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+
+        <!-- Subtotal, IVA y Total -->
+        <tr>
+            <td colspan="3">
+                <div class="totals">
+                    <p>Subtotal: @SUBTOTAL</p>
+                    <p>IVA (16%): @IVA</p>
+                    <p>Total a pagar: @TOTAL</p>
+                </div>
+            </td>
+        </tr>
+
+        <!-- Fechas de Emisión y Validación debajo del total -->
+        <tr>
+            <td colspan="3">
+                <div class="dates">
+                    <p>Fecha de Emision: @Emision</p>
+                    <p>Fecha de Validacion: @Validacion</p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

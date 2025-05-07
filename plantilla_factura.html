@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura - Pedido #12345</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .invoice-header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .invoice-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        
+        .invoice-meta {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .company-info, .client-info, .creator-info {
+            flex: 1;
+            padding: 0 15px;
+        }
+        
+        .company-info {
+            text-align: left;
+            border-right: 1px dashed #ccc;
+        }
+        
+        .client-info {
+            text-align: center;
+            border-right: 1px dashed #ccc;
+        }
+        
+        .creator-info {
+            text-align: right;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .creator-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .creator-badge i {
+            margin-right: 5px;
+        }
+        
+        .invoice-details {
+            padding: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .total-row {
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+        
+        .total-amount {
+            font-size: 18px;
+            color: #6e8efb;
+        }
+        
+        .invoice-footer {
+            padding: 20px 30px;
+            background-color: #f5f5f5;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .payment-info {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            border-left: 4px solid #6e8efb;
+        }
+        
+        .thank-you {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 18px;
+            color: #555;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #6e8efb;
+        }
+        
+        .invoice-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <div class="invoice-number">Factura #INV-2023-005</div>
+            <h1>FACTURA COMERCIAL</h1>
+            <p>Fecha: 15 de Mayo, 2023</p>
+            <div class="creator-badge">
+                <i class="fas fa-user-edit"></i>
+                Creada por: Admin
+            </div>
+        </div>
+        
+        <div class="invoice-meta">
+            <div class="company-info">
+                <div class="logo">TiendaOnline</div>
+                <p>Calle Principal 123<br>
+                Ciudad, País<br>
+                NIT: 123456789-0<br>
+                Tel: +123 456 7890<br>
+                info@tiendaonline.com</p>
+            </div>
+            
+            <div class="client-info">
+                <span class="info-label">FACTURAR A:</span>
+                <p><strong>Juan Pérez</strong><br>
+                Av. Siempre Viva 742<br>
+                Springfield<br>
+                CC: 987654321<br>
+                juan.perez@email.com<br>
+                Tel: +987 654 321</p>
+            </div>
+            
+            <div class="creator-info">
+                <span class="info-label">DATOS DEL VENDEDOR:</span>
+                <p><strong>Carlos Martínez</strong><br>
+                ID: EMP-001<br>
+                Departamento: Ventas<br>
+                Tel: +123 789 4561<br>
+                c.martinez@tiendaonline.com</p>
+                <p><span class="info-label">Fecha de emisión:</span> 15/05/2023 14:30</p>
+            </div>
+        </div>
+        
+        <div class="invoice-details">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ítem</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>P. Unitario</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Zapatos deportivos - Modelo X200</td>
+                        <td>1</td>
+                        <td>$89.99</td>
+                        <td>$89.99</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Camiseta de algodón - Talla M</td>
+                        <td>2</td>
+                        <td>$19.99</td>
+                        <td>$39.98</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Pantalón jeans - Color azul</td>
+                        <td>1</td>
+                        <td>$49.99</td>
+                        <td>$49.99</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="4">Subtotal</td>
+                        <td>$179.96</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Envío</td>
+                        <td>$9.99</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="4">IVA (19%)</td>
+                        <td>$34.19</td>
+                    </tr>
+                    <tr class="total-row total-amount">
+                        <td colspan="4">TOTAL A PAGAR</td>
+                        <td>$224.14</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="payment-info">
+                <h3><i class="fas fa-info-circle"></i> INFORMACIÓN DE PAGO</h3>
+                <p><strong>Método de pago:</strong> Tarjeta de crédito (Visa ****1234)</p>
+                <p><strong>Nº de transacción:</strong> TXN-789456123</p>
+                <p><strong>Fecha de pago:</strong> 15/05/2023 14:35</p>
+                <p><strong>Estado:</strong> <span style="color: green; font-weight: bold;">Pagado</span></p>
+            </div>
+            
+            <div class="thank-you">
+                <p><i class="fas fa-check-circle" style="color: green;"></i> ¡Gracias por su compra! Este documento es válido como factura de venta.</p>
+                <p>Para reclamos o devoluciones, contacte a servicioalcliente@tiendaonline.com</p>
+            </div>
+        </div>
+        
+        <div class="invoice-footer">
+            <div>
+                <p><strong>TiendaOnline SAS</strong><br>
+                Todos los derechos reservados © 2023</p>
+            </div>
+            <div>
+                <p><strong>Resolución DIAN:</strong> 1876400000<br>
+                <strong>Fecha de resolución:</strong> 01/01/2023</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

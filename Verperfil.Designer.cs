@@ -31,87 +31,62 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Verperfil));
-            label2 = new Label();
-            label1 = new Label();
-            label17 = new Label();
-            label16 = new Label();
-            label8 = new Label();
-            label7 = new Label();
+            lblRol = new Label();
+            lblUsuario = new Label();
+            lblID = new Label();
+            lblNombre = new Label();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // label2
+            // lblRol
             // 
-            label2.AutoSize = true;
-            label2.ForeColor = Color.Gainsboro;
-            label2.Location = new Point(524, 139);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(83, 15);
-            label2.TabIndex = 112;
-            label2.Text = "Administrador";
+            lblRol.AutoSize = true;
+            lblRol.ForeColor = Color.Gainsboro;
+            lblRol.Location = new Point(524, 139);
+            lblRol.Margin = new Padding(4, 0, 4, 0);
+            lblRol.Name = "lblRol";
+            lblRol.Size = new Size(83, 15);
+            lblRol.TabIndex = 112;
+            lblRol.Text = "Administrador";
+            lblRol.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // lblUsuario
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Gainsboro;
-            label1.Location = new Point(515, 109);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(94, 30);
-            label1.TabIndex = 111;
-            label1.Text = "Usuario1";
+            lblUsuario.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsuario.ForeColor = Color.Gainsboro;
+            lblUsuario.Location = new Point(515, 109);
+            lblUsuario.Margin = new Padding(4, 0, 4, 0);
+            lblUsuario.Name = "lblUsuario";
+            lblUsuario.Size = new Size(94, 30);
+            lblUsuario.TabIndex = 111;
+            lblUsuario.Text = "Usuario1";
+            lblUsuario.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label17
+            // lblID
             // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
-            label17.ForeColor = Color.Gainsboro;
-            label17.Location = new Point(486, 218);
-            label17.Margin = new Padding(4, 0, 4, 0);
-            label17.Name = "label17";
-            label17.Size = new Size(26, 16);
-            label17.TabIndex = 110;
-            label17.Text = "ID:";
+            lblID.AutoSize = true;
+            lblID.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            lblID.ForeColor = Color.Gainsboro;
+            lblID.Location = new Point(486, 218);
+            lblID.Margin = new Padding(4, 0, 4, 0);
+            lblID.Name = "lblID";
+            lblID.Size = new Size(26, 16);
+            lblID.TabIndex = 110;
+            lblID.Text = "ID:";
             // 
-            // label16
+            // lblNombre
             // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
-            label16.ForeColor = Color.Gainsboro;
-            label16.Location = new Point(485, 193);
-            label16.Margin = new Padding(4, 0, 4, 0);
-            label16.Name = "label16";
-            label16.Size = new Size(66, 16);
-            label16.TabIndex = 109;
-            label16.Text = "Nombre:";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
-            label8.ForeColor = Color.Gainsboro;
-            label8.Location = new Point(557, 193);
-            label8.Margin = new Padding(4, 0, 4, 0);
-            label8.Name = "label8";
-            label8.Size = new Size(96, 16);
-            label8.TabIndex = 108;
-            label8.Text = "Carlos Perez";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
-            label7.ForeColor = Color.Gainsboro;
-            label7.Location = new Point(515, 218);
-            label7.Margin = new Padding(4, 0, 4, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(62, 16);
-            label7.TabIndex = 107;
-            label7.Text = "V-82344";
+            lblNombre.AutoSize = true;
+            lblNombre.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
+            lblNombre.ForeColor = Color.Gainsboro;
+            lblNombre.Location = new Point(485, 193);
+            lblNombre.Margin = new Padding(4, 0, 4, 0);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(66, 16);
+            lblNombre.TabIndex = 109;
+            lblNombre.Text = "Nombre:";
             // 
             // guna2Button1
             // 
@@ -130,6 +105,7 @@
             guna2Button1.Size = new Size(151, 23);
             guna2Button1.TabIndex = 129;
             guna2Button1.Text = "Cambiar contraseña";
+            guna2Button1.Click += guna2Button1_Click;
             // 
             // pictureBox1
             // 
@@ -149,12 +125,10 @@
             ClientSize = new Size(1094, 872);
             Controls.Add(pictureBox1);
             Controls.Add(guna2Button1);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(label17);
-            Controls.Add(label16);
-            Controls.Add(label8);
-            Controls.Add(label7);
+            Controls.Add(lblRol);
+            Controls.Add(lblUsuario);
+            Controls.Add(lblID);
+            Controls.Add(lblNombre);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Verperfil";
             Text = "Verperfil";
@@ -164,12 +138,10 @@
         }
 
         #endregion
-        private Label label2;
-        private Label label1;
-        private Label label17;
-        private Label label16;
-        private Label label8;
-        private Label label7;
+        private Label lblRol;
+        private Label lblUsuario;
+        private Label lblID;
+        private Label lblNombre;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private PictureBox pictureBox1;
     }

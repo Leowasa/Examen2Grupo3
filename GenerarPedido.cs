@@ -1,24 +1,38 @@
 ﻿using Newtonsoft.Json; // Agregar esta directiva para usar JsonSerializerOptions
 using System.Drawing.Drawing2D;
 using static Examen2Grupo3.RegistroPedidos;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.tool.xml;
+using System.Text;
+using static System.Text.CodePagesEncodingProvider;
+using System.Net.Http;
+using System.Collections.Immutable;
+
 
 
 namespace Examen2Grupo3
 {
     public partial class GenerarPedido : Form
     {
-        private Pedido pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
+        private static Pedido pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
         private List<Pedido> ListaPedidos = new List<Pedido>();
         private static int NumeroPedido;
         private Producto ProductoNuevo;
-        public GenerarPedido()
+        private Usuarios usuarioActual = new Usuarios();
+        //validar cuando se ingrese 0 como cantidad
+        public GenerarPedido(Usuarios usuarioActual)
         {
             InitializeComponent();
-            label14.Text = CargarNum().ToString("D6");
+            Cliente.Text = "Pedido Nº: " + CargarNum().ToString("D6");
+            this.usuarioActual = usuarioActual;
+            lblEncargado.Text += usuarioActual.Username;
+            lblNombre.Text += usuarioActual.Nombre;
+            lblID.Text += usuarioActual.ID.ToString();
         }
         private int CargarNum()
         {
-            string rutaArchivo = "datos.json";
+            string rutaArchivo = "pedidos.json";
             if (File.Exists(rutaArchivo))
             {
                 string jsonString = File.ReadAllText(rutaArchivo);
@@ -28,8 +42,9 @@ namespace Examen2Grupo3
                 {
                     return NumeroPedido = pedidos.Max(p => p.ID) + 1; // Encuentra el mayor número de pedido
                 }
+                return NumeroPedido= 1;
             }
-            return 1; // Si no hay pedidos, empieza desde 0
+            return NumeroPedido= 1; // Si no hay pedidos, empieza desde 1
         }
 
         public class RoundButton : Button
@@ -43,67 +58,6 @@ namespace Examen2Grupo3
             }
         }
 
-        private void guna2Button2_Click(object sender, EventArgs e)
-        {
-            BuscarProducto formProductos = new BuscarProducto();
-            if (formProductos.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    ProductoNuevo = new Producto
-                    {
-                        Nombre = formProductos.Producto.Nombre,
-                        ID = formProductos.Producto.ID,
-                        Categoria = formProductos.Producto.Categoria,
-                        PrecioUnitario = formProductos.Producto.PrecioUnitario,
-                        Cantidad = formProductos.Producto.Cantidad,
-                        Descripcion = formProductos.Producto.Descripcion
-                    };
-                    //  listaProductos.Add(ProductoNuevo);
-                    if (pedido.Productos == null)
-                    {
-                        pedido.Productos = new List<Producto>();
-
-                    }
-                    pedido.Estado = "Pendiente";
-                    pedido.Productos.Add(ProductoNuevo); //codigo anterior  pedido.Productos = ListaProductos
-                    label18.Text = pedido.SubtTotal.ToString();
-                    Descuento();
-                    dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario, ProductoNuevo.Cantidad * ProductoNuevo.PrecioUnitario);
-
-                }
-                catch
-                {
-                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los datos");
-                }
-
-            }
-            else
-            {
-                //nada xd
-            }
-        }
-        public void Descuento()
-        {
-            if (pedido.Productos.Count > 3)
-            {
-                decimal descuento = 0.20m;
-                descuento = pedido.SubtTotal * descuento;
-                pedido.Total = pedido.SubtTotal - descuento;
-
-                label20.Text = pedido.Total.ToString();
-                label19.Text = "20%";
-
-            }
-            else
-            {
-                pedido.Total = pedido.SubtTotal;
-                label20.Text = pedido.SubtTotal.ToString();
-            }
-
-
-        }
-        
         public string? GuardarCliente()
         {
             try
@@ -127,7 +81,7 @@ namespace Examen2Grupo3
         }
         private void GuardarDatosEnJson(Pedido nuevoPedido)
         {
-            string rutaArchivo = "datos.json";
+            string rutaArchivo = "pedidos.json";
 
             try
             {
@@ -159,15 +113,17 @@ namespace Examen2Grupo3
                 MessageBox.Show("Faltan Datos por rellenar");
                 return;
             }
-            pedido.ID = int.Parse(label14.Text);
+            pedido.Encargado = usuarioActual;
+            pedido.ID = NumeroPedido;
             pedido.Fecha = guna2DateTimePicker1.Value;
             GuardarDatosEnJson(pedido);
             dataGridView1.Rows.Clear();
             LimpiarTextBox();
-            label14.Text = CargarNum().ToString("D6");
-            label18.Text = ": ";
-            label19.Text = ": ";
-            label20.Text = ": ";
+            lblDescuento.Text = "Descuento: ";
+            lblSubtotal.Text = "Subtotal: ";
+            lblTotal.Text = "Total: ";
+            Cliente.Text = "Pedido Nº: " + CargarNum().ToString("D6");
+            
             MessageBox.Show("Pedido generado exitosamente!");
 
 
@@ -189,7 +145,7 @@ namespace Examen2Grupo3
         }
         public List<Pedido> LeerPedidos()
         {
-            string rutaArchivo = "datos.json";
+            string rutaArchivo = "pedidos.json";
             if (File.Exists(rutaArchivo))
             {
                 string contenido = File.ReadAllText(rutaArchivo);
@@ -198,27 +154,12 @@ namespace Examen2Grupo3
             return new List<Pedido>();
         }
 
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void guna2Button5_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
-            label18.Text = ": ";
-            label19.Text = ": ";
-            label20.Text = ": ";
+            lblSubtotal.Text = "Subtotal: ";
+            lblDescuento.Text = "Descuento: ";
+            lblTotal.Text = "Total: ";
             pedido.Productos.Clear(); // Limpiar la lista de productos del pedido actual
             ;
         }
@@ -227,12 +168,6 @@ namespace Examen2Grupo3
         {
             LimpiarTextBox();
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             BuscarClientes frmClientes = new BuscarClientes();
@@ -249,6 +184,175 @@ namespace Examen2Grupo3
             guna2TextBox2.Text = Clientes.ID.ToString();
             guna2TextBox4.Text = Clientes.Direccion;
             guna2TextBox3.Text = Clientes.Correo;
+        }
+
+
+        private void GenerarFacturaPDF()
+        {
+            string htmlPath = Properties.Resources.plantilla_factura.ToString();
+            string pdfPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Factura.pdf");
+            Document document = new Document(PageSize.A4, 25, 25, 25, 25);
+            try
+            {
+                // 1. Configuración inicial  
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+                // 2. Configuración del documento PDF  
+
+                // 3. Crear el archivo PDF  
+                using (FileStream fs = new FileStream("Factura.pdf", FileMode.Create))
+                {
+                    PdfWriter writer = PdfWriter.GetInstance(document, fs);
+
+                    // 4. Abrir documento  
+                    document.Open();
+                    document.Add(new Phrase(""));
+
+                    // 5. Leer contenido HTML  
+                    string htmlContent = File.ReadAllText("Factura - copia.html", Encoding.UTF8);
+                    htmlContent = rellenarHtml(htmlContent);
+                    if (string.IsNullOrWhiteSpace(htmlContent))
+                    {
+                        throw new InvalidOperationException("El contenido HTML está vacío o no se pudo leer.");
+                    }
+
+                    // 6. Convertir HTML a PDF con configuración robusta  
+                    using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(htmlContent)))
+                    using (var reader = new StreamReader(ms, Encoding.UTF8)) // Convertir MemoryStream a TextReader  
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(
+                            writer,
+                            document,
+                            reader
+                        );
+                    }
+
+                    // 7. Cerrar documento (importante para evitar corrupción)  
+                    document.Close();
+                    fs.Close();
+                }
+
+                MessageBox.Show("✅ PDF generado correctamente.");
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show($"❌ Error: Archivo no encontrado. {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"❌ Error de E/S: {ex.Message}");
+            }
+            catch (DocumentException ex)
+            {
+                MessageBox.Show($"❌ Error al generar PDF: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"❌ Error inesperado: {ex.Message}");
+            }
+            finally
+            {
+                // Asegurarse de que el documento esté cerrado  
+                if (document != null && document.IsOpen())
+                {
+                    document.Close();
+                }
+            }
+        }
+        private void guna2Button6_Click(object sender, EventArgs e)
+        {
+            GenerarFacturaPDF();
+        }
+        private string rellenarHtml(string htmlContent)
+        {
+            htmlContent = htmlContent.Replace("@Razon", "si");
+            htmlContent = htmlContent.Replace("@Telefono", "042655");
+            htmlContent = htmlContent.Replace("@Direccion", "por ahi");
+            htmlContent = htmlContent.Replace("@Correo", "si");
+            htmlContent = htmlContent.Replace("@Website", "si");
+
+            string filas = string.Empty;
+            foreach (var row in pedido.Productos)
+            {
+                filas += "<tr>";
+                filas += "<td>" + row.ID + "</td>";
+                filas += "<td>" + row.Nombre + "</td>";
+                filas += "<td>" + row.Descripcion + "</td>";
+                filas += "<td>" + row.Categoria + "</td>";
+                filas += "<td>" + row.Cantidad + "</td>";
+                filas += "<td>" + row.PrecioUnitario + "</td>";
+                filas += "<td>" + row.Total + "</td>";
+                filas += "</tr>";
+            }
+            htmlContent = htmlContent.Replace("@FILAS", filas);
+            return htmlContent;
+
+        }
+
+        private void btnagregarProductoClick(object sender, EventArgs e)
+        {
+
+            BuscarProducto formProductos = new BuscarProducto();
+            if (formProductos.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    ProductoNuevo = new Producto
+                    {
+                        Nombre = formProductos.Producto.Nombre,
+                        ID = formProductos.Producto.ID,
+                        Categoria = formProductos.Producto.Categoria,
+                        PrecioUnitario = formProductos.Producto.PrecioUnitario,
+                        Cantidad = formProductos.Producto.Cantidad,
+                        Descripcion = formProductos.Producto.Descripcion
+                    };
+                    //  listaProductos.Add(ProductoNuevo);
+                    if (pedido.Productos == null)
+                    {
+                        pedido.Productos = new List<Producto>();
+
+                    }
+                    pedido.Estado = "Pendiente";
+                
+                    pedido.Productos.Add(ProductoNuevo); //codigo anterior  pedido.Productos = ListaProductos
+        
+
+                    Descuento();
+                    dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario, ProductoNuevo.Cantidad * ProductoNuevo.PrecioUnitario);
+
+                }
+                catch
+                {
+                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los datos");
+                }
+
+            }
+            else
+            {
+                //nada xd
+            }
+        }
+        public void Descuento()
+        {
+            lblSubtotal.Text ="Subtotal: " +pedido.SubtTotal.ToString();
+            var cantidad  = pedido.Productos.Sum(p => p.Cantidad);
+            if (cantidad > 3)
+            {
+                decimal descuento = 0.20m;
+                descuento = pedido.SubtTotal * descuento;
+                pedido.Total = pedido.SubtTotal - descuento;
+
+                lblTotal.Text = "total: "+ pedido.Total.ToString();
+                lblDescuento.Text ="Descuento: "+ "20%";
+
+            }
+            else
+            {
+                pedido.Total = pedido.SubtTotal;
+                lblTotal.Text ="Total: "+ pedido.SubtTotal.ToString();
+            }
+
+
         }
     }
 }
