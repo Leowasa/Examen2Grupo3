@@ -21,7 +21,7 @@ namespace Examen2Grupo3
             ControlUsuario1(usuarioactual);
         }
 
-       
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Codigo_especial Codigo = new Codigo_especial();
@@ -48,7 +48,7 @@ namespace Examen2Grupo3
                     filaSeleccionada.Cells["ID"].Value.ToString() ?? "0",
                     filaSeleccionada.Cells["Nombre"].Value.ToString() ?? "",
                     filaSeleccionada.Cells["Categoria"].Value.ToString() ?? "",
-                   
+
                     filaSeleccionada.Cells["Stock"].Value.ToString() ?? "",
                      filaSeleccionada.Cells["Descripcion"].Value.ToString() ?? "",
                     filaSeleccionada.Cells["PrecioUnitario"].Value.ToString() ?? ""
@@ -134,10 +134,10 @@ namespace Examen2Grupo3
             Producto producto = inventario.Find(p => p.ID == id);
             if (producto != null)
                 inventario.Remove(producto);
-           
+
         }
         [SupportedOSPlatform("windows6.1")]
-      
+
         private void BuscarElemento(string textoBusqueda)
         {
             // Verificar que el texto de búsqueda tenga al menos 4 caracteres
@@ -310,10 +310,7 @@ namespace Examen2Grupo3
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+      
         public void ControlUsuario1(RegistroPedidos.Usuarios Usuarioactual)
         {
 
@@ -322,6 +319,11 @@ namespace Examen2Grupo3
                 pictureBox1.Visible = false;
                 pictureBox2.Visible = false;
             }
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
         // Existing code...
