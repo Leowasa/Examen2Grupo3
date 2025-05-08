@@ -159,6 +159,7 @@
             Controls.Add(guna2TextBox2);
             Controls.Add(dataGridView1);
             Name = "BuscarClientes";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "BuscarClientes";
             Load += BuscarClientes_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

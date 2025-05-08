@@ -31,10 +31,10 @@ namespace Examen2Grupo3
         {
             InitializeComponent();
              Opcion = opcion;
-            InitializeComponent();
             ListaPedidos = LeerPedidos();
-            configurar(pedido);
             Pedido = pedido;
+            configurar();
+           
         }
         public Factura()
         {
@@ -47,22 +47,31 @@ namespace Examen2Grupo3
             Opcion = opcion;
             InitializeComponent();
             ListaPedidos = LeerPedidos();
-            configurar(pedido);
             Pedido = pedido;
+            configurar();
+           
         }
         
-        private void configurar(Pedido pedidoActual)
+        private void configurar()
         {
             cargarEmpresa();
             orden = new Pedido();
-            orden = pedidoActual;
+            orden = Pedido;
             lblFactura.Text = "Orden de entrega";
-            lblNumero.Text = "ID: " + pedidoActual.ID.ToString("D6");
-            label5.Text = "Fecha: " + pedidoActual.Fecha.ToString("dd/MM/yyyy");
-            label9.Text = "Nombre: " + pedidoActual.Cliente.Nombre;
-            label12.Text = "ID: " + pedidoActual.Cliente.ID.ToString();
-            label11.Text = "Direccion: " + pedidoActual.Cliente.Direccion;
-            label10.Text = "Correo Electronico" + pedidoActual.Cliente.Correo;
+            lblNumero.Text = "ID: " + orden.ID.ToString("D6");
+            label5.Text = "Fecha: " + orden.Fecha.ToString("dd/MM/yyyy");
+            if (orden.Cliente != null)
+            {
+                label9.Text = "Nombre: " + orden.Cliente.Nombre;
+               
+            }
+            else
+            {
+                label9.Text = "Nombre: N/A";
+            }
+            label12.Text = "ID: " + orden.Cliente.ID.ToString();
+            label11.Text = "Direccion: " + orden.Cliente.Direccion;
+            label10.Text = "Correo Electronico" + orden.Cliente.Correo;
 
             switch (Opcion)
             {
@@ -74,7 +83,7 @@ namespace Examen2Grupo3
                     FechaValidacion.Enabled = false;
                     try 
                     {
-                        lblEncargado.Text = Pedido.Encargado.Username ?? "";
+                        lblEncargado.Text = Pedido.Encargado.Username;
                     } catch(System.NullReferenceException)
                     {
                         
@@ -84,7 +93,7 @@ namespace Examen2Grupo3
                       
                     
                     
-                    lblNombre.Text = Pedido.Encargado.Nombre??"";
+                    lblNombre.Text = Pedido.Encargado.Nombre.ToString();
                     lblID.Text = Pedido.Encargado.ID.ToString()??"";
                     break;
                 case 2:
@@ -97,16 +106,16 @@ namespace Examen2Grupo3
             }
           
 
-            foreach (var lista in pedidoActual.Productos)
+            foreach (var lista in Pedido.Productos)
             {
                 dataGridView1.Rows.Add(lista.ID, lista.Nombre, lista.Categoria, lista.Descripcion, lista.Cantidad, lista.PrecioUnitario, lista.Cantidad * lista.PrecioUnitario);
 
 
             }
-            label21.Text = "Subtotal: " + pedidoActual.SubtTotal.ToString();
-            lblDescuento.Text = "Descuento: " + (pedidoActual.Descuento * 100M).ToString("0")+ "%";
+            label21.Text = "Subtotal: " + Pedido.SubtTotal.ToString();
+            lblDescuento.Text = "Descuento: " + (Pedido.Descuento * 100M).ToString("0")+ "%";
             lblIVa.Text = "IVA: 21%";
-            label20.Text = "Total: " + pedidoActual.Total.ToString();
+            label20.Text = "Total: " + Pedido.Total.ToString();
         }
         private void cargarEmpresa()
         {

@@ -297,6 +297,7 @@
             Controls.Add(label8);
             Controls.Add(label9);
             Name = "IngresarDatosEmpresa";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "IngresarDatosEmpresa";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

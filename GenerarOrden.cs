@@ -140,12 +140,12 @@ namespace Examen2Grupo3
             }
         }
 
-        public void AbrirOtroFormulario(Pedido seleccionadom, int opcion)
+        public void AbrirOtroFormulario(Pedido seleccionadot, int opcion)
         {
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                principal.AbrirFormularioEnPanel(new Factura(seleccionado, opcion, UsuarioActual)); // Reemplaza con el formulario que desees abrir
+                principal.AbrirFormularioEnPanel(new Factura(seleccionadot, opcion, UsuarioActual)); // Reemplaza con el formulario que desees abrir
             }
         }
         private void BuscarElemento(string textoBusqueda)
@@ -242,17 +242,42 @@ namespace Examen2Grupo3
             }
             editar(e);
         }
+        private Pedido ObtenerPedidoSeleccionado()
+        {
+            // Verificar si hay una fila seleccionada en el DataGridView
+            if (dataGridView1.CurrentRow != null)
+            {
+                // Obtener el valor del ID de la fila seleccionada
+                var idSeleccionado = dataGridView1.CurrentRow.Cells["Numero"].Value?.ToString();
+
+                if (!string.IsNullOrEmpty(idSeleccionado))
+                {
+                    // Buscar el pedido en la lista por el ID
+                    var pedidoSeleccionado = Lista.FirstOrDefault(p => p.ID.ToString() == idSeleccionado);
+
+                    if (pedidoSeleccionado != null)
+                    {
+                        return pedidoSeleccionado;
+                    }
+                }
+            }
+
+            // Si no se encuentra el pedido, devolver null o manejar el caso
+            MessageBox.Show("No se pudo encontrar el pedido seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return null;
+        }
+
         public void editar(DataGridViewCellEventArgs e)
         {
 
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
             {
-                int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
-                foreach (var lista in Lista)
+                var pedido = ObtenerPedidoSeleccionado();
+                if (pedido != null) 
                 {
-                    if (lista.ID == idPedido)
-                        AbrirOtroFormulario(lista, 1);
+                    AbrirOtroFormulario(pedido, 1);
                 }
+                
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {

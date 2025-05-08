@@ -62,8 +62,8 @@ namespace Examen2Grupo3
                 guna2TextBox6.Text = precio;
                
 
-                guna2TextBox1.ReadOnly = true;
-                guna2TextBox1.BackColor = Color.LightGray;
+               // guna2TextBox1.ReadOnly = true;
+               // guna2TextBox1.BackColor = Color.LightGray;
             }
             catch
 
