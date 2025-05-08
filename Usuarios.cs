@@ -122,11 +122,12 @@ namespace ejemplo
         private void ConfigurarDataGridView()
         {
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Ajustar columnas al tamaño del DataGridView
-            dataGridView1.Dock = DockStyle.Fill; // Ocupa todo el espacio disponible en el Panel
+             
             dataGridView1.ScrollBars = ScrollBars.Both;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
-
+            dataGridView1.Location = new Point(12, 165);
+            dataGridView1.Size = new Size(1070, 1000);
             // Configuración de estilo
             dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
             dataGridView1.BorderStyle = BorderStyle.None;
