@@ -186,81 +186,9 @@ namespace Examen2Grupo3
         }
 
 
-        private void GenerarFacturaPDF()
-        {
-            string htmlPath = Properties.Resources.plantilla_factura.ToString();
-            string pdfPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Factura.pdf");
-            Document document = new Document(PageSize.A4, 25, 25, 25, 25);
-            try
-            {
-                // 1. Configuración inicial  
-                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-                // 2. Configuración del documento PDF  
-
-                // 3. Crear el archivo PDF  
-                using (FileStream fs = new FileStream("Factura.pdf", FileMode.Create))
-                {
-                    PdfWriter writer = PdfWriter.GetInstance(document, fs);
-
-                    // 4. Abrir documento  
-                    document.Open();
-                    document.Add(new Phrase(""));
-
-                    // 5. Leer contenido HTML  
-                    string htmlContent = File.ReadAllText("Factura - copia.html", Encoding.UTF8);
-                    htmlContent = rellenarHtml(htmlContent);
-                    if (string.IsNullOrWhiteSpace(htmlContent))
-                    {
-                        throw new InvalidOperationException("El contenido HTML está vacío o no se pudo leer.");
-                    }
-
-                    // 6. Convertir HTML a PDF con configuración robusta  
-                    using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(htmlContent)))
-                    using (var reader = new StreamReader(ms, Encoding.UTF8)) // Convertir MemoryStream a TextReader  
-                    {
-                        XMLWorkerHelper.GetInstance().ParseXHtml(
-                            writer,
-                            document,
-                            reader
-                        );
-                    }
-
-                    // 7. Cerrar documento (importante para evitar corrupción)  
-                    document.Close();
-                    fs.Close();
-                }
-
-                MessageBox.Show("✅ PDF generado correctamente.");
-            }
-            catch (FileNotFoundException ex)
-            {
-                MessageBox.Show($"❌ Error: Archivo no encontrado. {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show($"❌ Error de E/S: {ex.Message}");
-            }
-            catch (DocumentException ex)
-            {
-                MessageBox.Show($"❌ Error al generar PDF: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"❌ Error inesperado: {ex.Message}");
-            }
-            finally
-            {
-                // Asegurarse de que el documento esté cerrado  
-                if (document != null && document.IsOpen())
-                {
-                    document.Close();
-                }
-            }
-        }
         private void guna2Button6_Click(object sender, EventArgs e)
         {
-            GenerarFacturaPDF();
+     
         }
         private string rellenarHtml(string htmlContent)
         {

@@ -227,7 +227,7 @@ namespace Examen2Grupo3
                     {
                         var datos = linea.Split(',');
 
-                        dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4], decimal.Parse(datos[5]).ToString("C", CultureInfo.GetCultureInfo("en-US")));
+                        dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4], decimal.Parse(datos[5]));
                     }
 
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -20,6 +20,7 @@ namespace Examen2Grupo3
             using (var formAgregar = new Form())
             {
                 Bitmap img = new Bitmap(Properties.Resources.Fondo);
+           
                 formAgregar.BackgroundImage = img;
                 formAgregar.BackgroundImageLayout = ImageLayout.Stretch;
                 formAgregar.Text = "Añadir Usuario";
