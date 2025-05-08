@@ -169,7 +169,7 @@ namespace Examen2Grupo3
         private void GenerarFacturaPDF(string pdfPath)
         {
             string htmlPath = Properties.Resources.plantilla_factura.ToString();
-            Document document = new Document(PageSize.A4, 25, 25, 25, 25);
+            Document document = new Document(PageSize.A4, 45, 45, 45, 45);
 
             try
             {

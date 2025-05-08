@@ -20,24 +20,38 @@ public partial class Login : Form
         IngresarDatosEmpresa Nuevo = new IngresarDatosEmpresa();
         if (File.Exists(rutaArchivo))
         {
-           
-            ProcesarUsuario();
+            Validar();
            
         }
         else
         {
-            File.WriteAllText(rutaArchivo, "Ejecutado"); // Crear el archivo para futuras ejecuciones
 
-            Nuevo.ShowDialog();
-            ProcesarUsuario();
+            if (Nuevo.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(rutaArchivo, "Ejecutado"); // Crear el archivo para futuras ejecuciones
+                Validar();
+
+            }
+            else 
+            { 
+            
+            }
+          
+
            
         }
     }
     private void guna2Button2_Click(object sender, EventArgs e)
     {
+   
         primeraEjecucion();
     }
     private void ProcesarUsuario() 
+    {
+        
+
+    }
+    public bool Validar() 
     {
         cargarCargarUsuario();
 
@@ -45,7 +59,7 @@ public partial class Login : Form
         if (string.IsNullOrWhiteSpace(guna2TextBox1.Text) || string.IsNullOrWhiteSpace(guna2TextBox3.Text))
         {
             MessageBox.Show("Por favor, complete todos los campos antes de iniciar sesión.", "Campos vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
+            return false;
         }
         try
         {
@@ -62,33 +76,34 @@ public partial class Login : Form
 
                         usuarioEncontrado = true;
                         personalizar(lista);
-                        break;
+                        return true;
                     }
                 }
 
                 if (!usuarioEncontrado)
                 {
                     MessageBox.Show("Usuario o contraseña incorrectos.", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    return false;
                 }
             }
             else
             {
                 MessageBox.Show("Error al cargar los usuarios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
         }
         catch (Exception ex)
         {
             MessageBox.Show($"Error al iniciar sesión: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
+            return false;
         }
+
+        return false;
 
 
 
 
     }
-
     public void cargarCargarUsuario()
     {
         string rutarchivo = "usuarios.json";

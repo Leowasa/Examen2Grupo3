@@ -79,29 +79,27 @@ namespace Examen2Grupo3
                     lblFactura.Text = "Pedido";
                     guna2Button2.Text = "Volver";
                     guna2TextBox1.Text = orden.Observaciones;
+                    lblEncargado.Text = "Encargado Del Pedido: " + orden.Encargado.Username;
+                    lblID.Text = "ID: " + orden.Encargado.ID.ToString(); ;
+                    lblNombre.Text = "Nombre: " + orden.Encargado.Nombre;
                     guna2TextBox1.ReadOnly = true;
                     FechaValidacion.Enabled = false;
                     try 
                     {
-                        lblEncargado.Text = Pedido.Encargado.Username;
+      
                     } catch(System.NullReferenceException)
                     {
                         
                         MessageBox.Show("Error");
                     
                     }
-                      
-                    
-                    
-                    lblNombre.Text = Pedido.Encargado.Nombre.ToString();
-                    lblID.Text = Pedido.Encargado.ID.ToString()??"";
                     break;
                 case 2:
                     lblFactura.Text = "Orden de entrega";
                     guna2Button2.Text = "Generar orden";
-                    lblEncargado.Text = usuarioActual.Username;
-                    lblID.Text = usuarioActual.ID.ToString(); ;
-                    lblNombre.Text = usuarioActual.Nombre;  
+                    lblEncargado.Text = "Encargado Del Orden: "+usuarioActual.Username;
+                    lblID.Text = "ID: "+usuarioActual.ID.ToString(); ;
+                    lblNombre.Text ="Nombre: " +usuarioActual.Nombre;  
                     break;
             }
           
@@ -114,7 +112,9 @@ namespace Examen2Grupo3
             }
             label21.Text = "Subtotal: " + Pedido.SubtTotal.ToString();
             lblDescuento.Text = "Descuento: " + (Pedido.Descuento * 100M).ToString("0")+ "%";
-            lblIVa.Text = "IVA: 21%";
+            Pedido.IVA = Pedido.Total*0.21M;
+            Pedido.Total =+ Pedido.IVA;
+            lblIVa.Text = "IVA(21%): "+ Pedido.IVA;
             label20.Text = "Total: " + Pedido.Total.ToString();
         }
         private void cargarEmpresa()
@@ -257,110 +257,13 @@ namespace Examen2Grupo3
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            string rutaHtml = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Factura.html");
-            GenerarFacturaHTML(rutaHtml, Pedido);
-
-            // Convertir el archivo HTML a PDF
-            string rutaPdf = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Factura.pdf");
-           // ConvertirHtmlAPdfConDinkToPdf(rutaHtml, rutaPdf);
+         
         }
 
 
 
 
-        
-
-    public void GenerarFacturaHTML(string rutaArchivo, Pedido pedido)
-        {
-            try
-            {
-                // Cargar los datos de la empresa desde el archivo JSON
-                string empresaJsonPath = "Empresa.json";
-                Empresa empresa = new Empresa();
-                if (File.Exists(empresaJsonPath))
-                {
-                    string jsonString = File.ReadAllText(empresaJsonPath);
-                    empresa = JsonConvert.DeserializeObject<Empresa>(jsonString) ?? new Empresa();
-                }
-                else
-                {
-                    throw new FileNotFoundException("El archivo Empresa.json no se encontró.");
-                }
-
-                // Construir la tabla de productos
-                StringBuilder tablaProductos = new StringBuilder();
-                decimal total = 0;
-
-                foreach (var producto in pedido.Productos)
-                {
-                    decimal totalProducto = producto.Cantidad * producto.PrecioUnitario;
-                    total += totalProducto;
-
-                    tablaProductos.AppendLine($@"
-            <tr>
-                <td>{producto.Nombre}</td>
-                <td>{producto.Cantidad}</td>
-                <td>${producto.PrecioUnitario}</td>
-                <td>${totalProducto}</td>
-            </tr>");
-                }
-
-                // Generar el contenido HTML
-                string html = $@"
-    <!DOCTYPE html>
-    <html lang='es'>
-    <head>
-        <meta charset='UTF-8'>
-        <title>Factura {pedido.ID}</title>
-        <style>
-            body {{ font-family: Arial, sans-serif; margin: 20px; padding: 20px; }}
-            .factura {{ border: 1px solid #000; padding: 20px; width: 60%; margin: auto; }}
-            .titulo {{ text-align: center; font-size: 24px; font-weight: bold; }}
-            .info {{ margin-bottom: 10px; }}
-            table {{ width: 100%; border-collapse: collapse; margin-top: 10px; }}
-            th, td {{ border: 1px solid #000; padding: 8px; text-align: center; }}
-            .total {{ text-align: right; font-weight: bold; margin-top: 10px; }}
-        </style>
-    </head>
-    <body>
-        <div class='factura'>
-            <div class='titulo'>Factura #{pedido.ID}</div>
-            <div class='info'>
-                <p><strong>Empresa:</strong> {empresa.RazonSocial}</p>
-                <p><strong>Dirección:</strong> {empresa.Direccion}</p>
-                <p><strong>Contacto:</strong> {empresa.Correo}</p>
-                <hr>
-                <p><strong>Cliente:</strong> {pedido.Cliente.Nombre} (ID: {pedido.Cliente.ID})</p>
-                <p><strong>Fecha:</strong> {pedido.Fecha.ToString("dd/MM/yyyy")}</p>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tablaProductos}
-                </tbody>
-            </table>
-            <p class='total'><strong>Total a pagar:</strong> ${total}</p>
-        </div>
-    </body>
-    </html>";
-
-                // Guardar el archivo HTML
-                File.WriteAllText(rutaArchivo, html);
-
-                MessageBox.Show("Factura generada exitosamente en formato HTML.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al generar la factura: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+       
 
 
 

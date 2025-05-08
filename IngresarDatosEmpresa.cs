@@ -48,7 +48,7 @@ namespace Examen2Grupo3
                     Website = guna2TextBox4.Text,
                 };
 
-                MessageBox.Show("Cambios aplicados exitosamente!");
+                MessageBox.Show("Operacion exitosa!");
                 GuardarEmpresa(datos);
                 this.DialogResult = DialogResult.OK;
                 this.Close();

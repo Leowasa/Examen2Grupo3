@@ -13,6 +13,7 @@ namespace ejemplo
         public Usuarios(RegistroPedidos.Usuarios usuarioactual)
         {
             InitializeComponent();
+
             this.Usuarioactual = usuarioactual;
             ControlUsuario1(usuarioactual);
             PanelPrincipal = new Panel
@@ -26,6 +27,7 @@ namespace ejemplo
 
             ConfigurarDataGridView();
             ConfigurarTextBox();
+
             Usuarioactual = usuarioactual;
         }
 
@@ -119,20 +121,27 @@ namespace ejemplo
 
         private void ConfigurarDataGridView()
         {
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Location = new Point(12, 165);
-            dataGridView1.Size = new Size(1070, 800);
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Ajustar columnas al tamaño del DataGridView
+            dataGridView1.Dock = DockStyle.Fill; // Ocupa todo el espacio disponible en el Panel
             dataGridView1.ScrollBars = ScrollBars.Both;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
 
+            // Configuración de estilo
+            dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.SteelBlue;
+            dataGridView1.RowHeadersVisible = false;
+
+
             // Ocultar la columna de contraseña si existe
-            if (dataGridView1.Columns["Password"] != null)
+            if (dataGridView1.Columns.Contains("Password"))
             {
                 dataGridView1.Columns["Password"].Visible = false;
             }
         }
-
         private void ConfigurarTextBox()
         {
             textBox1.Text = "Ingresar Nombre o ID";

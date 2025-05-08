@@ -70,7 +70,7 @@ namespace Examen2Grupo3
                     Direccion = guna2TextBox4.Text,
 
                 };
-                MessageBox.Show(""+pedido.Cliente.Nombre);
+               
                 return"";
 
             }
@@ -114,7 +114,6 @@ namespace Examen2Grupo3
                 MessageBox.Show("Faltan Datos por rellenar");
                 return;
             }
-            MessageBox.Show("" + pedido.Cliente.Nombre);
             pedido.Encargado = usuarioActual;
             pedido.ID = NumeroPedido;
             pedido.Fecha = guna2DateTimePicker1.Value;

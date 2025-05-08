@@ -24,7 +24,7 @@ namespace Examen2Grupo3
         Form1 form = new Form1();
         public GenerarOrden(RegistroPedidos.Usuarios UsuarioActual)
         {
-            UsuarioActual = UsuarioActual;
+            this.UsuarioActual = UsuarioActual;
             InitializeComponent();
             CargarDatosDesdeJson();
         }
@@ -54,8 +54,10 @@ namespace Examen2Grupo3
 
                 if (pedidos != null) // Evitar CS8601
                 {
+                    dataGridView1.Rows.Clear();
                     foreach (var datos in pedidos)
                     {
+
                         // Agregar una nueva fila con los datos
                         int rowIndex = dataGridView1.Rows.Add(datos.ID, datos.Cliente.Nombre, datos.Fecha.ToString("dd/MM/yyyy"), datos.Total);
 
@@ -145,7 +147,16 @@ namespace Examen2Grupo3
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                principal.AbrirFormularioEnPanel(new Factura(seleccionadot, opcion, UsuarioActual)); // Reemplaza con el formulario que desees abrir
+                switch (opcion) 
+                {
+                    case 1:
+                        principal.AbrirFormularioEnPanel(new Factura(seleccionadot, opcion)); // Reemplaza con el formulario que desees abrir
+                        break;
+                    case 2:
+                        principal.AbrirFormularioEnPanel(new Factura(seleccionadot, opcion, UsuarioActual)); // Reemplaza con el formulario que desees abrir
+                        break;
+                }
+               
             }
         }
         private void BuscarElemento(string textoBusqueda)
@@ -209,7 +220,7 @@ namespace Examen2Grupo3
                                 {
                                     lista.Estado = estadoActual;
                                     GuardarCambios(Lista);
-                                    dataGridView1.Rows.Clear();
+                                   
                                     CargarDatosDesdeJson();
                                     return;
                                 }
@@ -326,7 +337,7 @@ namespace Examen2Grupo3
                         comboBoxCell.Items.AddRange(new string[] { "Entregado" });
                         break;
                     case "Entregado":
-                        comboBoxCell.Items.AddRange(new string[] { "Entregado" });
+                        comboBoxCell.ReadOnly = true;
                         break;
                     case "Rechazado":
                         comboBoxCell.Items.AddRange(new string[] { "Rechazado" });
