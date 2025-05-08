@@ -64,7 +64,7 @@ namespace Examen2Grupo3
                     fila.Cells["Descripcion"].Value = productoEditado.Descripcion;
                     fila.Cells["Stock"].Value = productoEditado.Cantidad;
 
-                    fila.Cells["PrecioUnitario"].Value = productoEditado.PrecioUnitario.ToString("C"); ;
+                    fila.Cells["PrecioUnitario"].Value = productoEditado.PrecioUnitario.ToString(); ;
                     GuardarInventario("Inventario.Json");
                 }
             }
