@@ -6,7 +6,9 @@ namespace Examen2Grupo3
     public partial class BuscarProducto : Form
     {
         public Producto Producto = new Producto();
-        private List<Producto> inventario = new List<Producto>();
+        private List<Producto> listaProductos = new List<Producto>();
+        private List<Producto> inventarioOriginal = new List<Producto>();
+
         public BuscarProducto()
         {
             InitializeComponent();
@@ -17,9 +19,10 @@ namespace Examen2Grupo3
 
             if (File.Exists(rutaArchivo))
             {
+                
 
                 string json = File.ReadAllText(rutaArchivo);
-                List<Producto>? listaProductos = JsonSerializer.Deserialize<List<Producto>>(json);
+                listaProductos = JsonSerializer.Deserialize<List<Producto>>(json)??new List<Producto>();
 
                 if (listaProductos != null) // Verificar que la lista no sea nula
                 {
@@ -30,6 +33,15 @@ namespace Examen2Grupo3
                         dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario);
                     }
                 }
+            }
+        }
+        public void GuardarInventario(string rutaArchivo) 
+        {
+            if (File.Exists(rutaArchivo))
+            {
+
+                string json = JsonSerializer.Serialize(listaProductos, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(rutaArchivo, json);
             }
         }
 
@@ -71,7 +83,27 @@ namespace Examen2Grupo3
                 //ClienteSeleccionado?.Invoke(Clientes);
             }
         }
-
+        private bool Validar(Producto producto) 
+        {
+            foreach (var lista in listaProductos) 
+            {
+                if (lista.ID == producto.ID) 
+                {
+                    if (producto.Cantidad > lista.Cantidad) 
+                    {
+                        return false;
+                    }
+                    lista.Cantidad -= producto.Cantidad;
+                    GuardarInventario("Inventario.json");
+                    
+                
+                }
+            
+            }
+            
+            return true;
+        
+        }
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             Producto = new Producto();
@@ -83,6 +115,11 @@ namespace Examen2Grupo3
                 Producto.Descripcion = guna2TextBox3.Text;
                 Producto.Cantidad = int.Parse(guna2TextBox5.Text);
                 Producto.PrecioUnitario = Decimal.Parse(guna2TextBox6.Text);
+                if (Validar(Producto)==false)
+                {
+                    MessageBox.Show("La cantidad ingresada excede el stock disponible.");
+                    return;
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
 

@@ -181,6 +181,7 @@ namespace Examen2Grupo3
 
                     // **1. Agregar el evento de numeración de páginas**
                     PageNumberHelper pageEvent = new PageNumberHelper();
+                    pageEvent.Observaciones = Actual.Observaciones; 
                     writer.PageEvent = pageEvent;
 
                     document.Open();
@@ -237,12 +238,15 @@ namespace Examen2Grupo3
             htmlContent = htmlContent.Replace("@Emision", Actual.Fecha.ToString("dd/MM/yy"));
 
             //Datos de precio
-            htmlContent = htmlContent.Replace("@SUBTOTAL", Actual.SubtTotal.ToString());
-            htmlContent = htmlContent.Replace("@IVA", Actual.IVA.ToString());
-            htmlContent = htmlContent.Replace("@TOTAL", Actual.Total.ToString());
+            htmlContent = htmlContent.Replace("@SUBTOTAL", Actual.SubtTotal.ToString("F2"));
+            htmlContent = htmlContent.Replace("@IVA", Actual.IVA.ToString("F2"));
+            htmlContent = htmlContent.Replace("@TOTAL", Actual.Total.ToString("F2"));
+
+            //Observaciones
+            htmlContent = htmlContent.Replace("@Observaciones", Actual.Observaciones);
 
             iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(Properties.Resources.icons8_company_48, System.Drawing.Imaging.ImageFormat.Png);
-            img.ScaleToFit(90, 70);
+            img.ScaleToFit(120, 85);
             img.Alignment = iTextSharp.text.Image.UNDERLYING;
 
             //img.SetAbsolutePosition(10,100);
@@ -270,7 +274,7 @@ namespace Examen2Grupo3
         public class PageNumberHelper : PdfPageEventHelper
         {
             public int TotalPages { get; set; } // Se actualizará después de la creación del documento
-
+            public string Observaciones { get; set; } // Propiedad para recibir datos dinámicos
             public override void OnEndPage(PdfWriter writer, Document document)
             {
                 int pageNumber = writer.PageNumber; // Obtiene el número de la página actual
@@ -284,10 +288,16 @@ namespace Examen2Grupo3
                 float x = document.PageSize.Width - 50;
                 float y = document.PageSize.GetBottom(30);
 
+                // Posición de las observaciones (abajo a la izquierda)
+                float obsX = document.LeftMargin;
+                float obsY = document.PageSize.GetBottom(30); // Misma altura que la numeración
+
                 cb.BeginText();
                 cb.ShowTextAligned(PdfContentByte.ALIGN_RIGHT, $"Página {pageNumber} de {TotalPages}", x, y, 0);
+                cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, $"Observaciones: {Observaciones}", obsX, obsY, 0);
                 cb.EndText();
             }
+
         }
 
 
@@ -346,3 +356,21 @@ namespace Examen2Grupo3
         }
     }
 }
+/*     public override void OnEndPage(PdfWriter writer, Document document)
+            {
+                int pageNumber = writer.PageNumber; // Obtiene el número de la página actual
+                PdfContentByte cb = writer.DirectContent;
+
+                // Define la fuente
+                BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                cb.SetFontAndSize(bf, 10);
+
+                // Posición de la numeración (abajo a la derecha)
+                float x = document.PageSize.Width - 50;
+                float y = document.PageSize.GetBottom(30);
+
+
+                cb.BeginText();
+                cb.ShowTextAligned(PdfContentByte.ALIGN_RIGHT, $"Página {pageNumber} de {TotalPages}", x, y, 0);
+                cb.EndText();
+            }*/

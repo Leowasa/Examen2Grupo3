@@ -14,7 +14,7 @@
             public decimal SubtTotal => Productos.Sum(p => p.Total);
             public decimal Total { get; set; }
             public Usuarios Encargado { get; set; }
-            public decimal IVA;
+            public decimal IVA { get; set; }
             public DateTime FechaValidado { get; set; }
             public string Observaciones { get; set; }
         }

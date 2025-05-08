@@ -8,6 +8,8 @@ using System.Text;
 using static System.Text.CodePagesEncodingProvider;
 using System.Net.Http;
 using System.Collections.Immutable;
+using static Examen2Grupo3.BuscarProducto;
+using System.Text.Json;
 
 
 
@@ -15,15 +17,17 @@ namespace Examen2Grupo3
 {
     public partial class GenerarPedido : Form
     {
-        private static Pedido pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
-        private List<Pedido> ListaPedidos = new List<Pedido>();
+        private Pedido pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
         private static int NumeroPedido;
         private Producto ProductoNuevo;
+        List<Producto> listaProductos = new List<Producto>();
         private Usuarios usuarioActual = new Usuarios();
+        private List<Producto> inventarioOriginal =new List<Producto>();
         //validar cuando se ingrese 0 como cantidad
         public GenerarPedido(Usuarios usuarioActual)
         {
             InitializeComponent();
+            CargarInventario("Inventario.json");
             Cliente.Text = "Pedido Nº: " + CargarNum().ToString("D6");
             this.usuarioActual = usuarioActual;
             lblEncargado.Text += usuarioActual.Username;
@@ -45,6 +49,29 @@ namespace Examen2Grupo3
                 return NumeroPedido= 1;
             }
             return NumeroPedido= 1; // Si no hay pedidos, empieza desde 1
+        }
+        public void CargarInventario(string rutaArchivo)
+        {
+            if (File.Exists(rutaArchivo))
+            {
+                string json = File.ReadAllText(rutaArchivo);
+                var listaProductos = JsonConvert.DeserializeObject<List<Producto>>(json) ?? new List<Producto>();
+
+                if (listaProductos != null)
+                {
+                    // Guardar una copia del inventario original  
+                    inventarioOriginal = listaProductos;
+                }
+            }
+        }
+        public void GuardarInventario(string rutaArchivo)
+        {
+            if (File.Exists(rutaArchivo))
+            {
+                // Corrected the syntax for SerializeObject and added proper Formatting.Indented  
+                string json = JsonConvert.SerializeObject(inventarioOriginal, Formatting.Indented);
+                File.WriteAllText(rutaArchivo, json);
+            }
         }
 
         public class RoundButton : Button
@@ -161,8 +188,9 @@ namespace Examen2Grupo3
             lblSubtotal.Text = "Subtotal: ";
             lblDescuento.Text = "Descuento: ";
             lblTotal.Text = "Total: ";
+          GuardarInventario("Inventario.json");
             pedido.Productos.Clear(); // Limpiar la lista de productos del pedido actual
-            ;
+            
         }
 
         private void guna2Button4_Click(object sender, EventArgs e)

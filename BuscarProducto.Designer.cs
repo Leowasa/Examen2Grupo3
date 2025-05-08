@@ -65,8 +65,8 @@
             Cliente = new Label();
             ID2 = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
-            Descripcion = new DataGridViewTextBoxColumn();
             Categoria = new DataGridViewTextBoxColumn();
+            Descripcion = new DataGridViewTextBoxColumn();
             Cantidad = new DataGridViewTextBoxColumn();
             PrecioUnit = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -303,7 +303,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 40;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID2, Nombre, Descripcion, Categoria, Cantidad, PrecioUnit });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID2, Nombre, Categoria, Descripcion, Cantidad, PrecioUnit });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(4, 103);
@@ -369,19 +369,19 @@
             Nombre.Name = "Nombre";
             Nombre.ReadOnly = true;
             // 
-            // Descripcion
-            // 
-            Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Descripcion.HeaderText = "Descripcion";
-            Descripcion.Name = "Descripcion";
-            Descripcion.ReadOnly = true;
-            // 
             // Categoria
             // 
             Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             Categoria.HeaderText = "Categoria";
             Categoria.Name = "Categoria";
             Categoria.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Descripcion.HeaderText = "Descripcion";
+            Descripcion.Name = "Descripcion";
+            Descripcion.ReadOnly = true;
             // 
             // Cantidad
             // 

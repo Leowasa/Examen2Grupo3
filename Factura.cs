@@ -25,7 +25,7 @@ namespace Examen2Grupo3
         private static List<Pedido> ListaPedidos = new List<Pedido>();
         private static int NumeroPedido;
         private int Opcion;
-        private Pedido orden;
+        private static Pedido orden;
         private RegistroPedidos.Usuarios usuarioActual = new RegistroPedidos.Usuarios();
         public Factura(Pedido pedido, int opcion)
         {
@@ -34,6 +34,7 @@ namespace Examen2Grupo3
             ListaPedidos = LeerPedidos();
             Pedido = pedido;
             configurar();
+           
            
         }
         public Factura()
@@ -47,6 +48,7 @@ namespace Examen2Grupo3
             Opcion = opcion;
             InitializeComponent();
             ListaPedidos = LeerPedidos();
+            dataGridView1.Rows.Clear();
             Pedido = pedido;
             configurar();
            
@@ -55,6 +57,7 @@ namespace Examen2Grupo3
         private void configurar()
         {
             cargarEmpresa();
+            dataGridView1.Rows.Clear();
             orden = new Pedido();
             orden = Pedido;
             lblFactura.Text = "Orden de entrega";
@@ -71,19 +74,22 @@ namespace Examen2Grupo3
             }
             label12.Text = "ID: " + orden.Cliente.ID.ToString();
             label11.Text = "Direccion: " + orden.Cliente.Direccion;
-            label10.Text = "Correo Electronico" + orden.Cliente.Correo;
+            label10.Text = "Correo Electronico: " + orden.Cliente.Correo;
 
             switch (Opcion)
             {
-                case 1:
+                case 1://ver pedido
                     lblFactura.Text = "Pedido";
                     guna2Button2.Text = "Volver";
+                    guna2Button2.Location = new Point(19, 750);
                     guna2TextBox1.Text = orden.Observaciones;
                     lblEncargado.Text = "Encargado Del Pedido: " + orden.Encargado.Username;
                     lblID.Text = "ID: " + orden.Encargado.ID.ToString(); ;
                     lblNombre.Text = "Nombre: " + orden.Encargado.Nombre;
-                    guna2TextBox1.ReadOnly = true;
+                    guna2TextBox1.Visible = false;
+                    lblObservaciones.Visible = false;
                     FechaValidacion.Enabled = false;
+
                     try 
                     {
       
@@ -94,12 +100,38 @@ namespace Examen2Grupo3
                     
                     }
                     break;
-                case 2:
+                case 2://Generar Orden
                     lblFactura.Text = "Orden de entrega";
                     guna2Button2.Text = "Generar orden";
-                    lblEncargado.Text = "Encargado Del Orden: "+usuarioActual.Username;
+                    lblEncargado.Text = "Encargado de la Orden: "+usuarioActual.Username;
                     lblID.Text = "ID: "+usuarioActual.ID.ToString(); ;
-                    lblNombre.Text ="Nombre: " +usuarioActual.Nombre;  
+                    lblNombre.Text ="Nombre: " +usuarioActual.Nombre;
+                    orden.IVA = Pedido.Total * 0.21M;
+                    orden.Total = orden.Total + Pedido.IVA;
+                    lblIVa.Text = "IVA(21%): " + orden.IVA.ToString("F2");
+                    break;
+                case 3://ver orden
+                    lblFactura.Text = "Orden de entrega";
+                    guna2Button2.Text = "Volver";
+                    guna2TextBox1.Text = orden.Observaciones;
+                    lblEncargado.Text = "Encargado De la Orden: " + orden.Encargado.Username;
+                    lblID.Text = "ID: " + orden.Encargado.ID.ToString(); ;
+                    lblNombre.Text = "Nombre: " + orden.Encargado.Nombre;
+                    lblIVa.Text = "IVA(21%): " + orden.IVA.ToString("F2");
+                    guna2TextBox1.Enabled = true;
+                    FechaValidacion.Enabled = false;
+                    FechaValidacion.Value = orden.FechaValidado;
+
+                    try
+                    {
+
+                    }
+                    catch (System.NullReferenceException)
+                    {
+
+                        MessageBox.Show("Error");
+
+                    }
                     break;
             }
           
@@ -110,12 +142,10 @@ namespace Examen2Grupo3
 
 
             }
-            label21.Text = "Subtotal: " + Pedido.SubtTotal.ToString();
-            lblDescuento.Text = "Descuento: " + (Pedido.Descuento * 100M).ToString("0")+ "%";
-            Pedido.IVA = Pedido.Total*0.21M;
-            Pedido.Total =+ Pedido.IVA;
-            lblIVa.Text = "IVA(21%): "+ Pedido.IVA;
-            label20.Text = "Total: " + Pedido.Total.ToString();
+            label21.Text = "Subtotal: " + orden.SubtTotal.ToString("F2");
+            lblDescuento.Text = "Descuento: " + (orden.Descuento * 100M).ToString("0")+ "%";
+         
+            label20.Text = "Total: " + orden.Total.ToString("F2");
         }
         private void cargarEmpresa()
         {
@@ -223,10 +253,11 @@ namespace Examen2Grupo3
             switch (Opcion)
             {
                 case 2:
-                    Pedido.Observaciones = guna2TextBox1.Text;
-                    Pedido.FechaValidado = FechaValidacion.Value;
-                    GuardarPedidosEnJson(Pedido);
-                    GuardarOrdenEnJson(Pedido);
+                   orden.Observaciones = guna2TextBox1.Text;
+                    orden.FechaValidado = FechaValidacion.Value;
+                    GuardarPedidosEnJson(orden);
+                    
+                    GuardarOrdenEnJson(orden);
                     if (principal != null)
                     {
                         principal.AbrirFormularioEnPanel(new GenerarOrden(usuarioActual)); // Reemplaza con el formulario que desees abrir
@@ -236,13 +267,13 @@ namespace Examen2Grupo3
                 case 1:
                     if (principal != null)
                     {
-                        principal.AbrirFormularioEnPanel(new GenerarOrden(usuarioActual)); // Reemplaza con el formulario que desees abrir  
+                        principal.AbrirFormularioEnPanel(new PedidosHistorial()); // Reemplaza con el formulario que desees abrir  
                     }
                     break;
                 case 3:
                     if (principal != null)
                     {
-                        principal.AbrirFormularioEnPanel(new Factura()); // Reemplaza con el formulario que desees abrir  
+                        principal.AbrirFormularioEnPanel(new OrdenesHistorial()); // Reemplaza con el formulario que desees abrir  
                     }
                     break;
             }

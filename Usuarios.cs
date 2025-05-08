@@ -13,7 +13,6 @@ namespace ejemplo
         public Usuarios(RegistroPedidos.Usuarios usuarioactual)
         {
             InitializeComponent();
-
             this.Usuarioactual = usuarioactual;
             ControlUsuario1(usuarioactual);
             PanelPrincipal = new Panel
@@ -27,8 +26,6 @@ namespace ejemplo
 
             ConfigurarDataGridView();
             ConfigurarTextBox();
-            Eliminar();
-
             Usuarioactual = usuarioactual;
         }
 
@@ -100,6 +97,9 @@ namespace ejemplo
             {
                 var usuarios = LeerUsuarios();
                 var usuarioSeleccionado = usuarios[e.RowIndex];
+
+                MessageBox.Show($"Usuario seleccionado:\n\nNombre: {usuarioSeleccionado.Nombre}\nUsername: {usuarioSeleccionado.Username}\nTipo: {usuarioSeleccionado.Tipo}",
+                                "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -119,108 +119,20 @@ namespace ejemplo
 
         private void ConfigurarDataGridView()
         {
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Ajustar columnas al tamaño del DataGridView  
-
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.Location = new Point(12, 165);
+            dataGridView1.Size = new Size(1070, 800);
             dataGridView1.ScrollBars = ScrollBars.Both;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
-            dataGridView1.Location = new Point(12, 165);
-            dataGridView1.Size = new Size(1070, 1000);
-            // Configuración de estilo  
-            dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.RowHeadersVisible = false;
 
-
-            // Ocultar la columna de contraseña si existe  
-            if (dataGridView1.Columns.Contains("Password"))
+            // Ocultar la columna de contraseña si existe
+            if (dataGridView1.Columns["Password"] != null)
             {
                 dataGridView1.Columns["Password"].Visible = false;
             }
         }
-        private void Eliminar()
-        {
-            if (!dataGridView1.Columns.Contains("Eliminar"))
-            {
-                DataGridViewButtonColumn eliminarColumna = new DataGridViewButtonColumn
-                {
-                    Name = "Eliminar",
-                    HeaderText = "Eliminar",
-                    Text = "Eliminar",
-                    UseColumnTextForButtonValue = true,
-                    FlatStyle = FlatStyle.Flat // Estilo plano para personalización
-                };
 
-                // Aplicar estilos adicionales al botón en la columna
-                eliminarColumna.DefaultCellStyle.BackColor = Color.FromArgb(220, 53, 69); // Color de fondo
-                eliminarColumna.DefaultCellStyle.ForeColor = Color.White; // Color del texto
-                eliminarColumna.DefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 35, 51); // Color al seleccionar
-                eliminarColumna.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold); // Fuente personalizada
-
-                dataGridView1.Columns.Add(eliminarColumna);
-                dataGridView1.Columns["Eliminar"].DisplayIndex = dataGridView1.Columns.Count - 1; // Asegurar que la columna "Eliminar" esté al final
-            }
-
-            // Asegurar que la columna "Eliminar" permanezca al final después de cada actualización
-            dataGridView1.ColumnDisplayIndexChanged -= dataGridView1_ColumnDisplayIndexChanged;
-            dataGridView1.ColumnDisplayIndexChanged += dataGridView1_ColumnDisplayIndexChanged;
-
-            dataGridView1.CellClick += dataGridView1_CellClick_Eliminar;
-        }
-
-        private void dataGridView1_ColumnDisplayIndexChanged(object? sender, DataGridViewColumnEventArgs e)
-        {
-            if (e.Column.Name == "Eliminar")
-            {
-                e.Column.DisplayIndex = dataGridView1.Columns.Count - 1; // Forzar que la columna "Eliminar" esté al final
-            }
-        }
-        
-        
-        
-           
-           
-
-private void dataGridView1_CellClick_Eliminar(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
-            {
-                var resultado = MessageBox.Show("¿Seguro que quieres eliminar el usuario?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (resultado == DialogResult.Yes)
-                {
-                    var usuarios = LeerUsuarios();
-                    var usuarioAEliminar = usuarios.FirstOrDefault(u => u.ID == (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
-
-                    if (usuarioAEliminar != null)
-                    {
-                        usuarios.Remove(usuarioAEliminar);
-                        GuardarUsuariosDirectamente(usuarios);
-
-                        // Actualizar y ordenar el DataGridView  
-                        dataGridView1.DataSource = null;
-                        dataGridView1.DataSource = usuarios.OrderBy(u => u.ID).ToList();
-                        dataGridView1.Columns["Eliminar"].DisplayIndex = dataGridView1.Columns.Count - 1;
-                        // Ocultar la columna de contraseña si existe  
-                        if (dataGridView1.Columns.Contains("Password"))
-                        {
-                            dataGridView1.Columns["Password"].Visible = false;
-                        }
-
-
-                        MessageBox.Show("Usuario eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-        }
-
-        private void GuardarUsuariosDirectamente(List<RegistroPedidos.Usuarios> usuarios)
-        {
-            string json = JsonSerializer.Serialize(usuarios, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(FilePath, json);
-        }
         private void ConfigurarTextBox()
         {
             textBox1.Text = "Ingresar Nombre o ID";
@@ -275,7 +187,6 @@ private void dataGridView1_CellClick_Eliminar(object sender, DataGridViewCellEve
                         usuarios.Username = fila.Cells["Username"].Value.ToString() ?? "";
                         usuarios.Password = fila.Cells["Password"].Value?.ToString() ?? "";
                         usuarios.Tipo = fila.Cells["Tipo"].Value.ToString() ?? "";
-                        
 
 
                     }
@@ -423,7 +334,6 @@ private void dataGridView1_CellClick_Eliminar(object sender, DataGridViewCellEve
                         Username = datos[2],
                         Password = datos[3],
                         Tipo = datos[4]
-
                     });
                 }
             }
@@ -434,3 +344,4 @@ private void dataGridView1_CellClick_Eliminar(object sender, DataGridViewCellEve
        
     }
 }
+

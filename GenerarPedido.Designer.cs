@@ -297,7 +297,7 @@
             guna2Button3.FillColor = SystemColors.HotTrack;
             guna2Button3.Font = new Font("Segoe UI", 9F);
             guna2Button3.ForeColor = Color.White;
-            guna2Button3.Location = new Point(25, 740);
+            guna2Button3.Location = new Point(21, 762);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2Button3.Size = new Size(111, 23);

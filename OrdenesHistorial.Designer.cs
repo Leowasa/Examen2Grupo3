@@ -87,7 +87,7 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(931, 385);
+            dataGridView1.Size = new Size(931, 615);
             dataGridView1.TabIndex = 111;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 

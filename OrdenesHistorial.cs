@@ -98,7 +98,7 @@ namespace Examen2Grupo3
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 1)); // Reemplaza con el formulario que desees abrir
+                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 3)); // Reemplaza con el formulario que desees abrir
             }
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
