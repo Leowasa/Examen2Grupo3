@@ -58,7 +58,7 @@ namespace ejemplo
         }
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            AgregarCliente agregarCliente = new AgregarCliente();
+            AgregarCliente agregarCliente = new AgregarCliente(2);
             if (agregarCliente.ShowDialog() == DialogResult.OK)
             {
 
@@ -207,51 +207,53 @@ namespace ejemplo
         }
         public void editar(DataGridViewCellEventArgs e)
         {
-
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
 
-                // Creamos una instancia del formulario de edición y pasamos los datos
-                AgregarCliente formEditar = new AgregarCliente();
-                formEditar.SetDatosProducto(
-                    filaSeleccionada.Cells["ID"].Value.ToString(),
-                    filaSeleccionada.Cells["Nombre"].Value.ToString(),
-                    filaSeleccionada.Cells["Direccion"].Value.ToString(),
-                    filaSeleccionada.Cells["CorreoElectronico"].Value.ToString(),
-                    filaSeleccionada.Cells["Tipo"].Value.ToString()
-                );
+                // Validar que las celdas no sean nulas antes de acceder a sus valores  
+                string? id = filaSeleccionada.Cells["ID"].Value?.ToString();
+                string? nombre = filaSeleccionada.Cells["Nombre"].Value?.ToString();
+                string? direccion = filaSeleccionada.Cells["Direccion"].Value?.ToString();
+                string? correo = filaSeleccionada.Cells["CorreoElectronico"].Value?.ToString();
+                string? tipo = filaSeleccionada.Cells["Tipo"].Value?.ToString();
 
-                formEditar.ShowDialog(); // Mostramos el formulario de edición como una ventana modal
-                if (formEditar.DialogResult == DialogResult.OK)
+                // Verificar que los valores requeridos no sean nulos  
+                if (id != null && nombre != null && direccion != null && correo != null && tipo != null)
                 {
-                    DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
-                    Cliente productoEditado = formEditar.ObtenerClienteEditado();
-                    fila.Cells["ID"].Value = productoEditado.ID;
-                    fila.Cells["Nombre"].Value = productoEditado.Nombre;
-                    fila.Cells["Direccion"].Value = productoEditado.Direccion;
-                    fila.Cells["CorreoElectronico"].Value = productoEditado.Correo;
-                   
-                    fila.Cells["Tipo"].Value = productoEditado.Tipo;
-                    GuardarClientes("Clientes.Json");
-                    CargarClientes("Clientes.Json");
+                    // Crear una instancia del formulario de edición y pasar los datos  
+                    AgregarCliente formEditar = new AgregarCliente(2);
+                    formEditar.SetDatosProducto(id, nombre, direccion, correo, tipo);
+
+                    formEditar.ShowDialog(); // Mostrar el formulario de edición como una ventana modal  
+                    if (formEditar.DialogResult == DialogResult.OK)
+                    {
+                        DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
+                        Cliente productoEditado = formEditar.ObtenerClienteEditado();
+                        fila.Cells["ID"].Value = productoEditado.ID;
+                        fila.Cells["Nombre"].Value = productoEditado.Nombre;
+                        fila.Cells["Direccion"].Value = productoEditado.Direccion;
+                        fila.Cells["CorreoElectronico"].Value = productoEditado.Correo;
+                        fila.Cells["Tipo"].Value = productoEditado.Tipo;
+                        GuardarClientes("Clientes.Json");
+                        CargarClientes("Clientes.Json");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Algunos datos requeridos están vacíos o son nulos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-                // Verificar que la celda pertenece a la columna de botones y no es el encabezado
-
                 DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
-                    dataGridView1.Rows.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada
+                    dataGridView1.Rows.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada  
                     GuardarClientes("Clientes.Json");
                 }
-
-
-
             }
         }
 

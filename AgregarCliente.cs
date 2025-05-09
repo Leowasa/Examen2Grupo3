@@ -1,13 +1,40 @@
-﻿using static Examen2Grupo3.RegistroPedidos;
+﻿using System.Runtime.Versioning;
+using static Examen2Grupo3.RegistroPedidos;
 
 namespace Examen2Grupo3
 {
+    [SupportedOSPlatform("windows6.1")]
     public partial class AgregarCliente : Form
     {
         public Cliente Datos = new Cliente();
-        public AgregarCliente()
+
+        public AgregarCliente(int Opcion)//Opcion representa la operacion que hara el formulario
         {
+            
             InitializeComponent();
+            Configurar(Opcion);
+
+        }
+        private void Configurar(int Opcion)
+        {
+            switch(Opcion)
+            {
+                case 1: //Para Agregar Usuario  
+                    this.Text = "Agregar Cliente";
+                    guna2Button1.Text = "Agregar";
+                    label3.Text = "Username: ";
+                    label4.Text = "contraseña: ";
+                    label5.Text = "Confirmar contraseña: ";
+                    guna2ComboBox1.Items.Clear(); // Clear existing items before adding new ones
+                    // Use AddRange to populate the Items collection instead of assigning directly  
+                    guna2ComboBox1.Items.AddRange(new object[] { "Aprobador", "Registrador" });
+                    break;
+                case 2: //Para Agregar Cliente
+                    this.Text = "Agregar Cliente";
+                    guna2Button1.Text = "Agregar";
+                    break;
+            }
+            
         }
         public Cliente ObtenerClienteEditado()
         {
@@ -26,15 +53,6 @@ namespace Examen2Grupo3
             };
             return clienteEditado;
         }
-        private void AgregarCliente_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-
-        }
         public void SetDatosProducto(string ID, string Nombre, string Direccion, string Correo, string Tipo)
         {
             try
@@ -46,7 +64,21 @@ namespace Examen2Grupo3
                 guna2ComboBox1.Text = Tipo;
             }
             catch
+            {
 
+            }
+        }
+        public void SetDatosUsuarios(string ID, string Nombre, string Username, string Password, string Tipo)
+        {
+            try
+            {
+                guna2TextBox1.Text = ID;
+                guna2TextBox2.Text = Nombre;
+                guna2TextBox4.Text =Username;
+                guna2TextBox3.Text = Password;
+                guna2ComboBox1.Text = Tipo;
+            }
+            catch
             {
 
             }
@@ -54,6 +86,7 @@ namespace Examen2Grupo3
 
         private void guna2Button1_Click_1(object sender, EventArgs e)
         {
+            
             try
             {
                 Datos.ID = int.Parse(guna2TextBox1.Text);
@@ -77,11 +110,6 @@ namespace Examen2Grupo3
 
             this.DialogResult = DialogResult.OK;
             this.Close();
-        }
-
-        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
