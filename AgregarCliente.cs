@@ -1,14 +1,4 @@
-﻿using Guna.UI2.WinForms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static Examen2Grupo3.RegistroPedidos;
+﻿using static Examen2Grupo3.RegistroPedidos;
 
 namespace Examen2Grupo3
 {
@@ -30,8 +20,8 @@ namespace Examen2Grupo3
             {
                 ID = int.Parse(guna2TextBox1.Text), // Ensure 'ID' is a property of 'cliente' and not a Label
                 Nombre = guna2TextBox2.Text,
-                Direccion = guna2TextBox3.Text,
-                Correo = guna2TextBox4.Text,
+                Direccion = guna2TextBox4.Text,
+                Correo = guna2TextBox3.Text,
                 Tipo = guna2ComboBox1.SelectedItem?.ToString() ?? string.Empty // Safeguard against null
             };
             return clienteEditado;
@@ -54,9 +44,6 @@ namespace Examen2Grupo3
                 guna2TextBox4.Text = Direccion;
                 guna2TextBox3.Text = Correo;
                 guna2ComboBox1.Text = Tipo;
-
-                guna2TextBox1.ReadOnly = true;
-                guna2TextBox1.BackColor = Color.LightGray;
             }
             catch
 

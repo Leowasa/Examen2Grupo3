@@ -1,11 +1,12 @@
 ﻿using System.Data;
-
+using static Examen2Grupo3.RegistroPedidos;
 namespace Examen2Grupo3
 
 {
     public partial class Agregar_Usuarios
     {
         private Button btnAgregarUsuario;
+        private List<RegistroPedidos.Usuarios> usuarios = new List<RegistroPedidos.Usuarios>();
 
         public Agregar_Usuarios()
         {
@@ -20,7 +21,7 @@ namespace Examen2Grupo3
             using (var formAgregar = new Form())
             {
                 Bitmap img = new Bitmap(Properties.Resources.Fondo);
-           
+
                 formAgregar.BackgroundImage = img;
                 formAgregar.BackgroundImageLayout = ImageLayout.Stretch;
                 formAgregar.Text = "Añadir Usuario";
@@ -69,7 +70,7 @@ namespace Examen2Grupo3
 
                 var lblTipo = new Label { Text = "Tipo de Usuario:", Location = new Point(10, 180), AutoSize = false, ForeColor = Color.White, BackColor = Color.Transparent };
                 var cmbTipo = new Guna.UI2.WinForms.Guna2ComboBox
-                { 
+                {
                     Location = new Point(110, 180),
                     ItemHeight = 18,
                     Width = 150,
@@ -105,15 +106,15 @@ namespace Examen2Grupo3
                         return;
                     }
 
-                    if (usuarios.Any(u => u.Id == txtId.Text))
+                    if (usuarios.Any(u => u.ID == int.Parse(txtId.Text)))
                     {
                         MessageBox.Show("El ID ya existe. Por favor, ingrese un ID único.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
-                    var nuevoUsuario = new Usuario
+                    var nuevoUsuario = new RegistroPedidos.Usuarios
                     {
-                        Id = txtId.Text,
+                        ID = int.Parse(txtId.Text),
                         Nombre = txtNombre.Text,
                         Username = txtUsername.Text,
                         Password = txtPassword.Text,
@@ -142,35 +143,23 @@ namespace Examen2Grupo3
                 formAgregar.ShowDialog();
             }
         }
-
-        
-
         private const string FilePath = "usuarios.json";
 
-        public class Usuario
+        private List<RegistroPedidos.Usuarios> LeerUsuarios()
         {
-            public string Id { get; set; }
-            public string Nombre { get; set; }
-            public string Username { get; set; }
-            public string Password { get; set; }
-            public string Tipo { get; set; }
-        }
-
-        private List<Usuario> LeerUsuarios()
-        {
-            if (!File.Exists(FilePath))
+            if (!File.Exists("usuarios.json"))
             {
-                return new List<Usuario>();
+                return new List<RegistroPedidos.Usuarios>();
             }
 
-            string json = File.ReadAllText(FilePath);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Usuario>>(json) ?? new List<Usuario>();
+            string json = File.ReadAllText("usuarios.json");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(json) ?? new List<RegistroPedidos.Usuarios>();
         }
 
-        private void GuardarUsuarios(List<Usuario> usuarios)
+        private void GuardarUsuarios(List<RegistroPedidos.Usuarios> usuarios)
         {
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(usuarios, Newtonsoft.Json.Formatting.Indented);
-            File.WriteAllText(FilePath, json);
+            File.WriteAllText("usuarios.json", json);
         }
     }
 }

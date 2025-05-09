@@ -46,7 +46,7 @@ namespace Examen2Grupo3
         private void BuscarElemento(string textoBusqueda)
         {
             // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 4)
+            if (textoBusqueda.Length < 3)
             {
                 // Si tiene menos de 4 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)

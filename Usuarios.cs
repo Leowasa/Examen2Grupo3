@@ -1,38 +1,38 @@
 ﻿
 using System.Text.Json;
+using System.util;
 using Examen2Grupo3;
+using System.Data;
 using static Examen2Grupo3.RegistroPedidos;
+using Examen2Grupo3.Properties;
+using ejemplo;
+using System.Collections.Immutable;
+using System.Windows.Forms;
 
 namespace ejemplo
 {
     public partial class Usuarios : Form
     {
+
         private Panel PanelPrincipal;
         RegistroPedidos.Usuarios Usuarioactual = new RegistroPedidos.Usuarios();
-
+        List<RegistroPedidos.Usuarios> usuarios = new List<RegistroPedidos.Usuarios>();
         public Usuarios(RegistroPedidos.Usuarios usuarioactual)
         {
-            InitializeComponent();
+
+            InitializeComponent(); // Inicializa los controles del formulario
+            dataGridView1.Visible = true;
+            usuarios = LeerUsuarios(); // Carga la lista de usuarios
+           
+
             this.Usuarioactual = usuarioactual;
             ControlUsuario1(usuarioactual);
-            PanelPrincipal = new Panel
-            {
-                Dock = DockStyle.Fill
-            };
-            this.Controls.Add(PanelPrincipal);
-
-            if (this.PanelPrincipal.Controls.Count > 0)
-                this.PanelPrincipal.Controls.RemoveAt(0);
-
-            ConfigurarDataGridView();
             ConfigurarTextBox();
-            Usuarioactual = usuarioactual;
+
         }
 
         private void AbrirFormulario(object? formhija)
         {
-            if (this.PanelPrincipal.Controls.Count > 0)
-                this.PanelPrincipal.Controls.RemoveAt(0);
             Form? fh = formhija as Form;
             if (fh != null)
             {
@@ -47,29 +47,41 @@ namespace ejemplo
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             AbrirFormulario(new Agregar_Usuarios());
+            usuarios = LeerUsuarios();
+            dataGridView1.Rows.Clear();
             CargarDatosEnDataGridView();
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
+            string textoBusqueda = textBox1.Text.Trim(); // Obtener el texto de búsqueda y eliminar espacios en blanco
             var usuarios = LeerUsuarios();
-
-            if (textBox1.Text.Length >= 4)
+            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            if (textoBusqueda.Length < 3)
             {
-                var sugerencias = usuarios
-                    .Where(u => u.ID.ToString().Contains(textBox1.Text, StringComparison.OrdinalIgnoreCase) ||
-                                u.Nombre.Contains(textBox1.Text, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
+                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
+                {
+                    fila.Visible = true;
+                }
+                return;
+            }
 
-                dataGridView1.DataSource = sugerencias;
-            }
-            else
+            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
+            string filtro = textoBusqueda.ToLower();
+
+            // Iterar sobre las filas del DataGridView
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
-                // Mostrar toda la lista de usuarios si no hay coincidencias  
-                dataGridView1.DataSource = usuarios;
+                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
+                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().ToLower().Contains(filtro)) ||
+                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+
+                // Mostrar u ocultar la fila según si coincide con el filtro
+                fila.Visible = coincide;
             }
-            
-            
+
+
         }
 
 
@@ -93,14 +105,7 @@ namespace ejemplo
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                var usuarios = LeerUsuarios();
-                var usuarioSeleccionado = usuarios[e.RowIndex];
 
-                MessageBox.Show($"Usuario seleccionado:\n\nNombre: {usuarioSeleccionado.Nombre}\nUsername: {usuarioSeleccionado.Username}\nTipo: {usuarioSeleccionado.Tipo}",
-                                "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         private const string FilePath = "usuarios.json";
@@ -117,21 +122,7 @@ namespace ejemplo
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(json) ?? new List<RegistroPedidos.Usuarios>();
         }
 
-        private void ConfigurarDataGridView()
-        {
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Location = new Point(12, 165);
-            dataGridView1.Size = new Size(1070, 800);
-            dataGridView1.ScrollBars = ScrollBars.Both;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.MultiSelect = false;
 
-            // Ocultar la columna de contraseña si existe
-            if (dataGridView1.Columns["Password"] != null)
-            {
-                dataGridView1.Columns["Password"].Visible = false;
-            }
-        }
 
         private void ConfigurarTextBox()
         {
@@ -156,55 +147,24 @@ namespace ejemplo
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-            CargarDatosEnDataGridView();
+            CargarDatosEnDataGridView(); // Llena el DataGridView con los datos
         }
 
         private void CargarDatosEnDataGridView()
         {
-            var usuarios = LeerUsuarios();
-            dataGridView1.DataSource = usuarios;
-
-            // Ocultar la columna de contraseña después de cargar los datos
-            if (dataGridView1.Columns["Password"] != null)
+            dataGridView1.Rows.Clear();
+            foreach (var row in usuarios)
             {
-                dataGridView1.Columns["Password"].Visible = false;
+          
+                dataGridView1.Rows.Add(row.ID, row.Nombre, row.Username, row.Tipo);
+
             }
+
         }
         public void GuardarUsuarios(string rutaArchivo)
         {
-            List<RegistroPedidos.Usuarios> listaUsuarios = new List<RegistroPedidos.Usuarios>();
 
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
-            {
-                if (fila.Cells["Id"].Value != null) // Validamos que la fila tenga datos
-                {
-                    RegistroPedidos.Usuarios usuarios = new RegistroPedidos.Usuarios();
-                    try
-                    {
-                        // Fix for CS0019 and CS8604 in the problematic line
-                        usuarios.ID = Convert.ToInt32(fila.Cells["Id"].Value ?? 0);
-                        usuarios.Nombre = fila.Cells["Nombre"].Value.ToString() ?? "";
-                        usuarios.Username = fila.Cells["Username"].Value.ToString() ?? "";
-                        usuarios.Password = fila.Cells["Password"].Value?.ToString() ?? "";
-                        usuarios.Tipo = fila.Cells["Tipo"].Value.ToString() ?? "";
-
-
-                    }
-                    catch (FormatException ex)
-                    {
-                        MessageBox.Show($"Error de formato: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-                    }
-                    listaUsuarios.Insert(0, usuarios); // Agregamos al inicio para mantener el orden
-                }
-            }
-
-            string json = JsonSerializer.Serialize(listaUsuarios, new JsonSerializerOptions { WriteIndented = true });
+            string json = JsonSerializer.Serialize(usuarios, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(rutaArchivo, json);
 
         }
@@ -303,8 +263,8 @@ namespace ejemplo
                         GuardarUsuarios(FilePath);
 
                         // Actualizar el DataGridView  
-                        dataGridView1.DataSource = null;
-                        dataGridView1.DataSource = usuariosExistentes;
+                        //     dataGridView1.DataSource = null;
+                        //     dataGridView1.DataSource = usuariosExistentes;
 
                         MessageBox.Show("Usuarios importados y añadidos correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -334,6 +294,7 @@ namespace ejemplo
                         Username = datos[2],
                         Password = datos[3],
                         Tipo = datos[4]
+
                     });
                 }
             }
@@ -341,7 +302,64 @@ namespace ejemplo
             return usuarios;
         }
 
-       
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
+            {
+
+                if (Usuarioactual.Tipo == "Aprobador" || (Usuarioactual.Tipo == "Registrador"))
+                {
+                    MessageBox.Show("Necesita Ser Administrador para realizar la operacion.");
+                    return;
+                }
+
+
+                DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+
+                    usuarios.RemoveAt(e.RowIndex);
+                    dataGridView1.Rows.Clear();
+                    GuardarUsuarios("usuarios.json");
+                    CargarDatosEnDataGridView();
+                }
+            }
+            else if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0) 
+            {
+                AbrirFormulario(new Agregar_Usuarios());
+
+            }
+        }
     }
 }
+/*     private void ConfigurarDataGridView()
+        {
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.Location = new Point(12, 165);
+            dataGridView1.Size = new Size(1070, 800);
+            dataGridView1.ScrollBars = ScrollBars.Both;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
 
+            // Ocultar la columna de contraseña si existe
+            if (dataGridView1.Columns["Password"] != null)
+            {
+                dataGridView1.Columns["Password"].Visible = false;
+            }
+        }*/
+
+
+
+
+
+// var sugerencias = usuarios
+//  .Where(u => u.ID.ToString().Contains(textBox1.Text, StringComparison.OrdinalIgnoreCase) ||
+//             u.Nombre.Contains(textBox1.Text, StringComparison.OrdinalIgnoreCase))
+// .ToList();

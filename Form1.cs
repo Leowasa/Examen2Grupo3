@@ -1,4 +1,5 @@
 using Examen2Grupo3;
+using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -19,12 +20,30 @@ namespace ejemplo
             InitializeComponent();
             customizemenu();
             lblRol.Text = UsuarioActual.Tipo;
-            lblUsuario.Text = UsuarioActual.Username;  
+            lblUsuario.Text = UsuarioActual.Username;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.DoubleBuffered = true;
+           // this.FormBorderStyle = FormBorderStyle.None; // Elimina el borde del formulario
+           // this.Region = CrearRegionRedondeada(30);
         }
-
-        public Form1() 
+        /*
+        private Region CrearRegionRedondeada(int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(0, 0, radio, radio, 180, 90); // Esquina superior izquierda
+            path.AddArc(this.Width - radio, 0, radio, radio, 270, 90); // Esquina superior derecha
+            path.AddArc(this.Width - radio, this.Height - radio, radio, radio, 0, 90); // Esquina inferior derecha
+            path.AddArc(0, this.Height - radio, radio, radio, 90, 90); // Esquina inferior izquierda
+            path.CloseFigure();
+            return new Region(path);
+        }
+        
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            this.Region = CrearRegionRedondeada(30); // Recalcula la región al redimensionar
+        }*/
+        public Form1()
         {
             InitializeComponent();
             customizemenu();
@@ -69,64 +88,12 @@ namespace ejemplo
             }
             else submenu.Visible = false;
         }
-        private void button10_Click(object sender, EventArgs e)
-        {
-            showmenu(panelhistorial);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btncerrarr_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void panelhistorial_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button10_Click_1(object sender, EventArgs e)
-        {
-            showmenu(panelhistorial);
-        }
-
-        private void button7_Click_1(object sender, EventArgs e)
-        {
-            showmenu(panelVentas);
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new Usuarios(this.UsuarioActual));
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new datosempresa(UsuarioActual));
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new Inventario(this.UsuarioActual));
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new Clientes(this.UsuarioActual));
-        }
-        public void prueba()
-        {
-
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -154,10 +121,6 @@ namespace ejemplo
             Btnmaximi.Visible = true;
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -179,82 +142,7 @@ namespace ejemplo
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new PedidosHistorial());
-        }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new OrdenesHistorial());
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new GenerarPedido(UsuarioActual));
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new GenerarOrden(UsuarioActual));
-        }
-
-        private void guna2Button2_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new Verperfil(UsuarioActual));
-        }
-
-        private void guna2Button13_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new Usuarios(this.UsuarioActual));
-        }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new datosempresa(this.UsuarioActual));
-        }
-
-        private void guna2Button3_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new Inventario(this.UsuarioActual));
-        }
-
-        private void guna2Button4_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new Clientes(this.UsuarioActual));
-        }
-
-        private void guna2Button5_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            showmenu(panelhistorial);
-
-        }
-
-        private void guna2Button8_Click(object sender, EventArgs e)
-        {
-
-            AbrirFormulario(new PedidosHistorial());
-        }
-
-        private void guna2Button6_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new OrdenesHistorial());
-        }
-
-        private void guna2Button7_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new FacturasHistorial());
-        }
 
         private void guna2Button9_Click(object sender, EventArgs e)
         {
@@ -262,25 +150,7 @@ namespace ejemplo
             showmenu(panelVentas);
         }
 
-        private void guna2Button12_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new GenerarPedido(UsuarioActual));
-        }
 
-        private void guna2Button11_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new GenerarOrden(UsuarioActual));
-        }
-
-        private void PanelPrincipal_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void guna2CustomGradientPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
         //RESIZE METODO PARA REDIMENCIONAR/CAMBIAR TAMAÑO A FORMULARIO EN TIEMPO DE EJECUCION ----------------------------------------------------------
         private int tolerance = 12;
         private const int WM_NCHITTEST = 132;
@@ -308,7 +178,7 @@ namespace ejemplo
             var region = new Region(new Rectangle(0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height));
             sizeGripRectangle = new Rectangle(this.ClientRectangle.Width - tolerance, this.ClientRectangle.Height - tolerance, tolerance, tolerance);
             region.Exclude(sizeGripRectangle);
-            this.PanelPrincipal.Region = region;
+            this.panel1.Region = region;
             this.panel1.Region = region;
             this.Invalidate();
         }
@@ -324,6 +194,131 @@ namespace ejemplo
         private void guna2Button15_Click(object sender, EventArgs e)
         {
             AbrirFormulario(new GenerarPedido(UsuarioActual));
+        }
+
+        private void btnHistorial_Click(object sender, EventArgs e)
+        {
+            showmenu(panelhistorial);
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            customizemenu();
+            AbrirFormulario(new Usuarios(this.UsuarioActual));
+        }
+
+        private void PanelPrincipal_Click(object sender, EventArgs e)
+        {
+            customizemenu();
+            AbrirFormulario(new datosempresa(UsuarioActual));
+        }
+
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUsuarios_Click_1(object sender, EventArgs e)
+        {
+
+            customizemenu();
+            AbrirFormulario(new Clientes(this.UsuarioActual));
+        }
+
+        private void btnDistribuidora_Click(object sender, EventArgs e)
+        {
+            customizemenu();
+            AbrirFormulario(new datosempresa(UsuarioActual));
+        }
+
+        private void btnInventario_Click(object sender, EventArgs e)
+        {
+            customizemenu();
+            AbrirFormulario(new Inventario(this.UsuarioActual));
+        }
+
+        private void btnClientes_Click_1(object sender, EventArgs e)
+        {
+            customizemenu();
+            AbrirFormulario(new Clientes(this.UsuarioActual));
+        }
+
+        private void btnHistorial_Click_1(object sender, EventArgs e)
+        {
+            showmenu(panelhistorial);
+        }
+
+        private void btnVentas_Click(object sender, EventArgs e)
+        {
+            showmenu(panelVentas);
+        }
+
+        private void btnPedidosHistorial_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new PedidosHistorial());
+        }
+
+        private void btnOrdenesHistorial_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new OrdenesHistorial());
+        }
+
+        private void btnGenerarPedido_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new GenerarPedido(UsuarioActual));
+        }
+
+        private void btnGeneraOrden_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new GenerarOrden(UsuarioActual));
+        }
+
+        private void btnVerPerfil_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new GenerarOrden(UsuarioActual));
+        }
+
+        private void btnFactura_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new FacturasHistorial());
+        }
+
+        private void bntMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+        private Rectangle originalBounds; // Para guardar el tamaño y posición originales
+        private bool isMaximized = false; // Para rastrear si el formulario está maximizado
+
+        private void btnMaximizar_Click(object sender, EventArgs e)
+        {
+            if (!isMaximized)
+            {
+                originalBounds = this.Bounds; // Guarda el tamaño y posición originales
+                isMaximized = true;
+            }
+
+            this.WindowState = FormWindowState.Normal; // Asegúrate de que no esté minimizado
+            this.Bounds = Screen.FromHandle(this.Handle).WorkingArea; // Ajusta al área de trabajo de la pantalla
+            btnMaximizar.Visible = false;
+            btnRestaurar.Visible = true;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnRestaurar_Click(object sender, EventArgs e)
+        {
+            if (isMaximized)
+            {
+                this.Bounds = originalBounds; // Restaura el tamaño y posición originales
+                isMaximized = false;
+            }
+
+            btnRestaurar.Visible = false;
+            btnMaximizar.Visible = true;
         }
     }
 }

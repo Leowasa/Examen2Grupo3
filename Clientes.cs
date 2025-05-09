@@ -196,6 +196,7 @@ namespace ejemplo
                 if (Form.DialogResult == DialogResult.OK)
                 {
                     editar(e);
+                    return;
                 }
             }
             editar(e);
@@ -226,9 +227,11 @@ namespace ejemplo
                 {
                     DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
                     Cliente productoEditado = formEditar.ObtenerClienteEditado();
+                    fila.Cells["ID"].Value = productoEditado.ID;
                     fila.Cells["Nombre"].Value = productoEditado.Nombre;
-                    fila.Cells["CorreoElectronico"].Value = productoEditado.Correo;
                     fila.Cells["Direccion"].Value = productoEditado.Direccion;
+                    fila.Cells["CorreoElectronico"].Value = productoEditado.Correo;
+                   
                     fila.Cells["Tipo"].Value = productoEditado.Tipo;
                     GuardarClientes("Clientes.Json");
                     CargarClientes("Clientes.Json");
