@@ -222,7 +222,7 @@ namespace ejemplo
         {
 
             customizemenu();
-            AbrirFormulario(new Clientes(this.UsuarioActual));
+            AbrirFormulario(new Usuarios(this.UsuarioActual));
         }
 
         private void btnDistribuidora_Click(object sender, EventArgs e)
@@ -275,7 +275,7 @@ namespace ejemplo
 
         private void btnVerPerfil_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new GenerarOrden(UsuarioActual));
+            AbrirFormulario(new Verperfil(UsuarioActual));
         }
 
         private void btnFactura_Click(object sender, EventArgs e)
