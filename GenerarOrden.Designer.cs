@@ -102,7 +102,6 @@
             dataGridView1.Size = new Size(941, 615);
             dataGridView1.TabIndex = 114;
             dataGridView1.EditModeChanged += dataGridView1_EditModeChanged;
-            dataGridView1.CellBeginEdit += dataGridView1_CellBeginEdit;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             dataGridView1.EditingControlShowing += dataGridView1_EditingControlShowing;

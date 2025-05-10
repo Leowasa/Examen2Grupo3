@@ -101,6 +101,7 @@ namespace Examen2Grupo3
         }
         private void GenerarOrden_Load(object sender, EventArgs e)
         {
+            dataGridView1.EditingControlShowing += dataGridView1_EditingControlShowing;
 
         }
 
@@ -118,16 +119,15 @@ namespace Examen2Grupo3
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            // Verificar si la celda editada pertenece a la columna de estado
-            // Verifica si estamos en la columna correcta y si el control es un ComboBox
-            if (dataGridView1.CurrentCell.ColumnIndex == dataGridView1.Columns["Estado"].Index &&
-                e.Control is ComboBox comboBox)
-            {
-                // Eliminar manejador previo para evitar duplicaciones
-                comboBox.SelectedIndexChanged -= ComboBox_SelectedIndexChanged;
 
-                // Agregar nuevo manejador para limitar opciones
-                comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+            if (dataGridView1.CurrentCell.ColumnIndex == dataGridView1.Columns["Estado"].Index && e.Control is ComboBox combo)
+            {
+                combo.SelectedIndexChanged -= ComboBox_SelectedIndexChanged; // Evita múltiples suscripciones
+                combo.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+
+                // Definir opciones iniciales según el estado actual en la celda
+                string estadoActual = dataGridView1.CurrentCell.Value?.ToString() ?? "Pendiente";
+                ActualizarOpcionesComboBox(combo, estadoActual);
             }
         }
 
@@ -185,13 +185,6 @@ namespace Examen2Grupo3
             {
                 var fila = dataGridView1.CurrentRow;
                 string? estadoActual = comboBox.SelectedItem?.ToString();
-
-                if (estadoActual == "Entregado")
-                {
-                    MessageBox.Show("El estado 'Entregado' no puede ser modificado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
                 comboBox.Items.Clear();
                 if (fila != null)
                 {
@@ -341,6 +334,29 @@ namespace Examen2Grupo3
         {
             BuscarElemento(guna2TextBox2.Text);
         }
+        private void ActualizarOpcionesComboBox(ComboBox combo, string estadoActual)
+        {
+            List<string> nuevosEstados = new List<string>();
+
+            switch (estadoActual)
+            {
+                case "Pendiente":
+                    nuevosEstados = new List<string> { "Aprobado", "Rechazado" };
+                    break;
+                case "Aprobado":
+                    nuevosEstados = new List<string> { "Entregado" };
+                    break;
+                case "Rechazado":
+                    nuevosEstados = new List<string> { "Pendiente" };
+                    break;
+                case "Entregado":
+                    nuevosEstados = new List<string> { "Entregado" }; // Solo se mantiene entregado
+                    break;
+            }
+
+            combo.Items.Clear();
+            combo.Items.AddRange(nuevosEstados.ToArray());
+        }
     }
 }
 /*private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -378,6 +394,7 @@ private void ActualizarOpcionesComboBox(ComboBox combo, string estadoActual)
 
     combo.Items.Clear();
     combo.Items.AddRange(nuevosEstados.ToArray());
+}
 
 
 dataGridView1.EditingControlShowing += dataGridView1_EditingControlShowing;

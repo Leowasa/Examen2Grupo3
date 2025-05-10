@@ -253,7 +253,14 @@ namespace Examen2Grupo3
             switch (Opcion)
             {
                 case 2:
-                   orden.Observaciones = guna2TextBox1.Text;
+                    string fechaEntrega = label5.Text.Replace("Fecha: ", "").Trim();
+                    if (FechaValidacion.Value.ToString("dd/MM/yyyy") == fechaEntrega)
+                    {
+                        MessageBox.Show("La fecha de validación no puede ser la misma que la fecha de entrega", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    orden.Observaciones = guna2TextBox1.Text;
                     orden.FechaValidado = FechaValidacion.Value;
                     GuardarPedidosEnJson(orden);
                     
