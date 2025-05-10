@@ -90,6 +90,7 @@
             dataGridView1.Size = new Size(931, 615);
             dataGridView1.TabIndex = 111;
             dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             // 
             // Numero
             // 

@@ -30,7 +30,7 @@ namespace Examen2Grupo3
             {
 
                 string json = File.ReadAllText("Ordenes.json");
-               listaPedidos = System.Text.Json.JsonSerializer.Deserialize<List<Pedido>>(json)?? new List<Pedido>();
+                listaPedidos = System.Text.Json.JsonSerializer.Deserialize<List<Pedido>>(json) ?? new List<Pedido>();
 
                 if (listaPedidos != null) // Verificar que la lista no sea nula
                 {
@@ -147,6 +147,11 @@ namespace Examen2Grupo3
 
 
             }
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 
