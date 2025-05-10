@@ -17,6 +17,9 @@ namespace Examen2Grupo3
         public BuscarProducto()
         {
             InitializeComponent();
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+
             CargarInventario("Inventario.json");
         }
         public void CargarInventario(string rutaArchivo)
@@ -49,21 +52,36 @@ namespace Examen2Grupo3
                 File.WriteAllText(rutaArchivo, json);
             }
         }
-
-        private void guna2TextBox7_TextChanged(object sender, EventArgs e)
+        private void BuscarElemento(string textoBusqueda)
         {
-            string criterio = guna2TextBox2.Text;
+            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            if (textoBusqueda.Length >= 3)
+            {
+                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
+                {
+                    fila.Visible = true;
+                }
+                return;
+            }
 
+            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
+            string filtro = textoBusqueda.ToLower();
+
+            // Iterar sobre las filas del DataGridView
             foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
-                if (fila.Cells["ID2"].Value != null && fila.Cells["Nombre"].Value != null)
-                {
-                    string? id = fila.Cells["ID"].Value?.ToString();
-                    string? nombre = fila.Cells["Nombre"].Value?.ToString()?.ToLower();
+                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
+                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().ToLower().Contains(filtro)) ||
+                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
 
-                    fila.Visible = id.Contains(criterio) || nombre.Contains(criterio);
-                }
+                // Mostrar u ocultar la fila según si coincide con el filtro
+                fila.Visible = coincide;
             }
+        }
+        private void guna2TextBox7_TextChanged(object sender, EventArgs e)
+        {
+            BuscarElemento(guna2TextBox2.Text);
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -81,11 +99,6 @@ namespace Examen2Grupo3
                 guna2TextBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
                 guna2TextBox3.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                 guna2TextBox6.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-
-
-                // Dispara el evento enviando el cliente seleccionado
-                //ClienteSeleccionado?.Invoke(clienteSeleccionado);
-                //ClienteSeleccionado?.Invoke(Clientes);
             }
         }
         private bool Validar(Producto producto)
@@ -100,14 +113,9 @@ namespace Examen2Grupo3
                     }
                     lista.Cantidad -= producto.Cantidad;
                     GuardarInventario("Inventario.json");
-
-
                 }
-
             }
-
             return true;
-
         }
         private void guna2Button1_Click(object sender, EventArgs e)
         {

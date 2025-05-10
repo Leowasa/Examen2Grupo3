@@ -8,7 +8,6 @@ using Examen2Grupo3.Properties;
 using ejemplo;
 using System.Collections.Immutable;
 using System.Windows.Forms;
-using static Examen2Grupo3.GestorClientes;
 
 namespace ejemplo
 {
@@ -69,7 +68,7 @@ namespace ejemplo
             string textoBusqueda = textBox1.Text.Trim(); // Obtener el texto de búsqueda y eliminar espacios en blanco
             var usuarios = LeerUsuarios();
             // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 3)
+            if (textoBusqueda.Length >= 3)
             {
                 // Si tiene menos de 4 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
@@ -367,21 +366,6 @@ namespace ejemplo
         }
     }
 }
-/*     private void ConfigurarDataGridView()
-        {
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Location = new Point(12, 165);
-            dataGridView1.Size = new Size(1070, 800);
-            dataGridView1.ScrollBars = ScrollBars.Both;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.MultiSelect = false;
-
-            // Ocultar la columna de contraseña si existe
-            if (dataGridView1.Columns["Password"] != null)
-            {
-                dataGridView1.Columns["Password"].Visible = false;
-            }
-        }*/
 
 
 

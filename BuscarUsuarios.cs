@@ -56,7 +56,7 @@ namespace Examen2Grupo3
 
                 txtCriterio.TextChanged += (s, args) =>
                 {
-                    if (txtCriterio.Text.Length >= 4)
+                    if (txtCriterio.Text.Length >= 3)
                     {
                         var usuarios = LeerUsuarios();
                         var sugerencias = usuarios

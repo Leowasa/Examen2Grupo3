@@ -15,6 +15,8 @@ namespace Examen2Grupo3
         {
             this.UsuarioActual = UsuarioActual;
             InitializeComponent();
+            dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarDatosDesdeJson();
         }
         public List<Pedido> LeerPedidos()
@@ -48,7 +50,7 @@ namespace Examen2Grupo3
                     {
 
                         // Agregar una nueva fila con los datos
-                        int rowIndex = dataGridView1.Rows.Add(datos.ID, datos.Cliente.Nombre, datos.Fecha.ToString("dd/MM/yyyy"), datos.Total);
+                        int rowIndex = dataGridView1.Rows.Add(datos.ID.ToString("D6"), datos.Cliente.Nombre, datos.Fecha.ToString("dd/MM/yyyy"), datos.Total);
 
                         // Obtener la celda ComboBox correctamente
 
@@ -151,7 +153,7 @@ namespace Examen2Grupo3
         private void BuscarElemento(string textoBusqueda)
         {
             // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 4)
+            if (textoBusqueda.Length < 2)
             {
                 // Si tiene menos de 4 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
@@ -359,43 +361,3 @@ namespace Examen2Grupo3
         }
     }
 }
-/*private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-{
-    if (dataGridView1.CurrentCell.ColumnIndex == dataGridView1.Columns["Estado"].Index && e.Control is ComboBox combo)
-    {
-        combo.SelectedIndexChanged -= ComboBox_SelectedIndexChanged; // Evita múltiples suscripciones
-        combo.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
-
-        // Definir opciones iniciales según el estado actual en la celda
-        string estadoActual = dataGridView1.CurrentCell.Value?.ToString() ?? "Pendiente";
-        ActualizarOpcionesComboBox(combo, estadoActual);
-    }
-}
-
-private void ActualizarOpcionesComboBox(ComboBox combo, string estadoActual)
-{
-    List<string> nuevosEstados = new List<string>();
-
-    switch (estadoActual)
-    {
-        case "Pendiente":
-            nuevosEstados = new List<string> { "Aprobado", "Rechazado" };
-            break;
-        case "Aprobado":
-            nuevosEstados = new List<string> { "Entregado" };
-            break;
-        case "Rechazado":
-            nuevosEstados = new List<string> { "Pendiente" };
-            break;
-        case "Entregado":
-            nuevosEstados = new List<string> { "Entregado" }; // Solo se mantiene entregado
-            break;
-    }
-
-    combo.Items.Clear();
-    combo.Items.AddRange(nuevosEstados.ToArray());
-}
-
-
-dataGridView1.EditingControlShowing += dataGridView1_EditingControlShowing;
-}*/

@@ -21,6 +21,9 @@ namespace Examen2Grupo3
         public OrdenesHistorial()
         {
             InitializeComponent();
+            dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+
             CargarOrdenes();
         }
         public void CargarOrdenes()
@@ -38,7 +41,7 @@ namespace Examen2Grupo3
 
                     foreach (var producto in listaPedidos)
                     {
-                        dataGridView1.Rows.Add(producto.ID, producto.Cliente.Nombre, producto.Fecha.ToString("dd/MM/yy"), producto.Total, producto.Estado);
+                        dataGridView1.Rows.Add(producto.ID.ToString("D6"), producto.Cliente.Nombre, producto.Fecha.ToString("dd/MM/yy"), producto.Total, producto.Estado);
                     }
                 }
             }

@@ -18,7 +18,11 @@ namespace ejemplo
         public PedidosHistorial()
         {
             InitializeComponent();
+            dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarDatosDesdeJson();
+           
+
         }
 
         // Fix for CS1503: Use JsonConvert from Newtonsoft.Json instead of JsonSerializer
@@ -42,7 +46,7 @@ namespace ejemplo
 
                         // Añadimos la fila correspondiente al DataGridView
                         dataGridView1.Rows.Add(
-                            datos.ID,               // Número de Pedido
+                            datos.ID.ToString("D6"),               // Número de Pedido
                             nombreCliente,           // Nombre del Cliente
                             fechaCreacion,           // Fecha de creación
                             datos.Total,            // Total formateado como moneda
@@ -115,7 +119,7 @@ namespace ejemplo
         private void BuscarElemento(string textoBusqueda)
         {
             // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 4)
+            if (textoBusqueda.Length >= 3)
             {
                 // Si tiene menos de 4 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)

@@ -201,7 +201,7 @@
             guna2CustomGradientPanel1.Controls.Add(btncerrarr);
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges7;
             guna2CustomGradientPanel1.Dock = DockStyle.Top;
-            guna2CustomGradientPanel1.FillColor = Color.FromArgb(26, 32, 40);
+            guna2CustomGradientPanel1.FillColor = SystemColors.HotTrack;
             guna2CustomGradientPanel1.FillColor2 = SystemColors.HotTrack;
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(0, 80, 200);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(0, 80, 200);

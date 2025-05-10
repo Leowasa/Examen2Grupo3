@@ -27,14 +27,16 @@ namespace Examen2Grupo3
         public GenerarPedido(Usuarios usuarioActual)
         {
             InitializeComponent();
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarInventario("Inventario.json");
-            Cliente.Text = "Pedido Nº: " + CargarNum().ToString("D6");
+            Cliente.Text = "Pedido Nº: " + CargarNum();
             this.usuarioActual = usuarioActual;
             lblEncargado.Text += usuarioActual.Username;
             lblNombre.Text += usuarioActual.Nombre;
             lblID.Text += usuarioActual.ID.ToString();
         }
-        private int CargarNum()
+        private string CargarNum()
         {
             string rutaArchivo = "pedidos.json";
             if (File.Exists(rutaArchivo))
@@ -44,11 +46,14 @@ namespace Examen2Grupo3
 
                 if (pedidos.Count > 0)
                 {
-                    return NumeroPedido = pedidos.Max(p => p.ID) + 1; // Encuentra el mayor número de pedido
+                    NumeroPedido = pedidos.Max(p => p.ID) + 1; // Encuentra el mayor número de pedido  
+                    return NumeroPedido.ToString("D6");
                 }
-                return NumeroPedido= 1;
+                NumeroPedido = 1;
+                return NumeroPedido.ToString("D6");
             }
-            return NumeroPedido= 1; // Si no hay pedidos, empieza desde 1
+            NumeroPedido = 1;
+            return NumeroPedido.ToString("D6"); // Si no hay pedidos, empieza desde 1  
         }
         public void CargarInventario(string rutaArchivo)
         {
@@ -150,7 +155,7 @@ namespace Examen2Grupo3
             lblDescuento.Text = "Descuento: ";
             lblSubtotal.Text = "Subtotal: ";
             lblTotal.Text = "Total: ";
-            Cliente.Text = "Pedido Nº: " + CargarNum().ToString("D6");
+            Cliente.Text = "Pedido Nº: " + CargarNum();
             
             MessageBox.Show("Pedido generado exitosamente!");
 

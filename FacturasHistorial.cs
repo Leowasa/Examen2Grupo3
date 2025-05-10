@@ -13,6 +13,7 @@ using iTextSharp.tool.xml;
 using Newtonsoft.Json;
 using static Examen2Grupo3.RegistroPedidos;
 using System.Text.Json;
+using System.Collections;
 
 namespace Examen2Grupo3
 {
@@ -24,10 +25,12 @@ namespace Examen2Grupo3
         public FacturasHistorial()
         {
             InitializeComponent();
-            CargarInventario("ordenes.json");
+            dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+            CargarFacturas("Ordenes.json");
             cargarEmpresa();
         }
-        public void CargarInventario(string rutaArchivo)
+        public void CargarFacturas(string rutaArchivo)
         {
             if (File.Exists(rutaArchivo))
             {
@@ -40,32 +43,31 @@ namespace Examen2Grupo3
 
                     foreach (var producto in pedidos)
                     {
-                        dataGridView1.Rows.Add(producto.ID, producto.Cliente.Nombre, producto.Fecha.ToString("dd/MM/yy"), producto.Total);
+                        dataGridView1.Rows.Add(producto.ID.ToString("D6"), producto.Cliente.Nombre, producto.Fecha.ToString("dd/MM/yy"), producto.Total);
                     }
                 }
             }
         }
-        public void cargarEmpresa() 
+        public void cargarEmpresa()
         {
             if (File.Exists("Empresa.json"))
             {
-                try 
+                try
                 {
                     string json = File.ReadAllText("Empresa.json");
                     Empresa = JsonConvert.DeserializeObject<Empresa>(json) ?? new Empresa(); // Cambiar JsonSerializer por JsonConvert  
 
 
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 { }
-               
-            }
 
+            }
         }
         private void BuscarElemento(string textoBusqueda)
         {
             // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 4)
+            if (textoBusqueda.Length >= 3)
             {
                 // Si tiene menos de 4 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
@@ -82,93 +84,16 @@ namespace Examen2Grupo3
             foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
                 // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["Numero"].Value != null && fila.Cells["Numero"].Value.ToString().ToLower().Contains(filtro)) ||
+                bool coincide = (fila.Cells["Numero"].Value != null && fila.Cells["Numero"].Value.ToString().Contains(filtro, StringComparison.CurrentCultureIgnoreCase)) ||
                                 (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
 
                 // Mostrar u ocultar la fila según si coincide con el filtro
                 fila.Visible = coincide;
             }
         }
-        /* private void GenerarFacturaPDF(string pdfPath)
-         {
-             string htmlPath = Properties.Resources.plantilla_factura.ToString();
-
-             Document document = new Document(PageSize.A4, 25, 25, 25, 25);
-             SaveFileDialog savefile = new SaveFileDialog();
-
-                try
-                 {
-                     // 1. Configuración inicial  
-                     Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-                     // 2. Configuración del documento PDF  
-
-                     // 3. Crear el archivo PDF  
-                     using (FileStream fs = new FileStream(pdfPath, FileMode.Create))
-                     {
-                         PdfWriter writer = PdfWriter.GetInstance(document, fs);
-
-                         // 4. Abrir documento  
-                         document.Open();
-                         document.Add(new Phrase(""));
-
-                         // 5. Leer contenido HTML  
-                         string htmlContent = File.ReadAllText("Factura - copia.html", Encoding.UTF8);
-                         htmlContent = rellenarHtml(htmlContent, document);
-                         if (string.IsNullOrWhiteSpace(htmlContent))
-                         {
-                             throw new InvalidOperationException("El contenido HTML está vacío o no se pudo leer.");
-                         }
-
-                         // 6. Convertir HTML a PDF con configuración robusta  
-                         using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(htmlContent)))
-                         using (var reader = new StreamReader(ms, Encoding.UTF8)) // Convertir MemoryStream a TextReader  
-                         {
-                             XMLWorkerHelper.GetInstance().ParseXHtml(
-                                 writer,
-                                 document,
-                                 reader
-                             );
-                         }
-
-                         // 7. Cerrar documento (importante para evitar corrupción)  
-                         document.Close();
-                         fs.Close();
-                     }
-
-                     MessageBox.Show("✅ PDF generado correctamente.");
-                 }
-                 catch (FileNotFoundException ex)
-                 {
-                     MessageBox.Show($"❌ Error: Archivo no encontrado. {ex.Message}");
-                 }
-                 catch (IOException ex)
-                 {
-                     MessageBox.Show($"❌ Error de E/S: {ex.Message}");
-                 }
-                 catch (DocumentException ex)
-                 {
-                     MessageBox.Show($"❌ Error al generar PDF: {ex.Message}");
-                 }
-                 catch (Exception ex)
-                 {
-                     MessageBox.Show($"❌ Error inesperado: {ex.Message}");
-                 }
-                 finally
-                 {
-                     // Asegurarse de que el documento esté cerrado  
-                     if (document != null && document.IsOpen())
-                     {
-                         document.Close();
-                     }
-                 }
-
-
-         }
-        */
         private void GenerarFacturaPDF(string pdfPath)
         {
-            string htmlPath = Properties.Resources.plantilla_factura.ToString();
+            string htmlPath = Properties.Resources.plantilla_factura?.ToString() ?? string.Empty;
             Document document = new Document(PageSize.A4, 45, 45, 45, 45);
 
             try
@@ -181,7 +106,7 @@ namespace Examen2Grupo3
 
                     // **1. Agregar el evento de numeración de páginas**
                     PageNumberHelper pageEvent = new PageNumberHelper();
-                    pageEvent.Observaciones = Actual.Observaciones; 
+                    pageEvent.Observaciones = Actual.Observaciones;
                     writer.PageEvent = pageEvent;
 
                     document.Open();
@@ -238,9 +163,9 @@ namespace Examen2Grupo3
             htmlContent = htmlContent.Replace("@Emision", Actual.Fecha.ToString("dd/MM/yy"));
 
             //Datos de precio
-            htmlContent = htmlContent.Replace("@SUBTOTAL", Actual.SubtTotal.ToString("F2"));
-            htmlContent = htmlContent.Replace("@IVA", Actual.IVA.ToString("F2"));
-            htmlContent = htmlContent.Replace("@TOTAL", Actual.Total.ToString("F2"));
+            htmlContent = htmlContent.Replace("@SUBTOTAL", Actual.SubtTotal.ToString("F2") + "$");
+            htmlContent = htmlContent.Replace("@IVA", Actual.IVA.ToString("F2") + "$");
+            htmlContent = htmlContent.Replace("@TOTAL", Actual.Total.ToString("F2") + "$");
 
             //Observaciones
             htmlContent = htmlContent.Replace("@Observaciones", Actual.Observaciones);
@@ -263,8 +188,8 @@ namespace Examen2Grupo3
                 filas += "<td>" + row.Descripcion + "</td>";
                 filas += "<td>" + row.Categoria + "</td>";
                 filas += "<td>" + row.Cantidad + "</td>";
-                filas += "<td>" + row.PrecioUnitario + "</td>";
-                filas += "<td>" + row.Total + "</td>";
+                filas += "<td>" + row.PrecioUnitario +"$"+ "</td>";
+                filas += "<td>" + row.Total +"$" +"</td>";
                 filas += "</tr>";
             }
             htmlContent = htmlContent.Replace("@FILAS", filas);
@@ -302,12 +227,12 @@ namespace Examen2Grupo3
 
 
 
-        public void GuardarInventario()
+        public void GuardarFacturas()
         {
             // Fix for CS1503: Use Newtonsoft.Json.Formatting instead of System.Text.Json.JsonSerializerOptions  
             string json = JsonConvert.SerializeObject(pedidos, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText("Ordenes.Json", json);
-            CargarInventario("Ordenes.Json");
+            CargarFacturas("Ordenes.Json");
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -316,29 +241,24 @@ namespace Examen2Grupo3
             {
                 string pdfPath;
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
-                foreach (var lista in pedidos)
+
+                // Ensure 'pedidos' is not null and the index is within bounds  
+                if (pedidos != null && e.RowIndex < pedidos.Count && pedidos[e.RowIndex] != null)
                 {
-                    if (lista.ID.ToString() == filaSeleccionada.Cells["Numero"].Value.ToString())
+                    Actual = pedidos[e.RowIndex];
+                    using (SaveFileDialog sfd = new SaveFileDialog())
                     {
-                        Actual = lista;
+                        sfd.Filter = "Archivos PDF (*.PDf)|*.PDf";
+                        sfd.Title = "Selecciona dónde guardar el archivo PDF";
 
-                        using (SaveFileDialog sfd = new SaveFileDialog())
+                        if (sfd.ShowDialog() == DialogResult.OK)
                         {
-
-                            sfd.Filter = "Archivos PDF (*.PDf)|*.PDf";
-                            sfd.Title = "Selecciona dónde guardar el archivo PDF";
-
-                            if (sfd.ShowDialog() == DialogResult.OK)
-                            {
-                                pdfPath = sfd.FileName;
-                                GenerarFacturaPDF(pdfPath);
-                            }
-                            else return;
+                            pdfPath = sfd.FileName;
+                            GenerarFacturaPDF(pdfPath);
                         }
-                       
+                        else return;
                     }
                 }
-               
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
@@ -347,30 +267,20 @@ namespace Examen2Grupo3
 
                 if (result == DialogResult.Yes)
                 {
-                    pedidos.RemoveAt(e.RowIndex);
-                    dataGridView1.Rows.RemoveAt(e.RowIndex);
-                    GuardarInventario();
+                    // Ensure 'pedidos' is not null and the index is within bounds  
+                    if (pedidos != null && e.RowIndex < pedidos.Count)
+                    {
+                        pedidos.RemoveAt(e.RowIndex);
+                        dataGridView1.Rows.RemoveAt(e.RowIndex);
+                        GuardarFacturas();
+                    }
                 }
             }
+        }
 
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            BuscarElemento(guna2TextBox1.Text);
         }
     }
 }
-/*     public override void OnEndPage(PdfWriter writer, Document document)
-            {
-                int pageNumber = writer.PageNumber; // Obtiene el número de la página actual
-                PdfContentByte cb = writer.DirectContent;
-
-                // Define la fuente
-                BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                cb.SetFontAndSize(bf, 10);
-
-                // Posición de la numeración (abajo a la derecha)
-                float x = document.PageSize.Width - 50;
-                float y = document.PageSize.GetBottom(30);
-
-
-                cb.BeginText();
-                cb.ShowTextAligned(PdfContentByte.ALIGN_RIGHT, $"Página {pageNumber} de {TotalPages}", x, y, 0);
-                cb.EndText();
-            }*/

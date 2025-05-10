@@ -4,7 +4,6 @@ using ejemplo;
 using Examen2Grupo3.Properties;
 using System;
 using System.Runtime.InteropServices;
-using ejemplo;
 
 public partial class Login : Form
 {
@@ -105,21 +104,23 @@ public partial class Login : Form
     }
     public void cargarCargarUsuario()
     {
-        string rutarchivo = "usuarios.json";
-        if (File.Exists(rutarchivo))
+        byte[] archivoBytes = Properties.Resources.usuarios;
+        if (archivoBytes != null && archivoBytes.Length > 0)
         {
-            string usuarios = File.ReadAllText(rutarchivo);
+            string usuarios = System.Text.Encoding.UTF8.GetString(archivoBytes);
             try
             {
-                listaUsuarios = JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(usuarios);
+                listaUsuarios = JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(usuarios)??new List<RegistroPedidos.Usuarios>();
             }
             catch
             {
-                MessageBox.Show("error");
+                MessageBox.Show("Error al Cargar los usuarios.");
             }
-
         }
-
+        else
+        {
+            MessageBox.Show("El recurso de usuarios está vacío o no se pudo cargar.");
+        }
     }
     public void personalizar(RegistroPedidos.Usuarios usuarios)
     {

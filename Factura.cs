@@ -252,11 +252,17 @@ namespace Examen2Grupo3
 
             switch (Opcion)
             {
-                case 2:
+                case 2://Generar Orden
+
                     string fechaEntrega = label5.Text.Replace("Fecha: ", "").Trim();
                     if (FechaValidacion.Value.ToString("dd/MM/yyyy") == fechaEntrega)
                     {
                         MessageBox.Show("La fecha de validación no puede ser la misma que la fecha de entrega", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else if (string.IsNullOrWhiteSpace(guna2TextBox1.Text))
+                    {
+                        MessageBox.Show("El campo no puede estar vacío.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
@@ -271,13 +277,13 @@ namespace Examen2Grupo3
                         MessageBox.Show("Operacion generada Satisfactoriamente");
                     }
                     break;
-                case 1:
+                case 1://Ver pedido
                     if (principal != null)
                     {
                         principal.AbrirFormularioEnPanel(new PedidosHistorial()); // Reemplaza con el formulario que desees abrir  
                     }
                     break;
-                case 3:
+                case 3://Ver Orden
                     if (principal != null)
                     {
                         principal.AbrirFormularioEnPanel(new OrdenesHistorial()); // Reemplaza con el formulario que desees abrir  
