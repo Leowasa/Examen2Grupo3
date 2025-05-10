@@ -1,27 +1,33 @@
 ﻿using Newtonsoft.Json;
 namespace Examen2Grupo3;
 using ejemplo;
+using Examen2Grupo3.Properties;
 using System;
+using System.Runtime.InteropServices;
+using ejemplo;
 
 public partial class Login : Form
 {
     List<RegistroPedidos.Usuarios> listaUsuarios = new List<RegistroPedidos.Usuarios>();
 
     public RegistroPedidos.Usuarios usuario = new RegistroPedidos.Usuarios();
-
+    [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+    private extern static void ReleaseCapture();
+    [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+    private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
     public Login()
     {
         InitializeComponent();
-     
+
     }
-    private void primeraEjecucion() 
+    private void primeraEjecucion()
     {
         string rutaArchivo = "configuracion.dat";
         IngresarDatosEmpresa Nuevo = new IngresarDatosEmpresa();
         if (File.Exists(rutaArchivo))
         {
             Validar();
-           
+
         }
         else
         {
@@ -32,26 +38,19 @@ public partial class Login : Form
                 Validar();
 
             }
-            else 
-            { 
-            
-            }
-          
-
-           
         }
     }
     private void guna2Button2_Click(object sender, EventArgs e)
     {
-   
+
         primeraEjecucion();
     }
-    private void ProcesarUsuario() 
+    private void ProcesarUsuario()
     {
-        
+
 
     }
-    public bool Validar() 
+    public bool Validar()
     {
         cargarCargarUsuario();
 
@@ -156,5 +155,16 @@ public partial class Login : Form
     private void Login_Load(object sender, EventArgs e)
     {
 
+    }
+
+    private void pictureBox3_Click(object sender, EventArgs e)
+    {
+        Application.Exit();
+    }
+
+    private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+    {
+        ReleaseCapture();
+        SendMessage(this.Handle, 0x112, 0xf012, 0);
     }
 }

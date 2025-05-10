@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Runtime.InteropServices;
+using System.Text.Json;
 using static Examen2Grupo3.RegistroPedidos;
 
 namespace Examen2Grupo3
@@ -8,6 +9,11 @@ namespace Examen2Grupo3
         public List<Cliente>? cliente = new List<Cliente>();
         public event Action<Cliente> ClienteSeleccionado;
         public Cliente Clientes = new RegistroPedidos.Cliente();
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
         public BuscarClientes()
         {
             InitializeComponent();
@@ -72,6 +78,18 @@ namespace Examen2Grupo3
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

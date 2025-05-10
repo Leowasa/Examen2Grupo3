@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Runtime.InteropServices;
+using System.Text.Json;
 using static Examen2Grupo3.RegistroPedidos;
 
 namespace Examen2Grupo3
@@ -8,6 +9,10 @@ namespace Examen2Grupo3
         public Producto Producto = new Producto();
         private List<Producto> listaProductos = new List<Producto>();
         private List<Producto> inventarioOriginal = new List<Producto>();
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
 
         public BuscarProducto()
         {
@@ -19,10 +24,10 @@ namespace Examen2Grupo3
 
             if (File.Exists(rutaArchivo))
             {
-                
+
 
                 string json = File.ReadAllText(rutaArchivo);
-                listaProductos = JsonSerializer.Deserialize<List<Producto>>(json)??new List<Producto>();
+                listaProductos = JsonSerializer.Deserialize<List<Producto>>(json) ?? new List<Producto>();
 
                 if (listaProductos != null) // Verificar que la lista no sea nula
                 {
@@ -35,7 +40,7 @@ namespace Examen2Grupo3
                 }
             }
         }
-        public void GuardarInventario(string rutaArchivo) 
+        public void GuardarInventario(string rutaArchivo)
         {
             if (File.Exists(rutaArchivo))
             {
@@ -83,26 +88,26 @@ namespace Examen2Grupo3
                 //ClienteSeleccionado?.Invoke(Clientes);
             }
         }
-        private bool Validar(Producto producto) 
+        private bool Validar(Producto producto)
         {
-            foreach (var lista in listaProductos) 
+            foreach (var lista in listaProductos)
             {
-                if (lista.ID == producto.ID) 
+                if (lista.ID == producto.ID)
                 {
-                    if (producto.Cantidad > lista.Cantidad) 
+                    if (producto.Cantidad > lista.Cantidad)
                     {
                         return false;
                     }
                     lista.Cantidad -= producto.Cantidad;
                     GuardarInventario("Inventario.json");
-                    
-                
+
+
                 }
-            
+
             }
-            
+
             return true;
-        
+
         }
         private void guna2Button1_Click(object sender, EventArgs e)
         {
@@ -115,7 +120,7 @@ namespace Examen2Grupo3
                 Producto.Descripcion = guna2TextBox3.Text;
                 Producto.Cantidad = int.Parse(guna2TextBox5.Text);
                 Producto.PrecioUnitario = Decimal.Parse(guna2TextBox6.Text);
-                if (Validar(Producto)==false)
+                if (Validar(Producto) == false)
                 {
                     MessageBox.Show("La cantidad ingresada excede el stock disponible.");
                     return;
@@ -130,6 +135,18 @@ namespace Examen2Grupo3
                 return;
             }
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

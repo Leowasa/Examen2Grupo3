@@ -6,6 +6,7 @@ using static Examen2Grupo3.RegistroPedidos;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using static Examen2Grupo3.GestorClientes;
 
 namespace ejemplo
 {
@@ -62,19 +63,9 @@ namespace ejemplo
             if (agregarCliente.ShowDialog() == DialogResult.OK)
             {
 
-
-                Cliente Clientenuevo = new Cliente()
-                {
-                    ID = agregarCliente.Datos.ID,
-                    Nombre = agregarCliente.Datos.Nombre,
-                    Direccion = agregarCliente.Datos.Direccion,
-                    Correo = agregarCliente.Datos.Correo,
-                    Tipo = agregarCliente.Datos.Tipo
-                };
-
-                cliente.Add(Clientenuevo);
-                dataGridView1.Rows.Add(Clientenuevo.ID, Clientenuevo.Nombre, Clientenuevo.Direccion, Clientenuevo.Correo, Clientenuevo.Tipo);
-                GuardarClientes("Clientes.Json");
+                cliente.Add(agregarCliente.ObtenerCliente());
+               GuardarClientes("Clientes.Json");
+                CargarClientes("Clientes.Json");
 
 
 
@@ -229,12 +220,11 @@ namespace ejemplo
                     if (formEditar.DialogResult == DialogResult.OK)
                     {
                         DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
-                        Cliente productoEditado = formEditar.ObtenerClienteEditado();
-                        fila.Cells["ID"].Value = productoEditado.ID;
-                        fila.Cells["Nombre"].Value = productoEditado.Nombre;
-                        fila.Cells["Direccion"].Value = productoEditado.Direccion;
-                        fila.Cells["CorreoElectronico"].Value = productoEditado.Correo;
-                        fila.Cells["Tipo"].Value = productoEditado.Tipo;
+                        fila.Cells["ID"].Value = formEditar.DatosClientes.ID;
+                        fila.Cells["Nombre"].Value = formEditar.DatosClientes.Nombre;
+                        fila.Cells["Direccion"].Value = formEditar.DatosClientes.Direccion;
+                        fila.Cells["CorreoElectronico"].Value = formEditar.DatosClientes.Correo;
+                        fila.Cells["Tipo"].Value = formEditar.DatosClientes.Tipo;
                         GuardarClientes("Clientes.Json");
                         CargarClientes("Clientes.Json");
                     }

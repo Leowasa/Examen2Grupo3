@@ -518,6 +518,7 @@
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges26;
             guna2CustomGradientPanel1.Size = new Size(1200, 35);
             guna2CustomGradientPanel1.TabIndex = 141;
+            guna2CustomGradientPanel1.MouseDown += guna2CustomGradientPanel1_MouseDown_1;
             // 
             // btnMaximizar
             // 
@@ -526,7 +527,7 @@
             btnMaximizar.Cursor = Cursors.Hand;
             btnMaximizar.ErrorImage = (Image)resources.GetObject("btnMaximizar.ErrorImage");
             btnMaximizar.Image = (Image)resources.GetObject("btnMaximizar.Image");
-            btnMaximizar.Location = new Point(1132, 10);
+            btnMaximizar.Location = new Point(1132, 7);
             btnMaximizar.Name = "btnMaximizar";
             btnMaximizar.Size = new Size(25, 25);
             btnMaximizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -541,7 +542,7 @@
             btnRestaurar.Cursor = Cursors.Hand;
             btnRestaurar.ErrorImage = (Image)resources.GetObject("btnRestaurar.ErrorImage");
             btnRestaurar.Image = (Image)resources.GetObject("btnRestaurar.Image");
-            btnRestaurar.Location = new Point(1132, 10);
+            btnRestaurar.Location = new Point(1132, 7);
             btnRestaurar.Name = "btnRestaurar";
             btnRestaurar.Size = new Size(25, 25);
             btnRestaurar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -557,7 +558,7 @@
             bntMinimizar.Cursor = Cursors.Hand;
             bntMinimizar.ErrorImage = (Image)resources.GetObject("bntMinimizar.ErrorImage");
             bntMinimizar.Image = (Image)resources.GetObject("bntMinimizar.Image");
-            bntMinimizar.Location = new Point(1101, 10);
+            bntMinimizar.Location = new Point(1101, 7);
             bntMinimizar.Name = "bntMinimizar";
             bntMinimizar.Size = new Size(25, 25);
             bntMinimizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -572,7 +573,7 @@
             btnCerrar.Cursor = Cursors.Hand;
             btnCerrar.ErrorImage = (Image)resources.GetObject("btnCerrar.ErrorImage");
             btnCerrar.Image = (Image)resources.GetObject("btnCerrar.Image");
-            btnCerrar.Location = new Point(1163, 10);
+            btnCerrar.Location = new Point(1163, 7);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(25, 25);
             btnCerrar.SizeMode = PictureBoxSizeMode.Zoom;

@@ -23,26 +23,9 @@ namespace ejemplo
             lblUsuario.Text = UsuarioActual.Username;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.DoubleBuffered = true;
-           // this.FormBorderStyle = FormBorderStyle.None; // Elimina el borde del formulario
-           // this.Region = CrearRegionRedondeada(30);
+            // this.FormBorderStyle = FormBorderStyle.None; // Elimina el borde del formulario
+            // this.Region = CrearRegionRedondeada(30);
         }
-        /*
-        private Region CrearRegionRedondeada(int radio)
-        {
-            GraphicsPath path = new GraphicsPath();
-            path.AddArc(0, 0, radio, radio, 180, 90); // Esquina superior izquierda
-            path.AddArc(this.Width - radio, 0, radio, radio, 270, 90); // Esquina superior derecha
-            path.AddArc(this.Width - radio, this.Height - radio, radio, radio, 0, 90); // Esquina inferior derecha
-            path.AddArc(0, this.Height - radio, radio, radio, 90, 90); // Esquina inferior izquierda
-            path.CloseFigure();
-            return new Region(path);
-        }
-        
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-            this.Region = CrearRegionRedondeada(30); // Recalcula la región al redimensionar
-        }*/
         public Form1()
         {
             InitializeComponent();
@@ -319,6 +302,14 @@ namespace ejemplo
 
             btnRestaurar.Visible = false;
             btnMaximizar.Visible = true;
+        }
+
+        private void guna2CustomGradientPanel1_MouseDown_1(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+
+
         }
     }
 }

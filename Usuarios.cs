@@ -8,15 +8,18 @@ using Examen2Grupo3.Properties;
 using ejemplo;
 using System.Collections.Immutable;
 using System.Windows.Forms;
+using static Examen2Grupo3.GestorClientes;
 
 namespace ejemplo
 {
     public partial class Usuarios : Form
     {
 
-        private Panel PanelPrincipal;
+        private Panel PanelPrincipal= new Panel();
         RegistroPedidos.Usuarios Usuarioactual = new RegistroPedidos.Usuarios();
+        RegistroPedidos.Usuarios Nuevo = new RegistroPedidos.Usuarios();
         List<RegistroPedidos.Usuarios> usuarios = new List<RegistroPedidos.Usuarios>();
+        AgregarCliente Operar= new AgregarCliente(1);
         public Usuarios(RegistroPedidos.Usuarios usuarioactual)
         {
 
@@ -31,25 +34,34 @@ namespace ejemplo
 
         }
 
-        private void AbrirFormulario(object? formhija)
+        public void AbrirFormulario(Form formulario)
         {
-            Form? fh = formhija as Form;
-            if (fh != null)
-            {
-                fh.TopLevel = false;
-                fh.Dock = DockStyle.Fill;
-                this.PanelPrincipal.Controls.Add(fh);
-                this.PanelPrincipal.Tag = fh;
-                fh.Show();
-            }
+            // Limpiar el panel antes de agregar el nuevo formulario
+            PanelPrincipal.Controls.Clear();
+
+            // Configurar el formulario dentro del panel
+            formulario.TopLevel = false;
+            formulario.FormBorderStyle = FormBorderStyle.None;
+            formulario.Dock = DockStyle.Fill;
+
+            // Agregar el formulario al panel y mostrarlo
+            PanelPrincipal.Controls.Add(formulario);
+            formulario.Show();
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new Agregar_Usuarios());
-            usuarios = LeerUsuarios();
-            dataGridView1.Rows.Clear();
-            CargarDatosEnDataGridView();
+            Operar = new AgregarCliente(1);
+          
+            if (Operar.ShowDialog() == DialogResult.OK)
+            {
+                usuarios.Add(Operar.ObtenerUsuario());
+                GuardarUsuarios("usuarios.json");
+
+                CargarDatosEnDataGridView();
+
+            }
+           
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
@@ -175,22 +187,36 @@ namespace ejemplo
                 if (File.Exists(rutaArchivo))
                 {
                     var lineas = File.ReadAllLines(rutaArchivo);
-                    dataGridView1.Rows.Clear();
+                    usuarios.Clear();
 
-                    foreach (var linea in lineas.Skip(1)) // Omitimos el encabezado  
+                    foreach (var linea in lineas.Skip(1)) // Omitir encabezado
                     {
-                        var datos = linea.Split(',');
+                        var datos = linea.Split(','); // Dividir la línea en columnas
 
-                        // Asegurarse de que la columna de contraseña esté incluida  
-                        if (datos.Length >= 5)
+                        // Verificar que la línea tenga suficientes columnas
+                        if (datos.Length >= 4)
                         {
-                            dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4]);
+                            // Crear un nuevo objeto Usuarios y asignar los valores
+                            var usuario = new RegistroPedidos.Usuarios
+                            {
+                                ID = int.Parse(datos[0]), // Convertir el ID a entero
+                                Nombre = datos[1],
+                                Username = datos[2],
+                                Password = datos[3],
+                                Tipo = datos[4]
+                            };
+
+                            // Agregar el usuario a la lista
+                            usuarios.Add(usuario);
+                           
                         }
                     }
-
-                    MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     GuardarUsuarios("Usuarios.Json");
+                    CargarDatosEnDataGridView();
+                    MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                  
                 }
+                else MessageBox.Show("Importación  no completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -205,12 +231,11 @@ namespace ejemplo
                 {
                     sw.WriteLine("ID,Nombre,Username,Password,Tipo"); // Encabezado CSV  
 
-                    foreach (DataGridViewRow fila in dataGridView1.Rows)
+                    foreach (var fila in usuarios)
                     {
-                        if (fila.Cells["ID"].Value != null)
-                        {
-                            sw.WriteLine($"{fila.Cells["Id"].Value},{fila.Cells["Nombre"].Value},{fila.Cells["Username"].Value},{fila.Cells["Password"].Value},{fila.Cells["Tipo"].Value}");
-                        }
+                        
+                            sw.WriteLine($"{fila.ID},{fila.Nombre},{fila.Username},{fila.Password},{fila.Tipo}");
+                        
                     }
                 }
 
@@ -247,26 +272,9 @@ namespace ejemplo
                 {
                     try
                     {
-                        var usuariosExistentes = LeerUsuarios(); // Leer usuarios actuales  
-                        var nuevosUsuarios = LeerUsuariosDesdeCSV(ofd.FileName); // Leer usuarios desde el CSV  
+                        ImportarCSV(ofd.FileName);
 
-                        // Combinar listas evitando duplicados por ID  
-                        foreach (var nuevoUsuario in nuevosUsuarios)
-                        {
-                            if (!usuariosExistentes.Any(u => u.ID == nuevoUsuario.ID))
-                            {
-                                usuariosExistentes.Add(nuevoUsuario);
-                            }
-                        }
-
-                        // Guardar la lista combinada en el archivo JSON  
-                        GuardarUsuarios(FilePath);
-
-                        // Actualizar el DataGridView  
-                        //     dataGridView1.DataSource = null;
-                        //     dataGridView1.DataSource = usuariosExistentes;
-
-                        MessageBox.Show("Usuarios importados y añadidos correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                     
                     }
                     catch (Exception ex)
                     {
@@ -317,24 +325,44 @@ namespace ejemplo
                     MessageBox.Show("Necesita Ser Administrador para realizar la operacion.");
                     return;
                 }
-
-
-                DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+                else if(usuarios[e.RowIndex].Tipo == "Administrador" || usuarios[e.RowIndex].Tipo =="SuperUsuario")
+                {
+                    MessageBox.Show("No tiene permisos para eliminar este tipo de Usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                
+                }
+                DialogResult result = MessageBox.Show($"¿Deseas eliminar a {usuarios[e.RowIndex].Username}?", "Confirmar eliminación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
-
                     usuarios.RemoveAt(e.RowIndex);
-                    dataGridView1.Rows.Clear();
                     GuardarUsuarios("usuarios.json");
                     CargarDatosEnDataGridView();
                 }
             }
-            else if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0) 
+            else if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
-                AbrirFormulario(new Agregar_Usuarios());
-
+                DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
+                // Verificar que los valores requeridos no sean nulos  
+                if (usuarios[e.RowIndex]!=null)
+                {
+                    // Crear una instancia del formulario de edición y pasar los datos  
+                   
+                    Operar.SetDatosUsuarios(usuarios[e.RowIndex]);
+                     // Mostrar el formulario de edición como una ventana modal  
+                    if (Operar.ShowDialog() == DialogResult.OK)
+                    {
+                        usuarios[e.RowIndex] =  Operar.ObtenerUsuario();
+                        GuardarUsuarios("usuarios.json");
+                        CargarDatosEnDataGridView();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Algunos datos requeridos están vacíos o son nulos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+    
             }
         }
     }

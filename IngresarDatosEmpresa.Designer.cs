@@ -43,6 +43,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngresarDatosEmpresa));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
@@ -57,7 +59,29 @@
             Cliente = new Label();
             pictureBox1 = new PictureBox();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            pictureBox3 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            btnMaximizar = new PictureBox();
+            btnRestaurar = new PictureBox();
+            bntMinimizar = new PictureBox();
+            btnCerrar = new PictureBox();
+            Btnrest = new PictureBox();
+            Btnmaximi = new PictureBox();
+            Btnmini = new PictureBox();
+            btncerrarr = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            guna2CustomGradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnMaximizar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnRestaurar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bntMinimizar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnCerrar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Btnrest).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Btnmaximi).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Btnmini).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btncerrarr).BeginInit();
             SuspendLayout();
             // 
             // label5
@@ -276,12 +300,179 @@
             guna2Button2.Text = "Cambiar imagen";
             guna2Button2.Visible = false;
             // 
+            // guna2CustomGradientPanel1
+            // 
+            guna2CustomGradientPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            guna2CustomGradientPanel1.BackColor = Color.Transparent;
+            guna2CustomGradientPanel1.Controls.Add(pictureBox3);
+            guna2CustomGradientPanel1.Controls.Add(pictureBox2);
+            guna2CustomGradientPanel1.Controls.Add(btnMaximizar);
+            guna2CustomGradientPanel1.Controls.Add(btnRestaurar);
+            guna2CustomGradientPanel1.Controls.Add(bntMinimizar);
+            guna2CustomGradientPanel1.Controls.Add(btnCerrar);
+            guna2CustomGradientPanel1.Controls.Add(Btnrest);
+            guna2CustomGradientPanel1.Controls.Add(Btnmaximi);
+            guna2CustomGradientPanel1.Controls.Add(Btnmini);
+            guna2CustomGradientPanel1.Controls.Add(btncerrarr);
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges15;
+            guna2CustomGradientPanel1.Dock = DockStyle.Top;
+            guna2CustomGradientPanel1.FillColor = Color.FromArgb(26, 32, 40);
+            guna2CustomGradientPanel1.FillColor2 = SystemColors.HotTrack;
+            guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(0, 80, 200);
+            guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(0, 80, 200);
+            guna2CustomGradientPanel1.Location = new Point(0, 0);
+            guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2CustomGradientPanel1.Size = new Size(800, 25);
+            guna2CustomGradientPanel1.TabIndex = 158;
+            guna2CustomGradientPanel1.MouseDown += guna2CustomGradientPanel1_MouseDown;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox3.BackColor = Color.Transparent;
+            pictureBox3.Cursor = Cursors.Hand;
+            pictureBox3.ErrorImage = (Image)resources.GetObject("pictureBox3.ErrorImage");
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(771, 0);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(26, 25);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 155;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox2.BackColor = Color.Transparent;
+            pictureBox2.Cursor = Cursors.Hand;
+            pictureBox2.ErrorImage = (Image)resources.GetObject("pictureBox2.ErrorImage");
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(800, 0);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(26, 25);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 154;
+            pictureBox2.TabStop = false;
+            // 
+            // btnMaximizar
+            // 
+            btnMaximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnMaximizar.BackColor = Color.Transparent;
+            btnMaximizar.Cursor = Cursors.Hand;
+            btnMaximizar.ErrorImage = (Image)resources.GetObject("btnMaximizar.ErrorImage");
+            btnMaximizar.Image = (Image)resources.GetObject("btnMaximizar.Image");
+            btnMaximizar.Location = new Point(1758, 10);
+            btnMaximizar.Name = "btnMaximizar";
+            btnMaximizar.Size = new Size(25, 25);
+            btnMaximizar.SizeMode = PictureBoxSizeMode.Zoom;
+            btnMaximizar.TabIndex = 153;
+            btnMaximizar.TabStop = false;
+            // 
+            // btnRestaurar
+            // 
+            btnRestaurar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnRestaurar.BackColor = Color.Transparent;
+            btnRestaurar.Cursor = Cursors.Hand;
+            btnRestaurar.ErrorImage = (Image)resources.GetObject("btnRestaurar.ErrorImage");
+            btnRestaurar.Image = (Image)resources.GetObject("btnRestaurar.Image");
+            btnRestaurar.Location = new Point(1758, 10);
+            btnRestaurar.Name = "btnRestaurar";
+            btnRestaurar.Size = new Size(25, 25);
+            btnRestaurar.SizeMode = PictureBoxSizeMode.Zoom;
+            btnRestaurar.TabIndex = 151;
+            btnRestaurar.TabStop = false;
+            btnRestaurar.Visible = false;
+            // 
+            // bntMinimizar
+            // 
+            bntMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bntMinimizar.BackColor = Color.Transparent;
+            bntMinimizar.Cursor = Cursors.Hand;
+            bntMinimizar.ErrorImage = (Image)resources.GetObject("bntMinimizar.ErrorImage");
+            bntMinimizar.Image = (Image)resources.GetObject("bntMinimizar.Image");
+            bntMinimizar.Location = new Point(1727, 10);
+            bntMinimizar.Name = "bntMinimizar";
+            bntMinimizar.Size = new Size(25, 25);
+            bntMinimizar.SizeMode = PictureBoxSizeMode.Zoom;
+            bntMinimizar.TabIndex = 152;
+            bntMinimizar.TabStop = false;
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCerrar.BackColor = Color.Transparent;
+            btnCerrar.Cursor = Cursors.Hand;
+            btnCerrar.ErrorImage = (Image)resources.GetObject("btnCerrar.ErrorImage");
+            btnCerrar.Image = (Image)resources.GetObject("btnCerrar.Image");
+            btnCerrar.Location = new Point(1789, 10);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(25, 25);
+            btnCerrar.SizeMode = PictureBoxSizeMode.Zoom;
+            btnCerrar.TabIndex = 150;
+            btnCerrar.TabStop = false;
+            // 
+            // Btnrest
+            // 
+            Btnrest.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            Btnrest.BackColor = Color.Transparent;
+            Btnrest.Cursor = Cursors.Hand;
+            Btnrest.ErrorImage = null;
+            Btnrest.Location = new Point(2758, 7);
+            Btnrest.Name = "Btnrest";
+            Btnrest.Size = new Size(25, 25);
+            Btnrest.SizeMode = PictureBoxSizeMode.Zoom;
+            Btnrest.TabIndex = 149;
+            Btnrest.TabStop = false;
+            Btnrest.Visible = false;
+            // 
+            // Btnmaximi
+            // 
+            Btnmaximi.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            Btnmaximi.BackColor = Color.Transparent;
+            Btnmaximi.Cursor = Cursors.Hand;
+            Btnmaximi.ErrorImage = null;
+            Btnmaximi.Location = new Point(2758, 7);
+            Btnmaximi.Name = "Btnmaximi";
+            Btnmaximi.Size = new Size(25, 25);
+            Btnmaximi.SizeMode = PictureBoxSizeMode.Zoom;
+            Btnmaximi.TabIndex = 147;
+            Btnmaximi.TabStop = false;
+            // 
+            // Btnmini
+            // 
+            Btnmini.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            Btnmini.BackColor = Color.Transparent;
+            Btnmini.Cursor = Cursors.Hand;
+            Btnmini.ErrorImage = null;
+            Btnmini.Location = new Point(2727, 7);
+            Btnmini.Name = "Btnmini";
+            Btnmini.Size = new Size(25, 25);
+            Btnmini.SizeMode = PictureBoxSizeMode.Zoom;
+            Btnmini.TabIndex = 148;
+            Btnmini.TabStop = false;
+            // 
+            // btncerrarr
+            // 
+            btncerrarr.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btncerrarr.BackColor = Color.Transparent;
+            btncerrarr.Cursor = Cursors.Hand;
+            btncerrarr.ErrorImage = null;
+            btncerrarr.Location = new Point(2789, 7);
+            btncerrarr.Name = "btncerrarr";
+            btncerrarr.Size = new Size(25, 25);
+            btncerrarr.SizeMode = PictureBoxSizeMode.Zoom;
+            btncerrarr.TabIndex = 146;
+            btncerrarr.TabStop = false;
+            // 
             // IngresarDatosEmpresa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(800, 507);
+            Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(guna2Button2);
             Controls.Add(pictureBox1);
             Controls.Add(Cliente);
@@ -296,10 +487,22 @@
             Controls.Add(label7);
             Controls.Add(label8);
             Controls.Add(label9);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "IngresarDatosEmpresa";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "IngresarDatosEmpresa";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            guna2CustomGradientPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnMaximizar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnRestaurar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bntMinimizar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnCerrar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Btnrest).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Btnmaximi).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Btnmini).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btncerrarr).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -319,5 +522,16 @@
         private Label Cliente;
         private PictureBox pictureBox1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
+        private PictureBox pictureBox2;
+        private PictureBox btnMaximizar;
+        private PictureBox btnRestaurar;
+        private PictureBox bntMinimizar;
+        private PictureBox btnCerrar;
+        private PictureBox Btnrest;
+        private PictureBox Btnmaximi;
+        private PictureBox Btnmini;
+        private PictureBox btncerrarr;
+        private PictureBox pictureBox3;
     }
 }

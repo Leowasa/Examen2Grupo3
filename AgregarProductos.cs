@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,12 +23,16 @@ namespace Examen2Grupo3
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
 
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
         public Agregar_Productos()
         {
             InitializeComponent();
 
             // Initialize non-nullable properties to default values to fix CS8618  
-        
+
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
@@ -40,13 +45,13 @@ namespace Examen2Grupo3
                 Categoria = guna2TextBox4.Text;
                 PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
                 Cantidad = int.Parse(guna2TextBox5.Text);
-            } 
-            catch 
+            }
+            catch
             {
                 MessageBox.Show("Datos incompletos o erróneos. Intente nuevamente");
                 return;
             }
-        
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -60,10 +65,10 @@ namespace Examen2Grupo3
                 guna2TextBox3.Text = descripcion;
                 guna2TextBox5.Text = Cantidad;
                 guna2TextBox6.Text = precio;
-               
 
-               // guna2TextBox1.ReadOnly = true;
-               // guna2TextBox1.BackColor = Color.LightGray;
+
+                // guna2TextBox1.ReadOnly = true;
+                // guna2TextBox1.BackColor = Color.LightGray;
             }
             catch
 
@@ -91,6 +96,24 @@ namespace Examen2Grupo3
         private void Agregar_Productos_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void guna2TextBox6_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 

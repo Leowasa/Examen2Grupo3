@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.InteropServices;
+using Newtonsoft.Json;
 using static Examen2Grupo3.RegistroPedidos;
 
 namespace Examen2Grupo3
@@ -9,6 +10,13 @@ namespace Examen2Grupo3
         private static Empresa empresactual = new Empresa();
         List<Usuarios> lista = new List<Usuarios>();
         public Usuarios Usuarios { get; set; }
+
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
+
         public OpcionesSuperUsuario(int opcion, Usuarios usuarioActual)
         {
             Usuarios = usuarioActual;
@@ -61,9 +69,9 @@ namespace Examen2Grupo3
                         if (usuario.ID == Usuarios.ID) // Example condition
                         {
                             usuario.Password = guna2TextBox1.Text; // Update the password
-                        
+
                         }
-                       
+
                     }
                     var updatedJson = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented); // Renamed variable to avoid conflict
                     File.WriteAllText("usuarios.json", updatedJson);
@@ -88,7 +96,7 @@ namespace Examen2Grupo3
                 case 1:
                     GuardarCodigo();
                     MessageBox.Show("Operacion realizada exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    break;         
+                    break;
             }
             this.Close();
         }
@@ -96,6 +104,19 @@ namespace Examen2Grupo3
         private void lael1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+
+        }
+
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

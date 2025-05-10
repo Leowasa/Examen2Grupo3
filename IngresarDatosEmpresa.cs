@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Runtime.InteropServices;
+using System.Xml;
 using Newtonsoft.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static Examen2Grupo3.RegistroPedidos;
@@ -9,6 +10,11 @@ namespace Examen2Grupo3
     public partial class IngresarDatosEmpresa : Form
     {
         public Empresa datos;
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
+
         public IngresarDatosEmpresa()
         {
             InitializeComponent();
@@ -82,6 +88,19 @@ namespace Examen2Grupo3
         private void guna2Button1_Click_1(object sender, EventArgs e)
         {
             ObtenerDatos();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

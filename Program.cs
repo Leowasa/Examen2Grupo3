@@ -17,8 +17,8 @@ namespace ejemplo
 
             try
             {
-                RegistroPedidos.Usuarios usuario = new RegistroPedidos.Usuarios();
-                Application.Run(new Form1());
+              
+                Application.Run(new Login());
             }
             catch (System.NullReferenceException ex)
             {

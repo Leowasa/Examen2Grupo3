@@ -219,5 +219,15 @@ namespace Examen2Grupo3.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Byte[].
+        /// </summary>
+        internal static byte[] usuarios {
+            get {
+                object obj = ResourceManager.GetObject("usuarios", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -57,9 +57,9 @@
             Cliente.BackColor = Color.Transparent;
             Cliente.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
             Cliente.ForeColor = Color.Gainsboro;
-            Cliente.Location = new Point(403, 9);
+            Cliente.Location = new Point(448, 9);
             Cliente.Name = "Cliente";
-            Cliente.Size = new Size(253, 70);
+            Cliente.Size = new Size(131, 33);
             Cliente.TabIndex = 98;
             Cliente.Text = "Usuarios";
             Cliente.TextAlign = ContentAlignment.TopCenter;
