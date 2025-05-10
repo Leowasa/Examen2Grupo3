@@ -1,17 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ejemplo;
+using Newtonsoft.Json;
 using static Examen2Grupo3.RegistroPedidos;
-using ejemplo;
-using static Examen2Grupo3.Login;
-using static Examen2Grupo3.GenerarPedido;
 
 namespace Examen2Grupo3
 {
@@ -19,7 +8,7 @@ namespace Examen2Grupo3
     {
         public static Pedido seleccionado = new Pedido();
         public static List<Pedido> Lista = new List<Pedido>();
-        public  RegistroPedidos.Usuarios UsuarioActual = new RegistroPedidos.Usuarios();
+        public RegistroPedidos.Usuarios UsuarioActual = new RegistroPedidos.Usuarios();
         // private bool _cargandoDatos = false;
         Form1 form = new Form1();
         public GenerarOrden(RegistroPedidos.Usuarios UsuarioActual)
@@ -147,7 +136,7 @@ namespace Examen2Grupo3
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                switch (opcion) 
+                switch (opcion)
                 {
                     case 1:
                         principal.AbrirFormularioEnPanel(new Factura(seleccionadot, opcion)); // Reemplaza con el formulario que desees abrir
@@ -156,7 +145,7 @@ namespace Examen2Grupo3
                         principal.AbrirFormularioEnPanel(new Factura(seleccionadot, opcion, UsuarioActual)); // Reemplaza con el formulario que desees abrir
                         break;
                 }
-               
+
             }
         }
         private void BuscarElemento(string textoBusqueda)
@@ -218,7 +207,7 @@ namespace Examen2Grupo3
                                 {
                                     lista.Estado = estadoActual;
                                     GuardarCambios(Lista);
-                                   
+
                                     CargarDatosDesdeJson();
                                     return;
                                 }
@@ -283,11 +272,11 @@ namespace Examen2Grupo3
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
             {
                 var pedido = ObtenerPedidoSeleccionado();
-                if (pedido != null) 
+                if (pedido != null)
                 {
                     AbrirOtroFormulario(pedido, 1);
                 }
-                
+
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
@@ -354,3 +343,42 @@ namespace Examen2Grupo3
         }
     }
 }
+/*private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+{
+    if (dataGridView1.CurrentCell.ColumnIndex == dataGridView1.Columns["Estado"].Index && e.Control is ComboBox combo)
+    {
+        combo.SelectedIndexChanged -= ComboBox_SelectedIndexChanged; // Evita múltiples suscripciones
+        combo.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+
+        // Definir opciones iniciales según el estado actual en la celda
+        string estadoActual = dataGridView1.CurrentCell.Value?.ToString() ?? "Pendiente";
+        ActualizarOpcionesComboBox(combo, estadoActual);
+    }
+}
+
+private void ActualizarOpcionesComboBox(ComboBox combo, string estadoActual)
+{
+    List<string> nuevosEstados = new List<string>();
+
+    switch (estadoActual)
+    {
+        case "Pendiente":
+            nuevosEstados = new List<string> { "Aprobado", "Rechazado" };
+            break;
+        case "Aprobado":
+            nuevosEstados = new List<string> { "Entregado" };
+            break;
+        case "Rechazado":
+            nuevosEstados = new List<string> { "Pendiente" };
+            break;
+        case "Entregado":
+            nuevosEstados = new List<string> { "Entregado" }; // Solo se mantiene entregado
+            break;
+    }
+
+    combo.Items.Clear();
+    combo.Items.AddRange(nuevosEstados.ToArray());
+
+
+dataGridView1.EditingControlShowing += dataGridView1_EditingControlShowing;
+}*/
