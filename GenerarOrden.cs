@@ -190,18 +190,16 @@ namespace Examen2Grupo3
 
         private void ComboBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            // Obtener el ComboBox que disparó el evento  
             var comboBox = sender as ComboBox;
 
             if (comboBox != null)
             {
-                // Obtener la fila actual del DataGridView  
                 var fila = dataGridView1.CurrentRow;
                 string? estadoActual = comboBox.SelectedItem?.ToString();
 
-                if (estadoActual == null)
+                if (estadoActual == "Entregado")
                 {
-                    MessageBox.Show("El estado seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("El estado 'Entregado' no puede ser modificado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -321,6 +319,7 @@ namespace Examen2Grupo3
 
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Estado" &&
         dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
@@ -335,10 +334,12 @@ namespace Examen2Grupo3
                         comboBoxCell.Items.AddRange(new string[] { "Pendiente", "Aprobado", "Rechazado" });
                         break;
                     case "Aprobado":
-                        comboBoxCell.Items.AddRange(new string[] { "Entregado" });
+                        comboBoxCell.Items.AddRange(new string[] { "Aprobado", "Entregado" });
                         break;
                     case "Entregado":
-                        comboBoxCell.ReadOnly = true;
+                        // Cancelar la edición si el estado es "Entregado"
+                        MessageBox.Show("El estado 'Entregado' no puede ser modificado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        e.Cancel = true;
                         break;
                     case "Rechazado":
                         comboBoxCell.Items.AddRange(new string[] { "Rechazado" });
