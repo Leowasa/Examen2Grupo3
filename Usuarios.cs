@@ -232,7 +232,7 @@ namespace ejemplo
                            
                         }
                     }
-                    GuardarUsuarios("Usuarios.Json");
+                    GuardarUsuarios("usuarios.Json");
                     CargarDatosEnDataGridView();
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                   
