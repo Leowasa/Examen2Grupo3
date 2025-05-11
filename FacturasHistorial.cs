@@ -64,33 +64,7 @@ namespace Examen2Grupo3
 
             }
         }
-        private void BuscarElemento(string textoBusqueda)
-        {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length >= 3)
-            {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
-            }
 
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
-            {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["Numero"].Value != null && fila.Cells["Numero"].Value.ToString().Contains(filtro, StringComparison.CurrentCultureIgnoreCase)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
-
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
-            }
-        }
         private void GenerarFacturaPDF(string pdfPath)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -293,7 +267,33 @@ namespace Examen2Grupo3
                 }
             }
         }
+        private void BuscarElemento(string textoBusqueda)
+        {
+            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            if (textoBusqueda.Length >= 3)
+            {
+                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
+                {
+                    fila.Visible = true;
+                }
+                return;
+            }
 
+            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
+            string filtro = textoBusqueda.ToLower();
+
+            // Iterar sobre las filas del DataGridView
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            {
+                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
+                bool coincide = (fila.Cells["Numero"].Value != null && fila.Cells["Numero"].Value.ToString().Contains(filtro, StringComparison.CurrentCultureIgnoreCase)) ||
+                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+
+                // Mostrar u ocultar la fila según si coincide con el filtro
+                fila.Visible = coincide;
+            }
+        }
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
         {
             BuscarElemento(guna2TextBox1.Text);

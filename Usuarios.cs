@@ -10,27 +10,28 @@ using System.Collections.Immutable;
 using System.Windows.Forms;
 using ejemplo;
 using Newtonsoft.Json;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ejemplo
 {
     public partial class Usuarios : Form
     {
 
-        private Panel PanelPrincipal= new Panel();
+        private Panel PanelPrincipal = new Panel();
         RegistroPedidos.Usuarios Usuarioactual = new RegistroPedidos.Usuarios();
         RegistroPedidos.Usuarios Nuevo = new RegistroPedidos.Usuarios();
         List<RegistroPedidos.Usuarios> usuarios = new List<RegistroPedidos.Usuarios>();
-        AgregarCliente Operar= new AgregarCliente(1);
+        AgregarCliente Operar = new AgregarCliente(1);
         public Usuarios(RegistroPedidos.Usuarios usuarioactual)
         {
 
             InitializeComponent(); // Inicializa los controles del formulario
             usuarios = LeerUsuarios(); // Carga la lista de usuarios
-           
+
 
             this.Usuarioactual = usuarioactual;
             ControlUsuario1(usuarioactual);
-            ConfigurarTextBox();
+            //ConfigurarTextBox();
             CargarDatosEnDataGridView();
 
         }
@@ -53,7 +54,7 @@ namespace ejemplo
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             Operar = new AgregarCliente(1);
-          
+
             if (Operar.ShowDialog() == DialogResult.OK)
             {
                 usuarios.Add(Operar.ObtenerUsuario());
@@ -62,9 +63,9 @@ namespace ejemplo
                 CargarDatosEnDataGridView();
 
             }
-           
-        }
 
+        }
+        /*
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
             string textoBusqueda = textBox1.Text.Trim(); // Obtener el texto de búsqueda y eliminar espacios en blanco
@@ -115,13 +116,8 @@ namespace ejemplo
                 textBox1.ForeColor = Color.Gray;
             }
         }
+        */
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-       
         private List<RegistroPedidos.Usuarios> LeerUsuarios()
         {
             // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
@@ -144,14 +140,14 @@ namespace ejemplo
         }
 
 
-
+        /*
         private void ConfigurarTextBox()
         {
             textBox1.Text = "Ingresar Nombre o ID";
             textBox1.ForeColor = Color.Gray;
             textBox1.Enter += textBox1_Enter;
             textBox1.Leave += textBox1_Leave;
-        }
+        }*/
         public void ControlUsuario1(RegistroPedidos.Usuarios Usuarioactual)
         {
 
@@ -168,7 +164,7 @@ namespace ejemplo
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-      
+
         }
 
         private void CargarDatosEnDataGridView()
@@ -176,7 +172,7 @@ namespace ejemplo
             dataGridView1.Rows.Clear();
             foreach (var row in usuarios)
             {
-          
+
                 dataGridView1.Rows.Add(row.ID, row.Nombre, row.Username, row.Tipo);
 
             }
@@ -229,13 +225,13 @@ namespace ejemplo
 
                             // Agregar el usuario a la lista
                             usuarios.Add(usuario);
-                           
+
                         }
                     }
                     GuardarUsuarios("usuarios.Json");
                     CargarDatosEnDataGridView();
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                  
+
                 }
                 else MessageBox.Show("Importación  no completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -254,9 +250,9 @@ namespace ejemplo
 
                     foreach (var fila in usuarios)
                     {
-                        
-                            sw.WriteLine($"{fila.ID},{fila.Nombre},{fila.Username},{fila.Password},{fila.Tipo}");
-                        
+
+                        sw.WriteLine($"{fila.ID},{fila.Nombre},{fila.Username},{fila.Password},{fila.Tipo}");
+
                     }
                 }
 
@@ -295,7 +291,7 @@ namespace ejemplo
                     {
                         ImportarCSV(ofd.FileName);
 
-                     
+
                     }
                     catch (Exception ex)
                     {
@@ -333,11 +329,16 @@ namespace ejemplo
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
+        }
+
+        private void dataGridView1_CellClick_2(object sender, DataGridViewCellEventArgs e)
+        {
+
             if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
 
@@ -346,11 +347,11 @@ namespace ejemplo
                     MessageBox.Show("Necesita Ser Administrador para realizar la operacion.");
                     return;
                 }
-                else if(usuarios[e.RowIndex].Tipo == "Administrador" || usuarios[e.RowIndex].Tipo =="SuperUsuario")
+                else if (usuarios[e.RowIndex].Tipo == "Administrador" || usuarios[e.RowIndex].Tipo == "SuperUsuario")
                 {
                     MessageBox.Show("No tiene permisos para eliminar este tipo de Usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-                
+
                 }
                 DialogResult result = MessageBox.Show($"¿Deseas eliminar a {usuarios[e.RowIndex].Username}?", "Confirmar eliminación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -366,15 +367,15 @@ namespace ejemplo
             {
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
                 // Verificar que los valores requeridos no sean nulos  
-                if (usuarios[e.RowIndex]!=null)
+                if (usuarios[e.RowIndex] != null)
                 {
                     // Crear una instancia del formulario de edición y pasar los datos  
-                   
+
                     Operar.SetDatosUsuarios(usuarios[e.RowIndex]);
-                     // Mostrar el formulario de edición como una ventana modal  
+                    // Mostrar el formulario de edición como una ventana modal  
                     if (Operar.ShowDialog() == DialogResult.OK)
                     {
-                        usuarios[e.RowIndex] =  Operar.ObtenerUsuario();
+                        usuarios[e.RowIndex] = Operar.ObtenerUsuario();
                         GuardarUsuarios("usuarios.json");
                         CargarDatosEnDataGridView();
                     }
@@ -383,8 +384,44 @@ namespace ejemplo
                 {
                     MessageBox.Show("Algunos datos requeridos están vacíos o son nulos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-    
+
             }
+        }
+        private void BuscarElemento(string textoBusqueda)
+        {
+            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            if (textoBusqueda.Length < 3)
+            {
+                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
+                {
+                    fila.Visible = true;
+                }
+                return;
+            }
+
+            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
+            string filtro = textoBusqueda.ToLower();
+
+            // Iterar sobre las filas del DataGridView
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            {
+                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
+                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().Contains(filtro, StringComparison.CurrentCultureIgnoreCase)) ||
+                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+
+                // Mostrar u ocultar la fila según si coincide con el filtro
+                fila.Visible = coincide;
+            }
+        }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            BuscarElemento(guna2TextBox1.Text);
         }
     }
 }

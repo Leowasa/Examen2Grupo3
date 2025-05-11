@@ -35,15 +35,15 @@ namespace ejemplo
         }
         public void AbrirFormularioEnPanel(Form formulario)
         {
-            // Limpiar el panel antes de agregar el nuevo formulario
             PanelPrincipal.Controls.Clear();
 
-            // Configurar el formulario dentro del panel
             formulario.TopLevel = false;
             formulario.FormBorderStyle = FormBorderStyle.None;
-            formulario.Dock = DockStyle.Fill;
 
-            // Agregar el formulario al panel y mostrarlo
+            // Ajustar el tamaño del formulario al contenido
+            formulario.AutoSize = true;
+            formulario.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
             PanelPrincipal.Controls.Add(formulario);
             formulario.Show();
         }
@@ -311,6 +311,11 @@ namespace ejemplo
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
 
+
+        }
+
+        private void PanelPrincipal_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

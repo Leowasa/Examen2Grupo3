@@ -22,7 +22,7 @@ namespace Examen2Grupo3
         private Producto ProductoNuevo;
         List<Producto> listaProductos = new List<Producto>();
         private Usuarios usuarioActual = new Usuarios();
-        private List<Producto> inventarioOriginal =new List<Producto>();
+        private List<Producto> inventarioOriginal = new List<Producto>();
         public GenerarPedido(Usuarios usuarioActual)
         {
             InitializeComponent();
@@ -103,8 +103,8 @@ namespace Examen2Grupo3
                     Direccion = guna2TextBox4.Text,
 
                 };
-               
-                return"";
+
+                return "";
 
             }
             catch
@@ -140,29 +140,7 @@ namespace Examen2Grupo3
 
 
         // Guardar el pedido cuando el usuario presione el botón
-        private void guna2Button3_Click_1(object sender, EventArgs e)
-        {
-            if (pedido.Productos == null || GuardarCliente() == null)
-            {
-                MessageBox.Show("Faltan Datos por rellenar");
-                return;
-            }
-            pedido.Encargado = usuarioActual;
-            pedido.ID = NumeroPedido;
-            pedido.Fecha = guna2DateTimePicker1.Value;
-            GuardarDatosEnJson(pedido);
-            dataGridView1.Rows.Clear();
-            LimpiarTextBox();
-            lblDescuento.Text = "Descuento: ";
-            lblSubtotal.Text = "Subtotal: ";
-            lblTotal.Text = "Total: ";
-            Cliente.Text = "Pedido Nº: " + CargarNum();
-            
-            MessageBox.Show("Pedido generado exitosamente!");
-
-
-
-        }
+      
         private void LimpiarTextBox()
         {
             foreach (Control control in this.Controls)
@@ -196,7 +174,7 @@ namespace Examen2Grupo3
             lblTotal.Text = "Total: ";
             GuardarInventario("Inventario.json");
             pedido.Productos.Clear(); // Limpiar la lista de productos del pedido actual
-            
+
         }
 
         private void guna2Button4_Click(object sender, EventArgs e)
@@ -224,7 +202,7 @@ namespace Examen2Grupo3
 
         private void guna2Button6_Click(object sender, EventArgs e)
         {
-     
+
         }
 
         private void btnagregarProductoClick(object sender, EventArgs e)
@@ -250,9 +228,9 @@ namespace Examen2Grupo3
 
                     }
                     pedido.Estado = "Pendiente";
-                
+
                     pedido.Productos.Add(ProductoNuevo); //codigo anterior  pedido.Productos = ListaProductos
-        
+
 
                     Descuento();
                     dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario, ProductoNuevo.Cantidad * ProductoNuevo.PrecioUnitario);
@@ -274,10 +252,10 @@ namespace Examen2Grupo3
             var culture = new System.Globalization.CultureInfo("en-US"); // Cultura con símbolo "$"
 
             lblSubtotal.Text = "Subtotal: " + pedido.SubtTotal.ToString("C2", culture);
-            var cantidad  = pedido.Productos.Sum(p => p.Cantidad);
+            var cantidad = pedido.Productos.Sum(p => p.Cantidad);
             if (cantidad > 3)
             {
-               
+
                 pedido.Descuento = pedido.SubtTotal * 0.20M;
                 pedido.Total = pedido.SubtTotal - pedido.Descuento;
 
@@ -288,8 +266,32 @@ namespace Examen2Grupo3
             else
             {
                 pedido.Total = pedido.SubtTotal;
-                lblTotal.Text ="Total: "+ pedido.SubtTotal.ToString("C2", culture);
+                lblTotal.Text = "Total: " + pedido.SubtTotal.ToString("C2", culture);
             }
+
+
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+
+            if (pedido.Productos == null || GuardarCliente() == null)
+            {
+                MessageBox.Show("Faltan Datos por rellenar");
+                return;
+            }
+            pedido.Encargado = usuarioActual;
+            pedido.ID = NumeroPedido;
+            pedido.Fecha = guna2DateTimePicker1.Value;
+            GuardarDatosEnJson(pedido);
+            dataGridView1.Rows.Clear();
+            LimpiarTextBox();
+            lblDescuento.Text = "Descuento: ";
+            lblSubtotal.Text = "Subtotal: ";
+            lblTotal.Text = "Total: ";
+            Cliente.Text = "Pedido Nº: " + CargarNum();
+
+            MessageBox.Show("Pedido generado exitosamente!");
 
 
         }

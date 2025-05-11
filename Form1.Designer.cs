@@ -111,7 +111,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1200, 733);
+            panel1.Size = new Size(1200, 750);
             panel1.TabIndex = 0;
             // 
             // PanelPrincipal
@@ -120,8 +120,9 @@
             PanelPrincipal.Dock = DockStyle.Fill;
             PanelPrincipal.Location = new Point(250, 35);
             PanelPrincipal.Name = "PanelPrincipal";
-            PanelPrincipal.Size = new Size(950, 698);
+            PanelPrincipal.Size = new Size(950, 715);
             PanelPrincipal.TabIndex = 145;
+            PanelPrincipal.Paint += PanelPrincipal_Paint;
             // 
             // panel3
             // 
@@ -139,7 +140,7 @@
             panel3.Dock = DockStyle.Left;
             panel3.Location = new Point(0, 35);
             panel3.Name = "panel3";
-            panel3.Size = new Size(250, 698);
+            panel3.Size = new Size(250, 715);
             panel3.TabIndex = 144;
             // 
             // panelVentas
@@ -639,9 +640,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(1200, 733);
+            ClientSize = new Size(1200, 750);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form1";
