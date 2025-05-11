@@ -113,6 +113,7 @@
             guna2TextBox6.Location = new Point(1028, 121);
             guna2TextBox6.Name = "guna2TextBox6";
             guna2TextBox6.PlaceholderText = "";
+            guna2TextBox6.ReadOnly = true;
             guna2TextBox6.SelectedText = "";
             guna2TextBox6.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2TextBox6.Size = new Size(181, 23);
@@ -187,6 +188,7 @@
             guna2TextBox4.Location = new Point(818, 121);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
+            guna2TextBox4.ReadOnly = true;
             guna2TextBox4.SelectedText = "";
             guna2TextBox4.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2TextBox4.Size = new Size(181, 23);
@@ -219,6 +221,7 @@
             guna2TextBox3.Location = new Point(818, 183);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
+            guna2TextBox3.ReadOnly = true;
             guna2TextBox3.SelectedText = "";
             guna2TextBox3.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2TextBox3.Size = new Size(181, 23);
@@ -240,6 +243,7 @@
             guna2TextBox2.Location = new Point(613, 183);
             guna2TextBox2.Name = "guna2TextBox2";
             guna2TextBox2.PlaceholderText = "";
+            guna2TextBox2.ReadOnly = true;
             guna2TextBox2.SelectedText = "";
             guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2TextBox2.Size = new Size(181, 23);
@@ -261,6 +265,7 @@
             guna2TextBox1.Location = new Point(613, 121);
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderText = "";
+            guna2TextBox1.ReadOnly = true;
             guna2TextBox1.SelectedText = "";
             guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges14;
             guna2TextBox1.Size = new Size(181, 23);

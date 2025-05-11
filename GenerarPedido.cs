@@ -272,7 +272,7 @@ namespace Examen2Grupo3
         }
         public void Descuento()
         {
-            lblSubtotal.Text = "Subtotal: $" + pedido.SubtTotal.ToString();
+            lblSubtotal.Text = "Subtotal: $" + pedido.SubtTotal.ToString("C2");
             var cantidad  = pedido.Productos.Sum(p => p.Cantidad);
             if (cantidad > 3)
             {
@@ -280,14 +280,14 @@ namespace Examen2Grupo3
                 pedido.Descuento = pedido.SubtTotal * 0.20M;
                 pedido.Total = pedido.SubtTotal - pedido.Descuento;
 
-                lblTotal.Text = "total: $" + pedido.Total.ToString();
-                lblDescuento.Text = "Descuento(20%): $" + pedido.Descuento;
+                lblTotal.Text = "total: $" + pedido.Total.ToString("C2");
+                lblDescuento.Text = "Descuento(20%): $" + pedido.Descuento.ToString("C2");
 
             }
             else
             {
                 pedido.Total = pedido.SubtTotal;
-                lblTotal.Text ="Total: "+ pedido.SubtTotal.ToString();
+                lblTotal.Text ="Total: "+ pedido.SubtTotal.ToString("C2");
             }
 
 

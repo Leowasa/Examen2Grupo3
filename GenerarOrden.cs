@@ -235,41 +235,15 @@ namespace Examen2Grupo3
             }
             editar(e);
         }
-        private Pedido ObtenerPedidoSeleccionado()
-        {
-            // Verificar si hay una fila seleccionada en el DataGridView
-            if (dataGridView1.CurrentRow != null)
-            {
-                // Obtener el valor del ID de la fila seleccionada
-                var idSeleccionado = dataGridView1.CurrentRow.Cells["Numero"].Value?.ToString();
-
-                if (!string.IsNullOrEmpty(idSeleccionado))
-                {
-                    // Buscar el pedido en la lista por el ID
-                    var pedidoSeleccionado = Lista.FirstOrDefault(p => p.ID.ToString() == idSeleccionado);
-
-                    if (pedidoSeleccionado != null)
-                    {
-                        return pedidoSeleccionado;
-
-                    }
-                }
-            }
-
-            // Si no se encuentra el pedido, devolver null o manejar el caso
-            MessageBox.Show("No se pudo encontrar el pedido seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return null;
-        }
 
         public void editar(DataGridViewCellEventArgs e)
         {
 
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
             {
-                var pedido = ObtenerPedidoSeleccionado();
-                if (pedido != null)
+                if (Lista[e.RowIndex] != null)
                 {
-                    AbrirOtroFormulario(pedido, 1);
+                    AbrirOtroFormulario(Lista[e.RowIndex], 1);
                 }
 
             }

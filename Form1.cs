@@ -16,8 +16,10 @@ namespace ejemplo
 
         public Form1(RegistroPedidos.Usuarios UsuarioActual)
         {
-            this.UsuarioActual = UsuarioActual;
             InitializeComponent();
+            // En el constructor de Form1 o en el diseñador
+            PanelPrincipal.AutoScroll = true;
+            this.UsuarioActual = UsuarioActual;
             customizemenu();
             lblRol.Text = UsuarioActual.Tipo;
             lblUsuario.Text = UsuarioActual.Username;
