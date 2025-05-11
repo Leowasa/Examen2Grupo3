@@ -93,43 +93,55 @@ namespace Examen2Grupo3
         }
         private void GenerarFacturaPDF(string pdfPath)
         {
-           
-            Document document = new Document(PageSize.A4, 45, 45, 45, 45);
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            // **Primer pase: calcular el número total de páginas**
+            int totalPages;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Document tempDocument = new Document(PageSize.A4, 45, 45, 45, 45);
+                PdfWriter tempWriter = PdfWriter.GetInstance(tempDocument, ms);
+                PageNumberHelper tempPageEvent = new PageNumberHelper();
+                tempWriter.PageEvent = tempPageEvent;
+
+                tempDocument.Open();
+                string htmlContent = Properties.Resources.plantilla_factura != null
+                    ? Encoding.UTF8.GetString(Properties.Resources.plantilla_factura)
+                    : string.Empty;
+                htmlContent = rellenarHtml(htmlContent, tempDocument);
+
+                using (var reader = new StringReader(htmlContent))
+                {
+                    XMLWorkerHelper.GetInstance().ParseXHtml(tempWriter, tempDocument, reader);
+                }
+
+                tempDocument.Close();
+                totalPages = tempWriter.PageNumber; // Calcula el número total de páginas
+            }
 
             try
             {
-                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
+                // **Segundo pase: generar el documento final**
                 using (FileStream fs = new FileStream(pdfPath, FileMode.Create))
                 {
-                    PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                    Document finalDocument = new Document(PageSize.A4, 45, 45, 45, 45);
+                    PdfWriter finalWriter = PdfWriter.GetInstance(finalDocument, fs);
+                    PageNumberHelper finalPageEvent = new PageNumberHelper();
+                    finalPageEvent.TotalPages = totalPages; // Usa el total calculado en el primer pase
+                    finalWriter.PageEvent = finalPageEvent;
 
-                    // **1. Agregar el evento de numeración de páginas**
-                    PageNumberHelper pageEvent = new PageNumberHelper();
-                    pageEvent.Observaciones = Actual.Observaciones;
-                    writer.PageEvent = pageEvent;
-
-                    document.Open();
-                    document.Add(new Phrase(""));
-
-                    // Fix for CS0029 and CS8600: Convert byte[] to string using Encoding.UTF8.GetString and handle potential null values.
+                    finalDocument.Open();
                     string htmlContent = Properties.Resources.plantilla_factura != null
-                       ? Encoding.UTF8.GetString(Properties.Resources.plantilla_factura)
-                       : string.Empty;
-                    htmlContent = rellenarHtml(htmlContent, document);
+                        ? Encoding.UTF8.GetString(Properties.Resources.plantilla_factura)
+                        : string.Empty;
+                    htmlContent = rellenarHtml(htmlContent, finalDocument);
 
-
-                    using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(htmlContent)))
-                    using (var reader = new StreamReader(ms, Encoding.UTF8))
+                    using (var reader = new StringReader(htmlContent))
                     {
-                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, reader);
+                        XMLWorkerHelper.GetInstance().ParseXHtml(finalWriter, finalDocument, reader);
                     }
 
-                    // **3. Actualizar el número total de páginas**
-                    pageEvent.TotalPages = writer.PageNumber;
-
-                    document.Close();
-                    fs.Close();
+                    finalDocument.Close();
                 }
 
                 MessageBox.Show("✅ PDF generado correctamente.");
@@ -139,6 +151,7 @@ namespace Examen2Grupo3
                 MessageBox.Show($"❌ Error inesperado: {ex.Message}");
             }
         }
+
 
         private string rellenarHtml(string htmlContent, Document document)
         {
