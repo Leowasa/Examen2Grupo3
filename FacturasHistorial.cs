@@ -93,7 +93,7 @@ namespace Examen2Grupo3
         }
         private void GenerarFacturaPDF(string pdfPath)
         {
-            string htmlPath = Properties.Resources.plantilla_factura?.ToString() ?? string.Empty;
+           
             Document document = new Document(PageSize.A4, 45, 45, 45, 45);
 
             try
@@ -112,9 +112,12 @@ namespace Examen2Grupo3
                     document.Open();
                     document.Add(new Phrase(""));
 
-                    // **2. Leer contenido HTML**
-                    string htmlContent = File.ReadAllText("Factura - copia.html", Encoding.UTF8);
+                    // Fix for CS0029 and CS8600: Convert byte[] to string using Encoding.UTF8.GetString and handle potential null values.
+                    string htmlContent = Properties.Resources.plantilla_factura != null
+                       ? Encoding.UTF8.GetString(Properties.Resources.plantilla_factura)
+                       : string.Empty;
                     htmlContent = rellenarHtml(htmlContent, document);
+
 
                     using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(htmlContent)))
                     using (var reader = new StreamReader(ms, Encoding.UTF8))
