@@ -18,7 +18,7 @@ namespace ejemplo
             try
             {
               
-                Application.Run(new Form1());
+                Application.Run(new Login());
             }
             catch (System.NullReferenceException ex)
             {
