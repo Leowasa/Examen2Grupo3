@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheArtOfDevHtmlRenderer.Adapters;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 using static System.Windows.Forms.Design.AxImporter;
 using ejemplo;
 using iTextSharp.text;
@@ -25,7 +25,7 @@ namespace Examen2Grupo3
         private static int NumeroPedido;
         private int Opcion;
         private static Pedido orden;
-        private RegistroPedidos.Usuarios usuarioActual = new RegistroPedidos.Usuarios();
+        private Datos.Usuarios usuarioActual = new Datos.Usuarios();
         public Factura(Pedido pedido, int opcion)
         {
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace Examen2Grupo3
             InitializeComponent();
          
         }
-        public Factura(Pedido pedido, int opcion, RegistroPedidos.Usuarios usuario)
+        public Factura(Pedido pedido, int opcion, Datos.Usuarios usuario)
         {
             usuarioActual = usuario;
             Opcion = opcion;

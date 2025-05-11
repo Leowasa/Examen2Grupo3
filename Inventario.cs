@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Runtime.Versioning;
 using System.Text.Json;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
 {
@@ -11,7 +11,7 @@ namespace Examen2Grupo3
         //revisar cuando se elimina, buscar en datagrid, 
         private Producto Producto;
         private List<Producto> inventario = new List<Producto>();
-        RegistroPedidos.Usuarios Usuarioactual = new RegistroPedidos.Usuarios();
+        Datos.Usuarios Usuarioactual = new Datos.Usuarios();
         public Inventario(Usuarios usuarioactual)
         {
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace Examen2Grupo3
             {
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
 
-                Agregar_Productos formEditar = new Agregar_Productos();
+                Agregar_Productos formEditar = new Agregar_Productos(inventario);
                 formEditar.SetDatosProducto(
                     filaSeleccionada.Cells["ID"].Value.ToString() ?? "0",
                     filaSeleccionada.Cells["Nombre"].Value.ToString() ?? "",
@@ -175,13 +175,13 @@ namespace Examen2Grupo3
             {
 
                 string json = File.ReadAllText(rutaArchivo);
-                List<Producto>? listaProductos = JsonSerializer.Deserialize<List<Producto>>(json);
+                inventario = JsonSerializer.Deserialize<List<Producto>>(json)??new List<Producto>();
 
-                if (listaProductos != null) // Verificar que la lista no sea nula
+                if (inventario != null) // Verificar que la lista no sea nula
                 {
                     dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos
 
-                    foreach (var producto in listaProductos)
+                    foreach (var producto in inventario)
                     {
                         dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario);
                     }
@@ -267,19 +267,19 @@ namespace Examen2Grupo3
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            Agregar_Productos formProductos = new Agregar_Productos();
+            Agregar_Productos formProductos = new Agregar_Productos(inventario);
             if (formProductos.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
                     Producto ProductoNuevo = new Producto
                     {
-                        ID = formProductos.Id,
-                        Nombre = formProductos.Nombre,
-                        Categoria = formProductos.Categoria,
-                        Descripcion = formProductos.Descripcion,
-                        PrecioUnitario = formProductos.PrecioUnitario,
-                        Cantidad = formProductos.Cantidad
+                        ID = formProductos.producto.ID,
+                        Nombre = formProductos.producto.Nombre,
+                        Categoria = formProductos.producto.Categoria,
+                        Descripcion = formProductos.producto.Descripcion,
+                        PrecioUnitario = formProductos.producto.PrecioUnitario,
+                        Cantidad = formProductos.producto.Cantidad
                     };
 
                     inventario.Add(ProductoNuevo);
@@ -313,7 +313,7 @@ namespace Examen2Grupo3
         }
 
       
-        public void ControlUsuario1(RegistroPedidos.Usuarios Usuarioactual)
+        public void ControlUsuario1(Datos.Usuarios Usuarioactual)
         {
 
             if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")

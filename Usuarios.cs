@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.util;
 using Examen2Grupo3;
 using System.Data;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 using Examen2Grupo3.Properties;
 using ejemplo;
 using System.Collections.Immutable;
@@ -18,11 +18,11 @@ namespace ejemplo
     {
 
         private Panel PanelPrincipal = new Panel();
-        RegistroPedidos.Usuarios Usuarioactual = new RegistroPedidos.Usuarios();
-        RegistroPedidos.Usuarios Nuevo = new RegistroPedidos.Usuarios();
-        List<RegistroPedidos.Usuarios> usuarios = new List<RegistroPedidos.Usuarios>();
+        Datos.Usuarios Usuarioactual = new Datos.Usuarios();
+        Datos.Usuarios Nuevo = new Datos.Usuarios();
+        List<Datos.Usuarios> usuarios = new List<Datos.Usuarios>();
         AgregarCliente Operar = new AgregarCliente(1);
-        public Usuarios(RegistroPedidos.Usuarios usuarioactual)
+        public Usuarios(Datos.Usuarios usuarioactual)
         {
 
             InitializeComponent(); // Inicializa los controles del formulario
@@ -118,7 +118,7 @@ namespace ejemplo
         }
         */
 
-        private List<RegistroPedidos.Usuarios> LeerUsuarios()
+        private List <Datos.Usuarios> LeerUsuarios()
         {
             // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
             string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
@@ -129,14 +129,14 @@ namespace ejemplo
             // Verificar si el archivo existe
             if (!File.Exists(rutaCompleta))
             {
-                return new List<RegistroPedidos.Usuarios>(); // Retornar una lista vacía si no existe
+                return new List<Datos.Usuarios>(); // Retornar una lista vacía si no existe
             }
 
             // Leer el contenido del archivo JSON
             string json = File.ReadAllText(rutaCompleta);
 
             // Deserializar el contenido JSON en una lista de usuarios
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(json) ?? new List<RegistroPedidos.Usuarios>();
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Datos.Usuarios>>(json) ?? new List<Datos.Usuarios>();
         }
 
 
@@ -148,7 +148,7 @@ namespace ejemplo
             textBox1.Enter += textBox1_Enter;
             textBox1.Leave += textBox1_Leave;
         }*/
-        public void ControlUsuario1(RegistroPedidos.Usuarios Usuarioactual)
+        public void ControlUsuario1(Datos.Usuarios Usuarioactual)
         {
 
             if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
@@ -214,7 +214,7 @@ namespace ejemplo
                         if (datos.Length < 3)
                         {
                             // Crear un nuevo objeto Usuarios y asignar los valores
-                            var usuario = new RegistroPedidos.Usuarios
+                            var usuario = new Datos.Usuarios
                             {
                                 ID = int.Parse(datos[0]), // Convertir el ID a entero
                                 Nombre = datos[1],
@@ -301,9 +301,9 @@ namespace ejemplo
             }
         }
 
-        private List<RegistroPedidos.Usuarios> LeerUsuariosDesdeCSV(string rutaArchivo)
+        private List<Datos.Usuarios> LeerUsuariosDesdeCSV(string rutaArchivo)
         {
-            var usuarios = new List<RegistroPedidos.Usuarios>();
+            var usuarios = new List<Datos.Usuarios>();
 
             var lineas = File.ReadAllLines(rutaArchivo);
             foreach (var linea in lineas.Skip(1)) // Omitir encabezado  
@@ -312,7 +312,7 @@ namespace ejemplo
                 if (datos.Length >= 4)
                 {
 
-                    usuarios.Add(new RegistroPedidos.Usuarios
+                    usuarios.Add(new Datos.Usuarios
                     {
                         ID = int.Parse(datos[0]),
                         Nombre = datos[1],

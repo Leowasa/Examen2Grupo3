@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 
 public partial class Login : Form
 {
-    List<RegistroPedidos.Usuarios> listaUsuarios = new List<RegistroPedidos.Usuarios>();
+    List<Datos.Usuarios> listaUsuarios = new List<Datos.Usuarios>();
 
-    public RegistroPedidos.Usuarios usuario = new RegistroPedidos.Usuarios();
+    public Datos.Usuarios usuario = new Datos.Usuarios();
     [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
     private extern static void ReleaseCapture();
     [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -111,7 +111,7 @@ public partial class Login : Form
         // Verificar si el archivo existe
         if (!File.Exists(rutaCompleta))
         {
-            listaUsuarios = new List<RegistroPedidos.Usuarios>(); // Retornar una lista vacía si no existe
+            listaUsuarios = new List<Datos.Usuarios>(); // Retornar una lista vacía si no existe
             return;
         }
 
@@ -120,7 +120,7 @@ public partial class Login : Form
         try
         {
             // Deserializar el contenido JSON en una lista de usuarios
-            listaUsuarios = JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(json) ?? new List<RegistroPedidos.Usuarios>();
+            listaUsuarios = JsonConvert.DeserializeObject<List<Datos.Usuarios>>(json) ?? new List<Datos.Usuarios>();
         }
         catch
         {
@@ -128,7 +128,7 @@ public partial class Login : Form
         }
     }
 
-    public void personalizar(RegistroPedidos.Usuarios usuarios)
+    public void personalizar(Datos.Usuarios usuarios)
     {
         switch (usuarios.Tipo)
         {

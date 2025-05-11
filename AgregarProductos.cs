@@ -35,10 +35,6 @@ namespace Examen2Grupo3
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            if (Productos.Any(c => c.ID == int.Parse(guna2TextBox1.Text)) 
-            {
-                MessageBox.Show("No pueden haber mas de un ID identico. ");
-            }
             try
             {
                 producto = new Producto();
@@ -48,12 +44,35 @@ namespace Examen2Grupo3
                 producto.Categoria = guna2TextBox4.Text;
                 producto.PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
                 producto.Cantidad = int.Parse(guna2TextBox5.Text);
-                
+                // Aquí puedes agregar una validación extra si el número debe estar en cierto rango
+                if (producto.ID < 0 || producto.ID ==0)
+                {
+                    MessageBox.Show("El ID no puede ser negativo o igual a 0.");
+                    return;
+                }
+                else
+                {
+                    // Validación normal de ID repetido
+                    if (Productos.Any(c => c.ID == producto.ID))
+                    {
+                        MessageBox.Show("No pueden haber más de un ID idéntico.");
+                        return;
+                    }
+                }
             }
-            catch
+            catch (FormatException ex)
             {
-                MessageBox.Show("Datos incompletos o erróneos. Intente nuevamente");
+                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", ex.Message);
                 return;
+            }
+            catch (OverflowException ex)
+            {
+                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", ex.Message);
+                return;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente",ex.Message); // Captura la excepción del campo vacío
             }
 
             this.DialogResult = DialogResult.OK;

@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 namespace Examen2Grupo3
 {
     public partial class datosempresa : Form

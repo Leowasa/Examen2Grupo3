@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 using ejemplo;
 
 using System.Text.Json;

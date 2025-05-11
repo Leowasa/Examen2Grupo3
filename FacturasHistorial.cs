@@ -11,7 +11,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 using iTextSharp.tool.xml;
 using Newtonsoft.Json;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 using System.Text.Json;
 using System.Collections;
 

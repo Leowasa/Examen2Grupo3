@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text.Json;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
 {

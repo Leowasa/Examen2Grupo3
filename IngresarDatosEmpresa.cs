@@ -2,7 +2,7 @@
 using System.Xml;
 using Newtonsoft.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 
 namespace Examen2Grupo3

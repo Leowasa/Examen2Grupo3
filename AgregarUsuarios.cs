@@ -1,12 +1,12 @@
 ﻿using System.Data;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 namespace Examen2Grupo3
 
 {
     public partial class Agregar_Usuarios
     {
         private Button btnAgregarUsuario;
-        private List<RegistroPedidos.Usuarios> usuarios = new List<RegistroPedidos.Usuarios>();
+        private List<Datos.Usuarios> usuarios = new List<Datos.Usuarios>();
 
         public Agregar_Usuarios()
         {
@@ -112,7 +112,7 @@ namespace Examen2Grupo3
                         return;
                     }
 
-                    var nuevoUsuario = new RegistroPedidos.Usuarios
+                    var nuevoUsuario = new Datos.Usuarios
                     {
                         ID = int.Parse(txtId.Text),
                         Nombre = txtNombre.Text,
@@ -145,18 +145,18 @@ namespace Examen2Grupo3
         }
         private const string FilePath = "usuarios.json";
 
-        private List<RegistroPedidos.Usuarios> LeerUsuarios()
+        private List<Datos.Usuarios> LeerUsuarios()
         {
             if (!File.Exists("usuarios.json"))
             {
-                return new List<RegistroPedidos.Usuarios>();
+                return new List<Datos.Usuarios>();
             }
 
             string json = File.ReadAllText("usuarios.json");
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(json) ?? new List<RegistroPedidos.Usuarios>();
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Datos.Usuarios>>(json) ?? new List<Datos.Usuarios>();
         }
 
-        private void GuardarUsuarios(List<RegistroPedidos.Usuarios> usuarios)
+        private void GuardarUsuarios(List<Datos.Usuarios> usuarios)
         {
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(usuarios, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText("usuarios.json", json);

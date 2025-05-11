@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Examen2Grupo3;
 using Newtonsoft.Json;
 using System.Collections.Generic; // Ensure this is included for List<T>
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 using System.Drawing.Text;
 using System.Diagnostics;
 

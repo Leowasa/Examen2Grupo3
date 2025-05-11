@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
 {
     public partial class Verperfil : Form
     {
-        Usuarios usuarioActual = new Usuarios();
+        Datos.Usuarios usuarioActual = new Datos.Usuarios();
         public Verperfil(Usuarios usuarioActual)
         {
             InitializeComponent();

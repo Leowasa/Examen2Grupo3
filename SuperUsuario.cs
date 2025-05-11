@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
 {

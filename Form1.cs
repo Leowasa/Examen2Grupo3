@@ -8,13 +8,13 @@ namespace ejemplo
     [SupportedOSPlatform("windows6.1")]
     public partial class Form1 : Form
     {
-        RegistroPedidos.Usuarios UsuarioActual = new RegistroPedidos.Usuarios();
+        Datos.Usuarios UsuarioActual = new Datos.Usuarios();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        public Form1(RegistroPedidos.Usuarios UsuarioActual)
+        public Form1(Datos.Usuarios UsuarioActual)
         {
             InitializeComponent();
             // En el constructor de Form1 o en el diseñador

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text.Json;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
 {
@@ -8,7 +8,7 @@ namespace Examen2Grupo3
     {
         public List<Cliente>? cliente = new List<Cliente>();
         public event Action<Cliente> ClienteSeleccionado;
-        public Cliente Clientes = new RegistroPedidos.Cliente();
+        public Cliente Clientes = new Cliente();
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();

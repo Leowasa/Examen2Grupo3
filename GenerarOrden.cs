@@ -1,6 +1,6 @@
 ﻿using ejemplo;
 using Newtonsoft.Json;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
 {
@@ -8,10 +8,10 @@ namespace Examen2Grupo3
     {
         public static Pedido seleccionado = new Pedido();
         public static List<Pedido> Lista = new List<Pedido>();
-        public RegistroPedidos.Usuarios UsuarioActual = new RegistroPedidos.Usuarios();
+        public Datos.Usuarios UsuarioActual = new Datos.Usuarios();
         // private bool _cargandoDatos = false;
         Form1 form = new Form1();
-        public GenerarOrden(RegistroPedidos.Usuarios UsuarioActual)
+        public GenerarOrden(Datos.Usuarios UsuarioActual)
         {
             this.UsuarioActual = UsuarioActual;
             InitializeComponent();

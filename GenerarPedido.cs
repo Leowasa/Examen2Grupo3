@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json; // Agregar esta directiva para usar JsonSerializerOptions
 using System.Drawing.Drawing2D;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using iTextSharp.tool.xml;

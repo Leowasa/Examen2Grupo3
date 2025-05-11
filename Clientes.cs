@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Text.Json;
 using System.Windows.Forms;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,9 +13,9 @@ namespace ejemplo
     {
         //  public List<RegistroPedidos.Usuarios> Usuarioss = new List<RegistroPedidos.Usuarios>();
         public List<Cliente>? cliente = new List<Cliente>();
-        public RegistroPedidos.Usuarios usuarioActual = new RegistroPedidos.Usuarios();
+        public Datos.Usuarios usuarioActual = new Datos.Usuarios();
         BindingSource bindingSource = new BindingSource();
-        public Clientes(RegistroPedidos.Usuarios UsuarioActual)
+        public Clientes(Datos.Usuarios UsuarioActual)
         {
             InitializeComponent();
             CargarClientes("Clientes.Json");
@@ -257,7 +257,7 @@ namespace ejemplo
                 }
             }
         }
-        public void ControlUsuario1(RegistroPedidos.Usuarios Usuarioactual)
+        public void ControlUsuario1(Datos.Usuarios Usuarioactual)
         {
 
             if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
@@ -268,7 +268,7 @@ namespace ejemplo
 
         }
 
-        public void CargarUsuarios(List<RegistroPedidos.Usuarios> Lista)
+        public void CargarUsuarios(List<Datos.Usuarios> Lista)
         {
             string rutarchivo = "usuarios.json";
             if (File.Exists(rutarchivo))
@@ -276,7 +276,7 @@ namespace ejemplo
                 string usuarios = File.ReadAllText(rutarchivo);
                 try
                 {
-                    Lista = JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(usuarios);
+                    Lista = JsonConvert.DeserializeObject<List<Datos.Usuarios>>(usuarios);
                 }
                 catch
                 {
