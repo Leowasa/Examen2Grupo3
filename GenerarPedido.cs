@@ -225,31 +225,6 @@ namespace Examen2Grupo3
         {
      
         }
-        private string rellenarHtml(string htmlContent)
-        {
-            htmlContent = htmlContent.Replace("@Razon", "si");
-            htmlContent = htmlContent.Replace("@Telefono", "042655");
-            htmlContent = htmlContent.Replace("@Direccion", "por ahi");
-            htmlContent = htmlContent.Replace("@Correo", "si");
-            htmlContent = htmlContent.Replace("@Website", "si");
-
-            string filas = string.Empty;
-            foreach (var row in pedido.Productos)
-            {
-                filas += "<tr>";
-                filas += "<td>" + row.ID + "</td>";
-                filas += "<td>" + row.Nombre + "</td>";
-                filas += "<td>" + row.Descripcion + "</td>";
-                filas += "<td>" + row.Categoria + "</td>";
-                filas += "<td>" + row.Cantidad + "</td>";
-                filas += "<td>" + row.PrecioUnitario + "</td>";
-                filas += "<td>" + row.Total + "</td>";
-                filas += "</tr>";
-            }
-            htmlContent = htmlContent.Replace("@FILAS", filas);
-            return htmlContent;
-
-        }
 
         private void btnagregarProductoClick(object sender, EventArgs e)
         {
@@ -300,12 +275,12 @@ namespace Examen2Grupo3
             var cantidad  = pedido.Productos.Sum(p => p.Cantidad);
             if (cantidad > 3)
             {
-                decimal descuento = 0.20m;
-                descuento = pedido.SubtTotal * descuento;
-                pedido.Total = pedido.SubtTotal - descuento;
+               
+                pedido.Descuento = pedido.SubtTotal * 0.20M;
+                pedido.Total = pedido.SubtTotal - pedido.Descuento;
 
                 lblTotal.Text = "total: "+ pedido.Total.ToString();
-                lblDescuento.Text ="Descuento: "+ "20%";
+                lblDescuento.Text = "Descuento(20%): " + pedido.Descuento;
 
             }
             else

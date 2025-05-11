@@ -10,7 +10,7 @@
             public Cliente Cliente { get; set; }
             public List<Producto> Productos { get; set; }
             public String Estado { get; set; }
-            public decimal Descuento = 0.40M;
+            public decimal Descuento  { get; set; }
             public decimal SubtTotal => Productos.Sum(p => p.Total);
             public decimal Total { get; set; }
             public Usuarios Encargado { get; set; }

@@ -23,13 +23,13 @@ namespace ejemplo
         {
 
             InitializeComponent(); // Inicializa los controles del formulario
-            dataGridView1.Visible = true;
             usuarios = LeerUsuarios(); // Carga la lista de usuarios
            
 
             this.Usuarioactual = usuarioactual;
             ControlUsuario1(usuarioactual);
             ConfigurarTextBox();
+            CargarDatosEnDataGridView();
 
         }
 
@@ -68,7 +68,7 @@ namespace ejemplo
             string textoBusqueda = textBox1.Text.Trim(); // Obtener el texto de búsqueda y eliminar espacios en blanco
             var usuarios = LeerUsuarios();
             // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length >= 3)
+            if (textoBusqueda.Length < 3)
             {
                 // Si tiene menos de 4 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
@@ -158,7 +158,7 @@ namespace ejemplo
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-            CargarDatosEnDataGridView(); // Llena el DataGridView con los datos
+      
         }
 
         private void CargarDatosEnDataGridView()

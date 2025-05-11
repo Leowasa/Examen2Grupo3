@@ -35,6 +35,9 @@ namespace Examen2Grupo3
                     label3.Text = "Username: ";
                     label4.Text = "contraseña: ";
                     label5.Text = "Confirmar contraseña: ";
+
+                    // Fix for the line causing CS1525 and CS1002 errors  
+                    guna2TextBox4.PasswordChar = '*';
                     guna2ComboBox1.Items.Clear(); // Clear existing items before adding new ones
                     // Use AddRange to populate the Items collection instead of assigning directly  
                     guna2ComboBox1.Items.AddRange(new object[] { "Aprobador", "Registrador" });
@@ -57,8 +60,8 @@ namespace Examen2Grupo3
 
             DatosUsuario.ID = int.Parse(guna2TextBox1.Text);
             DatosUsuario.Nombre = guna2TextBox2.Text;
-            DatosUsuario.Username = guna2TextBox4.Text;
-            DatosUsuario.Password = guna2TextBox3.Text;
+            DatosUsuario.Username = guna2TextBox3.Text;
+            DatosUsuario.Password = guna2TextBox4.Text;
             DatosUsuario.Tipo = guna2ComboBox1.Text;
             MessageBox.Show("Operación realizada satisfactoriamente. ", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -73,17 +76,23 @@ namespace Examen2Grupo3
             {
                 throw new InvalidOperationException("El tipo de cliente no puede ser nulo. Por favor, seleccione un tipo.");
             }
-
-            DatosClientes = new Cliente
+            try 
             {
-                ID = int.Parse(guna2TextBox1.Text), // Ensure 'ID' is a property of 'cliente' and not a Label
-                Nombre = guna2TextBox2.Text,
-                Direccion = guna2TextBox4.Text,
-                Correo = guna2TextBox3.Text,
-                Tipo = guna2ComboBox1.SelectedItem?.ToString() ?? string.Empty // Safeguard against null
+                DatosClientes = new Cliente
+                {
+                    ID = int.Parse(guna2TextBox1.Text), // Ensure 'ID' is a property of 'cliente' and not a Label
+                    Nombre = guna2TextBox2.Text,
+                    Direccion = guna2TextBox4.Text,
+                    Correo = guna2TextBox3.Text,
+                    Tipo = guna2ComboBox1.SelectedItem?.ToString() ?? string.Empty // Safeguard against null
 
-            };
-            return DatosClientes;
+                };
+                return DatosClientes;
+            } catch 
+            {
+                throw new InvalidOperationException("El tipo de cliente no puede ser nulo. Por favor, seleccione un tipo.");
+            }
+            
         }
         public void SetDatosProducto(string ID, string Nombre, string Direccion, string Correo, string Tipo)
         {

@@ -98,33 +98,17 @@ namespace ejemplo
         }
         public void GuardarClientes(string rutaArchivo)
         {
-            cliente = new List<Cliente>();
-
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            try 
             {
-                if (fila.Cells["ID"].Value != null) // Validamos que la fila tenga datos
-                {
-                    Cliente clientes = new Cliente();
-                    try
-                    {
-                        clientes.ID = int.Parse(fila.Cells["ID"].Value.ToString());
-                        clientes.Nombre = fila.Cells["Nombre"].Value.ToString();
-                        clientes.Direccion = fila.Cells["Direccion"].Value.ToString();
-                        clientes.Correo = fila.Cells["CorreoElectronico"].Value.ToString();
-                        clientes.Tipo = fila.Cells["Tipo"].Value.ToString();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-                    }
-                    cliente.Add(clientes); // Agregamos al inicio para mantener el orden
-                }
+                string json = System.Text.Json.JsonSerializer.Serialize(cliente, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(rutaArchivo, json);
+                CargarClientes("Clientes.Json");
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la lista del cliente.", "Error de operacion", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
             }
-            string json = System.Text.Json.JsonSerializer.Serialize(cliente, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(rutaArchivo, json);
-            CargarClientes("Clientes.Json");
+            
         }
         public void CargarClientes(string rutaArchivo)
         {
