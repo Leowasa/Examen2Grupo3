@@ -23,11 +23,11 @@ namespace Examen2Grupo3
         List<Producto> listaProductos = new List<Producto>();
         private Usuarios usuarioActual = new Usuarios();
         private List<Producto> inventarioOriginal =new List<Producto>();
-        //validar cuando se ingrese 0 como cantidad
         public GenerarPedido(Usuarios usuarioActual)
         {
             InitializeComponent();
             dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarInventario("Inventario.json");
@@ -244,7 +244,6 @@ namespace Examen2Grupo3
                         Cantidad = formProductos.Producto.Cantidad,
                         Descripcion = formProductos.Producto.Descripcion
                     };
-                    //  listaProductos.Add(ProductoNuevo);
                     if (pedido.Productos == null)
                     {
                         pedido.Productos = new List<Producto>();
@@ -272,7 +271,9 @@ namespace Examen2Grupo3
         }
         public void Descuento()
         {
-            lblSubtotal.Text = "Subtotal: $" + pedido.SubtTotal.ToString("C2");
+            var culture = new System.Globalization.CultureInfo("en-US"); // Cultura con símbolo "$"
+
+            lblSubtotal.Text = "Subtotal: " + pedido.SubtTotal.ToString("C2", culture);
             var cantidad  = pedido.Productos.Sum(p => p.Cantidad);
             if (cantidad > 3)
             {
@@ -280,14 +281,14 @@ namespace Examen2Grupo3
                 pedido.Descuento = pedido.SubtTotal * 0.20M;
                 pedido.Total = pedido.SubtTotal - pedido.Descuento;
 
-                lblTotal.Text = "total: $" + pedido.Total.ToString("C2");
-                lblDescuento.Text = "Descuento(20%): $" + pedido.Descuento.ToString("C2");
+                lblTotal.Text = "total: " + pedido.Total.ToString("C2", culture);
+                lblDescuento.Text = "Descuento(20%): " + pedido.Descuento.ToString("C2", culture);
 
             }
             else
             {
                 pedido.Total = pedido.SubtTotal;
-                lblTotal.Text ="Total: "+ pedido.SubtTotal.ToString("C2");
+                lblTotal.Text ="Total: "+ pedido.SubtTotal.ToString("C2", culture);
             }
 
 

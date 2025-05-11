@@ -8,6 +8,8 @@ using Examen2Grupo3.Properties;
 using ejemplo;
 using System.Collections.Immutable;
 using System.Windows.Forms;
+using ejemplo;
+using Newtonsoft.Json;
 
 namespace ejemplo
 {
@@ -119,17 +121,25 @@ namespace ejemplo
 
         }
 
-        private const string FilePath = "usuarios.json";
-
+       
         private List<RegistroPedidos.Usuarios> LeerUsuarios()
         {
-            if (!File.Exists(FilePath))
-            {
-                return new List<RegistroPedidos.Usuarios>();
+            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
+            // Combinar la ruta del directorio con el nombre del archivo
+            string rutaCompleta = Path.Combine(directorio, "usuarios.json");
 
+
+            // Verificar si el archivo existe
+            if (!File.Exists(rutaCompleta))
+            {
+                return new List<RegistroPedidos.Usuarios>(); // Retornar una lista vacía si no existe
             }
 
-            string json = File.ReadAllText(FilePath);
+            // Leer el contenido del archivo JSON
+            string json = File.ReadAllText(rutaCompleta);
+
+            // Deserializar el contenido JSON en una lista de usuarios
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(json) ?? new List<RegistroPedidos.Usuarios>();
         }
 
@@ -174,11 +184,23 @@ namespace ejemplo
         }
         public void GuardarUsuarios(string rutaArchivo)
         {
+            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
 
-            string json = JsonSerializer.Serialize(usuarios, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(rutaArchivo, json);
+            // Crear la carpeta "Data" si no existe
+            if (!Directory.Exists(directorio))
+            {
+                Directory.CreateDirectory(directorio);
+            }
 
+            // Combinar la ruta del directorio con el nombre del archivo
+            string rutaCompleta = Path.Combine(directorio, rutaArchivo);
+
+            // Guardar el archivo JSON en la ruta especificada
+            string json = JsonConvert.SerializeObject(usuarios, Formatting.Indented);
+            File.WriteAllText(rutaCompleta, json);
         }
+
         public void ImportarCSV(string rutaArchivo)
         {
             try
@@ -193,7 +215,7 @@ namespace ejemplo
                         var datos = linea.Split(','); // Dividir la línea en columnas
 
                         // Verificar que la línea tenga suficientes columnas
-                        if (datos.Length >= 4)
+                        if (datos.Length < 3)
                         {
                             // Crear un nuevo objeto Usuarios y asignar los valores
                             var usuario = new RegistroPedidos.Usuarios
@@ -366,12 +388,3 @@ namespace ejemplo
         }
     }
 }
-
-
-
-
-
-// var sugerencias = usuarios
-//  .Where(u => u.ID.ToString().Contains(textBox1.Text, StringComparison.OrdinalIgnoreCase) ||
-//             u.Nombre.Contains(textBox1.Text, StringComparison.OrdinalIgnoreCase))
-// .ToList();

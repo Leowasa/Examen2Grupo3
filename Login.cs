@@ -51,7 +51,7 @@ public partial class Login : Form
     }
     public bool Validar()
     {
-        cargarCargarUsuario();
+        CargarUsuario();
 
         // Validar si los campos están vacíos
         if (string.IsNullOrWhiteSpace(guna2TextBox1.Text) || string.IsNullOrWhiteSpace(guna2TextBox3.Text))
@@ -102,26 +102,32 @@ public partial class Login : Form
 
 
     }
-    public void cargarCargarUsuario()
+    public void CargarUsuario()
     {
-        byte[] archivoBytes = Properties.Resources.usuarios;
-        if (archivoBytes != null && archivoBytes.Length > 0)
+        // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+        string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
+        string rutaCompleta = Path.Combine(directorio, "usuarios.json");
+
+        // Verificar si el archivo existe
+        if (!File.Exists(rutaCompleta))
         {
-            string usuarios = System.Text.Encoding.UTF8.GetString(archivoBytes);
-            try
-            {
-                listaUsuarios = JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(usuarios)??new List<RegistroPedidos.Usuarios>();
-            }
-            catch
-            {
-                MessageBox.Show("Error al Cargar los usuarios.");
-            }
+            listaUsuarios = new List<RegistroPedidos.Usuarios>(); // Retornar una lista vacía si no existe
+            return;
         }
-        else
+
+        // Leer el contenido del archivo JSON
+        string json = File.ReadAllText(rutaCompleta);
+        try
         {
-            MessageBox.Show("El recurso de usuarios está vacío o no se pudo cargar.");
+            // Deserializar el contenido JSON en una lista de usuarios
+            listaUsuarios = JsonConvert.DeserializeObject<List<RegistroPedidos.Usuarios>>(json) ?? new List<RegistroPedidos.Usuarios>();
+        }
+        catch
+        {
+            MessageBox.Show("Error al cargar los usuarios.");
         }
     }
+
     public void personalizar(RegistroPedidos.Usuarios usuarios)
     {
         switch (usuarios.Tipo)

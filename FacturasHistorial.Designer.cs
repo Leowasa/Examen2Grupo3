@@ -34,13 +34,13 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
+            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             Numero = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Fechas = new DataGridViewButtonColumn();
             Total = new DataGridViewTextBoxColumn();
             Exportar = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -90,6 +90,28 @@
             dataGridView1.TabIndex = 111;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
+            // guna2TextBox1
+            // 
+            guna2TextBox1.BorderRadius = 6;
+            guna2TextBox1.CustomizableEdges = customizableEdges1;
+            guna2TextBox1.DefaultText = "";
+            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox1.Font = new Font("Segoe UI", 9F);
+            guna2TextBox1.ForeColor = SystemColors.ControlDarkDark;
+            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox1.Location = new Point(12, 132);
+            guna2TextBox1.Name = "guna2TextBox1";
+            guna2TextBox1.PlaceholderText = "Ingresar Numero o Fecha...";
+            guna2TextBox1.SelectedText = "";
+            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2TextBox1.Size = new Size(164, 23);
+            guna2TextBox1.TabIndex = 149;
+            guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
+            // 
             // Numero
             // 
             Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -120,7 +142,7 @@
             // Exportar
             // 
             Exportar.HeaderText = "Exportar";
-            Exportar.Image = Properties.Resources.icons8_pdf_64;
+            Exportar.Image = Properties.Resources.icons8_pdf_50;
             Exportar.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Exportar.Name = "Exportar";
             Exportar.Resizable = DataGridViewTriState.True;
@@ -134,28 +156,6 @@
             Eliminar.Name = "Eliminar";
             Eliminar.Resizable = DataGridViewTriState.True;
             Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
-            // 
-            // guna2TextBox1
-            // 
-            guna2TextBox1.BorderRadius = 6;
-            guna2TextBox1.CustomizableEdges = customizableEdges1;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Segoe UI", 9F);
-            guna2TextBox1.ForeColor = SystemColors.ControlDarkDark;
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(12, 132);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "Ingresar Numero o Fecha...";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2TextBox1.Size = new Size(164, 23);
-            guna2TextBox1.TabIndex = 149;
-            guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
             // 
             // FacturasHistorial
             // 
