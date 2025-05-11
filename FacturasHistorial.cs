@@ -166,9 +166,9 @@ namespace Examen2Grupo3
             htmlContent = htmlContent.Replace("@Emision", Actual.Fecha.ToString("dd/MM/yy"));
 
             //Datos de precio
-            htmlContent = htmlContent.Replace("@SUBTOTAL", Actual.SubtTotal.ToString("F2") + "$");
-            htmlContent = htmlContent.Replace("@IVA", Actual.IVA.ToString("F2") + "$");
-            htmlContent = htmlContent.Replace("@TOTAL", Actual.Total.ToString("F2") + "$");
+            htmlContent = htmlContent.Replace("@SUBTOTAL", "$"+Actual.SubtTotal.ToString("F2") );
+            htmlContent = htmlContent.Replace("@IVA", "$" + Actual.IVA.ToString("F2") );
+            htmlContent = htmlContent.Replace("@TOTAL","$"+Actual.Total.ToString("F2"));
 
             //Observaciones
             htmlContent = htmlContent.Replace("@Observaciones", Actual.Observaciones);
@@ -191,8 +191,8 @@ namespace Examen2Grupo3
                 filas += "<td>" + row.Descripcion + "</td>";
                 filas += "<td>" + row.Categoria + "</td>";
                 filas += "<td>" + row.Cantidad + "</td>";
-                filas += "<td>" + row.PrecioUnitario +"$"+ "</td>";
-                filas += "<td>" + row.Total +"$" +"</td>";
+                filas += "<td>" +"$"+ row.PrecioUnitario+ "</td>";
+                filas += "<td>" +"$"+ row.Total +"</td>";
                 filas += "</tr>";
             }
             htmlContent = htmlContent.Replace("@FILAS", filas);

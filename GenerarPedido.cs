@@ -29,6 +29,7 @@ namespace Examen2Grupo3
             InitializeComponent();
             dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+            dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarInventario("Inventario.json");
             Cliente.Text = "Pedido Nº: " + CargarNum();
             this.usuarioActual = usuarioActual;
@@ -193,7 +194,7 @@ namespace Examen2Grupo3
             lblSubtotal.Text = "Subtotal: ";
             lblDescuento.Text = "Descuento: ";
             lblTotal.Text = "Total: ";
-          GuardarInventario("Inventario.json");
+            GuardarInventario("Inventario.json");
             pedido.Productos.Clear(); // Limpiar la lista de productos del pedido actual
             
         }
@@ -271,7 +272,7 @@ namespace Examen2Grupo3
         }
         public void Descuento()
         {
-            lblSubtotal.Text ="Subtotal: " +pedido.SubtTotal.ToString();
+            lblSubtotal.Text = "Subtotal: $" + pedido.SubtTotal.ToString();
             var cantidad  = pedido.Productos.Sum(p => p.Cantidad);
             if (cantidad > 3)
             {
@@ -279,8 +280,8 @@ namespace Examen2Grupo3
                 pedido.Descuento = pedido.SubtTotal * 0.20M;
                 pedido.Total = pedido.SubtTotal - pedido.Descuento;
 
-                lblTotal.Text = "total: "+ pedido.Total.ToString();
-                lblDescuento.Text = "Descuento(20%): " + pedido.Descuento;
+                lblTotal.Text = "total: $" + pedido.Total.ToString();
+                lblDescuento.Text = "Descuento(20%): $" + pedido.Descuento;
 
             }
             else

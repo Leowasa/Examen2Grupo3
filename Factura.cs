@@ -22,7 +22,6 @@ namespace Examen2Grupo3
     public partial class Factura : Form
     {
         private static Pedido Pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
-        private static List<Pedido> ListaPedidos = new List<Pedido>();
         private static int NumeroPedido;
         private int Opcion;
         private static Pedido orden;
@@ -31,7 +30,7 @@ namespace Examen2Grupo3
         {
             InitializeComponent();
              Opcion = opcion;
-            ListaPedidos = LeerPedidos();
+            dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             Pedido = pedido;
             configurar();
            
@@ -47,7 +46,6 @@ namespace Examen2Grupo3
             usuarioActual = usuario;
             Opcion = opcion;
             InitializeComponent();
-            ListaPedidos = LeerPedidos();
             dataGridView1.Rows.Clear();
             Pedido = pedido;
             configurar();
@@ -60,18 +58,9 @@ namespace Examen2Grupo3
             dataGridView1.Rows.Clear();
             orden = new Pedido();
             orden = Pedido;
-            lblFactura.Text = "Orden de entrega";
             lblNumero.Text = "ID: " + orden.ID.ToString("D6");
-            label5.Text = "Fecha: " + orden.Fecha.ToString("dd/MM/yyyy");
-            if (orden.Cliente != null)
-            {
-                label9.Text = "Nombre: " + orden.Cliente.Nombre;
-               
-            }
-            else
-            {
-                label9.Text = "Nombre: N/A";
-            }
+            label5.Text = "Fecha: " + orden.Fecha.ToString("dd/MM/yyyy");     
+            label9.Text = "Nombre: " + orden.Cliente.Nombre;       
             label12.Text = "ID: " + orden.Cliente.ID.ToString();
             label11.Text = "Direccion: " + orden.Cliente.Direccion;
             label10.Text = "Correo Electronico: " + orden.Cliente.Correo;
@@ -89,16 +78,6 @@ namespace Examen2Grupo3
                     guna2TextBox1.Visible = false;
                     lblObservaciones.Visible = false;
                     FechaValidacion.Enabled = false;
-
-                    try 
-                    {
-      
-                    } catch(System.NullReferenceException)
-                    {
-                        
-                        MessageBox.Show("Error");
-                    
-                    }
                     break;
                 case 2://Generar Orden
                     lblFactura.Text = "Orden de entrega";
@@ -121,17 +100,6 @@ namespace Examen2Grupo3
                     guna2TextBox1.Enabled = true;
                     FechaValidacion.Enabled = false;
                     FechaValidacion.Value = orden.FechaValidado;
-
-                    try
-                    {
-
-                    }
-                    catch (System.NullReferenceException)
-                    {
-
-                        MessageBox.Show("Error");
-
-                    }
                     break;
             }
           
@@ -142,10 +110,10 @@ namespace Examen2Grupo3
 
 
             }
-            label21.Text = "Subtotal: " + orden.SubtTotal.ToString("F2");
-            lblDescuento.Text = "Descuento: " + (orden.Descuento * 100M).ToString("0")+ "%";
+            label21.Text = "Subtotal: $" + orden.SubtTotal.ToString("F2");
+            lblDescuento.Text = "Descuento: $" + (orden.Descuento * 100M).ToString("0")+ "%";
          
-            label20.Text = "Total: " + orden.Total.ToString("F2");
+            label20.Text = "Total: $" + orden.Total.ToString("F2");
         }
         private void cargarEmpresa()
         {

@@ -87,7 +87,7 @@
             Columna4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
             PrecioUnit = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
+            Total = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -431,7 +431,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 40;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Columna4, Column5, PrecioUnit, Column7 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Columna4, Column5, PrecioUnit, Total });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(21, 523);
@@ -527,14 +527,14 @@
             PrecioUnit.Name = "PrecioUnit";
             PrecioUnit.ReadOnly = true;
             // 
-            // Column7
+            // Total
             // 
             dataGridViewCellStyle3.Format = "N2";
             dataGridViewCellStyle3.NullValue = null;
-            Column7.DefaultCellStyle = dataGridViewCellStyle3;
-            Column7.HeaderText = "Total";
-            Column7.Name = "Column7";
-            Column7.ReadOnly = true;
+            Total.DefaultCellStyle = dataGridViewCellStyle3;
+            Total.HeaderText = "Total";
+            Total.Name = "Total";
+            Total.ReadOnly = true;
             // 
             // GenerarPedido
             // 
@@ -632,5 +632,6 @@
         private Label lblTotal;
         private Label lblSubtotal;
         private DataGridViewTextBoxColumn PrecioUnit;
+        private DataGridViewTextBoxColumn Total;
     }
 }
