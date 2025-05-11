@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
 {
@@ -8,8 +8,8 @@ namespace Examen2Grupo3
     public partial class AgregarCliente : Form
     {
         public Cliente DatosClientes;
-        public RegistroPedidos.Usuarios DatosUsuario;
-        private List<RegistroPedidos.Usuarios> Usuarios = new List<RegistroPedidos.Usuarios>();
+        public Datos.Usuarios DatosUsuario;
+        private List<Datos.Usuarios> Usuarios = new List<Datos.Usuarios>();
         private int opcion;
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -53,9 +53,9 @@ namespace Examen2Grupo3
             }
 
         }
-        public RegistroPedidos.Usuarios ObtenerUsuario()
+        public Datos.Usuarios ObtenerUsuario()
         {
-            DatosUsuario = new RegistroPedidos.Usuarios();
+            DatosUsuario = new Datos.Usuarios();
 
 
             DatosUsuario.ID = int.Parse(guna2TextBox1.Text);
@@ -70,7 +70,7 @@ namespace Examen2Grupo3
 
 
         }
-        public RegistroPedidos.Cliente ObtenerCliente()
+        public Datos.Cliente ObtenerCliente()
         {
             if (guna2ComboBox1.SelectedItem == null)
             {
@@ -109,7 +109,7 @@ namespace Examen2Grupo3
                 MessageBox.Show("Error al cargar los datos del cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void SetDatosUsuarios(RegistroPedidos.Usuarios Usuario)
+        public void SetDatosUsuarios(Datos.Usuarios Usuario)
         {
             try
             {

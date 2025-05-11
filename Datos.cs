@@ -1,6 +1,6 @@
 ﻿namespace Examen2Grupo3
 {
-    public class RegistroPedidos
+    public class Datos
     {
 
         public class Pedido

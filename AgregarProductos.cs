@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ejemplo;
+using Guna.UI2.WinForms.Suite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +10,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Examen2Grupo3.RegistroPedidos;
+using static Examen2Grupo3.Datos;
+using static iTextSharp.tool.xml.html.HTML;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Examen2Grupo3
@@ -16,35 +20,35 @@ namespace Examen2Grupo3
 
     public partial class Agregar_Productos : Form
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public string Categoria { get; set; }
-        public int Cantidad { get; set; }
-        public decimal PrecioUnitario { get; set; }
-
+        public Producto producto { get; set; } = new Producto(); // Initialize to avoid nullability issues  
+        public List<Producto> Productos = new List<Producto>();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
-        public Agregar_Productos()
+
+        public Agregar_Productos(List<Producto> productos)
         {
+            Productos = productos; 
             InitializeComponent();
-
-            // Initialize non-nullable properties to default values to fix CS8618  
-
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
+            if (Productos.Any(c => c.ID == int.Parse(guna2TextBox1.Text)) 
+            {
+                MessageBox.Show("No pueden haber mas de un ID identico. ");
+            }
             try
             {
-                Id = int.Parse(guna2TextBox1.Text);
-                Nombre = guna2TextBox2.Text;
-                Descripcion = guna2TextBox3.Text;
-                Categoria = guna2TextBox4.Text;
-                PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
-                Cantidad = int.Parse(guna2TextBox5.Text);
+                producto = new Producto();
+                producto.ID = int.Parse(guna2TextBox1.Text);
+                producto.Nombre = guna2TextBox2.Text;
+                producto.Descripcion = guna2TextBox3.Text;
+                producto.Categoria = guna2TextBox4.Text;
+                producto.PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
+                producto.Cantidad = int.Parse(guna2TextBox5.Text);
+                
             }
             catch
             {
@@ -55,6 +59,7 @@ namespace Examen2Grupo3
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
         public void SetDatosProducto(string id, string nombre, string categoria, string Cantidad, string descripcion, string precio)
         {
             try
@@ -65,15 +70,9 @@ namespace Examen2Grupo3
                 guna2TextBox3.Text = descripcion;
                 guna2TextBox5.Text = Cantidad;
                 guna2TextBox6.Text = precio;
-
-
-                // guna2TextBox1.ReadOnly = true;
-                // guna2TextBox1.BackColor = Color.LightGray;
             }
             catch
-
             {
-
             }
         }
 
@@ -86,16 +85,13 @@ namespace Examen2Grupo3
                 Categoria = guna2TextBox4.Text,
                 Descripcion = guna2TextBox3.Text,
                 PrecioUnitario = decimal.Parse(guna2TextBox6.Text),
-                Cantidad = int.Parse(guna2TextBox5.Text) // Asegúrate de que esta propiedad exista en la clase Producto de Gestor_inventario
+                Cantidad = int.Parse(guna2TextBox5.Text)
             };
             return productoEditado;
         }
 
-
-
         private void Agregar_Productos_Load(object sender, EventArgs e)
         {
-
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
