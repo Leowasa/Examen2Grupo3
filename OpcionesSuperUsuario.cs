@@ -22,32 +22,17 @@ namespace Examen2Grupo3
         {
             Usuarios = usuarioActual;
             InitializeComponent();
-            CargarCodigo();
+
             this.opcion = opcion;
-        }
-
-        public void CargarCodigo()
-        {
-            if (File.Exists("Empresa.json")) // Corrected file name
-            {
-                var json = File.ReadAllText("Empresa.json");
-                Empresa? empresa = JsonConvert.DeserializeObject<Empresa>(json); // Fixed syntax and variable name
-
-                if (empresa != null) // Check for null to avoid CS8602
-                {
-                    empresactual = empresa;
-                    return; // Return the matched Empresa object           
-                }
-            } // Return null if no match is found or file doesn't exist
         }
         public void GuardarCodigo()
         {
             string rutaArchivo = "CodigoEspecial.json";
             string codigo = guna2TextBox1.Text;
-            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            // Obtener la ruta de la carpeta "usuario" en la raíz del proyecto
             string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Codigo");
 
-            // Crear la carpeta "Data" si no existe
+            // Crear la carpeta "Usuario" si no existe
             if (!Directory.Exists(directorio))
             {
                 Directory.CreateDirectory(directorio);
@@ -63,7 +48,7 @@ namespace Examen2Grupo3
         }
         private List<Datos.Usuarios> LeerUsuarios()
         {
-            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            // Obtener la ruta de la carpeta "Usuario" en la raíz del proyecto
             string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
             // Combinar la ruta del directorio con el nombre del archivo
             string rutaCompleta = Path.Combine(directorio, "usuarios.json");
@@ -83,18 +68,19 @@ namespace Examen2Grupo3
         }
 
 
-        public void GuardarUsuarios(string rutaArchivo)
+        public void GuardarUsuarios()
         {
-            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            string rutaArchivo = "usuarios.json";
+            // Obtener la ruta de la carpeta "Usuario" en la raíz del proyecto
             string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
 
-            // Crear la carpeta "Data" si no existe
+            // Crear la carpeta "Usuario" si no existe
             if (!Directory.Exists(directorio))
             {
                 Directory.CreateDirectory(directorio);
             }
             List<Datos.Usuarios>? listaUsuarios = LeerUsuarios();
-            if (listaUsuarios != null) // Check for null to avoid CS8602
+            if (listaUsuarios != null) 
             {
                 foreach (var usuario in listaUsuarios)
                 {
@@ -113,34 +99,7 @@ namespace Examen2Grupo3
             string json = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented);
             File.WriteAllText(rutaCompleta, json);
         }
-        public void GuardarClave()
-        {
-            if (File.Exists("usuarios.json"))
-            {
-                var jsonContent = File.ReadAllText("usuarios.json"); // Renamed variable to avoid conflict
-                List<Datos.Usuarios>? listaUsuarios = JsonConvert.DeserializeObject<List<Datos.Usuarios>>(jsonContent);
-
-                if (listaUsuarios != null) // Check for null to avoid CS8602
-                {
-                    foreach (var usuario in listaUsuarios)
-                    {
-                        if (usuario.ID == Usuarios.ID) // Example condition
-                        {
-                            usuario.Password = guna2TextBox1.Text; // Update the password
-
-                        }
-
-                    }
-                    var updatedJson = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented); // Renamed variable to avoid conflict
-                    File.WriteAllText("usuarios.json", updatedJson);
-                }
-            }
-        }
-        private void LeerCodigo()
-        {
-            
-        }
-
+   
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
@@ -152,8 +111,8 @@ namespace Examen2Grupo3
             string dato = guna2Button1.Text;
             switch (opcion)
             {
-                case 0://Para guardar contrasenia del admin
-                    GuardarClave();
+                case 0://Para guardar contraseña del admin
+                    GuardarUsuarios();
                     MessageBox.Show("Operacion realizada exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case 1://Para guardar codigo especial
@@ -169,14 +128,14 @@ namespace Examen2Grupo3
 
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e)//para cerrar 
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
 
         }
 
-        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)//para poder mover el programa
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);

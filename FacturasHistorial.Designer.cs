@@ -152,10 +152,10 @@
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Location = new Point(12, 132);
             guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "Ingresar Numero o Fecha...";
+            guna2TextBox1.PlaceholderText = "ngresar Numero o Nombre del Cliente...";
             guna2TextBox1.SelectedText = "";
             guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2TextBox1.Size = new Size(164, 23);
+            guna2TextBox1.Size = new Size(239, 23);
             guna2TextBox1.TabIndex = 149;
             guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
             // 

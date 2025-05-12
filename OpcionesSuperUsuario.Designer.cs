@@ -82,6 +82,7 @@
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox2.Location = new Point(200, 96);
             guna2TextBox2.Name = "guna2TextBox2";
+            guna2TextBox2.PasswordChar = '*';
             guna2TextBox2.PlaceholderText = "";
             guna2TextBox2.SelectedText = "";
             guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -104,6 +105,7 @@
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Location = new Point(199, 45);
             guna2TextBox1.Name = "guna2TextBox1";
+            guna2TextBox1.PasswordChar = '*';
             guna2TextBox1.PlaceholderText = "";
             guna2TextBox1.SelectedText = "";
             guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;

@@ -31,8 +31,8 @@ namespace Examen2Grupo3
             dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarInventario("Inventario.json");
-            Cliente.Text = "Pedido Nº: " + CargarNum();
-            this.usuarioActual = usuarioActual;
+            Cliente.Text = "Pedido Nº: " + CargarNum();//actualiza el numero del pedido conforme se generen mas
+            this.usuarioActual = usuarioActual;//carga el usuario actual para registrarlo como encargado
             lblEncargado.Text += usuarioActual.Username;
             lblNombre.Text += usuarioActual.Nombre;
             lblID.Text += usuarioActual.ID.ToString();
@@ -91,7 +91,7 @@ namespace Examen2Grupo3
             }
         }
 
-        public string? GuardarCliente()
+        public string? GuardarCliente()//Guarda los datos del Cliente
         {
             try
             {
@@ -103,13 +103,11 @@ namespace Examen2Grupo3
                     Direccion = guna2TextBox4.Text,
 
                 };
-
                 return "";
-
             }
             catch
             {
-                return null;
+                return null;//returna null si la operacion resulto fallida
             }
 
         }
@@ -137,11 +135,8 @@ namespace Examen2Grupo3
             }
         }
 
-
-
-        // Guardar el pedido cuando el usuario presione el botón
       
-        private void LimpiarTextBox()
+        private void LimpiarTextBox()//si el usuario presiona el btn para limpiar todos los campos del cliente 
         {
             foreach (Control control in this.Controls)
             {
@@ -166,12 +161,12 @@ namespace Examen2Grupo3
             return new List<Pedido>();
         }
 
-        private void guna2Button5_Click(object sender, EventArgs e)
+        private void guna2Button5_Click(object sender, EventArgs e)//btn para limpiar la lista de pedidos
         {
             dataGridView1.Rows.Clear();
-            lblSubtotal.Text = "Subtotal: ";
-            lblDescuento.Text = "Descuento: ";
-            lblTotal.Text = "Total: ";
+            lblSubtotal.Text = "Subtotal: ---";
+            lblDescuento.Text = "Descuento: ---";
+            lblTotal.Text = "Total: ---";
             GuardarInventario("Inventario.json");
             pedido.Productos.Clear(); // Limpiar la lista de productos del pedido actual
 
@@ -181,7 +176,7 @@ namespace Examen2Grupo3
         {
             LimpiarTextBox();
         }
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void guna2Button1_Click(object sender, EventArgs e)//btn para seleccion rapida de clientes
         {
             BuscarClientes frmClientes = new BuscarClientes();
 
@@ -191,7 +186,7 @@ namespace Examen2Grupo3
 
 
         }
-        private void RellenarTextBoxes(Cliente Clientes)
+        private void RellenarTextBoxes(Cliente Clientes)// rellena los campos al terminar la selecccion
         {
             guna2TextBox1.Text = Clientes.Nombre;
             guna2TextBox2.Text = Clientes.ID.ToString();
@@ -205,11 +200,11 @@ namespace Examen2Grupo3
 
         }
 
-        private void btnagregarProductoClick(object sender, EventArgs e)
+        private void btnagregarProductoClick(object sender, EventArgs e)//btn para agregar productos
         {
 
             BuscarProducto formProductos = new BuscarProducto();
-            if (formProductos.ShowDialog() == DialogResult.OK)
+            if (formProductos.ShowDialog() == DialogResult.OK)//si la operacion culmino de manera correcta, ejecutar el cuerpo
             {
                 try
                 {
@@ -227,7 +222,7 @@ namespace Examen2Grupo3
                         pedido.Productos = new List<Producto>();
 
                     }
-                    pedido.Estado = "Pendiente";
+                    pedido.Estado = "Pendiente";//estado predeterminado
 
                     pedido.Productos.Add(ProductoNuevo); //codigo anterior  pedido.Productos = ListaProductos
 
@@ -242,12 +237,9 @@ namespace Examen2Grupo3
                 }
 
             }
-            else
-            {
-                //nada xd
-            }
+   
         }
-        public void Descuento()
+        public void Descuento()//en esta funcion se aplican los montos
         {
             var culture = new System.Globalization.CultureInfo("en-US"); // Cultura con símbolo "$"
 

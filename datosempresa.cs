@@ -12,7 +12,7 @@ namespace Examen2Grupo3
             ControlUsuario(UsuarioActual);
         }
 
-        public void ControlUsuario(Usuarios UsuarioActual)
+        public void ControlUsuario(Usuarios UsuarioActual)//se oculta el boton de editar si es aprobador o registrador
         {
             if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
             {
@@ -44,14 +44,9 @@ namespace Examen2Grupo3
                 }
 
             }
-            else
-            {
-               // MessageBox.Show("Los campos de su empresa estan vacios. Asegurese de rellenarlos correctamente");
-            }
-
-
+           
         }
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void guna2Button1_Click(object sender, EventArgs e)//btn para editar
         {
             IngresarDatosEmpresa datos = new IngresarDatosEmpresa();
 

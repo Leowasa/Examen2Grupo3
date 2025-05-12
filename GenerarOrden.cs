@@ -15,8 +15,8 @@ namespace Examen2Grupo3
         {
             this.UsuarioActual = UsuarioActual;
             InitializeComponent();
-            dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
-            dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+            dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";//para Mostrar el monto con decimales
+            dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");//y mostrarlo en dolares
             CargarDatosDesdeJson();
         }
         public List<Pedido> LeerPedidos()
@@ -43,7 +43,7 @@ namespace Examen2Grupo3
 
                 var pedidos = LeerPedidos();
 
-                if (pedidos != null) // Evitar CS8601
+                if (pedidos != null) 
                 {
                     dataGridView1.Rows.Clear();
                     foreach (var datos in pedidos)
@@ -60,7 +60,7 @@ namespace Examen2Grupo3
             {
                 MessageBox.Show("El archivo 'datos.json' no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            // _cargandoDatos = true;
+           
         }
 
         private void GuardarCambios(List<Pedido> orden)
@@ -72,14 +72,6 @@ namespace Examen2Grupo3
                 // Cargar los pedidos existentes
                 List<Pedido> PedidosExistentes = LeerPedidos();
 
-                // Buscar el pedido existente por ID
-              //  var pedidoExistente = PedidosExistentes.FirstOrDefault(p => p.ID == orden.ID);
-               // if (pedidoExistente != null)
-               // {
-                    // Actualizar el estado del pedido existente
-                   // pedidoExistente.Estado = orden.Estado;
-               // }
-             
                     // Si no existe, no lo agregues (opcional: puedes lanzar un error o manejarlo de otra forma)
                     MessageBox.Show("El pedido no existe en la lista.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -135,10 +127,10 @@ namespace Examen2Grupo3
         }
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 2)
+            // Verificar que el texto de búsqueda tenga al menos 3 caracteres
+            if (textoBusqueda.Length < 3)
             {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                // Si tiene menos de 3 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
                     fila.Visible = true;
@@ -160,7 +152,7 @@ namespace Examen2Grupo3
                 fila.Visible = coincide;
             }
         }
-        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
+        private void guna2TextBox2_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
             BuscarElemento(guna2TextBox2.Text);
         }
@@ -170,7 +162,7 @@ namespace Examen2Grupo3
            
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)//celda seleccionada del datagrid
         {
 
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
@@ -181,7 +173,7 @@ namespace Examen2Grupo3
                 }
 
             }
-            else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
+            else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)//solicitara una clave especial en caso de eliminar un pedido preventivo siendo aprobador o registrador
             {
                 Codigo_especial Form = new Codigo_especial();
                 if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
@@ -213,8 +205,8 @@ namespace Examen2Grupo3
 
             if (result == DialogResult.Yes)
             {
-                Lista.RemoveAt(e.RowIndex);
-                dataGridView1.Rows.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada
+                Lista.RemoveAt(e.RowIndex);//elimina el pedido preventivo seleccionado
+                dataGridView1.Rows.RemoveAt(e.RowIndex); // Elimina la fila seleccionada del datagrid
                 GuardarCambios(Lista);
             }
         }

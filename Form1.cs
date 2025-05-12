@@ -58,13 +58,14 @@ namespace ejemplo
         }
         private void hidemenu()
         {
+
             if (panelhistorial.Visible == true)
             {
-                panelhistorial.Visible = false;
+                panelhistorial.Visible = false;//oculta el panel de historiales
             }
             if (panelVentas.Visible == true)
             {
-                panelVentas.Visible = false;
+                panelVentas.Visible = false;//Misma forma con el de ventas
             }
         }
         private void showmenu(Panel submenu)
@@ -79,7 +80,7 @@ namespace ejemplo
 
         private void btncerrarr_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Application.Exit();//cierra el programa
         }
 
 
@@ -90,27 +91,27 @@ namespace ejemplo
 
         private void Btnmaximi_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
-            Btnmaximi.Visible = false;
-            Btnrest.Visible = true;
+            this.WindowState = FormWindowState.Maximized;//Adapta el tamaño del programa a pantalla completa
+            Btnmaximi.Visible = false; //oculta el boton de maximizar
+            Btnrest.Visible = true;//y muestra el de restaurar
 
         }
 
         private void Btnmini_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;//minimiza el tamaño del programa
         }
 
         private void Btnrest_Click_1(object sender, EventArgs e)
         {
 
-            this.WindowState = FormWindowState.Normal;
+            this.WindowState = FormWindowState.Normal;//lo vuelve a su estado original
             Btnrest.Visible = false;
             Btnmaximi.Visible = true;
         }
 
 
-        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)//permite mover el formulario por la pantalla
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
@@ -130,13 +131,6 @@ namespace ejemplo
             }
         }
 
-
-
-        private void guna2Button9_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            showmenu(panelVentas);
-        }
 
 
         //RESIZE METODO PARA REDIMENCIONAR/CAMBIAR TAMAÑO A FORMULARIO EN TIEMPO DE EJECUCION ----------------------------------------------------------
@@ -177,28 +171,6 @@ namespace ejemplo
             e.Graphics.FillRectangle(blueBrush, sizeGripRectangle);
             base.OnPaint(e);
             ControlPaint.DrawSizeGrip(e.Graphics, Color.Transparent, sizeGripRectangle);
-        }
-
-        private void guna2Button15_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new GenerarPedido(UsuarioActual));
-        }
-
-        private void btnHistorial_Click(object sender, EventArgs e)
-        {
-            showmenu(panelhistorial);
-        }
-
-        private void btnUsuarios_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new Usuarios(this.UsuarioActual));
-        }
-
-        private void PanelPrincipal_Click(object sender, EventArgs e)
-        {
-            customizemenu();
-            AbrirFormulario(new datosempresa(UsuarioActual));
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
@@ -312,7 +284,7 @@ namespace ejemplo
         private void guna2CustomGradientPanel1_MouseDown_1(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            SendMessage(this.Handle, 0x112, 0xf012, 0);//Para mover el formulario
 
 
         }

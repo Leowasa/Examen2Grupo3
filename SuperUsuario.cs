@@ -5,7 +5,7 @@ namespace Examen2Grupo3
 {
     public partial class SuperUsuario : Form
     {
-        private int opcion;
+        private int opcion;//Si se quiere cambiar clave especial o contrasenia del admin
         private static Usuarios Admin = new Usuarios();
 
 
@@ -17,15 +17,15 @@ namespace Examen2Grupo3
         public SuperUsuario()
         {
             InitializeComponent();
-            cargarAdmin();
+           Admin = cargarAdmin();//obtengo los datos del admin
         }
 
         private void SuperUsuario_Load(object sender, EventArgs e)
         {
-            cargarAdmin();
+          
         }
 
-        private void guna2Button2_Click(object sender, EventArgs e)
+        private void guna2Button2_Click(object sender, EventArgs e)//para cambiar clave del admin
         {
             opcion = 0;
             OpcionesSuperUsuario form2 = new OpcionesSuperUsuario(opcion, Admin);
@@ -33,7 +33,7 @@ namespace Examen2Grupo3
 
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void guna2Button1_Click(object sender, EventArgs e)//para cambiar codigo especial
         {
             opcion = 1;
             OpcionesSuperUsuario form1 = new OpcionesSuperUsuario(opcion, Admin);
@@ -42,36 +42,35 @@ namespace Examen2Grupo3
             form1.Show();
 
         }
-        private void cargarAdmin()
+        private Datos.Usuarios cargarAdmin()
         {
-            string rutarchivo = "usuarios.json";
-            if (File.Exists(rutarchivo))
-            {
-                string json = File.ReadAllText(rutarchivo);
-                List<Usuarios>? listaUsuarios = System.Text.Json.JsonSerializer.Deserialize<List<Usuarios>>(json) ?? new List<Usuarios>();
-                foreach (var lista in listaUsuarios)
-                {
-                    if (lista.Tipo == "Administrador")
-                    {
-                        Admin = lista;
-                    }
+            // Obtener la ruta de la carpeta "Usuario" en la raíz del proyecto
+            string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
+            // Combinar la ruta del directorio con el nombre del archivo
+            string rutaCompleta = Path.Combine(directorio, "usuarios.json");
 
-                }
+            // Leer el contenido del archivo JSON
+            string json = File.ReadAllText(rutaCompleta);
 
-
-
-            }
-
-
+            // Deserializar el contenido JSON en una lista de usuarios
+           List<Datos.Usuarios> usuarios = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Datos.Usuarios>>(json) ?? new List<Datos.Usuarios>();
+           foreach (var lista in usuarios)
+           {
+               if (lista.Tipo == "Administrador")//buscar el admin y retornarlo
+               {
+                 return lista;                    
+               }
+           }
+            return new Datos.Usuarios(); // Retornar un usuario vacío si no existe
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+
+        private void pictureBox2_Click(object sender, EventArgs e)//btn cerrar
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            Application.Exit();
         }
 
-        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)//para poder mover el programa por la pantalla
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);

@@ -17,7 +17,7 @@ namespace Examen2Grupo3
         public BuscarClientes()
         {
             InitializeComponent();
-            CargarClientes("Clientes.Json");
+            CargarClientes("Clientes.Json");//Carga el cliente y lo actualiza en el datagridvew
         }
         public void CargarClientes(string rutaArchivo)
         {
@@ -40,34 +40,37 @@ namespace Examen2Grupo3
             }
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)//Cargar el Cliente de la fila seleccionada
         {
             if (e.RowIndex >= 0)
             {
-                // Obtén los datos del cliente desde la fila seleccionada
-                Clientes.ID = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                Clientes.Nombre = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                Clientes.Correo = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                Clientes.Direccion = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                // Validar que las celdas no sean nulas antes de convertirlas  
+                var idValue = dataGridView1.Rows[e.RowIndex].Cells[0].Value?.ToString();
+                var nombreValue = dataGridView1.Rows[e.RowIndex].Cells[1].Value?.ToString();
+                var correoValue = dataGridView1.Rows[e.RowIndex].Cells[2].Value?.ToString();
+                var direccionValue = dataGridView1.Rows[e.RowIndex].Cells[3].Value?.ToString();
 
-                // Dispara el evento enviando el cliente seleccionado
-                //ClienteSeleccionado?.Invoke(clienteSeleccionado);
-                ClienteSeleccionado?.Invoke(Clientes);
+                if (!string.IsNullOrEmpty(idValue) &&
+                    !string.IsNullOrEmpty(nombreValue) &&
+                    !string.IsNullOrEmpty(correoValue) &&
+                    !string.IsNullOrEmpty(direccionValue))
+                {
+                    Clientes.ID = int.Parse(idValue);
+                    Clientes.Nombre = nombreValue;
+                    Clientes.Correo = correoValue;
+                    Clientes.Direccion = direccionValue;
 
-                // Cierra el formulario
-                this.Close();
+                    // Dispara el evento enviando el cliente seleccionado  
+                    ClienteSeleccionado?.Invoke(Clientes);
+
+                    // Cierra el formulario  
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Algunos datos del cliente están incompletos o son nulos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-        }
-        private Cliente ObtenerClienteDesdeFila(int rowIndex)
-        {
-            return new Cliente
-            {
-                Nombre = dataGridView1.Rows[rowIndex].Cells["Nombre"].Value?.ToString() ?? "",
-                ID = int.Parse(dataGridView1.Rows[rowIndex].Cells["ID"].Value?.ToString() ?? "0"),
-                Direccion = dataGridView1.Rows[rowIndex].Cells["Direccion"].Value?.ToString() ?? "",
-                Correo = dataGridView1.Rows[rowIndex].Cells["Correo"].Value?.ToString() ?? "",
-                Tipo = dataGridView1.Rows[rowIndex].Cells["Tipo"].Value?.ToString() ?? ""
-            };
         }
 
         private void BuscarClientes_Load(object sender, EventArgs e)
@@ -80,7 +83,7 @@ namespace Examen2Grupo3
 
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e)//btn cerrrar
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
@@ -92,7 +95,7 @@ namespace Examen2Grupo3
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
+        private void guna2TextBox2_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
             BuscarElemento(guna2TextBox2.Text);
         }

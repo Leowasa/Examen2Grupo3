@@ -10,13 +10,13 @@ namespace Examen2Grupo3
     [SupportedOSPlatform("windows6.1")]
     public partial class AgregarCliente : Form
     {
-        public Cliente DatosClientes;
+        public  Cliente DatosClientes;//datos por si se agregara un nuevo al json
         public  Datos.Usuarios DatosUsuario;
-        private List<Cliente> Clientes = new List<Cliente>();
+        private List<Cliente> Clientes = new List<Cliente>();//listas para cargar el json
         private List<Datos.Usuarios> Usuarios = new List<Datos.Usuarios>();
         private int opcion;
 
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]//DllImport para poder move el formulario por la pantalla
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
@@ -29,7 +29,7 @@ namespace Examen2Grupo3
             Configurar();
 
         }
-        public AgregarCliente(int Opcion, List<Datos.Cliente> clientes)//Opcion representa la operacion que hara el formulario
+        public AgregarCliente(int Opcion, List<Datos.Cliente> clientes)
         {
             Clientes = clientes;
             this.opcion = Opcion;
@@ -39,7 +39,7 @@ namespace Examen2Grupo3
         }
         private void Configurar()
         {
-            if (opcion == 1 || opcion == 3)
+            if (opcion == 1 || opcion == 3)//para agegar o editar un usuario
             {
                 this.Text = "Agregar Usuario";
                 lbl1.Text = "ID: ";
@@ -48,15 +48,15 @@ namespace Examen2Grupo3
                 label4.Text = "contraseña: ";
                 label5.Text = "Confirmar contraseña: ";
 
-                // Fix for the line causing CS1525 and CS1002 errors  
-                guna2TextBox4.PasswordChar = '*';
-                guna2ComboBox1.Items.Clear(); // Clear existing items before adding new ones
-                                              // Use AddRange to populate the Items collection instead of assigning directly  
+            
+                guna2TextBox4.PasswordChar = '*';//para ocultar la contraseña
+                guna2ComboBox1.Items.Clear(); // limpia los items existentes antes de añadir nuevos
+                                             
                 guna2ComboBox1.Items.AddRange(new object[] { "Aprobador", "Registrador" });
 
 
             }
-            else if (opcion == 2 || opcion == 4)
+            else if (opcion == 2 || opcion == 4)//para agregar o editar un cliente
             {
                 this.Text = "Agregar Cliente";
                 label5.Visible = false;
@@ -85,18 +85,20 @@ namespace Examen2Grupo3
                     return false;
                 }
 
-                // Aquí puedes agregar una validación extra si el número debe estar en cierto rango
+                // validar si el numero ingresado es mayor o igual a 3
                 if (guna2TextBox1.Text.Trim().Length < 3)
                 {
                     MessageBox.Show("El ID no puede ser menor a 3. ");
                     return false;
                 }
+                //validar si el espacio del combobox esta vacio
                 else if (string.IsNullOrWhiteSpace(guna2ComboBox1.Text) || guna2ComboBox1.SelectedItem == null)
                 {
                     MessageBox.Show("Por favor seleccione un valor en el ComboBox.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
-                else if (guna2TextBox4.Text != guna2TextBox5.Text) 
+                //Verificar la contraseñas 
+                else if (guna2TextBox4.Text != guna2TextBox5.Text)
                 {
                     MessageBox.Show("Las contraseñas no coinciden.");
                     return false;
@@ -114,25 +116,25 @@ namespace Examen2Grupo3
             }
             catch (FormatException ex)
             {
-                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", ex.Message);
+                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", ex.Message);// Captura la excepción de campos erroneos
                 return false;
             }
             catch (OverflowException ex)
             {
-                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", ex.Message);
+                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", ex.Message);// Captura la excepción de un numero mayor al que puede soportar un int
                 return false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", ex.Message); // Captura la excepción del campo vacío
+                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", ex.Message); // Captura la excepción de los demas campos vacíos
                 return false;
             }
-           
-            MessageBox.Show("Operación realizada satisfactoriamente. ", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            MessageBox.Show("Operacion exitosa!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
         }
 
-        public bool ObtenerCliente()
+        public bool ObtenerCliente()//Agregar un cliente
         {
 
             try
@@ -144,7 +146,7 @@ namespace Examen2Grupo3
                 int nuevoId = int.Parse(guna2TextBox1.Text); // Suponiendo que el ID se ingresa en `guna2TextBox1`
                 if (!EsIdUnico(nuevoId, Clientes, DatosClientes?.ID))
                 {
-                    MessageBox.Show("El ID ya existe. Por favor, elige otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("El ID ya existe. Por favor, eliga otro diferente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
 
@@ -161,43 +163,43 @@ namespace Examen2Grupo3
                     return false;
                 }
                 //validar el correo ingresado
-                else if(!Regex.IsMatch(guna2TextBox3.Text, patronCorreo))
+                else if (!Regex.IsMatch(guna2TextBox3.Text, patronCorreo))
                 {
                     MessageBox.Show("El correo ingresado no es válido. Por favor, ingrese un correo válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
-                }   
+                }
                 //los datos son correctos, guardar en DatosClientes
                 else
                 {
-                    
+
                     DatosClientes = new Cliente
                     {
-                        ID = int.Parse(guna2TextBox1.Text), // Ensure 'ID' is a property of 'cliente' and not a Label
+                        ID = int.Parse(guna2TextBox1.Text), 
                         Nombre = guna2TextBox2.Text,
                         Direccion = guna2TextBox4.Text,
                         Correo = guna2TextBox3.Text,
-                        Tipo = guna2ComboBox1.SelectedItem?.ToString() ?? string.Empty // Safeguard against null
+                        Tipo = guna2ComboBox1.SelectedItem?.ToString() ?? string.Empty 
 
                     };
                 }
             }
-            catch (FormatException ex)//campos erroneos
+            catch (FormatException )//campos erroneos
             {
                 MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            catch (OverflowException ex)//ID ingresado que exceda el tamaño soportado por el int
+            catch (OverflowException)//ID ingresado que exceda el tamaño soportado por el int
             {
                 MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            catch (Exception ex)//Demas campos en blanco
+            catch (Exception)//Demas campos en blanco
             {
                 MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning); // Captura la excepción del campo vacío
-                return false;           
+                return false;
             }
 
-            MessageBox.Show("Operación realizada satisfactoriamente. ", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Operacion exitosa!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
         }
         public void SetDatosCiente(Datos.Cliente clientes)
@@ -241,32 +243,32 @@ namespace Examen2Grupo3
         }
 
 
-        private void guna2Button1_Click_1(object sender, EventArgs e)
+        private void guna2Button1_Click_1(object sender, EventArgs e)//btn confirmar
         {
             switch (opcion)
             {
                 case 1: //Agregar Usuario
 
-                   
+
                     if (Usuarios.Any(c => c.ID == int.Parse(guna2TextBox1.Text))) // Validación normal de ID repetido
                     {
                         MessageBox.Show("No pueden haber más de un ID idéntico.");
                         return;
                     }
-                    else if (ObtenerUsuario() == true) 
+                    else if (ObtenerUsuario() == true)
                     {
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     break;
                 case 2: //Agregar Cliente
-                   
+
                     if (Clientes.Any(c => c.ID == int.Parse(guna2TextBox1.Text))) // Validación normal de ID repetido
                     {
                         MessageBox.Show("No pueden haber más de un ID idéntico.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    else if (ObtenerCliente()) 
+                    else if (ObtenerCliente())
                     {
                         this.DialogResult = DialogResult.OK;
                         this.Close();
@@ -290,7 +292,7 @@ namespace Examen2Grupo3
             }
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void pictureBox3_Click(object sender, EventArgs e)//btn cerrar
         {
 
             this.DialogResult = DialogResult.Cancel;
@@ -300,7 +302,15 @@ namespace Examen2Grupo3
         private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            SendMessage(this.Handle, 0x112, 0xf012, 0);//Asegura poder mover el formulario por la pantalla
+        }
+
+        private void guna2TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la entrada de caracteres no numéricos
+            }
         }
     }
 }

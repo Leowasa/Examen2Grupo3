@@ -13,7 +13,6 @@ namespace ejemplo
 
     public partial class PedidosHistorial : Form
     {
-        private List<Producto> listaPersonas = new List<Producto>();
         private static List<Pedido> listaPedido = new List<Pedido>();
         private Datos.Usuarios UsuarioActual = new Datos.Usuarios();
         public PedidosHistorial(Datos.Usuarios usuario)
@@ -62,13 +61,12 @@ namespace ejemplo
         }
 
 
-        // Actualizar el DataGridView con la lista de pedidow
+      
 
 
-        // Me permite actualizar el estado del pedido
         private void GuardarCambios(List<Pedido> orden)
         {
-            string rutaArchivo = "pedidos.json";
+            string rutaArchivo = "pedidos.json";//ruta del archivo
 
             try
             {
@@ -86,22 +84,14 @@ namespace ejemplo
 
         }
 
-        // Guardar los datos actualizados en el archivo JSON
-        private void GuardarDatosJson()
-        {
-            string rutaArchivo = "datos.json";
-            string jsonString = JsonConvert.SerializeObject(listaPedido, Formatting.Indented);
-            File.WriteAllText(rutaArchivo, jsonString);
-        }
-
 
         private void PedidosHistorial_Load(object sender, EventArgs e)
         {
-            // Cargar los datos desde el archivo JSON al iniciar el formulario
+            
            
         }
 
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
             BuscarElemento(guna2TextBox1.Text);
         }

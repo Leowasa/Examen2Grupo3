@@ -25,13 +25,12 @@ namespace ejemplo
         public Usuarios(Datos.Usuarios usuarioactual)
         {
 
-            InitializeComponent(); // Inicializa los controles del formulario
+            InitializeComponent(); 
             usuarios = LeerUsuarios(); // Carga la lista de usuarios
 
             Operar = new AgregarCliente(1, usuarios); // Inicializa el formulario de agregar cliente
-            this.Usuarioactual = usuarioactual;
-            ControlUsuario1(usuarioactual);
-            //ConfigurarTextBox();
+            this.Usuarioactual = usuarioactual;//cargo el usuario actual
+            ControlUsuario1(usuarioactual);//y aplico las restricciones
             CargarDatosEnDataGridView();
 
         }
@@ -51,21 +50,8 @@ namespace ejemplo
             formulario.Show();
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-            Operar = new AgregarCliente(1,usuarios);
-            if (Operar.ShowDialog() == DialogResult.OK)
-            {
-                usuarios.Add(Operar.DatosUsuario);
-                GuardarUsuarios("usuarios.json");
 
-                CargarDatosEnDataGridView();
-
-            }
-
-        }
-
-        private List <Datos.Usuarios> LeerUsuarios()
+        private List<Datos.Usuarios> LeerUsuarios()
         {
             // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
             string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
@@ -86,15 +72,6 @@ namespace ejemplo
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Datos.Usuarios>>(json) ?? new List<Datos.Usuarios>();
         }
 
-
-        /*
-        private void ConfigurarTextBox()
-        {
-            textBox1.Text = "Ingresar Nombre o ID";
-            textBox1.ForeColor = Color.Gray;
-            textBox1.Enter += textBox1_Enter;
-            textBox1.Leave += textBox1_Leave;
-        }*/
         public void ControlUsuario1(Datos.Usuarios Usuarioactual)
         {
 
@@ -118,18 +95,18 @@ namespace ejemplo
             dataGridView1.Rows.Clear();
             foreach (var row in usuarios)
             {
-                if(row == null) continue; // Verificar si la fila es nula
-                dataGridView1.Rows.Add(row.ID, row.Nombre, row.Username, row.Tipo);
+                if (row == null) continue; // Verificar si la fila es nula
+                dataGridView1.Rows.Add(row.ID, row.Nombre, row.Username, row.Tipo);//muestro la lista de usuarios en el datagrid
 
             }
 
         }
         public void GuardarUsuarios(string rutaArchivo)
         {
-            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            // Obtener la ruta de la carpeta "Usuario" en la raíz del proyecto
             string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
 
-            // Crear la carpeta "Data" si no existe
+            // Crear la carpeta "Usaurio" si no existe
             if (!Directory.Exists(directorio))
             {
                 Directory.CreateDirectory(directorio);
@@ -209,7 +186,7 @@ namespace ejemplo
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)//btn para exportar archivo csv
         {
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
@@ -224,7 +201,7 @@ namespace ejemplo
             }
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e)//btn para importar archivo csv
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -253,7 +230,7 @@ namespace ejemplo
 
         private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
         private void Casillaseleccionada(DataGridViewCellEventArgs e)
         {
@@ -309,21 +286,20 @@ namespace ejemplo
         }
         private void dataGridView1_CellClick_2(object sender, DataGridViewCellEventArgs e)
         {
-            Codigo_especial Form = new Codigo_especial();
             if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
             {
-                    MessageBox.Show("No tiene permisos para realizar esta operacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                
+                MessageBox.Show("No tiene permisos para realizar esta operacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
             }
             Casillaseleccionada(e);
         }
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            // Verificar que el texto de búsqueda tenga al menos 3 caracteres
             if (textoBusqueda.Length < 3)
             {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                // Si tiene menos de 3 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
                     fila.Visible = true;
@@ -347,12 +323,38 @@ namespace ejemplo
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-          
+
         }
 
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
             BuscarElemento(guna2TextBox1.Text);
+        }
+
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")//solo el Admin puede agregar usuarios
+            {
+                MessageBox.Show("No tiene permisos para realizar esta operacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
+            Operar = new AgregarCliente(1, usuarios);
+            if (Operar.ShowDialog() == DialogResult.OK)//llamo al formulario para crear un nuevo usuario. si el resultado es ok se ejecuta el cuerpo
+            {
+                usuarios.Add(Operar.DatosUsuario);
+                GuardarUsuarios("usuarios.json");
+
+                CargarDatosEnDataGridView();
+
+            }
+        }
+
+        private void guna2TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+           
         }
     }
 }

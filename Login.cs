@@ -19,16 +19,16 @@ public partial class Login : Form
         InitializeComponent();
 
     }
-    private void primeraEjecucion()
+    private void primeraEjecucion()//verifica si es la primera vez que se ejecuta el programa
     {
         string rutaArchivo = "configuracion.dat";
         IngresarDatosEmpresa Nuevo = new IngresarDatosEmpresa();
-        if (File.Exists(rutaArchivo))
+        if (File.Exists(rutaArchivo))//si existe el archivo configuracion.dat. Ejecutar el menu principal
         {
             Validar();
 
         }
-        else
+        else//si es la primera vez. Solicitar ingresar los datos de la empresa
         {
 
             if (Nuevo.ShowDialog() == DialogResult.OK)
@@ -39,19 +39,15 @@ public partial class Login : Form
             }
         }
     }
-    private void guna2Button2_Click(object sender, EventArgs e)
+    private void guna2Button2_Click(object sender, EventArgs e)//btn de confirmar
     {
 
         primeraEjecucion();
     }
-    private void ProcesarUsuario()
-    {
-
-
-    }
+   
     public bool Validar()
     {
-        CargarUsuario();
+        CargarUsuario();//cargo los usuarios
 
         // Validar si los campos están vacíos
         if (string.IsNullOrWhiteSpace(guna2TextBox1.Text) || string.IsNullOrWhiteSpace(guna2TextBox3.Text))
@@ -64,21 +60,21 @@ public partial class Login : Form
             usuario.Username = guna2TextBox1.Text;
             usuario.Password = guna2TextBox3.Text;
 
-            if (listaUsuarios != null)
+            if (listaUsuarios != null)//verifico si la lista es nulla
             {
                 bool usuarioEncontrado = false;
                 foreach (var lista in listaUsuarios)
                 {
-                    if (lista.Username == usuario.Username && lista.Password == usuario.Password)
+                    if (lista.Username == usuario.Username && lista.Password == usuario.Password)//valido si tanto la contraseña como el username existen
                     {
 
-                        usuarioEncontrado = true;
+                        usuarioEncontrado = true;//confirmo la operacion
                         personalizar(lista);
                         return true;
                     }
                 }
 
-                if (!usuarioEncontrado)
+                if (!usuarioEncontrado)// si no es encontrado. lanzar mensaje
                 {
                     MessageBox.Show("Usuario o contraseña incorrectos.", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -128,30 +124,29 @@ public partial class Login : Form
         }
     }
 
-    public void personalizar(Datos.Usuarios usuarios)
+    public void personalizar(Datos.Usuarios usuarios)//dependiendo de que usuario ingrese. Se aplicaran los cambios
     {
         switch (usuarios.Tipo)
         {
-            case "Administrador":
+            case "Administrador"://no se oculta nada
                 Form1 form1 = new Form1(usuarios);
                 this.Hide();
                 form1.Show();
                 break;
             case "Aprobador":
                 Form1 form2 = new Form1(usuarios);
-                form2.btnGenerarPedido.Visible = false;
+                form2.btnGenerarPedido.Visible = false;//no podra generar un pedido
                 this.Hide();
-                // Assuming "Mibotn" is a control or property, it must be accessed correctly.
-                // Replace "Mibotn" with the correct property or method name.
+               
                 form2.Show();
                 break;
             case "Registrador":
                 Form1 form3 = new Form1(usuarios);
-                form3.btnGeneraOrden.Visible = false;
+                form3.btnGeneraOrden.Visible = false;//no podra generar una orden
                 this.Hide();
                 form3.Show();
                 break;
-            case "SuperUsuario":
+            case "SuperUsuario"://se mostrara un menu diferente, correspondiente al usuario
                 SuperUsuario form = new SuperUsuario();
                 this.Hide();
                 form.Show();

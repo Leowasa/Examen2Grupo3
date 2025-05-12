@@ -19,7 +19,7 @@ namespace Examen2Grupo3
         }
         private string LeerCodigo()
         {
-            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            // Obtener la ruta de la carpeta "Usuario" en la raíz del proyecto
             string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Codigo");
             // Combinar la ruta del directorio con el nombre del archivo
             string rutaCompleta = Path.Combine(directorio, "CodigoEspecial.json");
@@ -42,7 +42,7 @@ namespace Examen2Grupo3
 
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void guna2Button1_Click(object sender, EventArgs e)//btn confirmar
         {
             codigoespecial = LeerCodigo();
             codigoIngresado = guna2TextBox1.Text;
@@ -66,14 +66,14 @@ namespace Examen2Grupo3
 
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e)//btn cerrar
         {
 
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)//para mover el formulario por la pantalla
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);

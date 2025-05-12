@@ -11,10 +11,9 @@ namespace ejemplo
 {
     public partial class Clientes : Form
     {
-        //  public List<RegistroPedidos.Usuarios> Usuarioss = new List<RegistroPedidos.Usuarios>();
+       
         public List<Datos.Cliente> cliente = new List<Cliente>();
         public Datos.Usuarios usuarioActual = new Datos.Usuarios();
-        BindingSource bindingSource = new BindingSource();
         public Clientes(Datos.Usuarios UsuarioActual)
         {
             InitializeComponent();
@@ -25,7 +24,7 @@ namespace ejemplo
 
         }
 
-        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
+        private void guna2TextBox2_TextChanged(object sender, EventArgs e)//barra buscar cliente
         {
             BuscarElemento(guna2TextBox2.Text);
         }
@@ -56,7 +55,7 @@ namespace ejemplo
                 fila.Visible = coincide;
             }
         }
-        private void guna2Button2_Click(object sender, EventArgs e)
+        private void guna2Button2_Click(object sender, EventArgs e)//btn agregar cliente
         {
             AgregarCliente agregarCliente = new AgregarCliente(2, cliente);
             if (agregarCliente.ShowDialog() == DialogResult.OK)
@@ -69,6 +68,44 @@ namespace ejemplo
 
 
             }
+        }
+            public void ImportarCSV(string rutaArchivo)
+        {
+            cliente = new List<Cliente>();
+
+            try
+            {
+                if (File.Exists(rutaArchivo))
+                {
+                    var lineas = File.ReadAllLines(rutaArchivo);
+
+                    foreach (var linea in lineas.Skip(1)) // Omitimos el encabezado
+                    {
+                        var datos = linea.Split(',');
+
+
+                        Cliente clientes = new Cliente
+                        {
+                            ID = int.Parse(datos[0]),
+                            Nombre = datos[1],
+                            Correo = datos[2],
+                            Direccion = datos[3],
+                            Tipo = datos[4]
+                        };
+
+                        cliente.Add(clientes);
+                    }
+                   
+                    MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    GuardarClientes("Clientes.Json");
+                    CargarClientes("Clientes.Json");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         public void ExportarCSV(string rutaArchivo)
         {
@@ -128,53 +165,16 @@ namespace ejemplo
                 }
             }
         }
-        public void ImportarCSV(string rutaArchivo)
-        {
-            cliente = new List<Cliente>();
-
-            try
-            {
-                if (File.Exists(rutaArchivo))
-                {
-                    var lineas = File.ReadAllLines(rutaArchivo);
-
-                    foreach (var linea in lineas.Skip(1)) // Omitimos el encabezado
-                    {
-                        var datos = linea.Split(',');
-
-
-                        Cliente clientes = new Cliente
-                        {
-                            ID = int.Parse(datos[0]),
-                            Nombre = datos[1],
-                            Correo = datos[2],
-                            Direccion = datos[3],
-                            Tipo = datos[4]
-                        };
-
-                        cliente.Add(clientes);
-                    }
-                   
-                    MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    GuardarClientes("Clientes.Json");
-                    CargarClientes("Clientes.Json");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
+    
         private void Clientes_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)//casilla seleccionadad del datagrivew
         {
             Codigo_especial Form = new Codigo_especial();
-            if (usuarioActual.Tipo == "Aprobador" || usuarioActual.Tipo == "Registrador")
+            if (usuarioActual.Tipo == "Aprobador" || usuarioActual.Tipo == "Registrador")//si el usuario es aprobador o registrador, solicitar el codigo especial
             {
                 Form.ShowDialog();
                 if (Form.DialogResult == DialogResult.OK)
@@ -231,7 +231,7 @@ namespace ejemplo
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)//btn para exportar csv
         {
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
@@ -245,7 +245,7 @@ namespace ejemplo
             }
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e)//btn para importart csv
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -258,7 +258,7 @@ namespace ejemplo
                 }
             }
         }
-        public void ControlUsuario1(Datos.Usuarios Usuarioactual)
+        public void ControlUsuario1(Datos.Usuarios Usuarioactual)//control de usuarios para ocultar funciones al usuario
         {
 
             if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
@@ -277,7 +277,7 @@ namespace ejemplo
                 string usuarios = File.ReadAllText(rutarchivo);
                 try
                 {
-                    Lista = JsonConvert.DeserializeObject<List<Datos.Usuarios>>(usuarios);
+                    Lista = JsonConvert.DeserializeObject<List<Datos.Usuarios>>(usuarios)?? new List<Datos.Usuarios>();
                 }
                 catch
                 {

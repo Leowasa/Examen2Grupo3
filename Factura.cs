@@ -22,17 +22,19 @@ namespace Examen2Grupo3
     public partial class Factura : Form
     {
         private static Pedido Pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
-        private static int NumeroPedido;
-        private int Opcion;
-        private string estado;
+        private int Opcion;//se usa para saber si se va a ver un pedido, una orden (o generarla)
+        private string estado;//en caso de confirmar la orden, se le asigna el estado
         private static Pedido orden;
         private Datos.Usuarios usuarioActual = new Datos.Usuarios();
-        public Factura(Pedido pedido, int opcion, Datos.Usuarios usuarioActual)
+        public Factura(Pedido pedido, int opcion, Datos.Usuarios usuarioActual)//para consultar
         {
             this.usuarioActual = usuarioActual;
             InitializeComponent();
              Opcion = opcion;
+            dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             Pedido = pedido;
             configurar();
            
@@ -43,11 +45,15 @@ namespace Examen2Grupo3
             InitializeComponent();
          
         }
-        public Factura(Pedido pedido, int opcion, Datos.Usuarios usuario, string estadoinicial)
+        public Factura(Pedido pedido, int opcion, Datos.Usuarios usuario, string estadoinicial)//Para generar una orden
         {
             usuarioActual = usuario;
             Opcion = opcion;
             InitializeComponent();
+            dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.Format = "C2";
+            dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             dataGridView1.Rows.Clear();
             Pedido = pedido;
             estado = estadoinicial;
@@ -55,7 +61,7 @@ namespace Examen2Grupo3
            
         }
         
-        private void configurar()
+        private void configurar()//dependiendo de la opcion se actualiza de forma diferente
         {
             cargarEmpresa();
             dataGridView1.Rows.Clear();
@@ -107,7 +113,7 @@ namespace Examen2Grupo3
             }
           
 
-            foreach (var lista in Pedido.Productos)
+            foreach (var lista in Pedido.Productos)//cargar los productos
             {
                 dataGridView1.Rows.Add(lista.ID, lista.Nombre, lista.Categoria, lista.Descripcion, lista.Cantidad, lista.PrecioUnitario, lista.Cantidad * lista.PrecioUnitario);
 
@@ -118,7 +124,7 @@ namespace Examen2Grupo3
          
             label20.Text = "Total: $" + orden.Total.ToString("F2");
         }
-        private void cargarEmpresa()
+        private void cargarEmpresa()//Cargar y mostrar la empresa 
         {
             if (File.Exists("Empresa.Json"))
             {
@@ -218,7 +224,7 @@ namespace Examen2Grupo3
 
 
         }
-        private void guna2Button2_Click(object sender, EventArgs e)
+        private void guna2Button2_Click(object sender, EventArgs e)//boton confirmar (o volver)
         {
             Form1? principal = Application.OpenForms["Form1"] as Form1; // Use nullable reference type and safe casting  
 
@@ -247,7 +253,7 @@ namespace Examen2Grupo3
                     if (principal != null)
                     {
                         principal.AbrirFormularioEnPanel(new GenerarOrden(usuarioActual)); // Reemplaza con el formulario que desees abrir
-                        MessageBox.Show("Operacion generada Satisfactoriamente");
+                        MessageBox.Show("Operacion exitosa!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     break;
                 case 1://Ver pedido

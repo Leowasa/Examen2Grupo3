@@ -9,28 +9,27 @@ namespace Examen2Grupo3
     public partial class Inventario : Form
     {
         //revisar cuando se elimina, buscar en datagrid, 
-        private Producto Producto;
         private List<Producto> inventario = new List<Producto>();
         Datos.Usuarios Usuarioactual = new Datos.Usuarios();
+        [SupportedOSPlatform("windows6.1")]
         public Inventario(Usuarios usuarioactual)
         {
             InitializeComponent();
-            Producto = new Producto();
             dataGridView1.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["PrecioUnitario"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarInventario("Inventario.Json");
             Usuarioactual = usuarioactual;
-            ControlUsuario1(usuarioactual);
+            ControlUsuario1(usuarioactual);//restringo las funciones mostradas al usuario ingresado
         }
 
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Codigo_especial Codigo = new Codigo_especial();
-            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
+            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")//si es aprobador o registrador. Se le solicita clave especial
             {
                 Codigo.ShowDialog();
-                if (Codigo.DialogResult == DialogResult.OK)
+                if (Codigo.DialogResult == DialogResult.OK)//si se ingreso correctamente
                 {
                     casillaSeleccionada(e);
 
@@ -40,13 +39,13 @@ namespace Examen2Grupo3
 
         }
 
-        public void casillaSeleccionada(DataGridViewCellEventArgs e)
+        public void casillaSeleccionada(DataGridViewCellEventArgs e)//se obtiene la casilla seleccionada y realiza la operacion correspondiente
         {
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
 
-                Agregar_Productos formEditar = new Agregar_Productos(inventario,1);
+                Agregar_Productos formEditar = new Agregar_Productos(inventario,1);//obtengo los datos del productos desde la fila seleccionada y opero la edicion
                 formEditar.SetDatosProducto(
                     filaSeleccionada.Cells["ID"].Value.ToString() ?? "0",
                     filaSeleccionada.Cells["Nombre"].Value.ToString() ?? "",
@@ -58,7 +57,7 @@ namespace Examen2Grupo3
                 );
 
                 formEditar.ShowDialog();
-                if (formEditar.DialogResult == DialogResult.OK)
+                if (formEditar.DialogResult == DialogResult.OK)//si la operacion fue exitosa. Cargar los datos y despues guardar
                 {
                     DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
                     Producto productoEditado = formEditar.ObtenerProductoEditado();
@@ -78,7 +77,7 @@ namespace Examen2Grupo3
 
                 if (result == DialogResult.Yes)
                 {
-                    dataGridView1.Rows.RemoveAt(e.RowIndex);
+                    dataGridView1.Rows.RemoveAt(e.RowIndex);//elimino el producto del datagrid y luego guardo
                     GuardarInventario("Inventario.Json");
                 }
             }
@@ -98,7 +97,7 @@ namespace Examen2Grupo3
                     Producto producto = new Producto();
                     try
                     {
-                        // Fix for CS0019 and CS8604 in the problematic line
+                        //leo todos los productos que estan en el datagrid
                         producto.ID = int.TryParse(fila.Cells["ID"].Value?.ToString(), out int id) ? id : 0;
                         producto.Nombre = fila.Cells["Nombre"].Value.ToString() ?? "";
                         producto.Categoria = fila.Cells["Categoria"].Value.ToString() ?? "";
@@ -110,7 +109,7 @@ namespace Examen2Grupo3
                         }
                         else
                         {
-                            producto.PrecioUnitario = 0; // Or handle the default value appropriately
+                            producto.PrecioUnitario = 0; 
 
                         }
                     }
@@ -129,8 +128,8 @@ namespace Examen2Grupo3
             }
 
             string json = JsonSerializer.Serialize(listaProductos, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(rutaArchivo, json);
-            CargarInventario("Inventario.Json");
+            File.WriteAllText(rutaArchivo, json);//serializo, lo escribo en el json y luego cargo los cambios
+            CargarInventario ("Inventario.Json");
         }
         public void EliminarProducto(int id)
         {
@@ -139,7 +138,7 @@ namespace Examen2Grupo3
                 inventario.Remove(producto);
 
         }
-        [SupportedOSPlatform("windows6.1")]
+      
 
         private void BuscarElemento(string textoBusqueda)
         {
@@ -168,7 +167,6 @@ namespace Examen2Grupo3
                 fila.Visible = coincide;
             }
         }
-        [SupportedOSPlatform("windows6.1")]
         public void CargarInventario(string rutaArchivo)
         {
 
@@ -189,47 +187,59 @@ namespace Examen2Grupo3
                 }
             }
         }
-        [SupportedOSPlatform("windows6.1")]
         public void ExportarCSV(string rutaArchivo)
         {
             try
             {
+                // Crea un StreamWriter para escribir en el archivo CSV especificado por rutaArchivo
                 using (StreamWriter sw = new StreamWriter(rutaArchivo))
                 {
-                    sw.WriteLine("ID,Nombre,Categoria,Descripcion,PrecioUnitario"); // Encabezado CSV
+                    // Escribe la primera línea del archivo, que corresponde al encabezado de las columnas
+                    sw.WriteLine("ID,Nombre,Categoria,Descripcion,PrecioUnitario");
 
+                    // Recorre todas las filas del datagrid
                     foreach (DataGridViewRow fila in dataGridView1.Rows)
                     {
+                        // Verifica que la celda "ID" no sea nula (evita filas vacías)
                         if (fila.Cells["ID"].Value != null)
                         {
+                            // Escribe una línea en el archivo CSV con los valores de la fila, separados por comas
                             sw.WriteLine($"{fila.Cells["ID"].Value},{fila.Cells["Nombre"].Value},{fila.Cells["Categoria"].Value},{fila.Cells["Descripcion"].Value},{fila.Cells["Stock"].Value},{fila.Cells["PrecioUnitario"].Value}");
                         }
                     }
                 }
 
+              
                 MessageBox.Show("Exportación realizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
             {
+               
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
-        [SupportedOSPlatform("windows6.1")]
         public void ImportarCSV(string rutaArchivo)
         {
+            // Inicializa la lista de inventario como una nueva lista vacía
             inventario = new List<Producto>();
 
             try
             {
+                // Verifica si el archivo especificado existe
                 if (File.Exists(rutaArchivo))
                 {
+                    // Lee todas las líneas del archivo CSV
                     var lineas = File.ReadAllLines(rutaArchivo);
 
-                    foreach (var linea in lineas.Skip(1)) // Omitimos el encabezado
+                    // Recorre cada línea, omitiendo la primera (encabezado)
+                    foreach (var linea in lineas.Skip(1)) 
                     {
+                        // Divide la línea en partes usando la coma como separador
                         var datos = linea.Split(',');
+
+                        // Crea un nuevo objeto Producto y asigna los valores leídos del CSV
                         Producto producto = new Producto
                         {
                             ID = int.Parse(datos[0]),
@@ -240,28 +250,34 @@ namespace Examen2Grupo3
                             PrecioUnitario = decimal.Parse(datos[5])
                         };
 
+                        // Agrega el producto a la lista de inventario
                         inventario.Add(producto);
                     }
 
+                 
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                  
                     GuardarInventario("Inventario.Json");
+
+                 
                     CargarInventario("Inventario.Json");
                 }
             }
             catch (Exception ex)
             {
-
+               
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
-        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
+
+        private void guna2TextBox2_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
             BuscarElemento(guna2TextBox2.Text);
         }
-        [SupportedOSPlatform("windows6.1")]
-        private void pictureBox1_Click(object sender, EventArgs e)
+       
+        private void pictureBox1_Click(object sender, EventArgs e)//btn para exportar
         {
 
             using (SaveFileDialog sfd = new SaveFileDialog())
@@ -276,8 +292,21 @@ namespace Examen2Grupo3
                 }
             }
         }
+        private void pictureBox2_Click(object sender, EventArgs e)//btn para importar
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Archivos CSV (*.csv)|*.csv";
+                ofd.Title = "Selecciona un archivo CSV para importar";
 
-        private void guna2Button2_Click(object sender, EventArgs e)
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    ImportarCSV(ofd.FileName);
+                }
+            }
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)//btn para agregar producto
         {
             Agregar_Productos formProductos = new Agregar_Productos(inventario,2);
             if (formProductos.ShowDialog() == DialogResult.OK)
@@ -304,28 +333,13 @@ namespace Examen2Grupo3
                 }
 
             }
-            else
-            {
-                //nada xd
-            }
+         
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Filter = "Archivos CSV (*.csv)|*.csv";
-                ofd.Title = "Selecciona un archivo CSV para importar";
 
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    ImportarCSV(ofd.FileName);
-                }
-            }
-        }
 
       
-        public void ControlUsuario1(Datos.Usuarios Usuarioactual)
+        public void ControlUsuario1(Datos.Usuarios Usuarioactual)//oculta los botones de importar y exportar si es Aprobador o Registrador
         {
 
             if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
@@ -340,6 +354,6 @@ namespace Examen2Grupo3
         {
 
         }
-        // Existing code...
+      
     }
 }

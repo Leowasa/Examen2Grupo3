@@ -31,13 +31,12 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             Numero = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Usuariosd = new DataGridViewButtonColumn();
@@ -45,6 +44,7 @@
             Estado = new DataGridViewTextBoxColumn();
             Ver = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
+            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -105,28 +105,6 @@
             dataGridView1.TabIndex = 114;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
-            // guna2TextBox2
-            // 
-            guna2TextBox2.BorderRadius = 6;
-            guna2TextBox2.CustomizableEdges = customizableEdges1;
-            guna2TextBox2.DefaultText = "";
-            guna2TextBox2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Font = new Font("Segoe UI", 9F);
-            guna2TextBox2.ForeColor = SystemColors.ControlDarkDark;
-            guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(12, 132);
-            guna2TextBox2.Name = "guna2TextBox2";
-            guna2TextBox2.PlaceholderText = "Ingresar Numero o Fecha...";
-            guna2TextBox2.SelectedText = "";
-            guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2TextBox2.Size = new Size(164, 23);
-            guna2TextBox2.TabIndex = 148;
-            guna2TextBox2.TextChanged += guna2TextBox2_TextChanged;
-            // 
             // Numero
             // 
             Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -185,6 +163,28 @@
             Eliminar.Name = "Eliminar";
             Eliminar.Resizable = DataGridViewTriState.True;
             Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // guna2TextBox2
+            // 
+            guna2TextBox2.BorderRadius = 6;
+            guna2TextBox2.CustomizableEdges = customizableEdges1;
+            guna2TextBox2.DefaultText = "";
+            guna2TextBox2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            guna2TextBox2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            guna2TextBox2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox2.Font = new Font("Segoe UI", 9F);
+            guna2TextBox2.ForeColor = SystemColors.ControlDarkDark;
+            guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox2.Location = new Point(12, 132);
+            guna2TextBox2.Name = "guna2TextBox2";
+            guna2TextBox2.PlaceholderText = "ngresar Numero o Nombre del Cliente...";
+            guna2TextBox2.SelectedText = "";
+            guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2TextBox2.Size = new Size(235, 23);
+            guna2TextBox2.TabIndex = 148;
+            guna2TextBox2.TextChanged += guna2TextBox2_TextChanged;
             // 
             // GenerarOrden
             // 

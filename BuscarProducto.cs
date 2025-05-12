@@ -8,7 +8,6 @@ namespace Examen2Grupo3
     {
         public Producto Producto = new Producto();
         private List<Producto> listaProductos = new List<Producto>();
-        private List<Producto> inventarioOriginal = new List<Producto>();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -17,8 +16,8 @@ namespace Examen2Grupo3
         public BuscarProducto()
         {
             InitializeComponent();
-            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.Format = "C2";
-            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.Format = "C2";//Permite que la columna muestre decimales
+            dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");//Muestra el precio en $
 
             CargarInventario("Inventario.json");
         }
@@ -79,14 +78,14 @@ namespace Examen2Grupo3
                 fila.Visible = coincide;
             }
         }
-        private void guna2TextBox7_TextChanged(object sender, EventArgs e)
+        private void guna2TextBox7_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
             BuscarElemento(guna2TextBox2.Text);
         }
 
       
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)//obtener el producto seleccionado
         {
             if (e.RowIndex >= 0)
             {
@@ -118,13 +117,13 @@ namespace Examen2Grupo3
             return true;
         }
       
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e)//btn cerrar
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)//para mover el formulario
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);

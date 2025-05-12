@@ -158,10 +158,10 @@
             guna2TextBox1.Location = new Point(9, 135);
             guna2TextBox1.Margin = new Padding(4, 5, 4, 5);
             guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "Ingresar Nombre o ID...";
+            guna2TextBox1.PlaceholderText = "Ingresar Numero o Nombre del Cliente...";
             guna2TextBox1.SelectedText = "";
             guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2TextBox1.Size = new Size(150, 23);
+            guna2TextBox1.Size = new Size(234, 23);
             guna2TextBox1.TabIndex = 110;
             guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
             // 

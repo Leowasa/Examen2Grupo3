@@ -10,7 +10,7 @@
     "ID": 322,
     "Username": "admin",
     "Nombre": "leo",
-    "Password": "2630",
+    "Password": "2630877",
     "Tipo": "Administrador"
   },
   {
@@ -26,5 +26,19 @@
     "Nombre": "Bastidas Georgen",
     "Password": "2630",
     "Tipo": "Registrador"
+  },
+  {
+    "ID": 21233,
+    "Username": "dfgdfgdfgdfg",
+    "Nombre": "dfgdf",
+    "Password": "263087",
+    "Tipo": "Aprobador"
+  },
+  {
+    "ID": 45345,
+    "Username": "345345",
+    "Nombre": "345345",
+    "Password": "5345",
+    "Tipo": "Aprobador"
   }
 ]

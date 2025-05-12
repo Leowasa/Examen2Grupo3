@@ -32,22 +32,22 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Usuarios));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Cliente = new Label();
             btnAgregarUsuario = new Guna.UI2.WinForms.Guna2Button();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             dataGridView1 = new DataGridView();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             ID = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Username = new DataGridViewTextBoxColumn();
             Tipo = new DataGridViewTextBoxColumn();
             Editar = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
+            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -84,7 +84,7 @@
             btnAgregarUsuario.Size = new Size(111, 23);
             btnAgregarUsuario.TabIndex = 130;
             btnAgregarUsuario.Text = "Agregar";
-            btnAgregarUsuario.Click += guna2Button1_Click;
+            btnAgregarUsuario.Click += btnAgregar_Click;
             // 
             // pictureBox2
             // 
@@ -144,28 +144,6 @@
             dataGridView1.TabIndex = 155;
             dataGridView1.CellClick += dataGridView1_CellClick_2;
             // 
-            // guna2TextBox1
-            // 
-            guna2TextBox1.BorderRadius = 6;
-            guna2TextBox1.CustomizableEdges = customizableEdges3;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Segoe UI", 9F);
-            guna2TextBox1.ForeColor = SystemColors.ControlDarkDark;
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(23, 135);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "IngresarID o Username...";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2TextBox1.Size = new Size(164, 23);
-            guna2TextBox1.TabIndex = 156;
-            guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
-            // 
             // ID
             // 
             ID.HeaderText = "ID";
@@ -216,6 +194,29 @@
             Eliminar.ReadOnly = true;
             Eliminar.Resizable = DataGridViewTriState.True;
             Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // guna2TextBox1
+            // 
+            guna2TextBox1.BorderRadius = 6;
+            guna2TextBox1.CustomizableEdges = customizableEdges3;
+            guna2TextBox1.DefaultText = "";
+            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox1.Font = new Font("Segoe UI", 9F);
+            guna2TextBox1.ForeColor = SystemColors.ControlDarkDark;
+            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox1.Location = new Point(23, 135);
+            guna2TextBox1.Name = "guna2TextBox1";
+            guna2TextBox1.PlaceholderText = "IngresarID o Username...";
+            guna2TextBox1.SelectedText = "";
+            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2TextBox1.Size = new Size(164, 23);
+            guna2TextBox1.TabIndex = 156;
+            guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
+            guna2TextBox1.KeyPress += guna2TextBox1_KeyPress;
             // 
             // Usuarios
             // 

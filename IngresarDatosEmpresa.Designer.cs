@@ -214,6 +214,8 @@
             guna2TextBox3.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2TextBox3.Size = new Size(200, 20);
             guna2TextBox3.TabIndex = 134;
+            guna2TextBox3.KeyPress += guna2TextBox3_KeyPress;
+            guna2TextBox3.Leave += guna2TextBox3_Leave;
             // 
             // guna2TextBox4
             // 
@@ -234,6 +236,7 @@
             guna2TextBox4.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2TextBox4.Size = new Size(200, 20);
             guna2TextBox4.TabIndex = 135;
+            guna2TextBox4.Leave += guna2TextBox4_Leave;
             // 
             // guna2TextBox5
             // 

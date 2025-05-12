@@ -1,9 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Xml;
+
 using Newtonsoft.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static Examen2Grupo3.Datos;
 using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
+
 
 namespace Examen2Grupo3
 {
@@ -20,7 +23,7 @@ namespace Examen2Grupo3
             InitializeComponent();
         }
 
-        public void setDatos(string Razonsocial, string Numero, string DireccionFisica, string Correo, string Website)
+        public void setDatos(string Razonsocial, string Numero, string DireccionFisica, string Correo, string Website)//si se edita la empresa
         {
             guna2TextBox1.Text = Razonsocial;
             guna2TextBox2.Text = DireccionFisica;
@@ -34,7 +37,10 @@ namespace Examen2Grupo3
         {
             try
             {
-                // Corrected the if condition to properly check for empty or whitespace values in all text boxes  
+
+                // Expresión regular para validar correos electrónicos  
+                string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+               //verifica si los campos estan vacios
                 if (string.IsNullOrWhiteSpace(guna2TextBox1.Text) ||
                     string.IsNullOrWhiteSpace(guna2TextBox2.Text) ||
                     string.IsNullOrWhiteSpace(guna2TextBox3.Text) ||
@@ -42,6 +48,12 @@ namespace Examen2Grupo3
                     string.IsNullOrWhiteSpace(guna2TextBox5.Text))
                 {
                     MessageBox.Show("Campos vacíos. Intente nuevamente");
+                    return;
+                }
+                //validar el correo ingresado
+                else if (!Regex.IsMatch(guna2TextBox5.Text, patronCorreo))
+                {
+                    MessageBox.Show("El correo ingresado no es válido. Por favor, ingrese un correo válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -54,14 +66,14 @@ namespace Examen2Grupo3
                     Website = guna2TextBox4.Text,
                 };
 
-                MessageBox.Show("Operacion exitosa!");
+                MessageBox.Show("Operacion exitosa!","Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 GuardarEmpresa(datos);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)
             {
-                // Added exception parameter to catch block for better debugging  
+                
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -90,17 +102,60 @@ namespace Examen2Grupo3
             ObtenerDatos();
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void pictureBox3_Click(object sender, EventArgs e)//btn de cerrar
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)//para mover el formulario 
         {
 
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void guna2TextBox3_KeyPress(object sender, KeyPressEventArgs e)// prohibe la entrada de caracteres al campo de Telefono
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la entrada de caracteres no numéricos
+            }
+
+        }
+
+        private void guna2TextBox3_Leave(object sender, EventArgs e)//si el usuario ingresa un numero invalido
+        {
+            if (!EsTelefonoValido(guna2TextBox3.Text))
+            {
+                MessageBox.Show("Número de teléfono inválido. Debe contener 10 dígitos.");
+                guna2TextBox3.Focus();
+            }
+
+
+        }
+        // Método para validar el teléfono
+        bool EsTelefonoValido(string telefono)
+        {
+            string patron = @"^\d{10}$"; // Ejemplo: 10 dígitos sin espacios
+            return Regex.IsMatch(telefono, patron);
+        }
+
+        private void guna2TextBox4_Leave(object sender, EventArgs e)//si el usuario ingresa una direccion invalida
+        {
+            if (!ValidacionURL.EsURLValida(guna2TextBox4.Text))
+            {
+                MessageBox.Show("Ingrese una URL válida que comience con 'www.'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                guna2TextBox4.Focus();
+            }
+        }
+        public class ValidacionURL
+        {
+            public static bool EsURLValida(string url)
+            {
+                string patron = @"^www\.[\da-z.-]+\.[a-z.]{2,6}([\/\w .-]*)*\/?$";
+                return Regex.IsMatch(url, patron, RegexOptions.IgnoreCase);
+            }
         }
     }
 }

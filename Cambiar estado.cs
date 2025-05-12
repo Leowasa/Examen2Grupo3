@@ -26,12 +26,12 @@ namespace Examen2Grupo3
         public Cambiar_estado(Pedido Orden, Datos.Usuarios usuarioActual)
         {
             Ordenes = new Pedido();
-            this.Ordenes = Orden;
+            this.Ordenes = Orden;//obtengo la orden u pedido
             InitializeComponent();
-            UsuarioActual = usuarioActual;
-            cargarestado();
+            UsuarioActual = usuarioActual;//Al igual que el usuario
+            cargarestado();//cargo el estado inicial del pedido/orden
         }
-        public void AbrirOtroFormulario(Pedido seleccionadot)
+        public void AbrirOtroFormulario(Pedido seleccionadot)//me devuelve al formulario inicial al culminar la operacion
         {
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
@@ -119,7 +119,7 @@ namespace Examen2Grupo3
         }
         private List<Pedido> LeerPedidos()
         {
-            string rutaArchivo = "Ordenes.json";
+            string rutaArchivo = "pedidos.json";
             if (File.Exists(rutaArchivo))
             {
                 string contenido = File.ReadAllText(rutaArchivo);
@@ -134,6 +134,7 @@ namespace Examen2Grupo3
             List<string> nuevosEstados = new List<string>();
             // Cargar el estado actual de la orden en el ComboBox
             guna2ComboBox1.SelectedItem = Ordenes.Estado;
+            //dependiendo del estado inicial, Actualizar las opciones disponibles
             switch (Ordenes.Estado)
             {
                 case "Pendiente":
@@ -143,20 +144,19 @@ namespace Examen2Grupo3
                     nuevosEstados = new List<string> { "Entregado" };
                     break;
                 case "Rechazado":
-                    nuevosEstados = new List<string> { "Pendiente" };
+                    guna2ComboBox1.Enabled = false;
                     break;
                 case "Entregado":
-                    nuevosEstados = new List<string> { "Entregado" }; // Solo se mantiene entregado
                     guna2ComboBox1.Enabled = false;
                     break;
 
             }
-            guna2ComboBox1.Items.Clear();
+            guna2ComboBox1.Items.Clear();//limpiar los items para actualizarlo despues
             guna2ComboBox1.Items.AddRange(nuevosEstados.ToArray());
 
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void guna2Button1_Click(object sender, EventArgs e)//btn confirmar
         {
             try
             {
@@ -192,7 +192,7 @@ namespace Examen2Grupo3
 
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void pictureBox3_Click(object sender, EventArgs e)//btn cerrar
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
@@ -203,7 +203,7 @@ namespace Examen2Grupo3
            
         }
 
-        private void guna2CustomGradientPanel1_MouseDown_1(object sender, MouseEventArgs e)
+        private void guna2CustomGradientPanel1_MouseDown_1(object sender, MouseEventArgs e)//mover el formulario
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);

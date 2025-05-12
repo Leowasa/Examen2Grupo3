@@ -17,6 +17,7 @@ namespace Examen2Grupo3
         public Verperfil(Usuarios usuarioActual)
         {
             InitializeComponent();
+            //cargo los datos del usuario actual y lo muestro en pantalla
             this.usuarioActual = usuarioActual;
             lblRol.Text = usuarioActual.Tipo;
             lblID.Text ="ID: " +usuarioActual.ID.ToString();
@@ -26,8 +27,9 @@ namespace Examen2Grupo3
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
+
             OpcionesSuperUsuario opcionesSuperUsuario = new OpcionesSuperUsuario(0, usuarioActual);
-            opcionesSuperUsuario.ShowDialog();
+            opcionesSuperUsuario.ShowDialog();//ejecuto la funcion para cambiar clave
         }
     }
 }

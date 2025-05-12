@@ -50,10 +50,10 @@ namespace Examen2Grupo3
         }
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            // Verificar que el texto de búsqueda tenga al menos 3 caracteres
             if (textoBusqueda.Length < 3)
             {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                // Si tiene menos de 3 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
                     fila.Visible = true;
@@ -94,7 +94,7 @@ namespace Examen2Grupo3
 
 
         }
-        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
+        private void guna2TextBox2_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
             BuscarElemento(guna2TextBox2.Text);
         }
@@ -103,7 +103,7 @@ namespace Examen2Grupo3
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 3, usuarioActual)); // Reemplaza con el formulario que desees abrir
+                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 3, usuarioActual)); // abre el formulario para visualizar el orden 
             }
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

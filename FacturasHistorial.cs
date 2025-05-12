@@ -37,7 +37,7 @@ namespace Examen2Grupo3
             if (File.Exists(rutaArchivo))
             {
                 string json = File.ReadAllText(rutaArchivo);
-                pedidos = JsonConvert.DeserializeObject<List<Pedido>>(json); // Cambiar JsonSerializer por JsonConvert  
+                pedidos = JsonConvert.DeserializeObject<List<Pedido>>(json); 
 
                 if (pedidos != null) // Verificar que la lista no sea nula  
                 {
@@ -73,25 +73,41 @@ namespace Examen2Grupo3
 
             // **Primer pase: calcular el número total de páginas**
             int totalPages;
+            // Se crea un MemoryStream para generar el PDF en memoria (no en disco)
             using (MemoryStream ms = new MemoryStream())
             {
+                // Se crea un documento PDF con márgenes personalizados
                 Document tempDocument = new Document(PageSize.A4, 45, 45, 45, 45);
+
+                // Se asocia un escritor PDF al documento, que escribirá en el MemoryStream
                 PdfWriter tempWriter = PdfWriter.GetInstance(tempDocument, ms);
+
+                // Se crea un evento personalizado para numerar páginas (y otras acciones)
                 PageNumberHelper tempPageEvent = new PageNumberHelper();
                 tempWriter.PageEvent = tempPageEvent;
 
+                // Se abre el documento para comenzar a escribir en él
                 tempDocument.Open();
+
+                // Se obtiene la plantilla HTML desde los recursos y se convierte a string
                 string htmlContent = Properties.Resources.plantilla_factura != null
                     ? Encoding.UTF8.GetString(Properties.Resources.plantilla_factura)
                     : string.Empty;
+
+                // Se reemplazan los marcadores del HTML con los datos reales
                 htmlContent = rellenarHtml(htmlContent, tempDocument);
 
+                // Se crea un StringReader para leer el HTML como flujo de texto
                 using (var reader = new StringReader(htmlContent))
                 {
+                    // Se convierte el HTML a PDF y se escribe en el documento
                     XMLWorkerHelper.GetInstance().ParseXHtml(tempWriter, tempDocument, reader);
                 }
 
+                // Se cierra el documento PDF
                 tempDocument.Close();
+
+                // Se obtiene el número total de páginas generadas en el PDF
                 totalPages = tempWriter.PageNumber; // Calcula el número total de páginas
             }
 
@@ -102,6 +118,8 @@ namespace Examen2Grupo3
                 {
                     Document finalDocument = new Document(PageSize.A4, 45, 45, 45, 45);
                     PdfWriter finalWriter = PdfWriter.GetInstance(finalDocument, fs);
+
+                    // Se crea un evento personalizado para numerar páginas y mostrar observaciones
                     PageNumberHelper finalPageEvent = new PageNumberHelper();
                     finalPageEvent.TotalPages = totalPages; // Usa el total calculado en el primer pase
                     finalWriter.PageEvent = finalPageEvent;
@@ -156,6 +174,7 @@ namespace Examen2Grupo3
 
             //Datos de precio
             htmlContent = htmlContent.Replace("@SUBTOTAL", "$"+Actual.SubtTotal.ToString("F2") );
+            htmlContent = htmlContent.Replace("@Descuento", "$" + Actual.Descuento.ToString("F2"));
             htmlContent = htmlContent.Replace("@IVA", "$" + Actual.IVA.ToString("F2") );
             htmlContent = htmlContent.Replace("@TOTAL","$"+Actual.Total.ToString("F2"));
 
@@ -166,11 +185,11 @@ namespace Examen2Grupo3
             img.ScaleToFit(120, 85);
             img.Alignment = iTextSharp.text.Image.UNDERLYING;
 
-            //img.SetAbsolutePosition(10,100);
+            //se agrega la imagen Del logo de la empresa al pdf
             img.SetAbsolutePosition(document.RightMargin, document.Top - 60);
             document.Add(img);
 
-
+            //agregar los productos a la lista
             string filas = string.Empty;
             foreach (var row in Actual.Productos)
             {
@@ -192,12 +211,16 @@ namespace Examen2Grupo3
         {
             public int TotalPages { get; set; } // Se actualizará después de la creación del documento
             public string Observaciones { get; set; } // Propiedad para recibir datos dinámicos
+
+            // Método que se ejecuta automáticamente al finalizar cada página del PDF
             public override void OnEndPage(PdfWriter writer, Document document)
             {
                 int pageNumber = writer.PageNumber; // Obtiene el número de la página actual
+               
+                // Obtiene el objeto para dibujar contenido directamente en el PDF
                 PdfContentByte cb = writer.DirectContent;
 
-                // Define la fuente
+                // Define la fuente a utilizar (Helvetica, codificación CP1252, no incrustada)
                 BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
                 cb.SetFontAndSize(bf, 10);
 
@@ -209,9 +232,16 @@ namespace Examen2Grupo3
                 float obsX = document.LeftMargin;
                 float obsY = document.PageSize.GetBottom(30); // Misma altura que la numeración
 
+                // Inicia la escritura de texto en el PDF
                 cb.BeginText();
+
+                // Escribe el número de página y total de páginas alineado a la derecha
                 cb.ShowTextAligned(PdfContentByte.ALIGN_RIGHT, $"Página {pageNumber} de {TotalPages}", x, y, 0);
+
+                // Escribe las observaciones alineadas a la izquierda
                 cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, $"Observaciones: {Observaciones}", obsX, obsY, 0);
+
+                // Finaliza la escritura de texto
                 cb.EndText();
             }
 
@@ -221,13 +251,13 @@ namespace Examen2Grupo3
 
         public void GuardarFacturas()
         {
-            // Fix for CS1503: Use Newtonsoft.Json.Formatting instead of System.Text.Json.JsonSerializerOptions  
+           
             string json = JsonConvert.SerializeObject(pedidos, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText("Ordenes.Json", json);
             CargarFacturas("Ordenes.Json");
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)//obtener la celda seleccionada
         {
             if (dataGridView1.Columns.Contains("Exportar") && e.ColumnIndex == dataGridView1.Columns["Exportar"].Index && e.RowIndex >= 0)
             {
@@ -292,16 +322,16 @@ namespace Examen2Grupo3
                 // Guardar los cambios en el archivo JSON
                 GuardarFacturas();
 
-                // MessageBox.Show($"El pedido con ID {idPedido} ha sido eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+              
             }
 
         }
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
+            // Verificar que el texto de búsqueda tenga al menos 3 caracteres
             if (textoBusqueda.Length < 3)
             {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
+                // Si tiene menos de 3 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
                     fila.Visible = true;
@@ -323,7 +353,7 @@ namespace Examen2Grupo3
                 fila.Visible = coincide;
             }
         }
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
             BuscarElemento(guna2TextBox1.Text);
         }

@@ -31,7 +31,7 @@ namespace Examen2Grupo3
         public Agregar_Productos(List<Producto> productos, int opcion)
         {
             this.Opcion = opcion;
-            Productos = productos; 
+            Productos = productos;
             InitializeComponent();
         }
         public bool EsIdProductoUnico(int id, List<Producto> productos, int? idActual = null)
@@ -45,7 +45,7 @@ namespace Examen2Grupo3
             try
             {
                 int nuevoId = int.Parse(guna2TextBox1.Text); // Suponiendo que el ID se ingresa en `guna2TextBox1`
-                // Aquí puedes agregar una validación extra si el número debe estar en cierto rango
+                //validacion para que el ID sea mayor o igual a 3
                 if (guna2TextBox1.Text.Trim().Length < 3)
                 {
                     MessageBox.Show("El ID no puede ser menor a 3.");
@@ -53,7 +53,7 @@ namespace Examen2Grupo3
                 }
                 else
                 {
-
+                    //si los campos son correctos, agregar
                     producto = new Producto();
                     producto.ID = int.Parse(guna2TextBox1.Text);
                     producto.Nombre = guna2TextBox2.Text;
@@ -68,16 +68,8 @@ namespace Examen2Grupo3
                         MessageBox.Show("El ID ya existe. Por favor, elige otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                    MessageBox.Show("Operacion exitosa!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    if (Opcion==2)
-                    {
-                        if (Productos.Any(c => c.ID == producto.ID))
-                        {
-                            MessageBox.Show("No pueden haber más de un ID idéntico.");
-                            return;
-                        }
-                    }
-                    
                 }
             }
             catch (FormatException ex)
@@ -92,7 +84,7 @@ namespace Examen2Grupo3
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente",ex.Message); // Captura la excepción del campo vacío
+                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", ex.Message); 
             }
 
             this.DialogResult = DialogResult.OK;
@@ -101,6 +93,7 @@ namespace Examen2Grupo3
 
         public void SetDatosProducto(string id, string nombre, string categoria, string Cantidad, string descripcion, string precio)
         {
+            //Rellenar los textboxes al editar un producto
             try
             {
                 guna2TextBox1.Text = id;
@@ -115,7 +108,7 @@ namespace Examen2Grupo3
             }
         }
 
-        public Producto ObtenerProductoEditado()
+        public Producto ObtenerProductoEditado()//Obtener los cambios
         {
             Producto productoEditado = new Producto
             {
@@ -133,22 +126,24 @@ namespace Examen2Grupo3
         {
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e)//para cerrar
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        private void guna2TextBox6_MouseDown(object sender, MouseEventArgs e)
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)//para mover el formulario por la pantalla
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        private void guna2TextBox1_KeyPress(object sender, KeyPressEventArgs e)//para prohibir al usuario ingresar caracteres en el ID
         {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la entrada de caracteres no numéricos
+            }
         }
     }
 
