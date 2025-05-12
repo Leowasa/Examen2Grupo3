@@ -182,8 +182,10 @@ namespace ejemplo
                     Casillaseleccionada(e);
                     return;
                 }
+               
             }
-           Casillaseleccionada(e);
+            else Casillaseleccionada(e);
+
 
 
 

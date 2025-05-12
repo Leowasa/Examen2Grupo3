@@ -22,21 +22,29 @@ namespace Examen2Grupo3
     {
         public Producto producto { get; set; } = new Producto(); // Initialize to avoid nullability issues  
         public List<Producto> Productos = new List<Producto>();
+        private int Opcion;
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        public Agregar_Productos(List<Producto> productos)
+        public Agregar_Productos(List<Producto> productos, int opcion)
         {
+            this.Opcion = opcion;
             Productos = productos; 
             InitializeComponent();
+        }
+        public bool EsIdProductoUnico(int id, List<Producto> productos, int? idActual = null)
+        {
+            // Excluir el ID actual de la validación si se está editando
+            return !productos.Any(p => p.ID == id && p.ID != idActual);
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             try
             {
+                int nuevoId = int.Parse(guna2TextBox1.Text); // Suponiendo que el ID se ingresa en `guna2TextBox1`
                 // Aquí puedes agregar una validación extra si el número debe estar en cierto rango
                 if (guna2TextBox1.Text.Trim().Length < 3)
                 {
@@ -53,12 +61,23 @@ namespace Examen2Grupo3
                     producto.Categoria = guna2TextBox4.Text;
                     producto.PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
                     producto.Cantidad = int.Parse(guna2TextBox5.Text);
-                    // Validación normal de ID repetido
-                    if (Productos.Any(c => c.ID == producto.ID))
+                    // Validación normal de ID repetido (si se agrega)
+                    if (!EsIdProductoUnico(nuevoId, Productos, producto?.ID))
+
                     {
-                        MessageBox.Show("No pueden haber más de un ID idéntico.");
+                        MessageBox.Show("El ID ya existe. Por favor, elige otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+
+                    if (Opcion==2)
+                    {
+                        if (Productos.Any(c => c.ID == producto.ID))
+                        {
+                            MessageBox.Show("No pueden haber más de un ID idéntico.");
+                            return;
+                        }
+                    }
+                    
                 }
             }
             catch (FormatException ex)

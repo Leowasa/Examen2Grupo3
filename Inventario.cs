@@ -39,13 +39,14 @@ namespace Examen2Grupo3
             else casillaSeleccionada(e);
 
         }
+
         public void casillaSeleccionada(DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
 
-                Agregar_Productos formEditar = new Agregar_Productos(inventario);
+                Agregar_Productos formEditar = new Agregar_Productos(inventario,1);
                 formEditar.SetDatosProducto(
                     filaSeleccionada.Cells["ID"].Value.ToString() ?? "0",
                     filaSeleccionada.Cells["Nombre"].Value.ToString() ?? "",
@@ -143,7 +144,7 @@ namespace Examen2Grupo3
         private void BuscarElemento(string textoBusqueda)
         {
             // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length >= 3)
+            if (textoBusqueda.Length < 3)
             {
                 // Si tiene menos de 4 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
@@ -160,7 +161,7 @@ namespace Examen2Grupo3
             foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
                 // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().ToLower().Contains(filtro)) ||
+                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().Contains(filtro, StringComparison.CurrentCultureIgnoreCase)) ||
                                 (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
 
                 // Mostrar u ocultar la fila según si coincide con el filtro
@@ -278,7 +279,7 @@ namespace Examen2Grupo3
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            Agregar_Productos formProductos = new Agregar_Productos(inventario);
+            Agregar_Productos formProductos = new Agregar_Productos(inventario,2);
             if (formProductos.ShowDialog() == DialogResult.OK)
             {
                 try

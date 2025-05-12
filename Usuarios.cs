@@ -64,58 +64,6 @@ namespace ejemplo
             }
 
         }
-        /*
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-            string textoBusqueda = textBox1.Text.Trim(); // Obtener el texto de búsqueda y eliminar espacios en blanco
-            var usuarios = LeerUsuarios();
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 3)
-            {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
-            }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
-            {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().ToLower().Contains(filtro)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
-
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
-            }
-
-
-        }
-
-
-        private void textBox1_Enter(object sender, EventArgs e)
-        {
-            if (textBox1.Text == "Ingresar Nombre o ID")
-            {
-                textBox1.Text = string.Empty;
-                textBox1.ForeColor = Color.Black;
-            }
-        }
-
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBox1.Text))
-            {
-                textBox1.Text = "Ingresar Nombre o ID";
-                textBox1.ForeColor = Color.Gray;
-            }
-        }
-        */
 
         private List <Datos.Usuarios> LeerUsuarios()
         {
@@ -298,33 +246,6 @@ namespace ejemplo
                 }
             }
         }
-
-        private List<Datos.Usuarios> LeerUsuariosDesdeCSV(string rutaArchivo)
-        {
-            var usuarios = new List<Datos.Usuarios>();
-
-            var lineas = File.ReadAllLines(rutaArchivo);
-            foreach (var linea in lineas.Skip(1)) // Omitir encabezado  
-            {
-                var datos = linea.Split(',');
-                if (datos.Length >= 4)
-                {
-
-                    usuarios.Add(new Datos.Usuarios
-                    {
-                        ID = int.Parse(datos[0]),
-                        Nombre = datos[1],
-                        Username = datos[2],
-                        Password = datos[3],
-                        Tipo = datos[4]
-
-                    });
-                }
-            }
-
-            return usuarios;
-        }
-
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 

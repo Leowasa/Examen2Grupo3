@@ -68,11 +68,23 @@ namespace Examen2Grupo3
             }
 
         }
+        public bool EsIdUsuarioUnico(int id, List<Datos.Usuarios> usuarios, int? idActual = null)
+        {
+            // Excluir el ID actual de la validación si se está editando
+            return !usuarios.Any(u => u.ID == id && u.ID != idActual);
+        }
+
         public bool ObtenerUsuario()
         {
             try
             {
-              
+                int nuevoId = int.Parse(guna2TextBox1.Text); // Suponiendo que el ID se ingresa en `guna2TextBox1`
+                if (!EsIdUsuarioUnico(nuevoId, Usuarios, DatosUsuario?.ID))
+                {
+                    MessageBox.Show("El ID ya existe. Por favor, elige otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
                 // Aquí puedes agregar una validación extra si el número debe estar en cierto rango
                 if (guna2TextBox1.Text.Trim().Length < 3)
                 {
@@ -125,8 +137,16 @@ namespace Examen2Grupo3
 
             try
             {
+
                 // Expresión regular para validar correos electrónicos  
                 string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+                int nuevoId = int.Parse(guna2TextBox1.Text); // Suponiendo que el ID se ingresa en `guna2TextBox1`
+                if (!EsIdUnico(nuevoId, Clientes, DatosClientes?.ID))
+                {
+                    MessageBox.Show("El ID ya existe. Por favor, elige otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
 
                 // validación extra para que el número este en cierto rango
                 if (guna2TextBox1.Text.Trim().Length < 3)
@@ -196,6 +216,12 @@ namespace Examen2Grupo3
                 MessageBox.Show("Error al cargar los datos del cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        public bool EsIdUnico(int id, List<Cliente> clientes, int? idActual = null)
+        {
+            // Excluir el ID actual de la validación si se está editando
+            return !clientes.Any(c => c.ID == id && c.ID != idActual);
+        }
+
         public void SetDatosUsuarios(Datos.Usuarios Usuario)
         {
             try
