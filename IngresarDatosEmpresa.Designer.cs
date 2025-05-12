@@ -43,8 +43,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngresarDatosEmpresa));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
@@ -58,7 +56,6 @@
             guna2TextBox5 = new Guna.UI2.WinForms.Guna2TextBox();
             Cliente = new Label();
             pictureBox1 = new PictureBox();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
@@ -281,25 +278,6 @@
             pictureBox1.TabIndex = 139;
             pictureBox1.TabStop = false;
             // 
-            // guna2Button2
-            // 
-            guna2Button2.BorderRadius = 8;
-            guna2Button2.CustomizableEdges = customizableEdges13;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = SystemColors.HotTrack;
-            guna2Button2.Font = new Font("Segoe UI", 9F);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Location = new Point(358, 241);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2Button2.Size = new Size(123, 20);
-            guna2Button2.TabIndex = 140;
-            guna2Button2.Text = "Cambiar imagen";
-            guna2Button2.Visible = false;
-            // 
             // guna2CustomGradientPanel1
             // 
             guna2CustomGradientPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -314,7 +292,7 @@
             guna2CustomGradientPanel1.Controls.Add(Btnmaximi);
             guna2CustomGradientPanel1.Controls.Add(Btnmini);
             guna2CustomGradientPanel1.Controls.Add(btncerrarr);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges15;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges13;
             guna2CustomGradientPanel1.Dock = DockStyle.Top;
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(26, 32, 40);
             guna2CustomGradientPanel1.FillColor2 = SystemColors.HotTrack;
@@ -322,7 +300,7 @@
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(0, 80, 200);
             guna2CustomGradientPanel1.Location = new Point(0, 0);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
             guna2CustomGradientPanel1.Size = new Size(800, 25);
             guna2CustomGradientPanel1.TabIndex = 158;
             guna2CustomGradientPanel1.MouseDown += guna2CustomGradientPanel1_MouseDown;
@@ -473,7 +451,6 @@
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(800, 507);
             Controls.Add(guna2CustomGradientPanel1);
-            Controls.Add(guna2Button2);
             Controls.Add(pictureBox1);
             Controls.Add(Cliente);
             Controls.Add(guna2TextBox5);
@@ -521,7 +498,6 @@
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox5;
         private Label Cliente;
         private PictureBox pictureBox1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private PictureBox pictureBox2;
         private PictureBox btnMaximizar;

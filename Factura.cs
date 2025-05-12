@@ -27,8 +27,9 @@ namespace Examen2Grupo3
         private string estado;
         private static Pedido orden;
         private Datos.Usuarios usuarioActual = new Datos.Usuarios();
-        public Factura(Pedido pedido, int opcion)
+        public Factura(Pedido pedido, int opcion, Datos.Usuarios usuarioActual)
         {
+            this.usuarioActual = usuarioActual;
             InitializeComponent();
              Opcion = opcion;
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
@@ -119,17 +120,17 @@ namespace Examen2Grupo3
         }
         private void cargarEmpresa()
         {
-            if (!File.Exists("Empresa.json"))
+            if (File.Exists("Empresa.Json"))
             {
-                string jsonString = File.ReadAllText("Empresa.json");
-                var pedidos = JsonConvert.DeserializeObject<Empresa>(jsonString) ?? new Empresa();
-                if (pedidos != null)
+                string jsonString = File.ReadAllText("Empresa.Json");
+                var empresa = JsonConvert.DeserializeObject<Empresa>(jsonString) ?? new Empresa();
+                if (empresa != null)
                 {
-                    label16.Text = "Razón Social: " + pedidos.RazonSocial;
-                    label17.Text = "Número de teléfono de la empresa: " + pedidos.Direccion;
-                    label14.Text = "Dirección Física de la empresa: " + pedidos.Direccion;
-                    label15.Text = "Correo Electrónico de la empresa: " + pedidos.Correo;
-                    label13.Text = "Página Web de la empresa: " + pedidos.Website;
+                    label16.Text = "Razón Social: " + empresa.RazonSocial;
+                    label17.Text = "Número de teléfono de la empresa: " + empresa.Direccion;
+                    label14.Text = "Dirección Física de la empresa: " + empresa.Direccion;
+                    label15.Text = "Correo Electrónico de la empresa: " + empresa.Correo;
+                    label13.Text = "Página Web de la empresa: " + empresa.Website;
                 }
 
             }
@@ -252,13 +253,13 @@ namespace Examen2Grupo3
                 case 1://Ver pedido
                     if (principal != null)
                     {
-                        principal.AbrirFormularioEnPanel(new PedidosHistorial()); // Reemplaza con el formulario que desees abrir  
+                        principal.AbrirFormularioEnPanel(new PedidosHistorial(usuarioActual)); // Reemplaza con el formulario que desees abrir  
                     }
                     break;
                 case 3://Ver Orden
                     if (principal != null)
                     {
-                        principal.AbrirFormularioEnPanel(new OrdenesHistorial()); // Reemplaza con el formulario que desees abrir  
+                        principal.AbrirFormularioEnPanel(new OrdenesHistorial(usuarioActual)); // Reemplaza con el formulario que desees abrir  
                     }
                     break;
             }

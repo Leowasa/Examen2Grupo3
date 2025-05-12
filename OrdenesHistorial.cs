@@ -18,8 +18,10 @@ namespace Examen2Grupo3
     public partial class OrdenesHistorial : Form
     {
         List<Pedido> listaPedidos = new List<Pedido>();
-        public OrdenesHistorial()
+        Datos.Usuarios usuarioActual = new Datos.Usuarios();    
+        public OrdenesHistorial(Datos.Usuarios usuarioactual)
         {
+            this.usuarioActual = usuarioactual;
             InitializeComponent();
             dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
@@ -101,10 +103,25 @@ namespace Examen2Grupo3
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 3)); // Reemplaza con el formulario que desees abrir
+                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 3, usuarioActual)); // Reemplaza con el formulario que desees abrir
             }
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Codigo_especial Form = new Codigo_especial();
+            if (usuarioActual.Tipo == "Aprobador" || usuarioActual.Tipo == "Registrador")
+            {
+                Form.ShowDialog();
+                if (Form.DialogResult == DialogResult.OK)
+                {
+                    Casillaseleccionada(e);
+                    return;
+                }
+
+            }
+            else Casillaseleccionada(e);
+        }
+        private void Casillaseleccionada(DataGridViewCellEventArgs e)
         {
             // Si el usuario hizo clic en el botón "Editar"
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
@@ -153,8 +170,10 @@ namespace Examen2Grupo3
 
 
             }
+
         }
 
+        
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 

@@ -22,8 +22,10 @@ namespace Examen2Grupo3
         static Pedido Actual = new Pedido();
         List<Pedido>? pedidos = new List<Pedido>();
         static Empresa Empresa = new Empresa();
-        public FacturasHistorial()
+        private Datos.Usuarios UsuarioActual = new Datos.Usuarios();    
+        public FacturasHistorial(Datos.Usuarios usuario)
         {
+            UsuarioActual = usuario;    
             InitializeComponent();
             dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
@@ -252,20 +254,47 @@ namespace Examen2Grupo3
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-                DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                Codigo_especial Form = new Codigo_especial();
+                if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
                 {
-                    // Ensure 'pedidos' is not null and the index is within bounds  
-                    if (pedidos != null && e.RowIndex < pedidos.Count)
+                    Form.ShowDialog();
+                    if (Form.DialogResult == DialogResult.OK)
                     {
-                        pedidos.RemoveAt(e.RowIndex);
-                        dataGridView1.Rows.RemoveAt(e.RowIndex);
-                        GuardarFacturas();
+                        eliminar(e);
+                        return;
                     }
                 }
+                else eliminar(e); return;
+
             }
+
+        }
+        private void eliminar(DataGridViewCellEventArgs e)
+        {
+
+            DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            // Obtener el ID del pedido desde la celda correspondiente
+            int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
+
+            // Buscar el pedido en la lista por su ID
+            Pedido pedidoAEliminar = pedidos.Find(p => p.ID == idPedido);
+
+            if (pedidoAEliminar != null && result == DialogResult.Yes)
+            {
+                // Eliminar el pedido de la lista
+                pedidos.Remove(pedidoAEliminar);
+
+                // Eliminar la fila del DataGridView
+                dataGridView1.Rows.RemoveAt(e.RowIndex);
+
+                // Guardar los cambios en el archivo JSON
+                GuardarFacturas();
+
+                // MessageBox.Show($"El pedido con ID {idPedido} ha sido eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
         private void BuscarElemento(string textoBusqueda)
         {

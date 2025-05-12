@@ -15,9 +15,11 @@ namespace ejemplo
     {
         private List<Producto> listaPersonas = new List<Producto>();
         private static List<Pedido> listaPedido = new List<Pedido>();
-        public PedidosHistorial()
+        private Datos.Usuarios UsuarioActual = new Datos.Usuarios();
+        public PedidosHistorial(Datos.Usuarios usuario)
         {
             InitializeComponent();
+            UsuarioActual  = usuario;
             dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarDatosDesdeJson();
@@ -113,7 +115,7 @@ namespace ejemplo
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 1)); // Reemplaza con el formulario que desees abrir
+                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 1,UsuarioActual)); // Reemplaza con el formulario que desees abrir
             }
         }
         private void BuscarElemento(string textoBusqueda)
@@ -161,37 +163,48 @@ namespace ejemplo
             // Si el usuario hizo clic en el botón "Eliminar"
             if (e.ColumnIndex == dataGridView1.Columns["btnEliminar"].Index && e.RowIndex >= 0)
             {
-
-                DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                // Obtener el ID del pedido desde la celda correspondiente
-                int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
-
-                // Buscar el pedido en la lista por su ID
-                Pedido pedidoAEliminar = listaPedido.Find(p => p.ID == idPedido);
-
-                if (pedidoAEliminar != null && result == DialogResult.Yes)
+                Codigo_especial Form = new Codigo_especial();
+                if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
                 {
-                    // Eliminar el pedido de la lista
-                    listaPedido.Remove(pedidoAEliminar);
-
-                    // Eliminar la fila del DataGridView
-                    dataGridView1.Rows.RemoveAt(e.RowIndex);
-
-                    // Guardar los cambios en el archivo JSON
-                    GuardarCambios(listaPedido);
-
-                   // MessageBox.Show($"El pedido con ID {idPedido} ha sido eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Form.ShowDialog();
+                    if (Form.DialogResult == DialogResult.OK)
+                    {
+                        eliminar(e);
+                        return;
+                    }
                 }
-                
-
+                else eliminar(e); return;
 
             }
         }
+        private void eliminar(DataGridViewCellEventArgs e)
+        {
 
+            DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            // Obtener el ID del pedido desde la celda correspondiente
+            int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
+
+            // Buscar el pedido en la lista por su ID
+            Pedido pedidoAEliminar = listaPedido.Find(p => p.ID == idPedido);
+
+            if (pedidoAEliminar != null && result == DialogResult.Yes)
+            {
+                // Eliminar el pedido de la lista
+                listaPedido.Remove(pedidoAEliminar);
+
+                // Eliminar la fila del DataGridView
+                dataGridView1.Rows.RemoveAt(e.RowIndex);
+
+                // Guardar los cambios en el archivo JSON
+                GuardarCambios(listaPedido);
+
+                // MessageBox.Show($"El pedido con ID {idPedido} ha sido eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
+    }
 }
 
 

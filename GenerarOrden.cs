@@ -127,7 +127,7 @@ namespace Examen2Grupo3
             if (principal != null)
             {
              
-                principal.AbrirFormularioEnPanel(new Factura(seleccionadot, 1)); // Abre el formulario Factura Con los detalles del pedido
+                principal.AbrirFormularioEnPanel(new Factura(seleccionadot, 1, UsuarioActual)); // Abre el formulario Factura Con los detalles del pedido
      
 
 
@@ -172,20 +172,6 @@ namespace Examen2Grupo3
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Codigo_especial Form = new Codigo_especial();
-            if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
-            {
-                Form.ShowDialog();
-                if (Form.DialogResult == DialogResult.OK)
-                {
-                    Casillaseleccionada(e);
-                }
-            }
-            Casillaseleccionada(e);
-        }
-
-        public void Casillaseleccionada(DataGridViewCellEventArgs e)
-        {
 
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
             {
@@ -197,25 +183,44 @@ namespace Examen2Grupo3
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-                // Verificar que la celda pertenece a la columna de botones y no es el encabezado
-
-                DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                Codigo_especial Form = new Codigo_especial();
+                if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
                 {
-                    Lista.RemoveAt(e.RowIndex);
-                    dataGridView1.Rows.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada
-                    GuardarCambios(Lista);
+                    Form.ShowDialog();
+                    if (Form.DialogResult == DialogResult.OK)
+                    {
+                        eliminar(e);
+                        return;
+                    }
                 }
+                else eliminar(e); return;
+
+
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Estado"].Index && e.RowIndex >= 0)
             {
                 Cambiar_estado estado = new Cambiar_estado(Lista[e.RowIndex], UsuarioActual);
                 estado.ShowDialog();
                 CargarDatosDesdeJson();
-            
+
             }
+        }
+        private void eliminar(DataGridViewCellEventArgs e)
+        {
+           //Preguntar si en verdad desea eliminar el pedido
+            DialogResult result = MessageBox.Show("¿Deseas eliminar este pedido?", "Confirmar eliminación",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                Lista.RemoveAt(e.RowIndex);
+                dataGridView1.Rows.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada
+                GuardarCambios(Lista);
+            }
+        }
+        public void Casillaseleccionada(DataGridViewCellEventArgs e)
+        {
+
         }
         private void dataGridView1_EditModeChanged(object sender, EventArgs e)
         {

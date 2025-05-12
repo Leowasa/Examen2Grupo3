@@ -67,7 +67,7 @@ namespace Examen2Grupo3
         }
         public void GuardarEmpresa(Empresa empresactual)
         {
-            string rutaarchivo = "Empresa.json";
+            string rutaarchivo = "Empresa.Json";
             try
             {
                 // Corrected the use of Newtonsoft.Json's SerializeObject method  

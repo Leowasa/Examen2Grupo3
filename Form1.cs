@@ -243,12 +243,12 @@ namespace ejemplo
 
         private void btnPedidosHistorial_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new PedidosHistorial());
+            AbrirFormulario(new PedidosHistorial(UsuarioActual));
         }
 
         private void btnOrdenesHistorial_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new OrdenesHistorial());
+            AbrirFormulario(new OrdenesHistorial(UsuarioActual));
         }
 
         private void btnGenerarPedido_Click(object sender, EventArgs e)
@@ -268,7 +268,7 @@ namespace ejemplo
 
         private void btnFactura_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new FacturasHistorial());
+            AbrirFormulario(new FacturasHistorial(UsuarioActual));
         }
 
         private void bntMinimizar_Click(object sender, EventArgs e)
