@@ -123,29 +123,32 @@ namespace Examen2Grupo3
 
                 DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                // Obtener el ID del pedido desde la celda correspondiente
-                int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
-
-                // Buscar el pedido en la lista por su ID
-                Pedido pedidoAEliminar = listaPedidos.Find(p => p.ID == idPedido);
-
-                if (pedidoAEliminar != null)
+                if (result == DialogResult.OK)
                 {
-                    // Eliminar el pedido de la lista
-                    listaPedidos.Remove(pedidoAEliminar);
+                    // Obtener el ID del pedido desde la celda correspondiente
+                    int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
 
-                    // Eliminar la fila del DataGridView
-                    dataGridView1.Rows.RemoveAt(e.RowIndex);
+                    // Buscar el pedido en la lista por su ID
+                    Pedido pedidoAEliminar = listaPedidos.Find(p => p.ID == idPedido);
 
-                    // Guardar los cambios en el archivo JSON
-                    GuardarCambios(listaPedidos);
+                    if (pedidoAEliminar != null)
+                    {
+                        // Eliminar el pedido de la lista
+                        listaPedidos.Remove(pedidoAEliminar);
 
-                    // MessageBox.Show($"El pedido con ID {idPedido} ha sido eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show($"No se encontró ningún pedido con ID {idPedido}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // Eliminar la fila del DataGridView
+                        dataGridView1.Rows.RemoveAt(e.RowIndex);
+
+                        // Guardar los cambios en el archivo JSON
+                        GuardarCambios(listaPedidos);
+
+                        // MessageBox.Show($"El pedido con ID {idPedido} ha sido eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No se encontró ningún pedido con ID {idPedido}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                 }
 
 

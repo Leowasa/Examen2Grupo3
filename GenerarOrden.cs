@@ -50,22 +50,7 @@ namespace Examen2Grupo3
                     {
 
                         // Agregar una nueva fila con los datos
-                        int rowIndex = dataGridView1.Rows.Add(datos.ID.ToString("D6"), datos.Cliente.Nombre, datos.Fecha.ToString("dd/MM/yyyy"), datos.Total);
-
-                        // Obtener la celda ComboBox correctamente
-
-                        var comboCell = dataGridView1.Rows[rowIndex].Cells["Estado"] as DataGridViewComboBoxCell;
-                        if (comboCell.Value == null)
-                        {
-
-                            comboCell.Value = "Pendiente"; // Estado por defecto
-                        }
-                        if (comboCell != null && comboCell.Items != null && (comboCell.Items.Contains(datos.Estado)))
-                        {
-
-                             comboCell.Value = datos.Estado;// Mantener el estado
-                            
-                        }
+                        int rowIndex = dataGridView1.Rows.Add(datos.ID.ToString("D6"), datos.Cliente.Nombre, datos.Fecha.ToString("dd/MM/yyyy"), datos.Total, datos.Estado);
 
                     }
                     Lista = pedidos;
@@ -118,15 +103,6 @@ namespace Examen2Grupo3
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
 
-            if (dataGridView1.CurrentCell.ColumnIndex == dataGridView1.Columns["Estado"].Index && e.Control is ComboBox combo)
-            {
-                combo.SelectedIndexChanged -= ComboBox_SelectedIndexChanged; // Evita múltiples suscripciones
-                combo.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
-
-                // Definir opciones iniciales según el estado actual en la celda
-                string estadoActual = dataGridView1.CurrentCell.Value?.ToString() ?? "Pendiente";
-                ActualizarOpcionesComboBox(combo, estadoActual);
-            }
         }
 
         public void AbrirOtroFormulario(Pedido seleccionadot, int opcion)
@@ -134,15 +110,10 @@ namespace Examen2Grupo3
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                switch (opcion)
-                {
-                    case 1:
-                        principal.AbrirFormularioEnPanel(new Factura(seleccionadot, opcion)); // Reemplaza con el formulario que desees abrir
-                        break;
-                    case 2:
-                        principal.AbrirFormularioEnPanel(new Factura(seleccionadot, opcion, UsuarioActual)); // Reemplaza con el formulario que desees abrir
-                        break;
-                }
+             
+                principal.AbrirFormularioEnPanel(new Factura(seleccionadot, 1)); // Abre el formulario Factura Con los detalles del pedido
+     
+
 
             }
         }
@@ -180,45 +151,7 @@ namespace Examen2Grupo3
 
         private void ComboBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            var comboBox = sender as ComboBox;
-
-            if (comboBox != null)
-            {
-                var fila = dataGridView1.CurrentRow;
-                string? estadoActual = comboBox.SelectedItem?.ToString();
-                comboBox.Items.Clear();
-                if (fila != null)
-                {
-                    // Extraer los datos de la fila  
-                    if (int.TryParse(fila.Cells["Numero"].Value?.ToString(), out int idSeleccionado))
-                    {
-                        seleccionado.ID = idSeleccionado;
-                        foreach (var lista in Lista)
-                        {
-                            if (lista.ID == seleccionado.ID)
-                            {
-                                if (estadoActual == "Entregado" || estadoActual == "Rechazado")
-                                {
-                                    lista.Estado = estadoActual;
-                                    GuardarCambios(Lista);
-
-                                    CargarDatosDesdeJson();
-                                    return;
-                                }
-                                seleccionado = lista;
-                                seleccionado.Estado = estadoActual ?? string.Empty;
-                                lista.Estado = estadoActual ?? string.Empty;
-                                GuardarCambios(Lista);
-                                AbrirOtroFormulario(seleccionado, 2);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("El ID del pedido no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+           
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -259,9 +192,13 @@ namespace Examen2Grupo3
                     dataGridView1.Rows.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada
                     GuardarCambios(Lista);
                 }
-
-
-
+            }
+            else if (e.ColumnIndex == dataGridView1.Columns["Estado"].Index && e.RowIndex >= 0)
+            {
+                Cambiar_estado estado = new Cambiar_estado(Lista[e.RowIndex], UsuarioActual);
+                estado.ShowDialog();
+                CargarDatosDesdeJson();
+            
             }
         }
         private void dataGridView1_EditModeChanged(object sender, EventArgs e)
@@ -274,60 +211,7 @@ namespace Examen2Grupo3
 
         }
 
-        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "Estado" &&
-        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                string estadoActual = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                DataGridViewComboBoxCell comboBoxCell = (DataGridViewComboBoxCell)dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-                comboBoxCell.Items.Clear(); // Limpiar las opciones antes de asignar las nuevas
-
-                switch (estadoActual)
-                {
-                    case "Pendiente":
-                        comboBoxCell.Items.AddRange(new string[] { "Pendiente", "Aprobado", "Rechazado" });
-                        break;
-                    case "Aprobado":
-                        comboBoxCell.Items.AddRange(new string[] { "Aprobado", "Entregado" });
-                        break;
-                    case "Entregado":
-                        // Cancelar la edición si el estado es "Entregado"
-                        MessageBox.Show("El estado 'Entregado' no puede ser modificado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        e.Cancel = true;
-                        break;
-                    case "Rechazado":
-                        comboBoxCell.Items.AddRange(new string[] { "Rechazado" });
-                        break;
-                }
-            }
-        }
-
        
-        private void ActualizarOpcionesComboBox(ComboBox combo, string estadoActual)
-        {
-            List<string> nuevosEstados = new List<string>();
-
-            switch (estadoActual)
-            {
-                case "Pendiente":
-                    nuevosEstados = new List<string> { "Aprobado", "Rechazado" };
-                    break;
-                case "Aprobado":
-                    nuevosEstados = new List<string> { "Entregado" };
-                    break;
-                case "Rechazado":
-                    nuevosEstados = new List<string> { "Pendiente" };
-                    break;
-                case "Entregado":
-                    nuevosEstados = new List<string> { "Entregado" }; // Solo se mantiene entregado
-                    break;
-            }
-
-            combo.Items.Clear();
-            combo.Items.AddRange(nuevosEstados.ToArray());
-        }
+      
     }
 }

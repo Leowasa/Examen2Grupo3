@@ -24,6 +24,7 @@ namespace Examen2Grupo3
         private static Pedido Pedido = new Pedido();//se almacenan distintos miembros del pedido en distintas funciones para despues guardarlos en una lista 
         private static int NumeroPedido;
         private int Opcion;
+        private string estado;
         private static Pedido orden;
         private Datos.Usuarios usuarioActual = new Datos.Usuarios();
         public Factura(Pedido pedido, int opcion)
@@ -41,13 +42,14 @@ namespace Examen2Grupo3
             InitializeComponent();
          
         }
-        public Factura(Pedido pedido, int opcion, Datos.Usuarios usuario)
+        public Factura(Pedido pedido, int opcion, Datos.Usuarios usuario, string estadoinicial)
         {
             usuarioActual = usuario;
             Opcion = opcion;
             InitializeComponent();
             dataGridView1.Rows.Clear();
             Pedido = pedido;
+            estado = estadoinicial;
             configurar();
            
         }
@@ -236,6 +238,7 @@ namespace Examen2Grupo3
 
                     orden.Observaciones = guna2TextBox1.Text;
                     orden.FechaValidado = FechaValidacion.Value;
+                    orden.Estado = estado;
                     GuardarPedidosEnJson(orden);
                     
                     GuardarOrdenEnJson(orden);

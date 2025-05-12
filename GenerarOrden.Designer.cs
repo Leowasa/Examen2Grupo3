@@ -42,7 +42,7 @@
             Nombre = new DataGridViewTextBoxColumn();
             Usuariosd = new DataGridViewButtonColumn();
             Total = new DataGridViewTextBoxColumn();
-            Estado = new DataGridViewComboBoxColumn();
+            Estado = new DataGridViewTextBoxColumn();
             Ver = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -65,6 +65,8 @@
             // dataGridView1
             // 
             dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
             dataGridView1.BorderStyle = BorderStyle.None;
@@ -101,11 +103,7 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dataGridView1.Size = new Size(941, 615);
             dataGridView1.TabIndex = 114;
-            dataGridView1.EditModeChanged += dataGridView1_EditModeChanged;
             dataGridView1.CellClick += dataGridView1_CellClick;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            dataGridView1.EditingControlShowing += dataGridView1_EditingControlShowing;
-            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
             // guna2TextBox2
             // 
@@ -166,12 +164,9 @@
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.HotTrack;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HotTrack;
             Estado.DefaultCellStyle = dataGridViewCellStyle3;
-            Estado.DisplayStyleForCurrentCellOnly = true;
             Estado.HeaderText = "Estado";
-            Estado.Items.AddRange(new object[] { "Pendiente", "Aprobado", "Rechazado", "Entregado" });
             Estado.Name = "Estado";
             Estado.Resizable = DataGridViewTriState.True;
-            Estado.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // Ver
             // 
@@ -217,13 +212,13 @@
         private DataGridViewImageColumn Column3;
         private DataGridViewImageColumn Column5;
         private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Numero;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn Usuariosd;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewComboBoxColumn Estado;
+        private DataGridViewTextBoxColumn Total;
+        private DataGridViewTextBoxColumn Estado;
         private DataGridViewImageColumn Ver;
         private DataGridViewImageColumn Eliminar;
-        private DataGridViewTextBoxColumn Total;
     }
 }
