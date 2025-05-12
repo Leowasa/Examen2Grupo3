@@ -123,7 +123,7 @@ namespace Examen2Grupo3
 
                 DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.OK)
+                if (result == DialogResult.Yes)
                 {
                     // Obtener el ID del pedido desde la celda correspondiente
                     int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);

@@ -82,9 +82,10 @@ namespace Examen2Grupo3
 
 
         }
+
         private void GenerarOrden_Load(object sender, EventArgs e)
         {
-            dataGridView1.EditingControlShowing += dataGridView1_EditingControlShowing;
+            
 
         }
 

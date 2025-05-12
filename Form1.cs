@@ -34,13 +34,20 @@ namespace ejemplo
             customizemenu();
         }
         public void AbrirFormularioEnPanel(Form formulario)
-        {
-            PanelPrincipal.Controls.Clear();
+        {// Limpiar cualquier formulario existente en el panel
+            if (PanelPrincipal.Controls.Count > 0)
+            {
+                PanelPrincipal.Controls.RemoveAt(0);
+            }
 
-            formulario.TopLevel = false;
-            formulario.FormBorderStyle = FormBorderStyle.None;
+            // Configurar el formulario para que se adapte al panel
+            formulario.TopLevel = false; // Indica que el formulario no es de nivel superior
+            formulario.FormBorderStyle = FormBorderStyle.None; // Quitar bordes del formulario
+            formulario.Dock = DockStyle.Fill; // Hacer que el formulario ocupe todo el panel
 
+            // Agregar el formulario al panel y mostrarlo
             PanelPrincipal.Controls.Add(formulario);
+            PanelPrincipal.Tag = formulario;
             formulario.Show();
         }
 

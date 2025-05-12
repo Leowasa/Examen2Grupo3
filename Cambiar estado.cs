@@ -165,7 +165,7 @@ namespace Examen2Grupo3
                     return;
 
                 }
-                else if (guna2ComboBox1.SelectedItem == "Aprobado" || guna2ComboBox1.SelectedItem == "Entregado")
+                else if (guna2ComboBox1.SelectedItem == "Rechazado" || guna2ComboBox1.SelectedItem == "Entregado")
                 {
                     Orden.Estado = guna2ComboBox1.SelectedItem.ToString();
                     GuardarOrdenEnJson(Orden);
@@ -173,7 +173,11 @@ namespace Examen2Grupo3
 
                     this.Close();
                 }
-                else AbrirOtroFormulario(Orden);
+                else 
+                {
+                    Orden.Estado = guna2ComboBox1.SelectedItem.ToString(); 
+                    AbrirOtroFormulario(Orden); 
+                }
 
 
             }

@@ -164,6 +164,7 @@ namespace Examen2Grupo3
                     {
                        lista.FechaValidado = nuevoPedido.FechaValidado;
                         lista.Observaciones = nuevoPedido.Observaciones;
+                        lista.Estado = nuevoPedido.Estado;
                     
                     }
                 }
