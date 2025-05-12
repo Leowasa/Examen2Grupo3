@@ -1,16 +1,16 @@
 [
   {
     "ID": 35345,
-    "Username": "34534534534534",
-    "Nombre": "45345",
-    "Password": "34534534",
+    "Username": "leonardo",
+    "Nombre": "Figueredo Leonardo",
+    "Password": "263087",
     "Tipo": "Aprobador"
   },
   {
     "ID": 322,
-    "Username": "Lenfig",
+    "Username": "admin",
     "Nombre": "leo",
-    "Password": "56",
+    "Password": "2630",
     "Tipo": "Administrador"
   },
   {
@@ -22,8 +22,8 @@
   },
   {
     "ID": 34534,
-    "Username": "23423",
-    "Nombre": "Gabriel2",
+    "Username": "Georgen",
+    "Nombre": "Bastidas Georgen",
     "Password": "2630",
     "Tipo": "Registrador"
   }

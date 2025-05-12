@@ -26,7 +26,7 @@ namespace Examen2Grupo3
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             leerEmpresa();
-
+            codigoIngresado = guna2TextBox1.Text;
             if (empresactual.Codigo == null)
             {
                 MessageBox.Show("No hay codigo de autorizacion establecido. Por favor solicite al superusuario ingresar un codigo al programa");

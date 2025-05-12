@@ -21,14 +21,14 @@ namespace ejemplo
         Datos.Usuarios Usuarioactual = new Datos.Usuarios();
         Datos.Usuarios Nuevo = new Datos.Usuarios();
         List<Datos.Usuarios> usuarios = new List<Datos.Usuarios>();
-        AgregarCliente Operar = new AgregarCliente(1);
+        AgregarCliente Operar;
         public Usuarios(Datos.Usuarios usuarioactual)
         {
 
             InitializeComponent(); // Inicializa los controles del formulario
             usuarios = LeerUsuarios(); // Carga la lista de usuarios
 
-
+            Operar = new AgregarCliente(1, usuarios); // Inicializa el formulario de agregar cliente
             this.Usuarioactual = usuarioactual;
             ControlUsuario1(usuarioactual);
             //ConfigurarTextBox();
@@ -53,11 +53,10 @@ namespace ejemplo
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            Operar = new AgregarCliente(1);
-
+            Operar = new AgregarCliente(1,usuarios);
             if (Operar.ShowDialog() == DialogResult.OK)
             {
-                usuarios.Add(Operar.ObtenerUsuario());
+                usuarios.Add(Operar.DatosUsuario);
                 GuardarUsuarios("usuarios.json");
 
                 CargarDatosEnDataGridView();
@@ -155,7 +154,6 @@ namespace ejemplo
             {
                 pictureBox1.Visible = false;
                 pictureBox2.Visible = false;
-                dataGridView1.Columns["Password"].Visible = false;
             }
 
         }
@@ -172,7 +170,7 @@ namespace ejemplo
             dataGridView1.Rows.Clear();
             foreach (var row in usuarios)
             {
-
+                if(row == null) continue; // Verificar si la fila es nula
                 dataGridView1.Rows.Add(row.ID, row.Nombre, row.Username, row.Tipo);
 
             }
@@ -211,7 +209,7 @@ namespace ejemplo
                         var datos = linea.Split(','); // Dividir la línea en columnas
 
                         // Verificar que la línea tenga suficientes columnas
-                        if (datos.Length < 3)
+                        if (datos.Length > 3)
                         {
                             // Crear un nuevo objeto Usuarios y asignar los valores
                             var usuario = new Datos.Usuarios
@@ -334,9 +332,9 @@ namespace ejemplo
 
         private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            
         }
-
-        private void dataGridView1_CellClick_2(object sender, DataGridViewCellEventArgs e)
+        private void Casillaseleccionada(DataGridViewCellEventArgs e)
         {
 
             if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
@@ -370,12 +368,12 @@ namespace ejemplo
                 if (usuarios[e.RowIndex] != null)
                 {
                     // Crear una instancia del formulario de edición y pasar los datos  
-
+                    Operar = new AgregarCliente(3, usuarios);
                     Operar.SetDatosUsuarios(usuarios[e.RowIndex]);
                     // Mostrar el formulario de edición como una ventana modal  
                     if (Operar.ShowDialog() == DialogResult.OK)
                     {
-                        usuarios[e.RowIndex] = Operar.ObtenerUsuario();
+                        usuarios[e.RowIndex] = Operar.DatosUsuario;
                         GuardarUsuarios("usuarios.json");
                         CargarDatosEnDataGridView();
                     }
@@ -386,6 +384,18 @@ namespace ejemplo
                 }
 
             }
+
+        }
+        private void dataGridView1_CellClick_2(object sender, DataGridViewCellEventArgs e)
+        {
+            Codigo_especial Form = new Codigo_especial();
+            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
+            {
+                    MessageBox.Show("No tiene permisos para realizar esta operacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                
+            }
+            Casillaseleccionada(e);
         }
         private void BuscarElemento(string textoBusqueda)
         {

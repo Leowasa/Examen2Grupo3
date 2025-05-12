@@ -60,15 +60,11 @@ namespace Examen2Grupo3
 
                             comboCell.Value = "Pendiente"; // Estado por defecto
                         }
-                        if (comboCell != null && comboCell.Items != null && comboCell.Value != null)
+                        if (comboCell != null && comboCell.Items != null && (comboCell.Items.Contains(datos.Estado)))
                         {
 
-                            comboCell.Value = datos.Estado;
-                            if (comboCell.Items.Contains(datos.Estado))
-                            {
-
-                                comboCell.Value = datos.Estado; // Mantener el estado
-                            }
+                             comboCell.Value = datos.Estado;// Mantener el estado
+                            
                         }
 
                     }
@@ -84,7 +80,7 @@ namespace Examen2Grupo3
 
         private void GuardarCambios(List<Pedido> orden)
         {
-            string rutaArchivo = "Pedidos.json";
+            string rutaArchivo = "pedidos.json";
 
             try
             {
@@ -177,7 +173,10 @@ namespace Examen2Grupo3
                 fila.Visible = coincide;
             }
         }
-
+        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
+        {
+            BuscarElemento(guna2TextBox2.Text);
+        }
 
         private void ComboBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
@@ -230,13 +229,13 @@ namespace Examen2Grupo3
                 Form.ShowDialog();
                 if (Form.DialogResult == DialogResult.OK)
                 {
-                    editar(e);
+                    Casillaseleccionada(e);
                 }
             }
-            editar(e);
+            Casillaseleccionada(e);
         }
 
-        public void editar(DataGridViewCellEventArgs e)
+        public void Casillaseleccionada(DataGridViewCellEventArgs e)
         {
 
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
@@ -306,10 +305,7 @@ namespace Examen2Grupo3
             }
         }
 
-        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
-        {
-            BuscarElemento(guna2TextBox2.Text);
-        }
+       
         private void ActualizarOpcionesComboBox(ComboBox combo, string estadoActual)
         {
             List<string> nuevosEstados = new List<string>();

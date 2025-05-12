@@ -37,21 +37,22 @@ namespace Examen2Grupo3
         {
             try
             {
-                producto = new Producto();
-                producto.ID = int.Parse(guna2TextBox1.Text);
-                producto.Nombre = guna2TextBox2.Text;
-                producto.Descripcion = guna2TextBox3.Text;
-                producto.Categoria = guna2TextBox4.Text;
-                producto.PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
-                producto.Cantidad = int.Parse(guna2TextBox5.Text);
                 // Aquí puedes agregar una validación extra si el número debe estar en cierto rango
-                if (producto.ID < 0 || producto.ID ==0)
+                if (guna2TextBox1.Text.Trim().Length < 3)
                 {
-                    MessageBox.Show("El ID no puede ser negativo o igual a 0.");
+                    MessageBox.Show("El ID no puede ser menor a 3.");
                     return;
                 }
                 else
                 {
+
+                    producto = new Producto();
+                    producto.ID = int.Parse(guna2TextBox1.Text);
+                    producto.Nombre = guna2TextBox2.Text;
+                    producto.Descripcion = guna2TextBox3.Text;
+                    producto.Categoria = guna2TextBox4.Text;
+                    producto.PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
+                    producto.Cantidad = int.Parse(guna2TextBox5.Text);
                     // Validación normal de ID repetido
                     if (Productos.Any(c => c.ID == producto.ID))
                     {

@@ -40,10 +40,6 @@ namespace ejemplo
             formulario.TopLevel = false;
             formulario.FormBorderStyle = FormBorderStyle.None;
 
-            // Ajustar el tamaño del formulario al contenido
-            formulario.AutoSize = true;
-            formulario.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-
             PanelPrincipal.Controls.Add(formulario);
             formulario.Show();
         }

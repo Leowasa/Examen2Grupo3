@@ -12,7 +12,7 @@ namespace ejemplo
     public partial class Clientes : Form
     {
         //  public List<RegistroPedidos.Usuarios> Usuarioss = new List<RegistroPedidos.Usuarios>();
-        public List<Cliente>? cliente = new List<Cliente>();
+        public List<Datos.Cliente> cliente = new List<Cliente>();
         public Datos.Usuarios usuarioActual = new Datos.Usuarios();
         BindingSource bindingSource = new BindingSource();
         public Clientes(Datos.Usuarios UsuarioActual)
@@ -32,7 +32,7 @@ namespace ejemplo
         private void BuscarElemento(string textoBusqueda)
         {
             // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length >= 3)
+            if (textoBusqueda.Length < 3)
             {
                 // Si tiene menos de 4 caracteres, mostrar todas las filas
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
@@ -58,11 +58,11 @@ namespace ejemplo
         }
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            AgregarCliente agregarCliente = new AgregarCliente(2);
+            AgregarCliente agregarCliente = new AgregarCliente(2, cliente);
             if (agregarCliente.ShowDialog() == DialogResult.OK)
             {
 
-                cliente.Add(agregarCliente.ObtenerCliente());
+                cliente.Add(agregarCliente.DatosClientes);
                GuardarClientes("Clientes.Json");
                 CargarClientes("Clientes.Json");
 
@@ -112,18 +112,16 @@ namespace ejemplo
         }
         public void CargarClientes(string rutaArchivo)
         {
-
             if (File.Exists(rutaArchivo))
             {
-
                 string json = File.ReadAllText(rutaArchivo);
-                List<Cliente>? listaProductos = System.Text.Json.JsonSerializer.Deserialize<List<Cliente>>(json);
+                cliente = System.Text.Json.JsonSerializer.Deserialize<List<Datos.Cliente>>(json); // Cambiar 'Cliente' a 'cliente'  
 
-                if (listaProductos != null) // Verificar que la lista no sea nula
+                if (cliente != null) // Verificar que la lista no sea nula  
                 {
-                    dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos
+                    dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos  
 
-                    foreach (var producto in listaProductos)
+                    foreach (var producto in cliente)
                     {
                         dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Correo, producto.Direccion, producto.Tipo);
                     }
@@ -132,22 +130,34 @@ namespace ejemplo
         }
         public void ImportarCSV(string rutaArchivo)
         {
+            cliente = new List<Cliente>();
+
             try
             {
                 if (File.Exists(rutaArchivo))
                 {
                     var lineas = File.ReadAllLines(rutaArchivo);
-                    dataGridView1.Rows.Clear();
 
                     foreach (var linea in lineas.Skip(1)) // Omitimos el encabezado
                     {
                         var datos = linea.Split(',');
 
-                        dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4]);
-                    }
 
+                        Cliente clientes = new Cliente
+                        {
+                            ID = int.Parse(datos[0]),
+                            Nombre = datos[1],
+                            Correo = datos[2],
+                            Direccion = datos[3],
+                            Tipo = datos[4]
+                        };
+
+                        cliente.Add(clientes);
+                    }
+                   
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     GuardarClientes("Clientes.Json");
+                    CargarClientes("Clientes.Json");
                 }
             }
             catch (Exception ex)
@@ -169,45 +179,33 @@ namespace ejemplo
                 Form.ShowDialog();
                 if (Form.DialogResult == DialogResult.OK)
                 {
-                    editar(e);
+                    Casillaseleccionada(e);
                     return;
                 }
             }
-            editar(e);
+           Casillaseleccionada(e);
 
 
 
 
         }
-        public void editar(DataGridViewCellEventArgs e)
+        public void Casillaseleccionada(DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
-                DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
-
-                // Validar que las celdas no sean nulas antes de acceder a sus valores  
-                string? id = filaSeleccionada.Cells["ID"].Value?.ToString();
-                string? nombre = filaSeleccionada.Cells["Nombre"].Value?.ToString();
-                string? direccion = filaSeleccionada.Cells["Direccion"].Value?.ToString();
-                string? correo = filaSeleccionada.Cells["CorreoElectronico"].Value?.ToString();
-                string? tipo = filaSeleccionada.Cells["Tipo"].Value?.ToString();
+              
 
                 // Verificar que los valores requeridos no sean nulos  
-                if (id != null && nombre != null && direccion != null && correo != null && tipo != null)
+                if (cliente[e.RowIndex]!=null)
                 {
                     // Crear una instancia del formulario de edición y pasar los datos  
-                    AgregarCliente formEditar = new AgregarCliente(2);
-                    formEditar.SetDatosProducto(id, nombre, direccion, correo, tipo);
+                    AgregarCliente formEditar = new AgregarCliente(4, cliente);
+                    formEditar.SetDatosCiente(cliente[e.RowIndex]);
 
                     formEditar.ShowDialog(); // Mostrar el formulario de edición como una ventana modal  
                     if (formEditar.DialogResult == DialogResult.OK)
                     {
-                        DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
-                        fila.Cells["ID"].Value = formEditar.DatosClientes.ID;
-                        fila.Cells["Nombre"].Value = formEditar.DatosClientes.Nombre;
-                        fila.Cells["Direccion"].Value = formEditar.DatosClientes.Direccion;
-                        fila.Cells["CorreoElectronico"].Value = formEditar.DatosClientes.Correo;
-                        fila.Cells["Tipo"].Value = formEditar.DatosClientes.Tipo;
+                        cliente[e.RowIndex] = formEditar.DatosClientes;
                         GuardarClientes("Clientes.Json");
                         CargarClientes("Clientes.Json");
                     }
@@ -224,8 +222,9 @@ namespace ejemplo
 
                 if (result == DialogResult.Yes)
                 {
-                    dataGridView1.Rows.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada  
+                    cliente.RemoveAt(e.RowIndex); // Eliminar la fila seleccionada  
                     GuardarClientes("Clientes.Json");
+                    CargarClientes("Clientes.Json");
                 }
             }
         }

@@ -1,6 +1,9 @@
 ﻿using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Text.RegularExpressions;
+using Guna.UI2.WinForms;
 using static Examen2Grupo3.Datos;
+using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 
 namespace Examen2Grupo3
 {
@@ -8,7 +11,8 @@ namespace Examen2Grupo3
     public partial class AgregarCliente : Form
     {
         public Cliente DatosClientes;
-        public Datos.Usuarios DatosUsuario;
+        public  Datos.Usuarios DatosUsuario;
+        private List<Cliente> Clientes = new List<Cliente>();
         private List<Datos.Usuarios> Usuarios = new List<Datos.Usuarios>();
         private int opcion;
 
@@ -17,8 +21,17 @@ namespace Examen2Grupo3
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        public AgregarCliente(int Opcion)//Opcion representa la operacion que hara el formulario
+        public AgregarCliente(int Opcion, List<Datos.Usuarios> usuarios)//Opcion representa la operacion que hara el formulario
         {
+            this.Usuarios = usuarios;
+            this.opcion = Opcion;
+            InitializeComponent();
+            Configurar();
+
+        }
+        public AgregarCliente(int Opcion, List<Datos.Cliente> clientes)//Opcion representa la operacion que hara el formulario
+        {
+            Clientes = clientes;
             this.opcion = Opcion;
             InitializeComponent();
             Configurar();
@@ -26,83 +39,157 @@ namespace Examen2Grupo3
         }
         private void Configurar()
         {
-            switch (opcion)
+            if (opcion == 1 || opcion == 3)
             {
-                case 1: //Para Agregar Usuario  
-                    this.Text = "Agregar Usuario";
-                    lbl1.Text = "ID: ";
-                    label2.Text = "Nombre: ";
-                    label3.Text = "Username: ";
-                    label4.Text = "contraseña: ";
-                    label5.Text = "Confirmar contraseña: ";
+                this.Text = "Agregar Usuario";
+                lbl1.Text = "ID: ";
+                label2.Text = "Nombre: ";
+                label3.Text = "Username: ";
+                label4.Text = "contraseña: ";
+                label5.Text = "Confirmar contraseña: ";
 
-                    // Fix for the line causing CS1525 and CS1002 errors  
-                    guna2TextBox4.PasswordChar = '*';
-                    guna2ComboBox1.Items.Clear(); // Clear existing items before adding new ones
-                    // Use AddRange to populate the Items collection instead of assigning directly  
-                    guna2ComboBox1.Items.AddRange(new object[] { "Aprobador", "Registrador" });
-                    break;
-                case 2: //Para Agregar Cliente
-                    this.Text = "Agregar Cliente";
-                    label5.Visible = false;
-                    guna2TextBox5.Visible = false;
-                    guna2ComboBox1.Location = new Point(11, 274);
-                    label6.Location = new Point(11, 254);
-                    guna2Button1.Location = new Point(11, 314);
-                    break;
+                // Fix for the line causing CS1525 and CS1002 errors  
+                guna2TextBox4.PasswordChar = '*';
+                guna2ComboBox1.Items.Clear(); // Clear existing items before adding new ones
+                                              // Use AddRange to populate the Items collection instead of assigning directly  
+                guna2ComboBox1.Items.AddRange(new object[] { "Aprobador", "Registrador" });
+
+
+            }
+            else if (opcion == 2 || opcion == 4)
+            {
+                this.Text = "Agregar Cliente";
+                label5.Visible = false;
+                guna2TextBox5.Visible = false;
+                guna2ComboBox1.Location = new Point(11, 274);
+                label6.Location = new Point(11, 254);
+                guna2Button1.Location = new Point(11, 314);
+
             }
 
         }
-        public Datos.Usuarios ObtenerUsuario()
-        {
-            DatosUsuario = new Datos.Usuarios();
-
-
-            DatosUsuario.ID = int.Parse(guna2TextBox1.Text);
-            DatosUsuario.Nombre = guna2TextBox2.Text;
-            DatosUsuario.Username = guna2TextBox3.Text;
-            DatosUsuario.Password = guna2TextBox4.Text;
-            DatosUsuario.Tipo = guna2ComboBox1.Text;
-            MessageBox.Show("Operación realizada satisfactoriamente. ", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            return DatosUsuario;
-
-
-
-        }
-        public Datos.Cliente ObtenerCliente()
-        {
-            if (guna2ComboBox1.SelectedItem == null)
-            {
-                throw new InvalidOperationException("El tipo de cliente no puede ser nulo. Por favor, seleccione un tipo.");
-            }
-            try 
-            {
-                DatosClientes = new Cliente
-                {
-                    ID = int.Parse(guna2TextBox1.Text), // Ensure 'ID' is a property of 'cliente' and not a Label
-                    Nombre = guna2TextBox2.Text,
-                    Direccion = guna2TextBox4.Text,
-                    Correo = guna2TextBox3.Text,
-                    Tipo = guna2ComboBox1.SelectedItem?.ToString() ?? string.Empty // Safeguard against null
-
-                };
-                return DatosClientes;
-            } catch 
-            {
-                throw new InvalidOperationException("El tipo de cliente no puede ser nulo. Por favor, seleccione un tipo.");
-            }
-            
-        }
-        public void SetDatosProducto(string ID, string Nombre, string Direccion, string Correo, string Tipo)
+        public bool ObtenerUsuario()
         {
             try
             {
-                guna2TextBox1.Text = ID;
-                guna2TextBox2.Text = Nombre;
-                guna2TextBox4.Text = Direccion;
-                guna2TextBox3.Text = Correo;
-                guna2ComboBox1.Text = Tipo;
+              
+                // Aquí puedes agregar una validación extra si el número debe estar en cierto rango
+                if (guna2TextBox1.Text.Trim().Length < 3)
+                {
+                    MessageBox.Show("El ID no puede ser menor a 3. ");
+                    return false;
+                }
+                else if (string.IsNullOrWhiteSpace(guna2ComboBox1.Text) || guna2ComboBox1.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor seleccione un valor en el ComboBox.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                else if (guna2TextBox4.Text != guna2TextBox5.Text) 
+                {
+                    MessageBox.Show("Las contraseñas no coinciden.");
+                    return false;
+
+                }
+                else
+                {
+                    DatosUsuario = new Datos.Usuarios();
+                    DatosUsuario.ID = int.Parse(guna2TextBox1.Text);
+                    DatosUsuario.Nombre = guna2TextBox2.Text;
+                    DatosUsuario.Username = guna2TextBox3.Text;
+                    DatosUsuario.Password = guna2TextBox4.Text;
+                    DatosUsuario.Tipo = guna2ComboBox1.Text;
+                }
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", ex.Message);
+                return false;
+            }
+            catch (OverflowException ex)
+            {
+                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", ex.Message);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", ex.Message); // Captura la excepción del campo vacío
+                return false;
+            }
+           
+            MessageBox.Show("Operación realizada satisfactoriamente. ", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return true;
+        }
+
+        public bool ObtenerCliente()
+        {
+
+            try
+            {
+                // Expresión regular para validar correos electrónicos  
+                string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+                // validación extra para que el número este en cierto rango
+                if (guna2TextBox1.Text.Trim().Length < 3)
+                {
+                    MessageBox.Show("El ID no puede ser menor a 3.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                //validar que el campo Tipo este lleno
+                else if (string.IsNullOrWhiteSpace(guna2ComboBox1.Text) || guna2ComboBox1.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor seleccione un valor en el ComboBox.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                //validar el correo ingresado
+                else if(!Regex.IsMatch(guna2TextBox3.Text, patronCorreo))
+                {
+                    MessageBox.Show("El correo ingresado no es válido. Por favor, ingrese un correo válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }   
+                //los datos son correctos, guardar en DatosClientes
+                else
+                {
+                    
+                    DatosClientes = new Cliente
+                    {
+                        ID = int.Parse(guna2TextBox1.Text), // Ensure 'ID' is a property of 'cliente' and not a Label
+                        Nombre = guna2TextBox2.Text,
+                        Direccion = guna2TextBox4.Text,
+                        Correo = guna2TextBox3.Text,
+                        Tipo = guna2ComboBox1.SelectedItem?.ToString() ?? string.Empty // Safeguard against null
+
+                    };
+                }
+            }
+            catch (FormatException ex)//campos erroneos
+            {
+                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            catch (OverflowException ex)//ID ingresado que exceda el tamaño soportado por el int
+            {
+                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            catch (Exception ex)//Demas campos en blanco
+            {
+                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning); // Captura la excepción del campo vacío
+                return false;           
+            }
+
+            MessageBox.Show("Operación realizada satisfactoriamente. ", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return true;
+        }
+        public void SetDatosCiente(Datos.Cliente clientes)
+        {
+            //rellenar los campos al editar un cliente
+            try
+            {
+                guna2TextBox1.Text = clientes.ID.ToString();
+                guna2TextBox2.Text = clientes.Nombre;
+                guna2TextBox4.Text = clientes.Direccion;
+                guna2TextBox3.Text = clientes.Correo;
+                guna2ComboBox1.Text = clientes.Tipo;
             }
             catch
             {
@@ -113,6 +200,7 @@ namespace Examen2Grupo3
         {
             try
             {
+                //rellenar los campos al editar un usuario
                 guna2TextBox1.Text = Usuario.ID.ToString();
                 guna2TextBox2.Text = Usuario.Nombre;
                 guna2TextBox3.Text = Usuario.Username;
@@ -129,29 +217,51 @@ namespace Examen2Grupo3
 
         private void guna2Button1_Click_1(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(guna2TextBox1.Text) || string.IsNullOrWhiteSpace(guna2TextBox2.Text) || string.IsNullOrWhiteSpace(guna2TextBox3.Text) || string.IsNullOrWhiteSpace(guna2TextBox4.Text))
-            {
-                MessageBox.Show("Por favor complete todos los campos.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
             switch (opcion)
             {
                 case 1: //Agregar Usuario
-                    if (guna2TextBox5.Text != guna2TextBox4.Text)
+
+                   
+                    if (Usuarios.Any(c => c.ID == int.Parse(guna2TextBox1.Text))) // Validación normal de ID repetido
                     {
-                        MessageBox.Show("Las contraseñas no coinciden.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("No pueden haber más de un ID idéntico.");
                         return;
                     }
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    else if (ObtenerUsuario() == true) 
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
                     break;
                 case 2: //Agregar Cliente
-                    ObtenerCliente();
+                   
+                    if (Clientes.Any(c => c.ID == int.Parse(guna2TextBox1.Text))) // Validación normal de ID repetido
+                    {
+                        MessageBox.Show("No pueden haber más de un ID idéntico.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else if (ObtenerCliente()) 
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    break;
+                case 3://Editar Usuario
+                    if (ObtenerUsuario() == true)
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    break;
+                case 4://Editar Cliente
+                    if (ObtenerCliente())
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+
                     break;
             }
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)

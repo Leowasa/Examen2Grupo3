@@ -171,7 +171,7 @@ namespace ejemplo
                 // Buscar el pedido en la lista por su ID
                 Pedido pedidoAEliminar = listaPedido.Find(p => p.ID == idPedido);
 
-                if (pedidoAEliminar != null || result == DialogResult.Yes)
+                if (pedidoAEliminar != null && result == DialogResult.Yes)
                 {
                     // Eliminar el pedido de la lista
                     listaPedido.Remove(pedidoAEliminar);

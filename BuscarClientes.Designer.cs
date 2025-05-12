@@ -159,6 +159,7 @@
             guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2TextBox2.Size = new Size(139, 23);
             guna2TextBox2.TabIndex = 149;
+            guna2TextBox2.TextChanged += guna2TextBox2_TextChanged;
             // 
             // Cliente
             // 

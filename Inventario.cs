@@ -218,22 +218,33 @@ namespace Examen2Grupo3
         [SupportedOSPlatform("windows6.1")]
         public void ImportarCSV(string rutaArchivo)
         {
+            inventario = new List<Producto>();
+
             try
             {
                 if (File.Exists(rutaArchivo))
                 {
                     var lineas = File.ReadAllLines(rutaArchivo);
-                    dataGridView1.Rows.Clear();
 
                     foreach (var linea in lineas.Skip(1)) // Omitimos el encabezado
                     {
                         var datos = linea.Split(',');
+                        Producto producto = new Producto
+                        {
+                            ID = int.Parse(datos[0]),
+                            Nombre = datos[1],
+                            Categoria = datos[2],
+                            Descripcion = datos[3],
+                            Cantidad = int.Parse(datos[4]),
+                            PrecioUnitario = decimal.Parse(datos[5])
+                        };
 
-                        dataGridView1.Rows.Add(datos[0], datos[1], datos[2], datos[3], datos[4], decimal.Parse(datos[5]));
+                        inventario.Add(producto);
                     }
 
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     GuardarInventario("Inventario.Json");
+                    CargarInventario("Inventario.Json");
                 }
             }
             catch (Exception ex)

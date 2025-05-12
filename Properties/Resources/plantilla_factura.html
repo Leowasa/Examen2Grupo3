@@ -45,7 +45,7 @@
             </td>
             <td style="width:20%">
                 <table class="border" style="width:100%">
-                    <tr><td align="center" style="background-color: #3399FF; color: white;">FACTURA</td></tr>
+                    <tr><td align="center" style="background-color: #007bff; color: white;">FACTURA</td></tr>
                     <tr><td align="center">Nro: @Numero</td></tr>
                 </table>
             </td>
@@ -134,9 +134,9 @@
         <tr>
             <td colspan="3">
                 <div class="totals">
-                    <p>Monto Bruto: @SUBTOTAL</p>
-                    <p>Impuesto (21%): @IVA</p>
-                    <p>Importe Total: @TOTAL</p>
+                    <p>Subtotal: @SUBTOTAL</p>
+                    <p>IVA(21%): @IVA</p>
+                    <p>Monto Total: @TOTAL</p>
                 </div>
             </td>
         </tr>
@@ -145,6 +145,7 @@
             <td colspan="3">
                 <div class="dates">
                     <p>Emitido el: @Emision</p>
+                    <p>Valido hasta: @Validacion</p>
                 </div>
             </td>
         </tr>

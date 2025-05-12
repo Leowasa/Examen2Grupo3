@@ -99,6 +99,7 @@
             // 
             // lblObservaciones
             // 
+            lblObservaciones.Anchor = AnchorStyles.Left;
             lblObservaciones.AutoSize = true;
             lblObservaciones.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblObservaciones.ForeColor = SystemColors.Control;
