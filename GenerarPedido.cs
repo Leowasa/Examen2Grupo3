@@ -256,7 +256,7 @@ namespace Examen2Grupo3
             if (cantidad > 3)
             {
 
-                pedido.Descuento = pedido.SubtTotal * 0.20M;
+                pedido.Descuento = pedido.SubtTotal * 0.31M;//Descuento del 31%
                 pedido.Total = pedido.SubtTotal - pedido.Descuento;
 
                 lblTotal.Text = "total: " + pedido.Total.ToString("C2", culture);

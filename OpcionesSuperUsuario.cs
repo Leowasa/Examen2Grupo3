@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using ejemplo;
 using Newtonsoft.Json;
 using static Examen2Grupo3.Datos;
 
@@ -8,8 +9,8 @@ namespace Examen2Grupo3
     {
         public int opcion;
         private static Empresa empresactual = new Empresa();
-        List<Usuarios> lista = new List<Usuarios>();
-        public Usuarios Usuarios { get; set; }
+        List<Datos.Usuarios> lista = new List<Datos.Usuarios>();
+        public Datos.Usuarios Usuarios { get; set; }
 
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -17,7 +18,7 @@ namespace Examen2Grupo3
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        public OpcionesSuperUsuario(int opcion, Usuarios usuarioActual)
+        public OpcionesSuperUsuario(int opcion, Datos.Usuarios usuarioActual)
         {
             Usuarios = usuarioActual;
             InitializeComponent();
@@ -41,26 +42,83 @@ namespace Examen2Grupo3
         }
         public void GuardarCodigo()
         {
-            try
-            {
-                empresactual.Codigo = guna2TextBox1.Text;
-                string json = JsonConvert.SerializeObject(empresactual, Formatting.Indented);
+            string rutaArchivo = "CodigoEspecial.json";
+            string codigo = guna2TextBox1.Text;
+            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Codigo");
 
-                File.WriteAllText("Empresa.json", json);
-            }
-            catch
+            // Crear la carpeta "Data" si no existe
+            if (!Directory.Exists(directorio))
             {
-                // Fixed the MessageBox.Show call by correcting the third argument
-                MessageBox.Show("Error al guardar los cambios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Directory.CreateDirectory(directorio);
             }
 
+            // Combinar la ruta del directorio con el nombre del archivo
+            string rutaCompleta = Path.Combine(directorio, rutaArchivo);
+
+            // Guardar el archivo JSON en la ruta especificada
+            string json = JsonConvert.SerializeObject(codigo, Formatting.Indented);
+            File.WriteAllText(rutaCompleta, json);
+
+        }
+        private List<Datos.Usuarios> LeerUsuarios()
+        {
+            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
+            // Combinar la ruta del directorio con el nombre del archivo
+            string rutaCompleta = Path.Combine(directorio, "usuarios.json");
+
+
+            // Verificar si el archivo existe
+            if (!File.Exists(rutaCompleta))
+            {
+                return new List<Datos.Usuarios>(); // Retornar una lista vacía si no existe
+            }
+
+            // Leer el contenido del archivo JSON
+            string json = File.ReadAllText(rutaCompleta);
+
+            // Deserializar el contenido JSON en una lista de usuarios
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Datos.Usuarios>>(json) ?? new List<Datos.Usuarios>();
+        }
+
+
+        public void GuardarUsuarios(string rutaArchivo)
+        {
+            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
+
+            // Crear la carpeta "Data" si no existe
+            if (!Directory.Exists(directorio))
+            {
+                Directory.CreateDirectory(directorio);
+            }
+            List<Datos.Usuarios>? listaUsuarios = LeerUsuarios();
+            if (listaUsuarios != null) // Check for null to avoid CS8602
+            {
+                foreach (var usuario in listaUsuarios)
+                {
+                    if (usuario.ID == Usuarios.ID) // Example condition
+                    {
+                        usuario.Password = guna2TextBox1.Text; // Update the password
+
+                    }
+
+                }
+            }
+            // Combinar la ruta del directorio con el nombre del archivo
+            string rutaCompleta = Path.Combine(directorio, rutaArchivo);
+
+            // Guardar el archivo JSON en la ruta especificada
+            string json = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented);
+            File.WriteAllText(rutaCompleta, json);
         }
         public void GuardarClave()
         {
             if (File.Exists("usuarios.json"))
             {
                 var jsonContent = File.ReadAllText("usuarios.json"); // Renamed variable to avoid conflict
-                List<Usuarios>? listaUsuarios = JsonConvert.DeserializeObject<List<Usuarios>>(jsonContent);
+                List<Datos.Usuarios>? listaUsuarios = JsonConvert.DeserializeObject<List<Datos.Usuarios>>(jsonContent);
 
                 if (listaUsuarios != null) // Check for null to avoid CS8602
                 {
@@ -78,6 +136,11 @@ namespace Examen2Grupo3
                 }
             }
         }
+        private void LeerCodigo()
+        {
+            
+        }
+
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
@@ -89,11 +152,11 @@ namespace Examen2Grupo3
             string dato = guna2Button1.Text;
             switch (opcion)
             {
-                case 0:
+                case 0://Para guardar contrasenia del admin
                     GuardarClave();
                     MessageBox.Show("Operacion realizada exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
-                case 1:
+                case 1://Para guardar codigo especial
                     GuardarCodigo();
                     MessageBox.Show("Operacion realizada exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;

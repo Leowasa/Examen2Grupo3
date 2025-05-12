@@ -69,8 +69,24 @@ namespace Examen2Grupo3
 
             try
             {
+                // Cargar los pedidos existentes
+                List<Pedido> PedidosExistentes = LeerPedidos();
+
+                // Buscar el pedido existente por ID
+              //  var pedidoExistente = PedidosExistentes.FirstOrDefault(p => p.ID == orden.ID);
+               // if (pedidoExistente != null)
+               // {
+                    // Actualizar el estado del pedido existente
+                   // pedidoExistente.Estado = orden.Estado;
+               // }
+             
+                    // Si no existe, no lo agregues (opcional: puedes lanzar un error o manejarlo de otra forma)
+                    MessageBox.Show("El pedido no existe en la lista.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                
+
                 // Serializar la lista actualizada de pedidos
-                var json = JsonConvert.SerializeObject(orden, Formatting.Indented);
+                var json = JsonConvert.SerializeObject(PedidosExistentes, Formatting.Indented);
 
                 // Escribir el JSON en el archivo
                 File.WriteAllText(rutaArchivo, json);
@@ -79,7 +95,6 @@ namespace Examen2Grupo3
             {
                 MessageBox.Show($"Error al guardar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
 
         }
 

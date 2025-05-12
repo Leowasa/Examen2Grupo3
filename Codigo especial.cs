@@ -6,7 +6,7 @@ namespace Examen2Grupo3
 {
     public partial class Codigo_especial : Form
     {
-        public Empresa empresactual = new Empresa();
+        private string codigoespecial;
         string codigoIngresado;
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -17,7 +17,26 @@ namespace Examen2Grupo3
         {
             InitializeComponent();
         }
+        private string LeerCodigo()
+        {
+            // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
+            string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Codigo");
+            // Combinar la ruta del directorio con el nombre del archivo
+            string rutaCompleta = Path.Combine(directorio, "CodigoEspecial.json");
 
+
+            // Verificar si el archivo existe
+            if (!File.Exists(rutaCompleta))
+            {
+                return ""; // Retornar una lista vacía si no existe
+            }
+
+            // Leer el contenido del archivo JSON
+            string json = File.ReadAllText(rutaCompleta);
+
+            // Deserializar el contenido JSON en una lista de usuarios
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<string>(json) ??"";
+        }
         private void Codigo_especial_Load(object sender, EventArgs e)
         {
 
@@ -25,41 +44,25 @@ namespace Examen2Grupo3
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            leerEmpresa();
+            codigoespecial = LeerCodigo();
             codigoIngresado = guna2TextBox1.Text;
-            if (empresactual.Codigo == null)
+            if (codigoespecial == null)
             {
                 MessageBox.Show("No hay codigo de autorizacion establecido. Por favor solicite al superusuario ingresar un codigo al programa");
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
 
             }
-            else if (codigoIngresado == empresactual.Codigo)
+            else if (codigoIngresado == codigoespecial)
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            else if (codigoIngresado != empresactual.Codigo)
+            else if (codigoIngresado != codigoespecial)
             {
                 MessageBox.Show("Codigo invalido. Intente nuevamente");
                 return;
             }
-
-        }
-        public void leerEmpresa()
-        {
-            string rutaArchivo = "Empresa.Json";
-            if (File.Exists(rutaArchivo))
-            {
-                string jsonString = File.ReadAllText(rutaArchivo);
-                empresactual = JsonConvert.DeserializeObject<Empresa>(jsonString);
-
-            }
-            else
-            {
-                MessageBox.Show("Los campos de su empresa estan vacios. Asegurese de rellenarlos correctamente");
-            }
-
 
         }
 

@@ -55,13 +55,11 @@
             label10 = new Label();
             label9 = new Label();
             panel3 = new Panel();
-            label8 = new Label();
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
             lblNumero = new Label();
             label3 = new Label();
-            label2 = new Label();
             label1 = new Label();
             panel4 = new Panel();
             panel1 = new Panel();
@@ -77,7 +75,6 @@
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             FechaValidacion = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            label4 = new Label();
             lblID = new Label();
             lblNombre = new Label();
             lblEncargado = new Label();
@@ -255,18 +252,6 @@
             panel3.Size = new Size(365, 10);
             panel3.TabIndex = 129;
             // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.ForeColor = SystemColors.Control;
-            label8.Location = new Point(244, 607);
-            label8.Name = "label8";
-            label8.Size = new Size(55, 20);
-            label8.TabIndex = 138;
-            label8.Text = "000123";
-            label8.Visible = false;
-            // 
             // label7
             // 
             label7.AutoSize = true;
@@ -319,18 +304,6 @@
             label3.Size = new Size(112, 17);
             label3.TabIndex = 133;
             label3.Text = "Fecha de emision:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.Control;
-            label2.Location = new Point(244, 590);
-            label2.Name = "label2";
-            label2.Size = new Size(63, 17);
-            label2.TabIndex = 132;
-            label2.Text = "Numero: ";
-            label2.Visible = false;
             // 
             // label1
             // 
@@ -512,16 +485,6 @@
             FechaValidacion.TabIndex = 162;
             FechaValidacion.Value = new DateTime(2025, 4, 16, 0, 38, 10, 743);
             // 
-            // label4
-            // 
-            label4.ForeColor = SystemColors.HotTrack;
-            label4.Location = new Point(224, 572);
-            label4.Name = "label4";
-            label4.Size = new Size(135, 17);
-            label4.TabIndex = 163;
-            label4.Text = "______________________________________________";
-            label4.Visible = false;
-            // 
             // lblID
             // 
             lblID.AutoSize = true;
@@ -572,7 +535,6 @@
             Controls.Add(lblID);
             Controls.Add(lblNombre);
             Controls.Add(lblEncargado);
-            Controls.Add(label4);
             Controls.Add(FechaValidacion);
             Controls.Add(guna2Button2);
             Controls.Add(guna2TextBox1);
@@ -593,13 +555,11 @@
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(panel3);
-            Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(lblNumero);
             Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(panel4);
             Controls.Add(panel1);

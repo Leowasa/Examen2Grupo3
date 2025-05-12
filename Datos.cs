@@ -57,7 +57,6 @@
             public string Numero { get; set; }
             public string Correo { get; set; }
             public string Website { get; set; }
-            public string Codigo { get; set; }
 
         }
         public void CargarUsuarios()

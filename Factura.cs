@@ -89,7 +89,7 @@ namespace Examen2Grupo3
                     lblNombre.Text ="Nombre: " +usuarioActual.Nombre;
                     orden.IVA = Pedido.Total * 0.21M;
                     orden.Total = orden.Total + Pedido.IVA;
-                    lblIVa.Text = "IVA(21%): " + orden.IVA.ToString("F2");
+                    lblIVa.Text = "IVA(21%): $" + orden.IVA.ToString("F2");
                     break;
                 case 3://ver orden
                     lblFactura.Text = "Orden de entrega";
@@ -98,7 +98,7 @@ namespace Examen2Grupo3
                     lblEncargado.Text = "Encargado De la Orden: " + orden.Encargado.Username;
                     lblID.Text = "ID: " + orden.Encargado.ID.ToString(); ;
                     lblNombre.Text = "Nombre: " + orden.Encargado.Nombre;
-                    lblIVa.Text = "IVA(21%): " + orden.IVA.ToString("F2");
+                    lblIVa.Text = "IVA(21%): $" + orden.IVA.ToString("F2");
                     guna2TextBox1.Enabled = true;
                     FechaValidacion.Enabled = false;
                     FechaValidacion.Value = orden.FechaValidado;
@@ -113,7 +113,7 @@ namespace Examen2Grupo3
 
             }
             label21.Text = "Subtotal: $" + orden.SubtTotal.ToString("F2");
-            lblDescuento.Text = "Descuento: $" + (orden.Descuento * 100M).ToString("0")+ "%";
+            lblDescuento.Text = "Descuento: $" + (orden.Descuento * 100M).ToString("0");
          
             label20.Text = "Total: $" + orden.Total.ToString("F2");
         }

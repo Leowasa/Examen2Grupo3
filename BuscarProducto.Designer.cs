@@ -44,15 +44,15 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuscarProducto));
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             guna2TextBox6 = new Guna.UI2.WinForms.Guna2TextBox();
             label5 = new Label();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            btnConfirmar = new Guna.UI2.WinForms.Guna2Button();
             guna2TextBox5 = new Guna.UI2.WinForms.Guna2TextBox();
             guna2TextBox4 = new Guna.UI2.WinForms.Guna2TextBox();
             label4 = new Label();
@@ -64,6 +64,12 @@
             label1 = new Label();
             ID = new Label();
             dataGridView1 = new DataGridView();
+            ID2 = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Categoria = new DataGridViewTextBoxColumn();
+            Descripcion = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            PrecioUnit = new DataGridViewTextBoxColumn();
             guna2TextBox7 = new Guna.UI2.WinForms.Guna2TextBox();
             Cliente = new Label();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -77,12 +83,6 @@
             Btnmaximi = new PictureBox();
             Btnmini = new PictureBox();
             btncerrarr = new PictureBox();
-            ID2 = new DataGridViewTextBoxColumn();
-            Nombre = new DataGridViewTextBoxColumn();
-            Categoria = new DataGridViewTextBoxColumn();
-            Descripcion = new DataGridViewTextBoxColumn();
-            Cantidad = new DataGridViewTextBoxColumn();
-            PrecioUnit = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -130,26 +130,26 @@
             label5.TabIndex = 153;
             label5.Text = "Categoria";
             // 
-            // guna2Button1
+            // btnConfirmar
             // 
-            guna2Button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            guna2Button1.BackColor = Color.Transparent;
-            guna2Button1.BorderRadius = 8;
-            guna2Button1.CustomizableEdges = customizableEdges3;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = SystemColors.HotTrack;
-            guna2Button1.Font = new Font("Segoe UI", 9F);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(888, 248);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button1.Size = new Size(111, 36);
-            guna2Button1.TabIndex = 152;
-            guna2Button1.Text = "Confirmar";
-            guna2Button1.Click += guna2Button1_Click;
+            btnConfirmar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnConfirmar.BackColor = Color.Transparent;
+            btnConfirmar.BorderRadius = 8;
+            btnConfirmar.CustomizableEdges = customizableEdges3;
+            btnConfirmar.DisabledState.BorderColor = Color.DarkGray;
+            btnConfirmar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnConfirmar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnConfirmar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnConfirmar.FillColor = SystemColors.HotTrack;
+            btnConfirmar.Font = new Font("Segoe UI", 9F);
+            btnConfirmar.ForeColor = Color.White;
+            btnConfirmar.Location = new Point(888, 248);
+            btnConfirmar.Name = "btnConfirmar";
+            btnConfirmar.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnConfirmar.Size = new Size(111, 36);
+            btnConfirmar.TabIndex = 152;
+            btnConfirmar.Text = "Confirmar";
+            btnConfirmar.Click += btnConfirmar_Click;
             // 
             // guna2TextBox5
             // 
@@ -347,8 +347,50 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.Size = new Size(602, 319);
             dataGridView1.TabIndex = 155;
-            dataGridView1.CellClick += dataGridView1_CellClick;
+         
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
+            // 
+            // ID2
+            // 
+            ID2.HeaderText = "ID";
+            ID2.Name = "ID2";
+            ID2.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.HeaderText = "Nombre";
+            Nombre.Name = "Nombre";
+            Nombre.ReadOnly = true;
+            // 
+            // Categoria
+            // 
+            Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Categoria.HeaderText = "Categoria";
+            Categoria.Name = "Categoria";
+            Categoria.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Descripcion.HeaderText = "Descripcion";
+            Descripcion.Name = "Descripcion";
+            Descripcion.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            Cantidad.HeaderText = "stock";
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            // 
+            // PrecioUnit
+            // 
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            PrecioUnit.DefaultCellStyle = dataGridViewCellStyle2;
+            PrecioUnit.HeaderText = "Precio unit";
+            PrecioUnit.Name = "PrecioUnit";
+            PrecioUnit.ReadOnly = true;
             // 
             // guna2TextBox7
             // 
@@ -553,48 +595,6 @@
             btncerrarr.TabIndex = 146;
             btncerrarr.TabStop = false;
             // 
-            // ID2
-            // 
-            ID2.HeaderText = "ID";
-            ID2.Name = "ID2";
-            ID2.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Nombre";
-            Nombre.Name = "Nombre";
-            Nombre.ReadOnly = true;
-            // 
-            // Categoria
-            // 
-            Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Categoria.HeaderText = "Categoria";
-            Categoria.Name = "Categoria";
-            Categoria.ReadOnly = true;
-            // 
-            // Descripcion
-            // 
-            Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Descripcion.HeaderText = "Descripcion";
-            Descripcion.Name = "Descripcion";
-            Descripcion.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            Cantidad.HeaderText = "stock";
-            Cantidad.Name = "Cantidad";
-            Cantidad.ReadOnly = true;
-            // 
-            // PrecioUnit
-            // 
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            PrecioUnit.DefaultCellStyle = dataGridViewCellStyle2;
-            PrecioUnit.HeaderText = "Precio unit";
-            PrecioUnit.Name = "PrecioUnit";
-            PrecioUnit.ReadOnly = true;
-            // 
             // BuscarProducto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -608,7 +608,7 @@
             Controls.Add(dataGridView1);
             Controls.Add(guna2TextBox6);
             Controls.Add(label5);
-            Controls.Add(guna2Button1);
+            Controls.Add(btnConfirmar);
             Controls.Add(guna2TextBox5);
             Controls.Add(guna2TextBox4);
             Controls.Add(label4);
@@ -642,7 +642,7 @@
 
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox6;
         private Label label5;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnConfirmar;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox5;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox4;
         private Label label4;

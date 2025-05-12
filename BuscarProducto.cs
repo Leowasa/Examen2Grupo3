@@ -84,24 +84,24 @@ namespace Examen2Grupo3
             BuscarElemento(guna2TextBox2.Text);
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+      
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                // Obtén los datos del cliente desde la fila seleccionada
+                // Obtén los datos del Producto desde la fila seleccionada  
                 guna2TextBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
                 guna2TextBox2.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                 guna2TextBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
                 guna2TextBox3.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                guna2TextBox6.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+
+                // Convertir explícitamente el valor a decimal antes de formatearlo  
+                decimal precioUnitario = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
+                guna2TextBox6.Text = precioUnitario.ToString("F2");
             }
         }
-        private bool Validar(Producto producto)
+        private bool Validar(Producto producto)//validar si la cantidad ingresada es mayor al del stock disponible
         {
             foreach (var lista in listaProductos)
             {
@@ -117,7 +117,20 @@ namespace Examen2Grupo3
             }
             return true;
         }
-        private void guna2Button1_Click(object sender, EventArgs e)
+      
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
         {
             Producto = new Producto();
             try
@@ -143,18 +156,6 @@ namespace Examen2Grupo3
                 return;
             }
 
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
-        private void guna2CustomGradientPanel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Examen2Grupo3
 {
     public partial class Cambiar_estado : Form
     {
-        Pedido Orden = new Pedido();
+        Pedido Ordenes;
         Datos.Usuarios UsuarioActual = new Datos.Usuarios();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -25,7 +25,8 @@ namespace Examen2Grupo3
 
         public Cambiar_estado(Pedido Orden, Datos.Usuarios usuarioActual)
         {
-            this.Orden = Orden;
+            Ordenes = new Pedido();
+            this.Ordenes = Orden;
             InitializeComponent();
             UsuarioActual = usuarioActual;
             cargarestado();
@@ -86,15 +87,16 @@ namespace Examen2Grupo3
                     if (lista.ID == orden.ID)
                     {
                         lista.Estado = orden.Estado;
+                        // Serializar la lista actualizada de pedidos
+                        var json = JsonConvert.SerializeObject(PedidosExistentes, Formatting.Indented);
+
+                        // Escribir el JSON en el archivo
+                        File.WriteAllText(rutaArchivo, json);
 
                     }
                 }
 
-                // Serializar la lista actualizada de pedidos
-                var json = JsonConvert.SerializeObject(PedidosExistentes, Formatting.Indented);
-
-                // Escribir el JSON en el archivo
-                File.WriteAllText(rutaArchivo, json);
+           
             }
             catch (Exception ex)
             {
@@ -131,8 +133,8 @@ namespace Examen2Grupo3
         {
             List<string> nuevosEstados = new List<string>();
             // Cargar el estado actual de la orden en el ComboBox
-            guna2ComboBox1.SelectedItem = Orden.Estado;
-            switch (Orden.Estado)
+            guna2ComboBox1.SelectedItem = Ordenes.Estado;
+            switch (Ordenes.Estado)
             {
                 case "Pendiente":
                     nuevosEstados = new List<string> { "Aprobado", "Rechazado" };
@@ -167,16 +169,16 @@ namespace Examen2Grupo3
                 }
                 else if (guna2ComboBox1.SelectedItem == "Rechazado" || guna2ComboBox1.SelectedItem == "Entregado")
                 {
-                    Orden.Estado = guna2ComboBox1.SelectedItem.ToString();
-                    GuardarOrdenEnJson(Orden);
-                    GuardarPedidoEnJson(Orden);
+                    Ordenes.Estado = guna2ComboBox1.SelectedItem.ToString();
+                    GuardarOrdenEnJson(Ordenes);
+                    GuardarPedidoEnJson(Ordenes);
 
                     this.Close();
                 }
                 else 
                 {
-                    Orden.Estado = guna2ComboBox1.SelectedItem.ToString(); 
-                    AbrirOtroFormulario(Orden); 
+                    Ordenes.Estado = guna2ComboBox1.SelectedItem.ToString(); 
+                    AbrirOtroFormulario(Ordenes); 
                 }
 
 
