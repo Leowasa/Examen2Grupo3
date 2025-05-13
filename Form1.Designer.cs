@@ -645,6 +645,7 @@
             ClientSize = new Size(1200, 750);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
+            MinimumSize = new Size(1200, 500);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";

@@ -56,10 +56,7 @@ namespace Examen2Grupo3
                     Lista = pedidos;
                 }
             }
-            else
-            {
-                MessageBox.Show("El archivo 'datos.json' no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+          
 
         }
 
