@@ -15,6 +15,7 @@ namespace Examen2Grupo3
         private List<Cliente> Clientes = new List<Cliente>();//listas para cargar el json
         private List<Datos.Usuarios> Usuarios = new List<Datos.Usuarios>();
         private int opcion;
+        public int IdOriginal { get; set; }//por si se edita un usuario o cliente
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]//DllImport para poder move el formulario por la pantalla
         private extern static void ReleaseCapture();
@@ -79,7 +80,7 @@ namespace Examen2Grupo3
             try
             {
                 int nuevoId = int.Parse(guna2TextBox1.Text); // Suponiendo que el ID se ingresa en `guna2TextBox1`
-                if (!EsIdUsuarioUnico(nuevoId, Usuarios, DatosUsuario?.ID))
+                if (!EsIdUsuarioUnico(nuevoId, Usuarios, IdOriginal))
                 {
                     MessageBox.Show("El ID ya existe. Por favor, elige otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -114,19 +115,19 @@ namespace Examen2Grupo3
                     DatosUsuario.Tipo = guna2ComboBox1.Text;
                 }
             }
-            catch (FormatException ex)
+            catch (FormatException )
             {
-                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", ex.Message);// Captura la excepción de campos erroneos
+                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);// Captura la excepción de campos erroneos
                 return false;
             }
-            catch (OverflowException ex)
+            catch (OverflowException)
             {
-                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", ex.Message);// Captura la excepción de un numero mayor al que puede soportar un int
+                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);// Captura la excepción de un numero mayor al que puede soportar un int
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", ex.Message); // Captura la excepción de los demas campos vacíos
+                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning); // Captura la excepción de los demas campos vacíos
                 return false;
             }
 
@@ -144,7 +145,7 @@ namespace Examen2Grupo3
                 string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
                 int nuevoId = int.Parse(guna2TextBox1.Text); // Suponiendo que el ID se ingresa en `guna2TextBox1`
-                if (!EsIdUnico(nuevoId, Clientes, DatosClientes?.ID))
+                if (!EsIdUnico(nuevoId, Clientes, IdOriginal))
                 {
                     MessageBox.Show("El ID ya existe. Por favor, eliga otro diferente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;

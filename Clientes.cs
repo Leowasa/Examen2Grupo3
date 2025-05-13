@@ -174,35 +174,30 @@ namespace ejemplo
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)//casilla seleccionadad del datagrivew
         {
             Codigo_especial Form = new Codigo_especial();
-            if (usuarioActual.Tipo == "Aprobador" || usuarioActual.Tipo == "Registrador")//si el usuario es aprobador o registrador, solicitar el codigo especial
-            {
-                Form.ShowDialog();
-                if (Form.DialogResult == DialogResult.OK)
-                {
-                    Casillaseleccionada(e);
-                    return;
-                }
-               
-            }
-            else Casillaseleccionada(e);
-
-
-
-
-
-        }
-        public void Casillaseleccionada(DataGridViewCellEventArgs e)
-        {
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
-              
+
+                if (usuarioActual.Tipo == "Aprobador" || usuarioActual.Tipo == "Registrador")//si el usuario es aprobador o registrador, solicitar el codigo especial
+                {
+                    Form.ShowDialog();
+                    if (Form.DialogResult == DialogResult.OK)
+                    {
+                        //proceder con el resto del codigo
+
+                    }
+                    else return;
+
+                }
+               
+
 
                 // Verificar que los valores requeridos no sean nulos  
-                if (cliente[e.RowIndex]!=null)
+                if (cliente[e.RowIndex] != null)
                 {
                     // Crear una instancia del formulario de edición y pasar los datos  
                     AgregarCliente formEditar = new AgregarCliente(4, cliente);
                     formEditar.SetDatosCiente(cliente[e.RowIndex]);
+                    formEditar.IdOriginal = cliente[e.RowIndex].ID;
 
                     formEditar.ShowDialog(); // Mostrar el formulario de edición como una ventana modal  
                     if (formEditar.DialogResult == DialogResult.OK)
@@ -219,7 +214,18 @@ namespace ejemplo
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-                DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+                if (usuarioActual.Tipo == "Aprobador" || usuarioActual.Tipo == "Registrador")//si el usuario es aprobador o registrador, solicitar el codigo especial
+                {
+                    Form.ShowDialog();
+                    if (Form.DialogResult == DialogResult.OK)
+                    {
+                        //proceder con el resto del codigo
+                    }
+                    else return;
+                }
+               
+
+                DialogResult result = MessageBox.Show("¿Deseas eliminar a este cliente?", "Confirmar eliminación",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
@@ -229,8 +235,11 @@ namespace ejemplo
                     CargarClientes("Clientes.Json");
                 }
             }
-        }
 
+
+
+        }
+       
         private void pictureBox1_Click(object sender, EventArgs e)//btn para exportar csv
         {
             using (SaveFileDialog sfd = new SaveFileDialog())

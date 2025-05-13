@@ -26,26 +26,22 @@ namespace Examen2Grupo3
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Codigo_especial Codigo = new Codigo_especial();
-            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")//si es aprobador o registrador. Se le solicita clave especial
-            {
-                Codigo.ShowDialog();
-                if (Codigo.DialogResult == DialogResult.OK)//si se ingreso correctamente
-                {
-                    casillaSeleccionada(e);
-
-                }
-            }
-            else casillaSeleccionada(e);
-
-        }
-
-        public void casillaSeleccionada(DataGridViewCellEventArgs e)//se obtiene la casilla seleccionada y realiza la operacion correspondiente
-        {
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
+
+                if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")//si es aprobador o registrador. Se le solicita clave especial
+                {
+                    Codigo.ShowDialog();
+                    if (Codigo.DialogResult == DialogResult.OK)//si se ingreso correctamente
+                    {
+                        //proceder con el resto del codigo
+
+                    }
+                    else return;//cancelar la operacion si la operacion no fue fallida
+                }
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
 
-                Agregar_Productos formEditar = new Agregar_Productos(inventario,1);//obtengo los datos del productos desde la fila seleccionada y opero la edicion
+                Agregar_Productos formEditar = new Agregar_Productos(inventario, 1);//obtengo los datos del productos desde la fila seleccionada y opero la edicion
                 formEditar.SetDatosProducto(
                     filaSeleccionada.Cells["ID"].Value.ToString() ?? "0",
                     filaSeleccionada.Cells["Nombre"].Value.ToString() ?? "",
@@ -61,75 +57,57 @@ namespace Examen2Grupo3
                 {
                     DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
                     Producto productoEditado = formEditar.ObtenerProductoEditado();
-                    fila.Cells["Nombre"].Value = productoEditado.Nombre;
-                    fila.Cells["Categoria"].Value = productoEditado.Categoria;
-                    fila.Cells["Descripcion"].Value = productoEditado.Descripcion;
-                    fila.Cells["Stock"].Value = productoEditado.Cantidad;
-
-                    fila.Cells["PrecioUnitario"].Value = productoEditado.PrecioUnitario.ToString(); ;
+                    inventario[e.RowIndex] = productoEditado;
                     GuardarInventario("Inventario.Json");
                 }
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
+              
+                if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")//si es aprobador o registrador. Se le solicita clave especial
+                {
+                    Codigo.ShowDialog();
+                    if (Codigo.DialogResult == DialogResult.OK)//si se ingreso correctamente
+                    {
+                        //proceder con el resto del codigo
+
+                    }
+                    else return;//cancelar la operacion si la operacion no fue fallida
+                }
                 DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
-                    dataGridView1.Rows.RemoveAt(e.RowIndex);//elimino el producto del datagrid y luego guardo
+                    inventario.RemoveAt(e.RowIndex);//elimino el producto de la lista y luego guardo
                     GuardarInventario("Inventario.Json");
                 }
             }
 
+
+        }
+
+        public void casillaSeleccionada(DataGridViewCellEventArgs e)//se obtiene la casilla seleccionada y realiza la operacion correspondiente
+        {
+            
 
 
         }
 
         public void GuardarInventario(string rutaArchivo)
         {
-            List<Producto> listaProductos = new List<Producto>();
+          
 
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
-            {
-                if (fila.Cells["ID"].Value != null) // Validamos que la fila tenga datos
-                {
-                    Producto producto = new Producto();
-                    try
-                    {
-                        //leo todos los productos que estan en el datagrid
-                        producto.ID = int.TryParse(fila.Cells["ID"].Value?.ToString(), out int id) ? id : 0;
-                        producto.Nombre = fila.Cells["Nombre"].Value.ToString() ?? "";
-                        producto.Categoria = fila.Cells["Categoria"].Value.ToString() ?? "";
-                        producto.Descripcion = fila.Cells["Descripcion"].Value.ToString() ?? "";
-                        producto.Cantidad = int.TryParse(fila.Cells["Stock"].Value.ToString(), out int Cantidad) ? Cantidad : 0;
-                        if (fila.Cells["PrecioUnitario"].Value != null)
-                        {
-                            producto.PrecioUnitario = decimal.Parse(fila.Cells["PrecioUnitario"].Value.ToString());
-                        }
-                        else
-                        {
-                            producto.PrecioUnitario = 0; 
-
-                        }
-                    }
-                    catch (FormatException ex)
-                    {
-                        MessageBox.Show($"Error de formato: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+              if (inventario != null) // Validamos que la fila tenga datos
+              {
+                    string json = JsonSerializer.Serialize(inventario, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText(rutaArchivo, json);//serializo, lo escribo en el json y luego cargo los cambios
+                    CargarInventario("Inventario.Json");
+              }
+            else MessageBox.Show("Error al guardar los datos. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
-                    }
-                    listaProductos.Insert(0, producto); // Agregamos al inicio para mantener el orden
-                }
-            }
 
-            string json = JsonSerializer.Serialize(listaProductos, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(rutaArchivo, json);//serializo, lo escribo en el json y luego cargo los cambios
-            CargarInventario ("Inventario.Json");
         }
         public void EliminarProducto(int id)
         {
@@ -329,14 +307,14 @@ namespace Examen2Grupo3
                 }
                 catch
                 {
-                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los datos");
+                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los Campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
-         
+
         }
 
-
+     
 
       
         public void ControlUsuario1(Datos.Usuarios Usuarioactual)//oculta los botones de importar y exportar si es Aprobador o Registrador

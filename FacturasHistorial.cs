@@ -85,6 +85,7 @@ namespace Examen2Grupo3
                 // Se crea un evento personalizado para numerar páginas (y otras acciones)
                 PageNumberHelper tempPageEvent = new PageNumberHelper();
                 tempWriter.PageEvent = tempPageEvent;
+               
 
                 // Se abre el documento para comenzar a escribir en él
                 tempDocument.Open();
@@ -109,6 +110,7 @@ namespace Examen2Grupo3
 
                 // Se obtiene el número total de páginas generadas en el PDF
                 totalPages = tempWriter.PageNumber; // Calcula el número total de páginas
+               
             }
 
             try
@@ -122,6 +124,7 @@ namespace Examen2Grupo3
                     // Se crea un evento personalizado para numerar páginas y mostrar observaciones
                     PageNumberHelper finalPageEvent = new PageNumberHelper();
                     finalPageEvent.TotalPages = totalPages; // Usa el total calculado en el primer pase
+                    finalPageEvent.Observaciones = Actual.Observaciones; // Aquí se asigna las observaciones
                     finalWriter.PageEvent = finalPageEvent;
 
                     finalDocument.Open();
@@ -140,9 +143,9 @@ namespace Examen2Grupo3
 
                 MessageBox.Show("✅ PDF generado correctamente.");
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                MessageBox.Show($"❌ Error inesperado: {ex.Message}");
+                MessageBox.Show($"❌ Error inesperado: Asegurese de Cerrar el pdf antes de modificarlo");
             }
         }
 
@@ -239,7 +242,9 @@ namespace Examen2Grupo3
                 cb.ShowTextAligned(PdfContentByte.ALIGN_RIGHT, $"Página {pageNumber} de {TotalPages}", x, y, 0);
 
                 // Escribe las observaciones alineadas a la izquierda
-                cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, $"Observaciones: {Observaciones}", obsX, obsY, 0);
+                cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, $"Observaciones: {Observaciones}", obsX, obsY, 0); 
+
+                
 
                 // Finaliza la escritura de texto
                 cb.EndText();
@@ -302,7 +307,7 @@ namespace Examen2Grupo3
         private void eliminar(DataGridViewCellEventArgs e)
         {
 
-            DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+            DialogResult result = MessageBox.Show("¿Deseas eliminar esta Factura?", "Confirmar eliminación",
             MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             // Obtener el ID del pedido desde la celda correspondiente

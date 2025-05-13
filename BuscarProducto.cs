@@ -142,7 +142,7 @@ namespace Examen2Grupo3
                 Producto.PrecioUnitario = Decimal.Parse(guna2TextBox6.Text);
                 if (Validar(Producto) == false)
                 {
-                    MessageBox.Show("La cantidad ingresada excede el stock disponible.");
+                    MessageBox.Show("La cantidad ingresada excede el stock disponible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 this.DialogResult = DialogResult.OK;
@@ -151,7 +151,7 @@ namespace Examen2Grupo3
             }
             catch
             {
-                MessageBox.Show("Campos vacios o erroneos. Intente nuevamente");
+                MessageBox.Show("Campos vacios o erroneos. Intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

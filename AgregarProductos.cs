@@ -72,19 +72,19 @@ namespace Examen2Grupo3
 
                 }
             }
-            catch (FormatException ex)
+            catch (FormatException )
             {
-                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", ex.Message);
+                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar",  "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            catch (OverflowException ex)
+            catch (OverflowException )
             {
-                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", ex.Message);
+                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", ex.Message); 
+                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
             }
 
             this.DialogResult = DialogResult.OK;

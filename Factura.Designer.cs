@@ -108,10 +108,11 @@
             // 
             // lblIVa
             // 
+            lblIVa.Anchor = AnchorStyles.Top;
             lblIVa.AutoSize = true;
             lblIVa.Font = new Font("Segoe UI", 9.75F);
             lblIVa.ForeColor = SystemColors.Control;
-            lblIVa.Location = new Point(1024, 740);
+            lblIVa.Location = new Point(923, 744);
             lblIVa.Name = "lblIVa";
             lblIVa.Size = new Size(53, 17);
             lblIVa.TabIndex = 153;
@@ -119,10 +120,11 @@
             // 
             // lblDescuento
             // 
+            lblDescuento.Anchor = AnchorStyles.Top;
             lblDescuento.AutoSize = true;
             lblDescuento.Font = new Font("Segoe UI", 9.75F);
             lblDescuento.ForeColor = SystemColors.Control;
-            lblDescuento.Location = new Point(1024, 723);
+            lblDescuento.Location = new Point(923, 727);
             lblDescuento.Name = "lblDescuento";
             lblDescuento.Size = new Size(91, 17);
             lblDescuento.TabIndex = 152;
@@ -130,10 +132,11 @@
             // 
             // label20
             // 
+            label20.Anchor = AnchorStyles.Top;
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 9.75F);
             label20.ForeColor = SystemColors.Control;
-            label20.Location = new Point(1024, 757);
+            label20.Location = new Point(923, 761);
             label20.Name = "label20";
             label20.Size = new Size(63, 17);
             label20.TabIndex = 151;
@@ -141,10 +144,11 @@
             // 
             // label21
             // 
+            label21.Anchor = AnchorStyles.Top;
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 9.75F);
             label21.ForeColor = SystemColors.Control;
-            label21.Location = new Point(1024, 706);
+            label21.Location = new Point(923, 710);
             label21.Name = "label21";
             label21.Size = new Size(83, 17);
             label21.TabIndex = 150;
@@ -152,6 +156,7 @@
             // 
             // label13
             // 
+            label13.Anchor = AnchorStyles.None;
             label13.AutoSize = true;
             label13.ForeColor = Color.White;
             label13.Location = new Point(737, 363);
@@ -162,6 +167,7 @@
             // 
             // label14
             // 
+            label14.Anchor = AnchorStyles.None;
             label14.AutoSize = true;
             label14.ForeColor = Color.White;
             label14.Location = new Point(737, 303);
@@ -172,6 +178,7 @@
             // 
             // label15
             // 
+            label15.Anchor = AnchorStyles.None;
             label15.AutoSize = true;
             label15.ForeColor = Color.White;
             label15.Location = new Point(737, 334);
@@ -182,6 +189,7 @@
             // 
             // label16
             // 
+            label16.Anchor = AnchorStyles.None;
             label16.AutoSize = true;
             label16.ForeColor = Color.White;
             label16.Location = new Point(737, 227);
@@ -192,6 +200,7 @@
             // 
             // label17
             // 
+            label17.Anchor = AnchorStyles.None;
             label17.AutoSize = true;
             label17.ForeColor = Color.White;
             label17.Location = new Point(737, 259);
@@ -202,6 +211,7 @@
             // 
             // label12
             // 
+            label12.Anchor = AnchorStyles.None;
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.White;
@@ -213,6 +223,7 @@
             // 
             // label11
             // 
+            label11.Anchor = AnchorStyles.None;
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label11.ForeColor = Color.White;
@@ -224,6 +235,7 @@
             // 
             // label10
             // 
+            label10.Anchor = AnchorStyles.Left;
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.White;
@@ -235,6 +247,7 @@
             // 
             // label9
             // 
+            label9.Anchor = AnchorStyles.None;
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label9.ForeColor = Color.White;
@@ -246,6 +259,7 @@
             // 
             // panel3
             // 
+            panel3.Anchor = AnchorStyles.None;
             panel3.BackColor = SystemColors.HotTrack;
             panel3.Location = new Point(340, 211);
             panel3.Name = "panel3";
@@ -324,6 +338,7 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = SystemColors.HotTrack;
             panel1.Location = new Point(737, 212);
             panel1.Name = "panel1";
@@ -332,7 +347,7 @@
             // 
             // lblFactura
             // 
-            lblFactura.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblFactura.Anchor = AnchorStyles.None;
             lblFactura.AutoSize = true;
             lblFactura.Font = new Font("Bell MT", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblFactura.ForeColor = Color.White;
@@ -347,6 +362,7 @@
             // 
             dataGridView1.AccessibleRole = AccessibleRole.TitleBar;
             dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.Anchor = AnchorStyles.Top;
             dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;

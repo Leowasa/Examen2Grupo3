@@ -33,24 +33,7 @@ namespace ejemplo
             InitializeComponent();
             customizemenu();
         }
-        public void AbrirFormularioEnPanel(Form formulario)
-        {// Limpiar cualquier formulario existente en el panel
-            if (PanelPrincipal.Controls.Count > 0)
-            {
-                PanelPrincipal.Controls.RemoveAt(0);
-            }
-
-            // Configurar el formulario para que se adapte al panel
-            formulario.TopLevel = false; // Indica que el formulario no es de nivel superior
-            formulario.FormBorderStyle = FormBorderStyle.None; // Quitar bordes del formulario
-            formulario.Dock = DockStyle.Fill; // Hacer que el formulario ocupe todo el panel
-
-            // Agregar el formulario al panel y mostrarlo
-            PanelPrincipal.Controls.Add(formulario);
-            PanelPrincipal.Tag = formulario;
-            formulario.Show();
-        }
-
+        
         private void customizemenu()
         {
             panelhistorial.Visible = false;
@@ -116,7 +99,7 @@ namespace ejemplo
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-        private void AbrirFormulario(object? formhija)
+        public void AbrirFormulario(object? formhija)
         {
             if (this.PanelPrincipal.Controls.Count > 0)
                 this.PanelPrincipal.Controls.RemoveAt(0);

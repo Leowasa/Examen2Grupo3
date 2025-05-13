@@ -48,7 +48,7 @@ namespace Examen2Grupo3
             codigoIngresado = guna2TextBox1.Text;
             if (codigoespecial == null)
             {
-                MessageBox.Show("No hay codigo de autorizacion establecido. Por favor solicite al superusuario ingresar un codigo al programa");
+                MessageBox.Show("No hay codigo de autorizacion establecido. Por favor solicite al superusuario ingresar un codigo al programa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
 
@@ -60,7 +60,7 @@ namespace Examen2Grupo3
             }
             else if (codigoIngresado != codigoespecial)
             {
-                MessageBox.Show("Codigo invalido. Intente nuevamente");
+                MessageBox.Show("Codigo invalido. Intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

@@ -43,7 +43,7 @@ namespace Examen2Grupo3
 
                 var pedidos = LeerPedidos();
 
-                if (pedidos != null) 
+                if (pedidos != null)
                 {
                     dataGridView1.Rows.Clear();
                     foreach (var datos in pedidos)
@@ -60,7 +60,7 @@ namespace Examen2Grupo3
             {
                 MessageBox.Show("El archivo 'datos.json' no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
+
         }
 
         private void GuardarCambios(List<Pedido> orden)
@@ -71,11 +71,6 @@ namespace Examen2Grupo3
             {
                 // Cargar los pedidos existentes
                 List<Pedido> PedidosExistentes = LeerPedidos();
-
-                    // Si no existe, no lo agregues (opcional: puedes lanzar un error o manejarlo de otra forma)
-                    MessageBox.Show("El pedido no existe en la lista.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                
 
                 // Serializar la lista actualizada de pedidos
                 var json = JsonConvert.SerializeObject(PedidosExistentes, Formatting.Indented);
@@ -92,7 +87,7 @@ namespace Examen2Grupo3
 
         private void GenerarOrden_Load(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -118,9 +113,9 @@ namespace Examen2Grupo3
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-             
-                principal.AbrirFormularioEnPanel(new Factura(seleccionadot, 1, UsuarioActual)); // Abre el formulario Factura Con los detalles del pedido
-     
+
+                principal.AbrirFormulario(new Factura(seleccionadot, 1, UsuarioActual)); // Abre el formulario Factura Con los detalles del pedido
+
 
 
             }
@@ -159,7 +154,7 @@ namespace Examen2Grupo3
 
         private void ComboBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
-           
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)//celda seleccionada del datagrid
@@ -199,7 +194,7 @@ namespace Examen2Grupo3
         }
         private void eliminar(DataGridViewCellEventArgs e)
         {
-           //Preguntar si en verdad desea eliminar el pedido
+            //Preguntar si en verdad desea eliminar el pedido
             DialogResult result = MessageBox.Show("¿Deseas eliminar este pedido?", "Confirmar eliminación",
             MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -214,17 +209,6 @@ namespace Examen2Grupo3
         {
 
         }
-        private void dataGridView1_EditModeChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-
-        }
-
-       
       
     }
 }

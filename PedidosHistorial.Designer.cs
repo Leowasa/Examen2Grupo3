@@ -33,6 +33,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             dataGridView1 = new DataGridView();
+            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            label1 = new Label();
             Numero = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Usuariosd = new DataGridViewButtonColumn();
@@ -40,8 +42,6 @@
             Estado = new DataGridViewTextBoxColumn();
             Ver = new DataGridViewImageColumn();
             btnEliminar = new DataGridViewImageColumn();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -82,66 +82,6 @@
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // Numero
-            // 
-            Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Numero.HeaderText = "Numero";
-            Numero.MinimumWidth = 8;
-            Numero.Name = "Numero";
-            Numero.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Cliente";
-            Nombre.MinimumWidth = 8;
-            Nombre.Name = "Nombre";
-            // 
-            // Usuariosd
-            // 
-            Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Usuariosd.FlatStyle = FlatStyle.Flat;
-            Usuariosd.HeaderText = "Fecha de creacion";
-            Usuariosd.MinimumWidth = 8;
-            Usuariosd.Name = "Usuariosd";
-            Usuariosd.ReadOnly = true;
-            // 
-            // Total
-            // 
-            Total.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Total.HeaderText = "Monto Total";
-            Total.MinimumWidth = 8;
-            Total.Name = "Total";
-            // 
-            // Estado
-            // 
-            Estado.HeaderText = "Estado";
-            Estado.MinimumWidth = 8;
-            Estado.Name = "Estado";
-            Estado.Resizable = DataGridViewTriState.True;
-            Estado.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Estado.Width = 150;
-            // 
-            // Ver
-            // 
-            Ver.HeaderText = "Ver Detalles";
-            Ver.Image = Examen2Grupo3.Properties.Resources.icons8_view_details_241;
-            Ver.MinimumWidth = 7;
-            Ver.Name = "Ver";
-            Ver.ReadOnly = true;
-            Ver.Resizable = DataGridViewTriState.True;
-            Ver.SortMode = DataGridViewColumnSortMode.Automatic;
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.HeaderText = "Eliminar";
-            btnEliminar.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_481;
-            btnEliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            btnEliminar.MinimumWidth = 8;
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Resizable = DataGridViewTriState.True;
-            btnEliminar.Width = 150;
-            // 
             // guna2TextBox1
             // 
             guna2TextBox1.BorderRadius = 6;
@@ -178,6 +118,72 @@
             label1.Text = "Historial de Pedidos Preventivos";
             label1.TextAlign = ContentAlignment.TopCenter;
             // 
+            // Numero
+            // 
+            Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Numero.HeaderText = "Numero";
+            Numero.MinimumWidth = 8;
+            Numero.Name = "Numero";
+            Numero.ReadOnly = true;
+            Numero.Resizable = DataGridViewTriState.False;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.HeaderText = "Cliente";
+            Nombre.MinimumWidth = 8;
+            Nombre.Name = "Nombre";
+            Nombre.ReadOnly = true;
+            Nombre.Resizable = DataGridViewTriState.False;
+            // 
+            // Usuariosd
+            // 
+            Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Usuariosd.FlatStyle = FlatStyle.Flat;
+            Usuariosd.HeaderText = "Fecha de creacion";
+            Usuariosd.MinimumWidth = 8;
+            Usuariosd.Name = "Usuariosd";
+            Usuariosd.ReadOnly = true;
+            Usuariosd.Resizable = DataGridViewTriState.False;
+            // 
+            // Total
+            // 
+            Total.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Total.HeaderText = "Monto Total";
+            Total.MinimumWidth = 8;
+            Total.Name = "Total";
+            Total.ReadOnly = true;
+            Total.Resizable = DataGridViewTriState.False;
+            // 
+            // Estado
+            // 
+            Estado.HeaderText = "Estado";
+            Estado.MinimumWidth = 8;
+            Estado.Name = "Estado";
+            Estado.ReadOnly = true;
+            Estado.Resizable = DataGridViewTriState.False;
+            Estado.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Estado.Width = 150;
+            // 
+            // Ver
+            // 
+            Ver.HeaderText = "Ver Detalles";
+            Ver.Image = Examen2Grupo3.Properties.Resources.icons8_view_details_241;
+            Ver.MinimumWidth = 7;
+            Ver.Name = "Ver";
+            Ver.Resizable = DataGridViewTriState.False;
+            Ver.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.HeaderText = "Eliminar";
+            btnEliminar.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_481;
+            btnEliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            btnEliminar.MinimumWidth = 8;
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Resizable = DataGridViewTriState.True;
+            btnEliminar.Width = 150;
+            // 
             // PedidosHistorial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -200,14 +206,14 @@
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
         private Label label1;
         private DataGridViewTextBoxColumn Cedula;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewButtonColumn Usuariosd;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewImageColumn btnEditar;
-        private DataGridViewImageColumn btnEliminar;
+        private DataGridViewTextBoxColumn Numero;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewButtonColumn Usuariosd;
+        private DataGridViewTextBoxColumn Total;
         private DataGridViewTextBoxColumn Estado;
         private DataGridViewImageColumn Ver;
-        private DataGridViewTextBoxColumn Numero;
-        private DataGridViewTextBoxColumn Total;
+        private DataGridViewImageColumn btnEliminar;
     }
 }

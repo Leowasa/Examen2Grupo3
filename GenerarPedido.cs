@@ -233,7 +233,7 @@ namespace Examen2Grupo3
                 }
                 catch
                 {
-                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los datos");
+                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los campos requeridos",  "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -269,7 +269,7 @@ namespace Examen2Grupo3
 
             if (pedido.Productos == null || GuardarCliente() == null)
             {
-                MessageBox.Show("Faltan Datos por rellenar");
+                MessageBox.Show("Faltan Datos por rellenar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             pedido.Encargado = usuarioActual;
@@ -283,7 +283,7 @@ namespace Examen2Grupo3
             lblTotal.Text = "Total: ";
             Cliente.Text = "Pedido Nº: " + CargarNum();
 
-            MessageBox.Show("Pedido generado exitosamente!");
+            MessageBox.Show("Pedido generado exitosamente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
         }

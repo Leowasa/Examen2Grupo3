@@ -223,24 +223,18 @@ namespace ejemplo
                 }
             }
         }
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+     
+        private void dataGridView1_CellClick_2(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-        private void Casillaseleccionada(DataGridViewCellEventArgs e)
-        {
 
             if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
 
+
                 if (Usuarioactual.Tipo == "Aprobador" || (Usuarioactual.Tipo == "Registrador"))
                 {
-                    MessageBox.Show("Necesita Ser Administrador para realizar la operacion.");
+                    MessageBox.Show("Necesita Ser Administrador para realizar esta operacion.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else if (usuarios[e.RowIndex].Tipo == "Administrador" || usuarios[e.RowIndex].Tipo == "SuperUsuario")
@@ -261,6 +255,17 @@ namespace ejemplo
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
             {
+                if (Usuarioactual.Tipo == "Aprobador" || (Usuarioactual.Tipo == "Registrador"))
+                {
+                    MessageBox.Show("Necesita Ser Administrador para realizar esta operacion.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (usuarios[e.RowIndex].Tipo == "Administrador" || usuarios[e.RowIndex].Tipo == "SuperUsuario")
+                {
+                    MessageBox.Show("No tiene permisos para realizar esta operacion. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
                 // Verificar que los valores requeridos no sean nulos  
                 if (usuarios[e.RowIndex] != null)
@@ -268,6 +273,7 @@ namespace ejemplo
                     // Crear una instancia del formulario de edición y pasar los datos  
                     Operar = new AgregarCliente(3, usuarios);
                     Operar.SetDatosUsuarios(usuarios[e.RowIndex]);
+                    Operar.IdOriginal = usuarios[e.RowIndex].ID;
                     // Mostrar el formulario de edición como una ventana modal  
                     if (Operar.ShowDialog() == DialogResult.OK)
                     {
@@ -282,17 +288,6 @@ namespace ejemplo
                 }
 
             }
-
-        }
-        private void dataGridView1_CellClick_2(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")
-            {
-                MessageBox.Show("No tiene permisos para realizar esta operacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-
-            }
-            Casillaseleccionada(e);
         }
         private void BuscarElemento(string textoBusqueda)
         {
@@ -332,11 +327,11 @@ namespace ejemplo
         }
 
 
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private void btnAgregar_Click(object sender, EventArgs e)//btn agregar usuario
         {
             if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")//solo el Admin puede agregar usuarios
             {
-                MessageBox.Show("No tiene permisos para realizar esta operacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Necesita Ser Administrador para realizar esta operacion.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
 
             }

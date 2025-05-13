@@ -105,7 +105,7 @@ namespace ejemplo
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 1,UsuarioActual)); // Reemplaza con el formulario que desees abrir
+                principal.AbrirFormulario(new Factura(seleccionado, 1,UsuarioActual)); // Reemplaza con el formulario que desees abrir
             }
         }
         private void BuscarElemento(string textoBusqueda)
@@ -139,7 +139,7 @@ namespace ejemplo
         //Botones en DataGridView
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Si el usuario hizo clic en el botón "Editar"
+            // Si el usuario hizo clic en el botón "Ver"
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
             {
                 int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
@@ -170,7 +170,7 @@ namespace ejemplo
         private void eliminar(DataGridViewCellEventArgs e)
         {
 
-            DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+            DialogResult result = MessageBox.Show("¿Deseas eliminar este pedido?", "Confirmar eliminación",
             MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             // Obtener el ID del pedido desde la celda correspondiente
@@ -199,3 +199,21 @@ namespace ejemplo
 
 
 
+/*public void AbrirFormularioEnPanel(Form formulario)
+        {// Limpiar cualquier formulario existente en el panel
+            if (PanelPrincipal.Controls.Count > 0)
+            {
+                PanelPrincipal.Controls.RemoveAt(0);
+            }
+
+            // Configurar el formulario para que se adapte al panel
+            formulario.TopLevel = false; // Indica que el formulario no es de nivel superior
+            formulario.FormBorderStyle = FormBorderStyle.None; // Quitar bordes del formulario
+            formulario.Dock = DockStyle.Fill; // Hacer que el formulario ocupe todo el panel
+
+            // Agregar el formulario al panel y mostrarlo
+            PanelPrincipal.Controls.Add(formulario);
+            PanelPrincipal.Tag = formulario;
+            formulario.Show();
+        }
+*/

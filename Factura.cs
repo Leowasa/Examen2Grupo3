@@ -106,7 +106,7 @@ namespace Examen2Grupo3
                     lblID.Text = "ID: " + orden.Encargado.ID.ToString(); ;
                     lblNombre.Text = "Nombre: " + orden.Encargado.Nombre;
                     lblIVa.Text = "IVA(21%): $" + orden.IVA.ToString("F2");
-                    guna2TextBox1.Enabled = true;
+                    guna2TextBox1.ReadOnly = true;
                     FechaValidacion.Enabled = false;
                     FechaValidacion.Value = orden.FechaValidado;
                     break;
@@ -120,7 +120,7 @@ namespace Examen2Grupo3
 
             }
             label21.Text = "Subtotal: $" + orden.SubtTotal.ToString("F2");
-            lblDescuento.Text = "Descuento: $" + (orden.Descuento * 100M).ToString("0");
+            lblDescuento.Text = "Descuento(31%): $" + (orden.Descuento * 100M).ToString("0");
          
             label20.Text = "Total: $" + orden.Total.ToString("F2");
         }
@@ -133,7 +133,7 @@ namespace Examen2Grupo3
                 if (empresa != null)
                 {
                     label16.Text = "Razón Social: " + empresa.RazonSocial;
-                    label17.Text = "Número de teléfono de la empresa: " + empresa.Direccion;
+                    label17.Text = "Número de teléfono de la empresa: " + empresa.Numero;
                     label14.Text = "Dirección Física de la empresa: " + empresa.Direccion;
                     label15.Text = "Correo Electrónico de la empresa: " + empresa.Correo;
                     label13.Text = "Página Web de la empresa: " + empresa.Website;
@@ -240,32 +240,33 @@ namespace Examen2Grupo3
                     }
                     else if (string.IsNullOrWhiteSpace(guna2TextBox1.Text))
                     {
-                        MessageBox.Show("El campo no puede estar vacío.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("El campo de Observaciones no puede estar vacío.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
                     orden.Observaciones = guna2TextBox1.Text;
                     orden.FechaValidado = FechaValidacion.Value;
                     orden.Estado = estado;
+                    orden.Encargado = usuarioActual;
                     GuardarPedidosEnJson(orden);
                     
                     GuardarOrdenEnJson(orden);
                     if (principal != null)
                     {
-                        principal.AbrirFormularioEnPanel(new GenerarOrden(usuarioActual)); // Reemplaza con el formulario que desees abrir
+                        principal.AbrirFormulario(new GenerarOrden(usuarioActual)); // Reemplaza con el formulario que desees abrir
                         MessageBox.Show("Operacion exitosa!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     break;
                 case 1://Ver pedido
                     if (principal != null)
                     {
-                        principal.AbrirFormularioEnPanel(new PedidosHistorial(usuarioActual)); // Reemplaza con el formulario que desees abrir  
+                        principal.AbrirFormulario(new PedidosHistorial(usuarioActual)); // Reemplaza con el formulario que desees abrir  
                     }
                     break;
                 case 3://Ver Orden
                     if (principal != null)
                     {
-                        principal.AbrirFormularioEnPanel(new OrdenesHistorial(usuarioActual)); // Reemplaza con el formulario que desees abrir  
+                        principal.AbrirFormulario(new OrdenesHistorial(usuarioActual)); // Reemplaza con el formulario que desees abrir  
                     }
                     break;
             }

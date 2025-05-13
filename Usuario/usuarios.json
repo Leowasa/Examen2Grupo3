@@ -1,12 +1,5 @@
 [
   {
-    "ID": 35345,
-    "Username": "leonardo",
-    "Nombre": "Figueredo Leonardo",
-    "Password": "263087",
-    "Tipo": "Aprobador"
-  },
-  {
     "ID": 322,
     "Username": "admin",
     "Nombre": "leo",
@@ -19,26 +12,5 @@
     "Nombre": "Gabriel",
     "Password": "333",
     "Tipo": "SuperUsuario"
-  },
-  {
-    "ID": 34534,
-    "Username": "Georgen",
-    "Nombre": "Bastidas Georgen",
-    "Password": "2630",
-    "Tipo": "Registrador"
-  },
-  {
-    "ID": 21233,
-    "Username": "dfgdfgdfgdfg",
-    "Nombre": "dfgdf",
-    "Password": "263087",
-    "Tipo": "Aprobador"
-  },
-  {
-    "ID": 45345,
-    "Username": "345345",
-    "Nombre": "345345",
-    "Password": "5345",
-    "Tipo": "Aprobador"
   }
 ]

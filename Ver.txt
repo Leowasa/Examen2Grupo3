@@ -1,0 +1,17 @@
+Usuarios
+Admin:
+"ID": 322,
+"Username": "admin",
+"Nombre": "leo",
+"Password": "2630877",
+"Tipo": "Administrador"
+Superusuario:
+"ID": 32277,
+"Username": "null",
+"Nombre": "Gabriel",
+"Password": "333",
+"Tipo": "SuperUsuario"
+
+
+
+clave especial: 2630877

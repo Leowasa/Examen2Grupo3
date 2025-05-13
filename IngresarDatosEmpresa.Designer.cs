@@ -169,7 +169,7 @@
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Location = new Point(170, 303);
             guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "";
+            guna2TextBox1.PlaceholderText = "Ejemplo: Company.S.A ";
             guna2TextBox1.SelectedText = "";
             guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2TextBox1.Size = new Size(200, 20);
@@ -189,7 +189,7 @@
             guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox2.Location = new Point(456, 303);
             guna2TextBox2.Name = "guna2TextBox2";
-            guna2TextBox2.PlaceholderText = "";
+            guna2TextBox2.PlaceholderText = "Ejemplo: Company.S.A. Av. Principal 123, Piso 5, Oficina 501 Zona Comercial El Centro Mérida, Estado Mérida, Venezuela";
             guna2TextBox2.SelectedText = "";
             guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2TextBox2.Size = new Size(200, 20);
@@ -209,7 +209,7 @@
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Location = new Point(169, 369);
             guna2TextBox3.Name = "guna2TextBox3";
-            guna2TextBox3.PlaceholderText = "";
+            guna2TextBox3.PlaceholderText = "Ejemplo: 4245770042";
             guna2TextBox3.SelectedText = "";
             guna2TextBox3.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2TextBox3.Size = new Size(200, 20);
@@ -231,7 +231,7 @@
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Location = new Point(456, 369);
             guna2TextBox4.Name = "guna2TextBox4";
-            guna2TextBox4.PlaceholderText = "";
+            guna2TextBox4.PlaceholderText = "Ejemplo: www.Company.com";
             guna2TextBox4.SelectedText = "";
             guna2TextBox4.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2TextBox4.Size = new Size(200, 20);
@@ -252,11 +252,12 @@
             guna2TextBox5.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox5.Location = new Point(169, 426);
             guna2TextBox5.Name = "guna2TextBox5";
-            guna2TextBox5.PlaceholderText = "";
+            guna2TextBox5.PlaceholderText = "Ejemplo: Company@gmail.com";
             guna2TextBox5.SelectedText = "";
             guna2TextBox5.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2TextBox5.Size = new Size(200, 20);
             guna2TextBox5.TabIndex = 136;
+            guna2TextBox5.Leave += guna2TextBox5_Leave_1;
             // 
             // Cliente
             // 

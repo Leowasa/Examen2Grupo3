@@ -38,24 +38,18 @@ namespace Examen2Grupo3
             try
             {
 
-                // Expresión regular para validar correos electrónicos  
-                string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-               //verifica si los campos estan vacios
+
+                //verifica si los campos estan vacios
                 if (string.IsNullOrWhiteSpace(guna2TextBox1.Text) ||
                     string.IsNullOrWhiteSpace(guna2TextBox2.Text) ||
                     string.IsNullOrWhiteSpace(guna2TextBox3.Text) ||
                     string.IsNullOrWhiteSpace(guna2TextBox4.Text) ||
                     string.IsNullOrWhiteSpace(guna2TextBox5.Text))
                 {
-                    MessageBox.Show("Campos vacíos. Intente nuevamente");
+                    MessageBox.Show("Campos vacíos. Intente nuevamente","Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                //validar el correo ingresado
-                else if (!Regex.IsMatch(guna2TextBox5.Text, patronCorreo))
-                {
-                    MessageBox.Show("El correo ingresado no es válido. Por favor, ingrese un correo válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+
 
                 datos = new Empresa
                 {
@@ -66,14 +60,14 @@ namespace Examen2Grupo3
                     Website = guna2TextBox4.Text,
                 };
 
-                MessageBox.Show("Operacion exitosa!","Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Operacion exitosa!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 GuardarEmpresa(datos);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)
             {
-                
+
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -128,7 +122,7 @@ namespace Examen2Grupo3
         {
             if (!EsTelefonoValido(guna2TextBox3.Text))
             {
-                MessageBox.Show("Número de teléfono inválido. Debe contener 10 dígitos.");
+                MessageBox.Show("Número de teléfono inválido. Debe contener 10 dígitos.","Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 guna2TextBox3.Focus();
             }
 
@@ -145,7 +139,7 @@ namespace Examen2Grupo3
         {
             if (!ValidacionURL.EsURLValida(guna2TextBox4.Text))
             {
-                MessageBox.Show("Ingrese una URL válida que comience con 'www.'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ingrese una URL válida. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 guna2TextBox4.Focus();
             }
         }
@@ -155,6 +149,17 @@ namespace Examen2Grupo3
             {
                 string patron = @"^www\.[\da-z.-]+\.[a-z.]{2,6}([\/\w .-]*)*\/?$";
                 return Regex.IsMatch(url, patron, RegexOptions.IgnoreCase);
+            }
+        }
+
+        private void guna2TextBox5_Leave_1(object sender, EventArgs e)
+        {
+            // Expresión regular para validar correos electrónicos  
+            string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (!Regex.IsMatch(guna2TextBox5.Text, patronCorreo))//validar correo
+            {
+                MessageBox.Show("El correo ingresado no es válido. Por favor, Verifique haber ingresado correctamente el campo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                guna2TextBox5.Focus();
             }
         }
     }

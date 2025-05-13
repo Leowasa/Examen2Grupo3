@@ -80,7 +80,7 @@ namespace Examen2Grupo3
                 Directory.CreateDirectory(directorio);
             }
             List<Datos.Usuarios>? listaUsuarios = LeerUsuarios();
-            if (listaUsuarios != null) 
+            if (listaUsuarios != null)
             {
                 foreach (var usuario in listaUsuarios)
                 {
@@ -99,7 +99,7 @@ namespace Examen2Grupo3
             string json = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented);
             File.WriteAllText(rutaCompleta, json);
         }
-   
+
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
@@ -139,6 +139,22 @@ namespace Examen2Grupo3
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void guna2TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la entrada de caracteres no numéricos
+            }
+        }
+
+        private void guna2TextBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la entrada de caracteres no numéricos
+            }
         }
     }
 }

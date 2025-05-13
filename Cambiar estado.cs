@@ -37,7 +37,7 @@ namespace Examen2Grupo3
             if (principal != null)
             {
 
-                principal.AbrirFormularioEnPanel(new Factura(seleccionadot, 2, UsuarioActual, guna2ComboBox1.SelectedItem.ToString())); // Reemplaza con el formulario que desees abrir
+                principal.AbrirFormulario(new Factura(seleccionadot, 2, UsuarioActual, guna2ComboBox1.SelectedItem.ToString())); // Reemplaza con el formulario que desees abrir
 
             }
             this.Close();
@@ -163,7 +163,7 @@ namespace Examen2Grupo3
 
                 if (guna2ComboBox1.SelectedItem == null)
                 {
-                    MessageBox.Show("Por favor escoja un estado valido");
+                    MessageBox.Show("Por favor escoja un estado valido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
 
                 }

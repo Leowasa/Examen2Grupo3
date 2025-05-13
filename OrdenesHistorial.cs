@@ -103,42 +103,42 @@ namespace Examen2Grupo3
             Form1 principal = (Form1)Application.OpenForms["Form1"];
             if (principal != null)
             {
-                principal.AbrirFormularioEnPanel(new Factura(seleccionado, 3, usuarioActual)); // abre el formulario para visualizar el orden 
+                principal.AbrirFormulario(new Factura(seleccionado, 3, usuarioActual)); // abre el formulario para visualizar el orden 
             }
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Codigo_especial Form = new Codigo_especial();
-            if (usuarioActual.Tipo == "Aprobador" || usuarioActual.Tipo == "Registrador")
-            {
-                Form.ShowDialog();
-                if (Form.DialogResult == DialogResult.OK)
-                {
-                    Casillaseleccionada(e);
-                    return;
-                }
-
-            }
-            else Casillaseleccionada(e);
-        }
-        private void Casillaseleccionada(DataGridViewCellEventArgs e)
-        {
             // Si el usuario hizo clic en el botón "Editar"
             if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
             {
-                int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
+               int idPedido = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Numero"].Value);
                 foreach (var lista in listaPedidos)
                 {
-                    if (lista.ID == idPedido)
-                        AbrirOtroFormulario(lista);
+                   if (lista.ID == idPedido)
+                   AbrirOtroFormulario(lista);
                 }
+               return;
+        
             }
 
             // Si el usuario hizo clic en el botón "Eliminar"
             if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
+                if (usuarioActual.Tipo == "Aprobador" || usuarioActual.Tipo == "Registrador")
+                {
+                    Form.ShowDialog();
+                    if (Form.DialogResult == DialogResult.OK)
+                    {
+                        //continuar con el codigo 
 
-                DialogResult result = MessageBox.Show("¿Deseas eliminar este producto?", "Confirmar eliminación",
+                    }
+                    else return;
+
+                }
+
+
+                DialogResult result = MessageBox.Show("¿Deseas eliminar esta orden?", "Confirmar eliminación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
@@ -172,8 +172,7 @@ namespace Examen2Grupo3
             }
 
         }
-
-        
+      
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
