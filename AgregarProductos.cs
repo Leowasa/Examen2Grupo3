@@ -1,19 +1,5 @@
-﻿using ejemplo;
-using Guna.UI2.WinForms.Suite;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Runtime.InteropServices;
 using static Examen2Grupo3.Datos;
-using static iTextSharp.tool.xml.html.HTML;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Examen2Grupo3
 {
@@ -51,6 +37,12 @@ namespace Examen2Grupo3
                     MessageBox.Show("El ID no puede ser menor a 3.");
                     return;
                 }
+                else if (!EsIdProductoUnico(nuevoId, Productos, producto?.ID))
+
+                {
+                    MessageBox.Show("El ID ya existe. Por favor, elige otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 else
                 {
                     //si los campos son correctos, agregar
@@ -61,30 +53,26 @@ namespace Examen2Grupo3
                     producto.Categoria = guna2TextBox4.Text;
                     producto.PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
                     producto.Cantidad = int.Parse(guna2TextBox5.Text);
-                    // Validación normal de ID repetido (si se agrega)
-                    if (!EsIdProductoUnico(nuevoId, Productos, producto?.ID))
 
-                    {
-                        MessageBox.Show("El ID ya existe. Por favor, elige otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                    // Validación normal de ID repetido (si se agrega)
+
                     MessageBox.Show("Operacion exitosa!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
             }
-            catch (FormatException )
+            catch (FormatException)
             {
-                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar",  "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            catch (OverflowException )
+            catch (OverflowException)
             {
                 MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            catch (Exception )
+            catch (Exception)
             {
-                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             this.DialogResult = DialogResult.OK;
@@ -102,6 +90,8 @@ namespace Examen2Grupo3
                 guna2TextBox3.Text = descripcion;
                 guna2TextBox5.Text = Cantidad;
                 guna2TextBox6.Text = precio;
+                // Actualiza el ID del producto actual para la validación
+                producto.ID = int.Parse(id);
             }
             catch
             {

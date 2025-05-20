@@ -1,16 +1,5 @@
-﻿
-using System.Text.Json;
-using System.util;
-using Examen2Grupo3;
-using System.Data;
-using static Examen2Grupo3.Datos;
-using Examen2Grupo3.Properties;
-using ejemplo;
-using System.Collections.Immutable;
-using System.Windows.Forms;
-using ejemplo;
+﻿using Examen2Grupo3;
 using Newtonsoft.Json;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ejemplo
 {
@@ -25,13 +14,23 @@ namespace ejemplo
         public Usuarios(Datos.Usuarios usuarioactual)
         {
 
-            InitializeComponent(); 
+            InitializeComponent();
             usuarios = LeerUsuarios(); // Carga la lista de usuarios
 
             Operar = new AgregarCliente(1, usuarios); // Inicializa el formulario de agregar cliente
             this.Usuarioactual = usuarioactual;//cargo el usuario actual
             ControlUsuario1(usuarioactual);//y aplico las restricciones
             CargarDatosEnDataGridView();
+            tootip();
+
+
+        }
+        private void tootip()
+        {
+            toolTip1 = new System.Windows.Forms.ToolTip();
+            toolTip1.SetToolTip(pictureBox1, "Importar.");
+            ToolTip tooltip2 = new ToolTip();
+            tooltip2.SetToolTip(pictureBox2, "Exportar.");
 
         }
 
@@ -186,22 +185,7 @@ namespace ejemplo
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void pictureBox1_Click(object sender, EventArgs e)//btn para exportar archivo csv
-        {
-            using (SaveFileDialog sfd = new SaveFileDialog())
-            {
-
-                sfd.Filter = "Archivos CSV (*.csv)|*.csv";
-                sfd.Title = "Selecciona dónde guardar el archivo CSV";
-
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    ExportarCSV(sfd.FileName);
-                }
-            }
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)//btn para importar archivo csv
+        private void pictureBox1_Click(object sender, EventArgs e)//btn para  archivo importar csv
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -222,8 +206,25 @@ namespace ejemplo
                     }
                 }
             }
+
         }
-     
+
+        private void pictureBox2_Click(object sender, EventArgs e)//btn para exportar archivo csv
+        {
+
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+
+                sfd.Filter = "Archivos CSV (*.csv)|*.csv";
+                sfd.Title = "Selecciona dónde guardar el archivo CSV";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    ExportarCSV(sfd.FileName);
+                }
+            }
+        }
+
         private void dataGridView1_CellClick_2(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -349,7 +350,12 @@ namespace ejemplo
         private void guna2TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
-           
+
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
         }
     }
 }

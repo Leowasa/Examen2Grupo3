@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
@@ -48,6 +49,7 @@
             Editar = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            toolTip1 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -218,6 +220,10 @@
             guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
             guna2TextBox1.KeyPress += guna2TextBox1_KeyPress;
             // 
+            // toolTip1
+            // 
+            toolTip1.Popup += toolTip1_Popup;
+            // 
             // Usuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -254,5 +260,6 @@
         private DataGridViewTextBoxColumn Tipo;
         private DataGridViewImageColumn Editar;
         private DataGridViewImageColumn Eliminar;
+        private ToolTip toolTip1;
     }
 }

@@ -1,17 +1,13 @@
 ﻿using Examen2Grupo3;
 using Newtonsoft.Json;
 using System.Text.Json;
-using System.Windows.Forms;
 using static Examen2Grupo3.Datos;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace ejemplo
 {
     public partial class Clientes : Form
     {
-       
+
         public List<Datos.Cliente> cliente = new List<Cliente>();
         public Datos.Usuarios usuarioActual = new Datos.Usuarios();
         public Clientes(Datos.Usuarios UsuarioActual)
@@ -20,10 +16,17 @@ namespace ejemplo
             CargarClientes("Clientes.Json");
             this.usuarioActual = UsuarioActual;
             ControlUsuario1(usuarioActual);
-           
+            tootip();
 
         }
+        private void tootip()
+        {
+            ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+            toolTip1.SetToolTip(pictureBox1, "Importar.");
+            ToolTip tooltip2 = new ToolTip();
+            tooltip2.SetToolTip(pictureBox2, "Exportar.");
 
+        }
         private void guna2TextBox2_TextChanged(object sender, EventArgs e)//barra buscar cliente
         {
             BuscarElemento(guna2TextBox2.Text);
@@ -62,14 +65,14 @@ namespace ejemplo
             {
 
                 cliente.Add(agregarCliente.DatosClientes);
-               GuardarClientes("Clientes.Json");
+                GuardarClientes("Clientes.Json");
                 CargarClientes("Clientes.Json");
 
 
 
             }
         }
-            public void ImportarCSV(string rutaArchivo)
+        public void ImportarCSV(string rutaArchivo)
         {
             cliente = new List<Cliente>();
 
@@ -95,7 +98,7 @@ namespace ejemplo
 
                         cliente.Add(clientes);
                     }
-                   
+
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     GuardarClientes("Clientes.Json");
                     CargarClientes("Clientes.Json");
@@ -135,17 +138,18 @@ namespace ejemplo
         }
         public void GuardarClientes(string rutaArchivo)
         {
-            try 
+            try
             {
                 string json = System.Text.Json.JsonSerializer.Serialize(cliente, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(rutaArchivo, json);
                 CargarClientes("Clientes.Json");
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar la lista del cliente.", "Error de operacion", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
             }
-            
+
         }
         public void CargarClientes(string rutaArchivo)
         {
@@ -165,7 +169,7 @@ namespace ejemplo
                 }
             }
         }
-    
+
         private void Clientes_Load(object sender, EventArgs e)
         {
 
@@ -188,7 +192,7 @@ namespace ejemplo
                     else return;
 
                 }
-               
+
 
 
                 // Verificar que los valores requeridos no sean nulos  
@@ -223,7 +227,7 @@ namespace ejemplo
                     }
                     else return;
                 }
-               
+
 
                 DialogResult result = MessageBox.Show("¿Deseas eliminar a este cliente?", "Confirmar eliminación",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -239,22 +243,8 @@ namespace ejemplo
 
 
         }
-       
-        private void pictureBox1_Click(object sender, EventArgs e)//btn para exportar csv
-        {
-            using (SaveFileDialog sfd = new SaveFileDialog())
-            {
-                sfd.Filter = "Archivos CSV (*.csv)|*.csv";
-                sfd.Title = "Selecciona dónde guardar el archivo CSV";
 
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    ExportarCSV(sfd.FileName);
-                }
-            }
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)//btn para importart csv
+        private void pictureBox1_Click(object sender, EventArgs e)//btn para importar csv
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -266,6 +256,21 @@ namespace ejemplo
                     ImportarCSV(ofd.FileName);
                 }
             }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)//btn para exportar csv
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Archivos CSV (*.csv)|*.csv";
+                sfd.Title = "Selecciona dónde guardar el archivo CSV";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    ExportarCSV(sfd.FileName);
+                }
+            }
+
         }
         public void ControlUsuario1(Datos.Usuarios Usuarioactual)//control de usuarios para ocultar funciones al usuario
         {
@@ -286,7 +291,7 @@ namespace ejemplo
                 string usuarios = File.ReadAllText(rutarchivo);
                 try
                 {
-                    Lista = JsonConvert.DeserializeObject<List<Datos.Usuarios>>(usuarios)?? new List<Datos.Usuarios>();
+                    Lista = JsonConvert.DeserializeObject<List<Datos.Usuarios>>(usuarios) ?? new List<Datos.Usuarios>();
                 }
                 catch
                 {

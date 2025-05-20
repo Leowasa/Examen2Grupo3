@@ -1,5 +1,3 @@
-using Examen2Grupo3;
-
 namespace ejemplo
 {
     internal static class Program
@@ -17,8 +15,8 @@ namespace ejemplo
 
             try
             {
-              
-                Application.Run(new Login());
+
+                Application.Run(new Form1());
             }
             catch (System.NullReferenceException ex)
             {

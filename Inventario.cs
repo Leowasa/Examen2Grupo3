@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Runtime.Versioning;
+﻿using System.Runtime.Versioning;
 using System.Text.Json;
 using static Examen2Grupo3.Datos;
 
@@ -20,9 +19,17 @@ namespace Examen2Grupo3
             CargarInventario("Inventario.Json");
             Usuarioactual = usuarioactual;
             ControlUsuario1(usuarioactual);//restringo las funciones mostradas al usuario ingresado
+            tootip();
         }
 
+        private void tootip()
+        {
+            ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+            toolTip1.SetToolTip(pictureBox1, "Importar.");
+            ToolTip tooltip2 = new ToolTip();
+            tooltip2.SetToolTip(pictureBox2, "Exportar.");
 
+        }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Codigo_especial Codigo = new Codigo_especial();
@@ -63,7 +70,7 @@ namespace Examen2Grupo3
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-              
+
                 if (Usuarioactual.Tipo == "Aprobador" || Usuarioactual.Tipo == "Registrador")//si es aprobador o registrador. Se le solicita clave especial
                 {
                     Codigo.ShowDialog();
@@ -89,21 +96,21 @@ namespace Examen2Grupo3
 
         public void casillaSeleccionada(DataGridViewCellEventArgs e)//se obtiene la casilla seleccionada y realiza la operacion correspondiente
         {
-            
+
 
 
         }
 
         public void GuardarInventario(string rutaArchivo)
         {
-          
 
-              if (inventario != null) // Validamos que la fila tenga datos
-              {
-                    string json = JsonSerializer.Serialize(inventario, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText(rutaArchivo, json);//serializo, lo escribo en el json y luego cargo los cambios
-                    CargarInventario("Inventario.Json");
-              }
+
+            if (inventario != null) // Validamos que la fila tenga datos
+            {
+                string json = JsonSerializer.Serialize(inventario, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(rutaArchivo, json);//serializo, lo escribo en el json y luego cargo los cambios
+                CargarInventario("Inventario.Json");
+            }
             else MessageBox.Show("Error al guardar los datos. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
@@ -116,7 +123,7 @@ namespace Examen2Grupo3
                 inventario.Remove(producto);
 
         }
-      
+
 
         private void BuscarElemento(string textoBusqueda)
         {
@@ -152,7 +159,7 @@ namespace Examen2Grupo3
             {
 
                 string json = File.ReadAllText(rutaArchivo);
-                inventario = JsonSerializer.Deserialize<List<Producto>>(json)??new List<Producto>();
+                inventario = JsonSerializer.Deserialize<List<Producto>>(json) ?? new List<Producto>();
 
                 if (inventario != null) // Verificar que la lista no sea nula
                 {
@@ -187,13 +194,13 @@ namespace Examen2Grupo3
                     }
                 }
 
-              
+
                 MessageBox.Show("Exportación realizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
             {
-               
+
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -212,7 +219,7 @@ namespace Examen2Grupo3
                     var lineas = File.ReadAllLines(rutaArchivo);
 
                     // Recorre cada línea, omitiendo la primera (encabezado)
-                    foreach (var linea in lineas.Skip(1)) 
+                    foreach (var linea in lineas.Skip(1))
                     {
                         // Divide la línea en partes usando la coma como separador
                         var datos = linea.Split(',');
@@ -232,19 +239,19 @@ namespace Examen2Grupo3
                         inventario.Add(producto);
                     }
 
-                 
+
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                  
+
                     GuardarInventario("Inventario.Json");
 
-                 
+
                     CargarInventario("Inventario.Json");
                 }
             }
             catch (Exception ex)
             {
-               
+
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -254,10 +261,23 @@ namespace Examen2Grupo3
         {
             BuscarElemento(guna2TextBox2.Text);
         }
-       
-        private void pictureBox1_Click(object sender, EventArgs e)//btn para exportar
-        {
 
+        private void pictureBox1_Click(object sender, EventArgs e)//btn para importar
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Archivos CSV (*.csv)|*.csv";
+                ofd.Title = "Selecciona un archivo CSV para importar";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    ImportarCSV(ofd.FileName);
+                }
+            }
+
+        }
+        private void pictureBox2_Click(object sender, EventArgs e)//btn para exportar
+        {
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
 
@@ -270,23 +290,10 @@ namespace Examen2Grupo3
                 }
             }
         }
-        private void pictureBox2_Click(object sender, EventArgs e)//btn para importar
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Filter = "Archivos CSV (*.csv)|*.csv";
-                ofd.Title = "Selecciona un archivo CSV para importar";
-
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    ImportarCSV(ofd.FileName);
-                }
-            }
-        }
 
         private void guna2Button2_Click(object sender, EventArgs e)//btn para agregar producto
         {
-            Agregar_Productos formProductos = new Agregar_Productos(inventario,2);
+            Agregar_Productos formProductos = new Agregar_Productos(inventario, 2);
             if (formProductos.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -314,9 +321,9 @@ namespace Examen2Grupo3
 
         }
 
-     
 
-      
+
+
         public void ControlUsuario1(Datos.Usuarios Usuarioactual)//oculta los botones de importar y exportar si es Aprobador o Registrador
         {
 
@@ -332,6 +339,6 @@ namespace Examen2Grupo3
         {
 
         }
-      
+
     }
 }
