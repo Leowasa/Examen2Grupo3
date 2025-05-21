@@ -1,6 +1,6 @@
-﻿using System.Runtime.InteropServices;
-using ejemplo;
+﻿using ejemplo;
 using Newtonsoft.Json;
+using System.Runtime.InteropServices;
 using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
@@ -24,6 +24,12 @@ namespace Examen2Grupo3
             InitializeComponent();
 
             this.opcion = opcion;
+            if (opcion == 2)
+            {
+                label1.Text = "Contraseña Actual";
+                label2.Text = "Confirmar Contraseña ";
+
+            }
         }
         public void GuardarCodigo()
         {
@@ -99,7 +105,21 @@ namespace Examen2Grupo3
             string json = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented);
             File.WriteAllText(rutaCompleta, json);
         }
+        private bool confirmar()
+        {
+            var lista = LeerUsuarios();
+            foreach (var clave in lista)
+            {
+                if (guna2TextBox1.Text == clave.Password)
+                {
+                    return true;
 
+                }
+
+            }
+            MessageBox.Show("Clave incorrecta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
@@ -112,6 +132,7 @@ namespace Examen2Grupo3
             switch (opcion)
             {
                 case 0://Para guardar contraseña del admin
+
                     GuardarUsuarios();
                     MessageBox.Show("Operacion realizada exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
@@ -119,7 +140,16 @@ namespace Examen2Grupo3
                     GuardarCodigo();
                     MessageBox.Show("Operacion realizada exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
+                case 2://guardar contrasenia del usuario
+                    if (confirmar() == true)
+                    {
+                        MessageBox.Show("Confirmacion exitosa", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                    }
+                    break;
             }
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 

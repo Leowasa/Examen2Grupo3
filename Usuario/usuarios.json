@@ -12,5 +12,19 @@
     "Nombre": "Gabriel",
     "Password": "333",
     "Tipo": "SuperUsuario"
+  },
+  {
+    "ID": 234234,
+    "Username": "Juan",
+    "Nombre": "Juan",
+    "Password": "263087",
+    "Tipo": "Aprobador"
+  },
+  {
+    "ID": 2342,
+    "Username": "Luisana",
+    "Nombre": "Luisana",
+    "Password": "2630",
+    "Tipo": "Registrador"
   }
 ]
