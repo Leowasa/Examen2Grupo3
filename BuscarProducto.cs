@@ -138,6 +138,11 @@ namespace Examen2Grupo3
                 this.Close();
 
             }
+            catch (OverflowException)//Cantidad ingresada que exceda el tamaño soportado por el int
+            {
+                MessageBox.Show("El número ingresado es demasiado grande o pequeño para este tipo de dato.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             catch
             {
                 MessageBox.Show("Campos vacios o erroneos. Intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

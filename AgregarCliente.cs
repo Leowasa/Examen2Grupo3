@@ -120,11 +120,6 @@ namespace Examen2Grupo3
                 MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);// Captura la excepción de campos erroneos
                 return false;
             }
-            catch (OverflowException)
-            {
-                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);// Captura la excepción de un numero mayor al que puede soportar un int
-                return false;
-            }
             catch (Exception)
             {
                 MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning); // Captura la excepción de los demas campos vacíos
@@ -189,11 +184,6 @@ namespace Examen2Grupo3
                 MessageBox.Show("Campos Erroneos. Asegurese de haber ingresado correctamente los campos y vuelva a intentar", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            catch (OverflowException)//ID ingresado que exceda el tamaño soportado por el int
-            {
-                MessageBox.Show("El número ingresado es demasiado grande o pequeño para el ID.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
             catch (Exception)//Demas campos en blanco
             {
                 MessageBox.Show("Campos vacios. Verifique de haber LLenado todos los campos e intente nuevamente", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning); // Captura la excepción del campo vacío
@@ -246,11 +236,15 @@ namespace Examen2Grupo3
 
         private void guna2Button1_Click_1(object sender, EventArgs e)//btn confirmar
         {
+            int id;
+            if (!int.TryParse(guna2TextBox1.Text, out id))
+            {
+                MessageBox.Show("El ID ingresado no es válido o es demasiado grande/pequeño para este tipo de dato.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             switch (opcion)
             {
                 case 1: //Agregar Usuario
-
-
                     if (Usuarios.Any(c => c.ID == int.Parse(guna2TextBox1.Text))) // Validación normal de ID repetido
                     {
                         MessageBox.Show("No pueden haber más de un ID idéntico.");
