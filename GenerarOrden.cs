@@ -1,4 +1,5 @@
-﻿using ejemplo;
+﻿using System.Windows.Forms;
+using ejemplo;
 using Newtonsoft.Json;
 using static Examen2Grupo3.Datos;
 
@@ -8,8 +9,10 @@ namespace Examen2Grupo3
     {
         public static Pedido seleccionado = new Pedido();
         public static List<Pedido> Lista = new List<Pedido>();
+        public  List<Pedido> ListaOriginal = new List<Pedido>();
         public Datos.Usuarios UsuarioActual = new Datos.Usuarios();
-        // private bool _cargandoDatos = false;
+        private BindingSource bindingSource = new BindingSource();
+
         Form1 form = new Form1();
         public GenerarOrden(Datos.Usuarios UsuarioActual)
         {
@@ -17,6 +20,9 @@ namespace Examen2Grupo3
             InitializeComponent();
             dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";//para Mostrar el monto con decimales
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");//y mostrarlo en dolares
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = bindingSource;
+
             CargarDatosDesdeJson();
         }
         public List<Pedido> LeerPedidos()
@@ -33,7 +39,7 @@ namespace Examen2Grupo3
 
         private void CargarDatosDesdeJson()
         {
-            // _cargandoDatos = true;
+          
             string rutaArchivoOriginal = "pedidos.json";
 
 
@@ -41,20 +47,11 @@ namespace Examen2Grupo3
             if (File.Exists(rutaArchivoOriginal))
             {
 
-                var pedidos = LeerPedidos();
+                Lista  = LeerPedidos();
 
-                if (pedidos != null)
-                {
-                    dataGridView1.Rows.Clear();
-                    foreach (var datos in pedidos)
-                    {
-
-                        // Agregar una nueva fila con los datos
-                        int rowIndex = dataGridView1.Rows.Add(datos.ID.ToString("D6"), datos.Cliente.Nombre, datos.Fecha.ToString("dd/MM/yyyy"), datos.Total, datos.Estado);
-
-                    }
-                    Lista = pedidos;
-                }
+                ListaOriginal = Lista;
+                bindingSource.DataSource =Lista;
+                bindingSource.ResetBindings(false);
             }
           
 
@@ -88,23 +85,7 @@ namespace Examen2Grupo3
 
         }
 
-        private void Cliente_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-
-
-        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-
-        }
-
+    
         public void AbrirOtroFormulario(Pedido seleccionadot, int opcion)
         {
             Form1 principal = (Form1)Application.OpenForms["Form1"];
@@ -119,31 +100,24 @@ namespace Examen2Grupo3
         }
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 3 caracteres
-            if (textoBusqueda.Length < 3)
+            if (string.IsNullOrWhiteSpace(textoBusqueda) || textoBusqueda.Length < 3)
             {
-                // Si tiene menos de 3 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
+                // Mostrar todas las órdenes
+                bindingSource.DataSource = new List<Pedido>(ListaOriginal);
             }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            else
             {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["Numero"].Value != null && fila.Cells["Numero"].Value.ToString().ToLower().Contains(filtro)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+                string filtro = textoBusqueda.ToLower();
+                var filtrados = Lista.Where(p =>
+                    p.ID.ToString().Contains(filtro) ||
+                    (p.Cliente != null && p.Cliente.Nombre != null && p.Cliente.Nombre.ToLower().Contains(filtro))
+                ).ToList();
 
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
+                bindingSource.DataSource = filtrados;
             }
+            bindingSource.ResetBindings(false);
         }
+
         private void guna2TextBox2_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
             BuscarElemento(guna2TextBox2.Text);
@@ -165,7 +139,7 @@ namespace Examen2Grupo3
                 }
 
             }
-            else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)//solicitara una clave especial en caso de eliminar un pedido preventivo siendo aprobador o registrador
+            else if (e.ColumnIndex == dataGridView1.Columns["Eliminar2"].Index && e.RowIndex >= 0)//solicitara una clave especial en caso de eliminar un pedido preventivo siendo aprobador o registrador
             {
                 Codigo_especial Form = new Codigo_especial();
                 if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
@@ -198,13 +172,8 @@ namespace Examen2Grupo3
             if (result == DialogResult.Yes)
             {
                 Lista.RemoveAt(e.RowIndex);//elimina el pedido preventivo seleccionado
-                dataGridView1.Rows.RemoveAt(e.RowIndex); // Elimina la fila seleccionada del datagrid
-                GuardarCambios(Lista);
+                 GuardarCambios(Lista);
             }
-        }
-        public void Casillaseleccionada(DataGridViewCellEventArgs e)
-        {
-
         }
       
     }

@@ -156,7 +156,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Categoria, Descripcion, Stock, PrecioUnitario, Editar, Eliminar });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(12, 163);
+            dataGridView1.Location = new Point(12, 161);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(45, 66, 91);
@@ -172,6 +172,7 @@
             // ID
             // 
             ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ID.DataPropertyName = "ID";
             ID.HeaderText = "ID";
             ID.Name = "ID";
             ID.ReadOnly = true;
@@ -179,12 +180,14 @@
             // Nombre
             // 
             Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.DataPropertyName = "Nombre";
             Nombre.HeaderText = "Nombre";
             Nombre.Name = "Nombre";
             // 
             // Categoria
             // 
             Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Categoria.DataPropertyName = "Categoria";
             Categoria.FlatStyle = FlatStyle.Flat;
             Categoria.HeaderText = "Categoria";
             Categoria.Name = "Categoria";
@@ -193,17 +196,20 @@
             // Descripcion
             // 
             Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Descripcion.DataPropertyName = "Descripcion";
             Descripcion.HeaderText = "Descripcion";
             Descripcion.Name = "Descripcion";
             // 
             // Stock
             // 
+            Stock.DataPropertyName = "Cantidad";
             Stock.HeaderText = "Stock";
             Stock.Name = "Stock";
             // 
             // PrecioUnitario
             // 
             PrecioUnitario.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            PrecioUnitario.DataPropertyName = "PrecioUnitario";
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             PrecioUnitario.DefaultCellStyle = dataGridViewCellStyle2;
@@ -257,14 +263,6 @@
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private Label Cliente;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn ID;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewButtonColumn Categoria;
-        private DataGridViewTextBoxColumn Descripcion;
-        private DataGridViewTextBoxColumn Stock;
-        private DataGridViewTextBoxColumn PrecioUnitario;
-        private DataGridViewImageColumn Editar;
-        private DataGridViewImageColumn Eliminar;
         private DataGridView dataGridView2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -274,5 +272,13 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewImageColumn dataGridViewImageColumn1;
         private DataGridViewImageColumn dataGridViewImageColumn2;
+        private DataGridViewTextBoxColumn ID;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewButtonColumn Categoria;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Stock;
+        private DataGridViewTextBoxColumn PrecioUnitario;
+        private DataGridViewImageColumn Editar;
+        private DataGridViewImageColumn Eliminar;
     }
 }

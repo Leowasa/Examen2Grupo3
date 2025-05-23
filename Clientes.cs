@@ -9,10 +9,14 @@ namespace ejemplo
     {
 
         public List<Datos.Cliente> cliente = new List<Cliente>();
+        public List<Datos.Cliente> ListaOriginal = new List<Cliente>();//ListaOriginal
+        private BindingSource bindingSource = new BindingSource();
         public Datos.Usuarios usuarioActual = new Datos.Usuarios();
         public Clientes(Datos.Usuarios UsuarioActual)
         {
             InitializeComponent();
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = bindingSource;
             CargarClientes("Clientes.Json");
             this.usuarioActual = UsuarioActual;
             ControlUsuario1(usuarioActual);
@@ -33,30 +37,23 @@ namespace ejemplo
         }
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 3)
+            if ((string.IsNullOrWhiteSpace(textoBusqueda) || textoBusqueda.Length < 3))
             {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
+                // Mostrar todos los productos
+                bindingSource.DataSource = new List<Cliente>(ListaOriginal);
+
             }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            else
             {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().ToLower().Contains(filtro)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+                string filtro = textoBusqueda.ToLower();
+                var filtrados = ListaOriginal.Where(p =>
+                    p.ID.ToString().Contains(filtro) ||
+                    (p.Nombre != null && p.Nombre.ToLower().Contains(filtro))
+                ).ToList();
 
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
+                bindingSource.DataSource = filtrados;
             }
+            bindingSource.ResetBindings(false);
         }
         private void guna2Button2_Click(object sender, EventArgs e)//btn agregar cliente
         {
@@ -156,17 +153,12 @@ namespace ejemplo
             if (File.Exists(rutaArchivo))
             {
                 string json = File.ReadAllText(rutaArchivo);
-                cliente = System.Text.Json.JsonSerializer.Deserialize<List<Datos.Cliente>>(json); // Cambiar 'Cliente' a 'cliente'  
+                cliente = System.Text.Json.JsonSerializer.Deserialize<List<Cliente>>(json); // Cambiar 'Cliente' a 'cliente'  
 
-                if (cliente != null) // Verificar que la lista no sea nula  
-                {
-                    dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos  
+                ListaOriginal = new List<Cliente>(cliente); // Copia original
 
-                    foreach (var producto in cliente)
-                    {
-                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Correo, producto.Direccion, producto.Tipo);
-                    }
-                }
+                bindingSource.DataSource = cliente;
+                bindingSource.ResetBindings(false);
             }
         }
 

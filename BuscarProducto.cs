@@ -1,5 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Windows.Forms;
+using ejemplo;
 using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
@@ -12,13 +14,14 @@ namespace Examen2Grupo3
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
-
+        private BindingSource bindingSource = new BindingSource();
         public BuscarProducto()
         {
             InitializeComponent();
             dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.Format = "C2";//Permite que la columna muestre decimales
             dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");//Muestra el precio en $
-
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = bindingSource;
             CargarInventario("Inventario.json");
         }
         public void CargarInventario(string rutaArchivo)
@@ -30,16 +33,8 @@ namespace Examen2Grupo3
 
                 string json = File.ReadAllText(rutaArchivo);
                 listaProductos = JsonSerializer.Deserialize<List<Producto>>(json) ?? new List<Producto>();
-
-                if (listaProductos != null) // Verificar que la lista no sea nula
-                {
-                    dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos
-
-                    foreach (var producto in listaProductos)
-                    {
-                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario);
-                    }
-                }
+                bindingSource.DataSource = listaProductos;
+                bindingSource.ResetBindings(false);
             }
         }
         public void GuardarInventario(string rutaArchivo)
@@ -53,30 +48,24 @@ namespace Examen2Grupo3
         }
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 3)
+            // Verificar que el texto de búsqueda tenga al menos 3 caracteres
+            if ((string.IsNullOrWhiteSpace(textoBusqueda) || textoBusqueda.Length < 3))
             {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
+                // Mostrar todos los productos
+                bindingSource.DataSource = new List<Producto>(listaProductos);
+
             }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            else
             {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["ID2"].Value != null && fila.Cells["ID"].Value.ToString().ToLower().Contains(filtro)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+                string filtro = textoBusqueda.ToLower();
+                var filtrados = listaProductos.Where(p =>
+                    p.ID.ToString().Contains(filtro) ||
+                    (p.Nombre != null && p.Nombre.ToLower().Contains(filtro))
+                ).ToList();
 
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
+                bindingSource.DataSource = filtrados;
             }
+            bindingSource.ResetBindings(false);
         }
         private void guna2TextBox7_TextChanged(object sender, EventArgs e)//barra de busqueda
         {

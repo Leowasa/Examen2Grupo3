@@ -8,19 +8,20 @@ namespace ejemplo
 
         private Panel PanelPrincipal = new Panel();
         Datos.Usuarios Usuarioactual = new Datos.Usuarios();
-        Datos.Usuarios Nuevo = new Datos.Usuarios();
         List<Datos.Usuarios> usuarios = new List<Datos.Usuarios>();
+        private List<Datos.Usuarios> usuariosoriginal = new List<Datos.Usuarios>();
         AgregarCliente Operar;
+        private BindingSource bindingSource = new BindingSource();
         public Usuarios(Datos.Usuarios usuarioactual)
         {
 
             InitializeComponent();
-            usuarios = LeerUsuarios(); // Carga la lista de usuarios
-
+            LeerUsuarios(); // Carga la lista de usuarios
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = bindingSource;
             Operar = new AgregarCliente(1, usuarios); // Inicializa el formulario de agregar cliente
             this.Usuarioactual = usuarioactual;//cargo el usuario actual
             ControlUsuario1(usuarioactual);//y aplico las restricciones
-            CargarDatosEnDataGridView();
             tootip();
 
 
@@ -50,7 +51,7 @@ namespace ejemplo
         }
 
 
-        private List<Datos.Usuarios> LeerUsuarios()
+        private void LeerUsuarios()
         {
             // Obtener la ruta de la carpeta "Data" en la raíz del proyecto
             string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Usuario");
@@ -61,14 +62,19 @@ namespace ejemplo
             // Verificar si el archivo existe
             if (!File.Exists(rutaCompleta))
             {
-                return new List<Datos.Usuarios>(); // Retornar una lista vacía si no existe
+                usuarios = new List<Datos.Usuarios>(); // Retornar una lista vacía si no existe
+                return;
             }
 
             // Leer el contenido del archivo JSON
             string json = File.ReadAllText(rutaCompleta);
 
             // Deserializar el contenido JSON en una lista de usuarios
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Datos.Usuarios>>(json) ?? new List<Datos.Usuarios>();
+            usuarios = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Datos.Usuarios>>(json) ?? new List<Datos.Usuarios>();
+            usuariosoriginal = usuarios;
+            bindingSource.DataSource = usuarios;
+            bindingSource.ResetBindings(false);
+
         }
 
         public void ControlUsuario1(Datos.Usuarios Usuarioactual)
@@ -86,18 +92,6 @@ namespace ejemplo
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void CargarDatosEnDataGridView()
-        {
-            dataGridView1.Rows.Clear();
-            foreach (var row in usuarios)
-            {
-                if (row == null) continue; // Verificar si la fila es nula
-                dataGridView1.Rows.Add(row.ID, row.Nombre, row.Username, row.Tipo);//muestro la lista de usuarios en el datagrid
-
-            }
 
         }
         public void GuardarUsuarios(string rutaArchivo)
@@ -151,7 +145,7 @@ namespace ejemplo
                         }
                     }
                     GuardarUsuarios("usuarios.Json");
-                    CargarDatosEnDataGridView();
+                    LeerUsuarios();
                     MessageBox.Show("Importación completada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
@@ -251,7 +245,7 @@ namespace ejemplo
                 {
                     usuarios.RemoveAt(e.RowIndex);
                     GuardarUsuarios("usuarios.json");
-                    CargarDatosEnDataGridView();
+                    LeerUsuarios();
                 }
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index && e.RowIndex >= 0)
@@ -280,7 +274,7 @@ namespace ejemplo
                     {
                         usuarios[e.RowIndex] = Operar.DatosUsuario;
                         GuardarUsuarios("usuarios.json");
-                        CargarDatosEnDataGridView();
+                        LeerUsuarios();
                     }
                 }
                 else
@@ -293,29 +287,23 @@ namespace ejemplo
         private void BuscarElemento(string textoBusqueda)
         {
             // Verificar que el texto de búsqueda tenga al menos 3 caracteres
-            if (textoBusqueda.Length < 3)
+            if ((string.IsNullOrWhiteSpace(textoBusqueda) || textoBusqueda.Length < 3))
             {
-                // Si tiene menos de 3 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
+                // Mostrar todos los productos
+                bindingSource.DataSource = new List<Datos.Usuarios>(usuarios);
+
             }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            else
             {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().Contains(filtro, StringComparison.CurrentCultureIgnoreCase)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+                string filtro = textoBusqueda.ToLower();
+                var filtrados = usuarios.Where(p =>
+                    p.ID.ToString().Contains(filtro) ||
+                    (p.Nombre != null && p.Nombre.ToLower().Contains(filtro))
+                ).ToList();
 
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
+                bindingSource.DataSource = filtrados;
             }
+            bindingSource.ResetBindings(false);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -341,8 +329,7 @@ namespace ejemplo
             {
                 usuarios.Add(Operar.DatosUsuario);
                 GuardarUsuarios("usuarios.json");
-
-                CargarDatosEnDataGridView();
+                LeerUsuarios();
 
             }
         }

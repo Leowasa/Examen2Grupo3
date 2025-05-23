@@ -556,6 +556,7 @@
             // 
             // ID2
             // 
+            ID2.DataPropertyName = "ID";
             ID2.HeaderText = "ID";
             ID2.Name = "ID2";
             ID2.ReadOnly = true;
@@ -564,6 +565,7 @@
             // Nombre
             // 
             Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.DataPropertyName = "Nombre";
             Nombre.HeaderText = "Nombre";
             Nombre.Name = "Nombre";
             Nombre.ReadOnly = true;
@@ -572,6 +574,7 @@
             // Categoria
             // 
             Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Categoria.DataPropertyName = "Categoria";
             Categoria.HeaderText = "Categoria";
             Categoria.Name = "Categoria";
             Categoria.ReadOnly = true;
@@ -580,6 +583,7 @@
             // Descripcion
             // 
             Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Descripcion.DataPropertyName = "Descripcion";
             Descripcion.HeaderText = "Descripcion";
             Descripcion.Name = "Descripcion";
             Descripcion.ReadOnly = true;
@@ -587,6 +591,7 @@
             // 
             // Cantidad
             // 
+            Cantidad.DataPropertyName = "Cantidad";
             Cantidad.HeaderText = "stock";
             Cantidad.Name = "Cantidad";
             Cantidad.ReadOnly = true;
@@ -594,6 +599,7 @@
             // 
             // PrecioUnit
             // 
+            PrecioUnit.DataPropertyName = "PrecioUnitario";
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             PrecioUnit.DefaultCellStyle = dataGridViewCellStyle2;
@@ -669,12 +675,6 @@
         private DataGridViewTextBoxColumn Column6;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox7;
         private Label Cliente;
-        private DataGridViewTextBoxColumn ID2;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewTextBoxColumn Descripcion;
-        private DataGridViewTextBoxColumn Categoria;
-        private DataGridViewTextBoxColumn Cantidad;
-        private DataGridViewTextBoxColumn PrecioUnit;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private PictureBox pictureBox1;
         private PictureBox btnMaximizar;
@@ -686,5 +686,11 @@
         private PictureBox Btnmini;
         private PictureBox btncerrarr;
         private PictureBox pictureBox2;
+        private DataGridViewTextBoxColumn ID2;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Categoria;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn PrecioUnit;
     }
 }

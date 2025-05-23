@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Versioning;
 using System.Text.Json;
+using System.Windows.Forms;
 using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
@@ -10,12 +11,20 @@ namespace Examen2Grupo3
         //revisar cuando se elimina, buscar en datagrid, 
         private List<Producto> inventario = new List<Producto>();
         Datos.Usuarios Usuarioactual = new Datos.Usuarios();
+        private BindingSource bindingSource = new BindingSource();
+        private List<Producto> inventarioOriginal = new List<Producto>();
+
         [SupportedOSPlatform("windows6.1")]
         public Inventario(Usuarios usuarioactual)
         {
             InitializeComponent();
             dataGridView1.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["PrecioUnitario"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = bindingSource;
+            if (dataGridView1.Columns["Total"] != null)
+                dataGridView1.Columns["Total"].Visible = false;
+
             CargarInventario("Inventario.Json");
             Usuarioactual = usuarioactual;
             ControlUsuario1(usuarioactual);//restringo las funciones mostradas al usuario ingresado
@@ -127,49 +136,34 @@ namespace Examen2Grupo3
 
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 3)
+            if ((string.IsNullOrWhiteSpace(textoBusqueda) || textoBusqueda.Length < 3))
             {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
+                // Mostrar todos los productos
+                bindingSource.DataSource = new List<Producto>(inventarioOriginal);
+
             }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            else
             {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().Contains(filtro, StringComparison.CurrentCultureIgnoreCase)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+                string filtro = textoBusqueda.ToLower();
+                var filtrados = inventarioOriginal.Where(p =>
+                    p.ID.ToString().Contains(filtro) ||
+                    (p.Nombre != null && p.Nombre.ToLower().Contains(filtro))
+                ).ToList();
 
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
+                bindingSource.DataSource = filtrados;
             }
+            bindingSource.ResetBindings(false);
         }
         public void CargarInventario(string rutaArchivo)
         {
-
             if (File.Exists(rutaArchivo))
             {
-
                 string json = File.ReadAllText(rutaArchivo);
                 inventario = JsonSerializer.Deserialize<List<Producto>>(json) ?? new List<Producto>();
+                inventarioOriginal = new List<Producto>(inventario); // Copia original
 
-                if (inventario != null) // Verificar que la lista no sea nula
-                {
-                    dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos
-
-                    foreach (var producto in inventario)
-                    {
-                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Categoria, producto.Descripcion, producto.Cantidad, producto.PrecioUnitario);
-                    }
-                }
+                bindingSource.DataSource = inventario;
+                bindingSource.ResetBindings(false);
             }
         }
         public void ExportarCSV(string rutaArchivo)
@@ -307,10 +301,10 @@ namespace Examen2Grupo3
                         PrecioUnitario = formProductos.producto.PrecioUnitario,
                         Cantidad = formProductos.producto.Cantidad
                     };
-
                     inventario.Add(ProductoNuevo);
-                    dataGridView1.Rows.Add(ProductoNuevo.ID, ProductoNuevo.Nombre, ProductoNuevo.Categoria, ProductoNuevo.Descripcion, ProductoNuevo.Cantidad, ProductoNuevo.PrecioUnitario);
+                    bindingSource.ResetBindings(false); // Notifica al DataGridView que hay un nuevo elemento
                     GuardarInventario("Inventario.Json");
+
                 }
                 catch
                 {

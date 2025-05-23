@@ -29,18 +29,20 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
+            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             Numero = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Fechas = new DataGridViewButtonColumn();
             Total = new DataGridViewTextBoxColumn();
             Exportar = new DataGridViewImageColumn();
-            Eliminar = new DataGridViewImageColumn();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            Eliminar2 = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -76,66 +78,21 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Numero, Nombre, Fechas, Total, Exportar, Eliminar });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Numero, Nombre, Fechas, Total, Exportar, Eliminar2 });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(12, 161);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Size = new Size(941, 615);
             dataGridView1.TabIndex = 111;
             dataGridView1.CellClick += dataGridView1_CellClick;
-            // 
-            // Numero
-            // 
-            Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Numero.HeaderText = "Numero";
-            Numero.Name = "Numero";
-            Numero.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Cliente";
-            Nombre.Name = "Nombre";
-            // 
-            // Fechas
-            // 
-            Fechas.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Fechas.FlatStyle = FlatStyle.Flat;
-            Fechas.HeaderText = "Fecha de creacion";
-            Fechas.Name = "Fechas";
-            Fechas.ReadOnly = true;
-            // 
-            // Total
-            // 
-            Total.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Total.HeaderText = "Monto Total";
-            Total.Name = "Total";
-            // 
-            // Exportar
-            // 
-            Exportar.HeaderText = "Exportar";
-            Exportar.Image = Properties.Resources.icons8_pdf_50;
-            Exportar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Exportar.Name = "Exportar";
-            Exportar.Resizable = DataGridViewTriState.True;
-            Exportar.SortMode = DataGridViewColumnSortMode.Automatic;
-            // 
-            // Eliminar
-            // 
-            Eliminar.HeaderText = "Eliminar";
-            Eliminar.Image = Properties.Resources.icons8_trash_can_481;
-            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Eliminar.Name = "Eliminar";
-            Eliminar.Resizable = DataGridViewTriState.True;
-            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // guna2TextBox1
             // 
@@ -159,6 +116,60 @@
             guna2TextBox1.TabIndex = 149;
             guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
             // 
+            // Numero
+            // 
+            Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Numero.DataPropertyName = "ID";
+            dataGridViewCellStyle2.Format = "D6";
+            Numero.DefaultCellStyle = dataGridViewCellStyle2;
+            Numero.HeaderText = "Numero";
+            Numero.Name = "Numero";
+            Numero.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.DataPropertyName = "NombreCliente";
+            Nombre.HeaderText = "Cliente";
+            Nombre.Name = "Nombre";
+            // 
+            // Fechas
+            // 
+            Fechas.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Fechas.DataPropertyName = "Fecha";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Format = "dd/MM/yyyy";
+            Fechas.DefaultCellStyle = dataGridViewCellStyle3;
+            Fechas.FlatStyle = FlatStyle.Flat;
+            Fechas.HeaderText = "Fecha de creacion";
+            Fechas.Name = "Fechas";
+            Fechas.ReadOnly = true;
+            // 
+            // Total
+            // 
+            Total.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Total.DataPropertyName = "Total";
+            Total.HeaderText = "Monto Total";
+            Total.Name = "Total";
+            // 
+            // Exportar
+            // 
+            Exportar.HeaderText = "Exportar";
+            Exportar.Image = Properties.Resources.icons8_pdf_50;
+            Exportar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Exportar.Name = "Exportar";
+            Exportar.Resizable = DataGridViewTriState.True;
+            Exportar.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // Eliminar2
+            // 
+            Eliminar2.HeaderText = "Eliminar";
+            Eliminar2.Image = Properties.Resources.icons8_trash_can_481;
+            Eliminar2.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Eliminar2.Name = "Eliminar2";
+            Eliminar2.Resizable = DataGridViewTriState.True;
+            Eliminar2.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
             // FacturasHistorial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -180,13 +191,14 @@
         private Label Cliente;
         private DataGridView dataGridView1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
-        private DataGridViewTextBoxColumn Numero;
         private DataGridViewTextBoxColumn Clientes;
-        private DataGridViewButtonColumn Fechas;
         private DataGridViewTextBoxColumn Fecha;
-        private DataGridViewImageColumn Exportar;
         private DataGridViewImageColumn Eliminar;
+        private DataGridViewTextBoxColumn Numero;
         private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewButtonColumn Fechas;
         private DataGridViewTextBoxColumn Total;
+        private DataGridViewImageColumn Exportar;
+        private DataGridViewImageColumn Eliminar2;
     }
 }

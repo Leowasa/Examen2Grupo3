@@ -1,4 +1,6 @@
-﻿namespace Examen2Grupo3
+﻿using System.Text.Json.Serialization;
+
+namespace Examen2Grupo3
 {
     public class Datos
     {
@@ -11,6 +13,8 @@
             public List<Producto> Productos { get; set; }
             public String Estado { get; set; }
             public decimal Descuento  { get; set; }
+            [JsonIgnore] // para que no se serialize
+            public string NombreCliente => Cliente != null ? Cliente.Nombre : "";
             public decimal SubtTotal => Productos.Sum(p => p.Total);
             public decimal Total { get; set; }
             public Usuarios Encargado { get; set; }

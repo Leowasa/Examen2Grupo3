@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dataGridView1 = new DataGridView();
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             label1 = new Label();
@@ -71,13 +73,13 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(941, 385);
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridView1.Size = new Size(941, 374);
             dataGridView1.TabIndex = 107;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
@@ -121,6 +123,9 @@
             // Numero
             // 
             Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Numero.DataPropertyName = "ID";
+            dataGridViewCellStyle2.Format = "D6";
+            Numero.DefaultCellStyle = dataGridViewCellStyle2;
             Numero.HeaderText = "Numero";
             Numero.MinimumWidth = 8;
             Numero.Name = "Numero";
@@ -130,6 +135,7 @@
             // Nombre
             // 
             Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.DataPropertyName = "NombreCliente";
             Nombre.HeaderText = "Cliente";
             Nombre.MinimumWidth = 8;
             Nombre.Name = "Nombre";
@@ -139,6 +145,10 @@
             // Usuariosd
             // 
             Usuariosd.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Usuariosd.DataPropertyName = "Fecha";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Format = "dd/MM/yyyy";
+            Usuariosd.DefaultCellStyle = dataGridViewCellStyle3;
             Usuariosd.FlatStyle = FlatStyle.Flat;
             Usuariosd.HeaderText = "Fecha de creacion";
             Usuariosd.MinimumWidth = 8;
@@ -149,6 +159,7 @@
             // Total
             // 
             Total.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Total.DataPropertyName = "Total";
             Total.HeaderText = "Monto Total";
             Total.MinimumWidth = 8;
             Total.Name = "Total";
@@ -157,13 +168,14 @@
             // 
             // Estado
             // 
+            Estado.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Estado.DataPropertyName = "Estado";
             Estado.HeaderText = "Estado";
             Estado.MinimumWidth = 8;
             Estado.Name = "Estado";
             Estado.ReadOnly = true;
             Estado.Resizable = DataGridViewTriState.False;
             Estado.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Estado.Width = 150;
             // 
             // Ver
             // 
@@ -179,10 +191,9 @@
             btnEliminar.HeaderText = "Eliminar";
             btnEliminar.Image = Examen2Grupo3.Properties.Resources.icons8_trash_can_481;
             btnEliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            btnEliminar.MinimumWidth = 8;
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Resizable = DataGridViewTriState.True;
-            btnEliminar.Width = 150;
+            btnEliminar.Resizable = DataGridViewTriState.False;
+            btnEliminar.Width = 120;
             // 
             // PedidosHistorial
             // 

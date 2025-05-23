@@ -1,14 +1,16 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Windows.Forms;
 using static Examen2Grupo3.Datos;
 
 namespace Examen2Grupo3
 {
     public partial class BuscarClientes : Form
     {
-        public List<Cliente>? cliente = new List<Cliente>();
         public event Action<Cliente> ClienteSeleccionado;
-        public Cliente Clientes = new Cliente();
+        public Cliente Clientes= new Cliente();
+        List<Cliente> listaClientes = new List<Cliente>();
+        private BindingSource bindingSource = new BindingSource();
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -17,6 +19,8 @@ namespace Examen2Grupo3
         public BuscarClientes()
         {
             InitializeComponent();
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = bindingSource;
             CargarClientes("Clientes.Json");//Carga el cliente y lo actualiza en el datagridvew
         }
         public void CargarClientes(string rutaArchivo)
@@ -26,17 +30,9 @@ namespace Examen2Grupo3
             {
 
                 var json = File.ReadAllText(rutaArchivo);
-                List<Cliente>? listaProductos = JsonSerializer.Deserialize<List<Cliente>>(json);
-
-                if (listaProductos != null) // Verificar que la lista no sea nula
-                {
-                    dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos
-
-                    foreach (var producto in listaProductos)
-                    {
-                        dataGridView1.Rows.Add(producto.ID, producto.Nombre, producto.Correo, producto.Direccion, producto.Tipo);
-                    }
-                }
+                listaClientes = JsonSerializer.Deserialize<List<Cliente>>(json)?? new List<Cliente>();
+                bindingSource.DataSource = listaClientes;
+                bindingSource.ResetBindings(false);
             }
         }
 
@@ -101,30 +97,25 @@ namespace Examen2Grupo3
         }
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 3)
+
+            // Verificar que el texto de búsqueda tenga al menos 3 caracteres
+            if ((string.IsNullOrWhiteSpace(textoBusqueda) || textoBusqueda.Length < 3))
             {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
+                // Mostrar todos los Clientes
+                bindingSource.DataSource = new List<Cliente>(listaClientes);
+
             }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            else
             {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["ID"].Value != null && fila.Cells["ID"].Value.ToString().ToLower().Contains(filtro)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+                string filtro = textoBusqueda.ToLower();
+                var filtrados = listaClientes.Where(p =>
+                    p.ID.ToString().Contains(filtro) ||
+                    (p.Nombre != null && p.Nombre.ToLower().Contains(filtro))
+                ).ToList();
 
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
+                bindingSource.DataSource = filtrados;
             }
+            bindingSource.ResetBindings(false);
         }
     }
 }

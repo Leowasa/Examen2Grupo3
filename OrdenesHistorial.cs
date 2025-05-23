@@ -18,11 +18,15 @@ namespace Examen2Grupo3
     public partial class OrdenesHistorial : Form
     {
         List<Pedido> listaPedidos = new List<Pedido>();
-        Datos.Usuarios usuarioActual = new Datos.Usuarios();    
+        Datos.Usuarios usuarioActual = new Datos.Usuarios();
+        private BindingSource bindingSource = new BindingSource();
         public OrdenesHistorial(Datos.Usuarios usuarioactual)
         {
-            this.usuarioActual = usuarioactual;
+           
             InitializeComponent();
+            this.usuarioActual = usuarioactual;
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = bindingSource;
             dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
 
@@ -36,44 +40,31 @@ namespace Examen2Grupo3
 
                 string json = File.ReadAllText("Ordenes.json");
                 listaPedidos = System.Text.Json.JsonSerializer.Deserialize<List<Pedido>>(json) ?? new List<Pedido>();
-
-                if (listaPedidos != null) // Verificar que la lista no sea nula
-                {
-                    dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos
-
-                    foreach (var producto in listaPedidos)
-                    {
-                        dataGridView1.Rows.Add(producto.ID.ToString("D6"), producto.Cliente.Nombre, producto.Fecha.ToString("dd/MM/yy"), producto.Total, producto.Estado);
-                    }
-                }
+                bindingSource.DataSource = listaPedidos;
+                bindingSource.ResetBindings(false);
             }
         }
         private void BuscarElemento(string textoBusqueda)
         {
+
             // Verificar que el texto de búsqueda tenga al menos 3 caracteres
-            if (textoBusqueda.Length < 3)
+            if ((string.IsNullOrWhiteSpace(textoBusqueda) || textoBusqueda.Length < 3))
             {
-                // Si tiene menos de 3 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
+                // Mostrar todas las ordenes
+                bindingSource.DataSource = new List<Pedido>(listaPedidos);
+
             }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            else
             {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["Numero"].Value != null && fila.Cells["Numero"].Value.ToString().ToLower().Contains(filtro)) ||
-                                (fila.Cells["Nombres"].Value != null && fila.Cells["Nombres"].Value.ToString().ToLower().Contains(filtro));
+                string filtro = textoBusqueda.ToLower();
+                var filtrados =listaPedidos.Where(p =>
+                    p.ID.ToString().Contains(filtro) ||
+                    (p.Cliente != null && p.Cliente.Nombre.ToLower().Contains(filtro))
+                ).ToList();
 
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
+                bindingSource.DataSource = filtrados;
             }
+            bindingSource.ResetBindings(false);
         }
         private void GuardarCambios(List<Pedido> orden)
         {
@@ -153,13 +144,10 @@ namespace Examen2Grupo3
                         // Eliminar el pedido de la lista
                         listaPedidos.Remove(pedidoAEliminar);
 
-                        // Eliminar la fila del DataGridView
-                        dataGridView1.Rows.RemoveAt(e.RowIndex);
-
                         // Guardar los cambios en el archivo JSON
                         GuardarCambios(listaPedidos);
 
-                        // MessageBox.Show($"El pedido con ID {idPedido} ha sido eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                     
                     }
                     else
                     {

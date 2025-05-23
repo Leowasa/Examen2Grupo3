@@ -29,11 +29,14 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
+            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             Numero = new DataGridViewTextBoxColumn();
             Nombres = new DataGridViewButtonColumn();
             Fecha = new DataGridViewTextBoxColumn();
@@ -41,7 +44,6 @@
             Estado = new DataGridViewTextBoxColumn();
             Ver = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -83,65 +85,16 @@
             dataGridView1.Location = new Point(12, 161);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Size = new Size(931, 615);
             dataGridView1.TabIndex = 111;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
-            // 
-            // Numero
-            // 
-            Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Numero.HeaderText = "Numero";
-            Numero.Name = "Numero";
-            Numero.ReadOnly = true;
-            // 
-            // Nombres
-            // 
-            Nombres.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombres.FlatStyle = FlatStyle.Flat;
-            Nombres.HeaderText = "Cliente";
-            Nombres.Name = "Nombres";
-            Nombres.ReadOnly = true;
-            // 
-            // Fecha
-            // 
-            Fecha.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Fecha.HeaderText = "Fecha de creacion";
-            Fecha.Name = "Fecha";
-            // 
-            // Total
-            // 
-            Total.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Total.HeaderText = "Monto total";
-            Total.Name = "Total";
-            // 
-            // Estado
-            // 
-            Estado.HeaderText = "Estado";
-            Estado.Name = "Estado";
-            // 
-            // Ver
-            // 
-            Ver.HeaderText = "ver detalles";
-            Ver.Image = Properties.Resources.icons8_view_details_241;
-            Ver.Name = "Ver";
-            Ver.Resizable = DataGridViewTriState.True;
-            Ver.SortMode = DataGridViewColumnSortMode.Automatic;
-            // 
-            // Eliminar
-            // 
-            Eliminar.HeaderText = "Eliminar";
-            Eliminar.Image = Properties.Resources.icons8_trash_can_481;
-            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Eliminar.Name = "Eliminar";
-            Eliminar.Resizable = DataGridViewTriState.True;
-            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // guna2TextBox2
             // 
@@ -164,6 +117,64 @@
             guna2TextBox2.Size = new Size(202, 23);
             guna2TextBox2.TabIndex = 149;
             guna2TextBox2.TextChanged += guna2TextBox2_TextChanged;
+            // 
+            // Numero
+            // 
+            Numero.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Numero.DataPropertyName = "ID";
+            dataGridViewCellStyle2.Format = "D6";
+            Numero.DefaultCellStyle = dataGridViewCellStyle2;
+            Numero.HeaderText = "Numero";
+            Numero.Name = "Numero";
+            Numero.ReadOnly = true;
+            // 
+            // Nombres
+            // 
+            Nombres.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombres.DataPropertyName = "NombreCliente";
+            Nombres.FlatStyle = FlatStyle.Flat;
+            Nombres.HeaderText = "Cliente";
+            Nombres.Name = "Nombres";
+            Nombres.ReadOnly = true;
+            // 
+            // Fecha
+            // 
+            Fecha.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Fecha.DataPropertyName = "Fecha";
+            dataGridViewCellStyle3.Format = "dd/MM/yyyy";
+            Fecha.DefaultCellStyle = dataGridViewCellStyle3;
+            Fecha.HeaderText = "Fecha de creacion";
+            Fecha.Name = "Fecha";
+            // 
+            // Total
+            // 
+            Total.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Total.DataPropertyName = "Total";
+            Total.HeaderText = "Monto total";
+            Total.Name = "Total";
+            // 
+            // Estado
+            // 
+            Estado.DataPropertyName = "Estado";
+            Estado.HeaderText = "Estado";
+            Estado.Name = "Estado";
+            // 
+            // Ver
+            // 
+            Ver.HeaderText = "ver detalles";
+            Ver.Image = Properties.Resources.icons8_view_details_241;
+            Ver.Name = "Ver";
+            Ver.Resizable = DataGridViewTriState.True;
+            Ver.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // Eliminar
+            // 
+            Eliminar.HeaderText = "Eliminar";
+            Eliminar.Image = Properties.Resources.icons8_trash_can_481;
+            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Eliminar.Name = "Eliminar";
+            Eliminar.Resizable = DataGridViewTriState.True;
+            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // OrdenesHistorial
             // 

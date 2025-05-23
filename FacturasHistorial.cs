@@ -20,13 +20,16 @@ namespace Examen2Grupo3
     public partial class FacturasHistorial : Form
     {
         static Pedido Actual = new Pedido();
-        List<Pedido>? pedidos = new List<Pedido>();
+        List<Pedido> pedidos = new List<Pedido>();
         static Empresa Empresa = new Empresa();
-        private Datos.Usuarios UsuarioActual = new Datos.Usuarios();    
+        private Datos.Usuarios UsuarioActual = new Datos.Usuarios();
+        private BindingSource bindingSource = new BindingSource();
         public FacturasHistorial(Datos.Usuarios usuario)
         {
             UsuarioActual = usuario;    
             InitializeComponent();
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = bindingSource;
             dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarFacturas("Ordenes.json");
@@ -37,17 +40,9 @@ namespace Examen2Grupo3
             if (File.Exists(rutaArchivo))
             {
                 string json = File.ReadAllText(rutaArchivo);
-                pedidos = JsonConvert.DeserializeObject<List<Pedido>>(json); 
-
-                if (pedidos != null) // Verificar que la lista no sea nula  
-                {
-                    dataGridView1.Rows.Clear(); // Limpiar la tabla antes de cargar nuevos datos  
-
-                    foreach (var producto in pedidos)
-                    {
-                        dataGridView1.Rows.Add(producto.ID.ToString("D6"), producto.Cliente.Nombre, producto.Fecha.ToString("dd/MM/yy"), producto.Total);
-                    }
-                }
+                pedidos = JsonConvert.DeserializeObject<List<Pedido>>(json)?? new List<Pedido>();
+                bindingSource.DataSource = pedidos;
+                bindingSource.ResetBindings(false);
             }
         }
         public void cargarEmpresa()
@@ -89,7 +84,6 @@ namespace Examen2Grupo3
 
                 // Se abre el documento para comenzar a escribir en él
                 tempDocument.Open();
-
                 // Se obtiene la plantilla HTML desde los recursos y se convierte a string
                 string htmlContent = Properties.Resources.plantilla_factura != null
                     ? Encoding.UTF8.GetString(Properties.Resources.plantilla_factura)
@@ -107,7 +101,7 @@ namespace Examen2Grupo3
 
                 // Se cierra el documento PDF
                 tempDocument.Close();
-
+               
                 // Se obtiene el número total de páginas generadas en el PDF
                 totalPages = tempWriter.PageNumber; // Calcula el número total de páginas
                
@@ -287,7 +281,7 @@ namespace Examen2Grupo3
                     }
                 }
             }
-            else if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
+            else if (e.ColumnIndex == dataGridView1.Columns["Eliminar2"].Index && e.RowIndex >= 0)
             {
                 Codigo_especial Form = new Codigo_especial();
                 if (UsuarioActual.Tipo == "Aprobador" || UsuarioActual.Tipo == "Registrador")
@@ -334,29 +328,23 @@ namespace Examen2Grupo3
         private void BuscarElemento(string textoBusqueda)
         {
             // Verificar que el texto de búsqueda tenga al menos 3 caracteres
-            if (textoBusqueda.Length < 3)
+            if ((string.IsNullOrWhiteSpace(textoBusqueda) || textoBusqueda.Length < 3))
             {
-                // Si tiene menos de 3 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
+                // Mostrar todos las ordenes
+                bindingSource.DataSource = new List<Pedido>(pedidos);
+
             }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            else
             {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["Numero"].Value != null && fila.Cells["Numero"].Value.ToString().Contains(filtro, StringComparison.CurrentCultureIgnoreCase)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+                string filtro = textoBusqueda.ToLower();
+                var filtrados = pedidos.Where(p =>
+                    p.ID.ToString().Contains(filtro) ||
+                    (p.Cliente != null && p.Cliente.Nombre.ToLower().Contains(filtro))
+                ).ToList();
 
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
+                bindingSource.DataSource = filtrados;
             }
+            bindingSource.ResetBindings(false);
         }
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)//barra de busqueda
         {

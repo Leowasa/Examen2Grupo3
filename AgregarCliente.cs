@@ -101,7 +101,7 @@ namespace Examen2Grupo3
                 //Verificar la contraseñas 
                 else if (guna2TextBox4.Text != guna2TextBox5.Text)
                 {
-                    MessageBox.Show("Las contraseñas no coinciden.");
+                    MessageBox.Show("Las contraseñas no coinciden.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
 
                 }

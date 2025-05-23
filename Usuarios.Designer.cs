@@ -148,6 +148,7 @@
             // 
             // ID
             // 
+            ID.DataPropertyName = "ID";
             ID.HeaderText = "ID";
             ID.Name = "ID";
             ID.ReadOnly = true;
@@ -155,6 +156,7 @@
             // Nombre
             // 
             Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.DataPropertyName = "Nombre";
             Nombre.HeaderText = "Nombre";
             Nombre.Name = "Nombre";
             Nombre.ReadOnly = true;
@@ -162,6 +164,7 @@
             // Username
             // 
             Username.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Username.DataPropertyName = "Username";
             Username.HeaderText = "Username";
             Username.Name = "Username";
             Username.ReadOnly = true;
@@ -169,6 +172,7 @@
             // Tipo
             // 
             Tipo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Tipo.DataPropertyName = "Tipo";
             Tipo.HeaderText = "Tipo";
             Tipo.Name = "Tipo";
             Tipo.ReadOnly = true;
@@ -230,8 +234,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(965, 788);
-            Controls.Add(guna2TextBox1);
             Controls.Add(dataGridView1);
+            Controls.Add(guna2TextBox1);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(btnAgregarUsuario);
@@ -254,12 +258,12 @@
         private PictureBox pictureBox1;
         private DataGridView dataGridView1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private ToolTip toolTip1;
         private DataGridViewTextBoxColumn ID;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn Username;
         private DataGridViewTextBoxColumn Tipo;
         private DataGridViewImageColumn Editar;
         private DataGridViewImageColumn Eliminar;
-        private ToolTip toolTip1;
     }
 }

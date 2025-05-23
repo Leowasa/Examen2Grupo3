@@ -15,10 +15,13 @@ namespace ejemplo
     {
         private static List<Pedido> listaPedido = new List<Pedido>();
         private Datos.Usuarios UsuarioActual = new Datos.Usuarios();
+        private BindingSource bindingSource = new BindingSource();
         public PedidosHistorial(Datos.Usuarios usuario)
         {
             InitializeComponent();
             UsuarioActual  = usuario;
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = bindingSource;
             dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarDatosDesdeJson();
@@ -26,7 +29,7 @@ namespace ejemplo
 
         }
 
-        // Fix for CS1503: Use JsonConvert from Newtonsoft.Json instead of JsonSerializer
+       
         private void CargarDatosDesdeJson()
         {
             string rutaArchivo = "pedidos.json";
@@ -34,29 +37,8 @@ namespace ejemplo
             {
                 string jsonString = File.ReadAllText(rutaArchivo);
                  listaPedido = JsonConvert.DeserializeObject<List<Pedido>>(jsonString)?? new List<Pedido>();
-                dataGridView1.Rows.Clear();
-
-                if (listaPedido != null && listaPedido.Count > 0)
-                {
-                    foreach (var datos in listaPedido)
-                    {
-                        string nombreCliente = datos.Cliente?.Nombre ?? "Desconocido";
-
-                        // Aseguramos que la fecha no sea nula y la mostramos correctamente
-                        string fechaCreacion = datos.Fecha != null ? datos.Fecha.ToString("dd/MM/yyyy") : "Desconocida";
-
-                        // Añadimos la fila correspondiente al DataGridView
-                        dataGridView1.Rows.Add(
-                            datos.ID.ToString("D6"),               // Número de Pedido
-                            nombreCliente,           // Nombre del Cliente
-                            fechaCreacion,           // Fecha de creación
-                            datos.Total,            // Total formateado como moneda
-                            datos.Estado             // Estado del pedido
-                        );
-
-                    }
-                   
-                }
+                bindingSource.DataSource = listaPedido;
+                bindingSource.ResetBindings(false);
             }
         }
 
@@ -110,30 +92,25 @@ namespace ejemplo
         }
         private void BuscarElemento(string textoBusqueda)
         {
-            // Verificar que el texto de búsqueda tenga al menos 4 caracteres
-            if (textoBusqueda.Length < 3)
+
+            // Verificar que el texto de búsqueda tenga al menos 3 caracteres
+            if ((string.IsNullOrWhiteSpace(textoBusqueda) || textoBusqueda.Length < 3))
             {
-                // Si tiene menos de 4 caracteres, mostrar todas las filas
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    fila.Visible = true;
-                }
-                return;
+                // Mostrar todas las ordenes
+                bindingSource.DataSource = new List<Pedido>(listaPedido);
+
             }
-
-            // Convertir el texto de búsqueda a minúsculas para una comparación insensible a mayúsculas/minúsculas
-            string filtro = textoBusqueda.ToLower();
-
-            // Iterar sobre las filas del DataGridView
-            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            else
             {
-                // Verificar si la celda de ID o Nombre contiene el texto de búsqueda
-                bool coincide = (fila.Cells["Numero"].Value != null && fila.Cells["Numero"].Value.ToString().ToLower().Contains(filtro)) ||
-                                (fila.Cells["Nombre"].Value != null && fila.Cells["Nombre"].Value.ToString().ToLower().Contains(filtro));
+                string filtro = textoBusqueda.ToLower();
+                var filtrados = listaPedido.Where(p =>
+                    p.ID.ToString().Contains(filtro) ||
+                    (p.Cliente != null && p.Cliente.Nombre.ToLower().Contains(filtro))
+                ).ToList();
 
-                // Mostrar u ocultar la fila según si coincide con el filtro
-                fila.Visible = coincide;
+                bindingSource.DataSource = filtrados;
             }
+            bindingSource.ResetBindings(false);
         }
 
         //Botones en DataGridView
@@ -183,9 +160,6 @@ namespace ejemplo
             {
                 // Eliminar el pedido de la lista
                 listaPedido.Remove(pedidoAEliminar);
-
-                // Eliminar la fila del DataGridView
-                dataGridView1.Rows.RemoveAt(e.RowIndex);
 
                 // Guardar los cambios en el archivo JSON
                 GuardarCambios(listaPedido);

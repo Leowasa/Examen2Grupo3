@@ -36,11 +36,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuscarClientes));
             dataGridView1 = new DataGridView();
-            ID = new DataGridViewTextBoxColumn();
-            Nombre = new DataGridViewTextBoxColumn();
-            Correo = new DataGridViewButtonColumn();
-            Direccion = new DataGridViewTextBoxColumn();
-            Tipo = new DataGridViewTextBoxColumn();
             guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             Cliente = new Label();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -54,6 +49,11 @@
             Btnmaximi = new PictureBox();
             Btnmini = new PictureBox();
             btncerrarr = new PictureBox();
+            ID = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Correo = new DataGridViewButtonColumn();
+            Direccion = new DataGridViewTextBoxColumn();
+            Tipo = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -105,39 +105,6 @@
             dataGridView1.TabIndex = 100;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
-            // 
-            // ID
-            // 
-            ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ID.HeaderText = "ID";
-            ID.Name = "ID";
-            ID.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.HeaderText = "Nombre";
-            Nombre.Name = "Nombre";
-            // 
-            // Correo
-            // 
-            Correo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Correo.FlatStyle = FlatStyle.Flat;
-            Correo.HeaderText = "Correo Electronico";
-            Correo.Name = "Correo";
-            Correo.ReadOnly = true;
-            // 
-            // Direccion
-            // 
-            Direccion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Direccion.HeaderText = "Direccion";
-            Direccion.Name = "Direccion";
-            // 
-            // Tipo
-            // 
-            Tipo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Tipo.HeaderText = "Tipo de cliente ";
-            Tipo.Name = "Tipo";
             // 
             // guna2TextBox2
             // 
@@ -341,6 +308,44 @@
             btncerrarr.TabIndex = 146;
             btncerrarr.TabStop = false;
             // 
+            // ID
+            // 
+            ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ID.DataPropertyName = "ID";
+            ID.HeaderText = "ID";
+            ID.Name = "ID";
+            ID.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.DataPropertyName = "Nombre";
+            Nombre.HeaderText = "Nombre";
+            Nombre.Name = "Nombre";
+            // 
+            // Correo
+            // 
+            Correo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Correo.DataPropertyName = "Correo";
+            Correo.FlatStyle = FlatStyle.Flat;
+            Correo.HeaderText = "Correo Electronico";
+            Correo.Name = "Correo";
+            Correo.ReadOnly = true;
+            // 
+            // Direccion
+            // 
+            Direccion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Direccion.DataPropertyName = "direccion";
+            Direccion.HeaderText = "Direccion";
+            Direccion.Name = "Direccion";
+            // 
+            // Tipo
+            // 
+            Tipo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Tipo.DataPropertyName = "Tipo";
+            Tipo.HeaderText = "Tipo de cliente ";
+            Tipo.Name = "Tipo";
+            // 
             // BuscarClientes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -373,17 +378,12 @@
         }
 
         #endregion
-        private DataGridViewTextBoxColumn ID;
-        private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn CorreoElectronico;
-        private DataGridViewTextBoxColumn Direccion;
-        private DataGridViewTextBoxColumn Tipo;
         private DataGridViewImageColumn Editar;
         private DataGridViewImageColumn Eliminar;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private Label Cliente;
         public DataGridView dataGridView1;
-        private DataGridViewButtonColumn Correo;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private PictureBox pictureBox1;
         private PictureBox btnMaximizar;
@@ -395,5 +395,10 @@
         private PictureBox Btnmini;
         private PictureBox btncerrarr;
         private PictureBox pictureBox2;
+        private DataGridViewTextBoxColumn ID;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewButtonColumn Correo;
+        private DataGridViewTextBoxColumn Direccion;
+        private DataGridViewTextBoxColumn Tipo;
     }
 }

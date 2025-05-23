@@ -26,5 +26,12 @@
     "Nombre": "Luisana",
     "Password": "2630",
     "Tipo": "Registrador"
+  },
+  {
+    "ID": 23423,
+    "Username": "4234",
+    "Nombre": "2342",
+    "Password": "2630",
+    "Tipo": "Aprobador"
   }
 ]
