@@ -125,13 +125,7 @@ namespace Examen2Grupo3
 
 
         }
-        public void EliminarProducto(int id)
-        {
-            Producto producto = inventario.Find(p => p.ID == id);
-            if (producto != null)
-                inventario.Remove(producto);
-
-        }
+     
 
 
         private void BuscarElemento(string textoBusqueda)

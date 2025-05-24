@@ -50,8 +50,10 @@ namespace Examen2Grupo3
                 Lista  = LeerPedidos();
 
                 ListaOriginal = Lista;
+
                 bindingSource.DataSource =Lista;
                 bindingSource.ResetBindings(false);
+                dataGridView1.DataSource = bindingSource;
             }
           
 
@@ -63,11 +65,10 @@ namespace Examen2Grupo3
 
             try
             {
-                // Cargar los pedidos existentes
-                List<Pedido> PedidosExistentes = LeerPedidos();
+            
 
                 // Serializar la lista actualizada de pedidos
-                var json = JsonConvert.SerializeObject(PedidosExistentes, Formatting.Indented);
+                var json = JsonConvert.SerializeObject(Lista, Formatting.Indented);
 
                 // Escribir el JSON en el archivo
                 File.WriteAllText(rutaArchivo, json);
@@ -165,14 +166,20 @@ namespace Examen2Grupo3
         }
         private void eliminar(DataGridViewCellEventArgs e)
         {
-            //Preguntar si en verdad desea eliminar el pedido
+            // Preguntar si en verdad desea eliminar el pedido
             DialogResult result = MessageBox.Show("¿Deseas eliminar este pedido?", "Confirmar eliminación",
-            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
-                Lista.RemoveAt(e.RowIndex);//elimina el pedido preventivo seleccionado
-                 GuardarCambios(Lista);
+                // Obtener el pedido seleccionado desde el DataGridView
+                var pedidoSeleccionado = dataGridView1.Rows[e.RowIndex].DataBoundItem as Pedido;
+                if (pedidoSeleccionado != null)
+                {
+                    Lista.Remove(pedidoSeleccionado);
+                    GuardarCambios(Lista);
+                    CargarDatosDesdeJson();
+                }
             }
         }
       
