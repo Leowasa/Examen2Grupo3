@@ -79,7 +79,7 @@ namespace Examen2Grupo3
                 case 1://ver pedido
                     lblFactura.Text = "Pedido";
                     guna2Button2.Text = "Volver";
-                    guna2Button2.Location = new Point(19, 750);
+                    guna2Button2.Location = new Point(19, 780);
                     guna2TextBox1.Text = orden.Observaciones;
                     lblEncargado.Text = "Encargado Del Pedido: " + orden.Encargado.Username;
                     lblID.Text = "ID: " + orden.Encargado.ID.ToString(); ;

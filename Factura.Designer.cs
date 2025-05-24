@@ -43,7 +43,6 @@
             lblObservaciones = new Label();
             lblIVa = new Label();
             lblDescuento = new Label();
-            label20 = new Label();
             label21 = new Label();
             label13 = new Label();
             label14 = new Label();
@@ -79,6 +78,8 @@
             lblNombre = new Label();
             lblEncargado = new Label();
             pictureBox1 = new PictureBox();
+            label20 = new Label();
+            label18 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -100,7 +101,7 @@
             lblObservaciones.AutoSize = true;
             lblObservaciones.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblObservaciones.ForeColor = SystemColors.Control;
-            lblObservaciones.Location = new Point(19, 723);
+            lblObservaciones.Location = new Point(19, 728);
             lblObservaciones.Name = "lblObservaciones";
             lblObservaciones.Size = new Size(97, 17);
             lblObservaciones.TabIndex = 155;
@@ -108,11 +109,11 @@
             // 
             // lblIVa
             // 
-            lblIVa.Anchor = AnchorStyles.Top;
+            lblIVa.Anchor = AnchorStyles.None;
             lblIVa.AutoSize = true;
             lblIVa.Font = new Font("Segoe UI", 9.75F);
             lblIVa.ForeColor = SystemColors.Control;
-            lblIVa.Location = new Point(923, 744);
+            lblIVa.Location = new Point(911, 755);
             lblIVa.Name = "lblIVa";
             lblIVa.Size = new Size(53, 17);
             lblIVa.TabIndex = 153;
@@ -120,35 +121,23 @@
             // 
             // lblDescuento
             // 
-            lblDescuento.Anchor = AnchorStyles.Top;
+            lblDescuento.Anchor = AnchorStyles.None;
             lblDescuento.AutoSize = true;
             lblDescuento.Font = new Font("Segoe UI", 9.75F);
             lblDescuento.ForeColor = SystemColors.Control;
-            lblDescuento.Location = new Point(923, 727);
+            lblDescuento.Location = new Point(911, 738);
             lblDescuento.Name = "lblDescuento";
             lblDescuento.Size = new Size(91, 17);
             lblDescuento.TabIndex = 152;
             lblDescuento.Text = "Descuento: ---";
             // 
-            // label20
-            // 
-            label20.Anchor = AnchorStyles.Top;
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 9.75F);
-            label20.ForeColor = SystemColors.Control;
-            label20.Location = new Point(923, 761);
-            label20.Name = "label20";
-            label20.Size = new Size(63, 17);
-            label20.TabIndex = 151;
-            label20.Text = "Total: ----";
-            // 
             // label21
             // 
-            label21.Anchor = AnchorStyles.Top;
+            label21.Anchor = AnchorStyles.None;
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 9.75F);
             label21.ForeColor = SystemColors.Control;
-            label21.Location = new Point(923, 710);
+            label21.Location = new Point(911, 721);
             label21.Name = "label21";
             label21.Size = new Size(83, 17);
             label21.TabIndex = 150;
@@ -159,7 +148,7 @@
             label13.Anchor = AnchorStyles.None;
             label13.AutoSize = true;
             label13.ForeColor = Color.White;
-            label13.Location = new Point(737, 363);
+            label13.Location = new Point(713, 368);
             label13.Name = "label13";
             label13.Size = new Size(162, 15);
             label13.TabIndex = 147;
@@ -170,7 +159,7 @@
             label14.Anchor = AnchorStyles.None;
             label14.AutoSize = true;
             label14.ForeColor = Color.White;
-            label14.Location = new Point(737, 303);
+            label14.Location = new Point(713, 308);
             label14.Name = "label14";
             label14.Size = new Size(274, 15);
             label14.TabIndex = 146;
@@ -181,7 +170,7 @@
             label15.Anchor = AnchorStyles.None;
             label15.AutoSize = true;
             label15.ForeColor = Color.White;
-            label15.Location = new Point(737, 334);
+            label15.Location = new Point(713, 339);
             label15.Name = "label15";
             label15.Size = new Size(251, 15);
             label15.TabIndex = 145;
@@ -192,7 +181,7 @@
             label16.Anchor = AnchorStyles.None;
             label16.AutoSize = true;
             label16.ForeColor = Color.White;
-            label16.Location = new Point(737, 227);
+            label16.Location = new Point(713, 232);
             label16.Name = "label16";
             label16.Size = new Size(154, 15);
             label16.TabIndex = 144;
@@ -203,7 +192,7 @@
             label17.Anchor = AnchorStyles.None;
             label17.AutoSize = true;
             label17.ForeColor = Color.White;
-            label17.Location = new Point(737, 259);
+            label17.Location = new Point(713, 264);
             label17.Name = "label17";
             label17.Size = new Size(269, 15);
             label17.TabIndex = 143;
@@ -215,7 +204,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.White;
-            label12.Location = new Point(340, 265);
+            label12.Location = new Point(316, 270);
             label12.Name = "label12";
             label12.Size = new Size(82, 17);
             label12.TabIndex = 142;
@@ -227,7 +216,7 @@
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(340, 302);
+            label11.Location = new Point(316, 307);
             label11.Name = "label11";
             label11.Size = new Size(259, 17);
             label11.TabIndex = 141;
@@ -235,11 +224,11 @@
             // 
             // label10
             // 
-            label10.Anchor = AnchorStyles.Left;
+            label10.Anchor = AnchorStyles.None;
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.White;
-            label10.Location = new Point(340, 334);
+            label10.Location = new Point(316, 339);
             label10.Name = "label10";
             label10.Size = new Size(271, 17);
             label10.TabIndex = 140;
@@ -251,7 +240,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(340, 226);
+            label9.Location = new Point(316, 231);
             label9.Name = "label9";
             label9.Size = new Size(126, 17);
             label9.TabIndex = 139;
@@ -261,7 +250,7 @@
             // 
             panel3.Anchor = AnchorStyles.None;
             panel3.BackColor = SystemColors.HotTrack;
-            panel3.Location = new Point(340, 211);
+            panel3.Location = new Point(316, 216);
             panel3.Name = "panel3";
             panel3.Size = new Size(365, 10);
             panel3.TabIndex = 129;
@@ -340,7 +329,7 @@
             // 
             panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = SystemColors.HotTrack;
-            panel1.Location = new Point(737, 212);
+            panel1.Location = new Point(713, 217);
             panel1.Name = "panel1";
             panel1.Size = new Size(370, 10);
             panel1.TabIndex = 128;
@@ -351,7 +340,7 @@
             lblFactura.AutoSize = true;
             lblFactura.Font = new Font("Bell MT", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblFactura.ForeColor = Color.White;
-            lblFactura.Location = new Point(737, 167);
+            lblFactura.Location = new Point(713, 172);
             lblFactura.Name = "lblFactura";
             lblFactura.Size = new Size(114, 34);
             lblFactura.TabIndex = 127;
@@ -362,7 +351,7 @@
             // 
             dataGridView1.AccessibleRole = AccessibleRole.TitleBar;
             dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.Anchor = AnchorStyles.Top;
+            dataGridView1.Anchor = AnchorStyles.None;
             dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -379,7 +368,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Descripcion, Categoria, Cantidad, PrecioUnit, Total });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(329, 422);
+            dataGridView1.Location = new Point(305, 427);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
@@ -455,7 +444,7 @@
             guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Font = new Font("Segoe UI", 9F);
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(19, 750);
+            guna2TextBox1.Location = new Point(19, 755);
             guna2TextBox1.MaxLength = 100;
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderText = "";
@@ -466,7 +455,7 @@
             // 
             // guna2Button2
             // 
-            guna2Button2.Anchor = AnchorStyles.Left;
+            guna2Button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             guna2Button2.BorderRadius = 8;
             guna2Button2.CustomizableEdges = customizableEdges3;
             guna2Button2.DisabledState.BorderColor = Color.DarkGray;
@@ -476,7 +465,7 @@
             guna2Button2.FillColor = SystemColors.HotTrack;
             guna2Button2.Font = new Font("Segoe UI", 9F);
             guna2Button2.ForeColor = Color.White;
-            guna2Button2.Location = new Point(244, 763);
+            guna2Button2.Location = new Point(244, 773);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2Button2.Size = new Size(138, 23);
@@ -536,10 +525,31 @@
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(6, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(213, 170);
+            pictureBox1.Size = new Size(199, 166);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 167;
             pictureBox1.TabStop = false;
+            // 
+            // label20
+            // 
+            label20.Anchor = AnchorStyles.None;
+            label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label20.ForeColor = Color.Gainsboro;
+            label20.Location = new Point(911, 774);
+            label20.Name = "label20";
+            label20.Size = new Size(63, 17);
+            label20.TabIndex = 168;
+            label20.Text = "Total: ----";
+            // 
+            // label18
+            // 
+            label18.ForeColor = Color.FromArgb(45, 66, 91);
+            label18.Location = new Point(6, 803);
+            label18.Name = "label18";
+            label18.Size = new Size(14, 10);
+            label18.TabIndex = 169;
+            label18.Text = "label18";
             // 
             // Factura
             // 
@@ -548,6 +558,8 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(1297, 811);
+            Controls.Add(label18);
+            Controls.Add(label20);
             Controls.Add(pictureBox1);
             Controls.Add(lblID);
             Controls.Add(lblNombre);
@@ -560,7 +572,6 @@
             Controls.Add(lblObservaciones);
             Controls.Add(lblIVa);
             Controls.Add(lblDescuento);
-            Controls.Add(label20);
             Controls.Add(label21);
             Controls.Add(label13);
             Controls.Add(label14);
@@ -641,5 +652,6 @@
         private Label lblNombre;
         private Label lblEncargado;
         private Label lblIVa;
+        private Label label18;
     }
 }
