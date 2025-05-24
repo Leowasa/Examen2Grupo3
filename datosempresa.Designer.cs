@@ -93,7 +93,6 @@
             // 
             // guna2Button1
             // 
-            guna2Button1.Anchor = AnchorStyles.Top;
             guna2Button1.BorderRadius = 8;
             guna2Button1.CustomizableEdges = customizableEdges1;
             guna2Button1.DisabledState.BorderColor = Color.DarkGray;

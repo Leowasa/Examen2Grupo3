@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Verperfil));
             lblRol = new Label();
             lblUsuario = new Label();
@@ -42,6 +42,7 @@
             // 
             // lblRol
             // 
+            lblRol.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblRol.AutoSize = true;
             lblRol.ForeColor = Color.Gainsboro;
             lblRol.Location = new Point(524, 139);
@@ -54,6 +55,7 @@
             // 
             // lblUsuario
             // 
+            lblUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblUsuario.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblUsuario.ForeColor = Color.Gainsboro;
             lblUsuario.Location = new Point(515, 109);
@@ -66,6 +68,7 @@
             // 
             // lblID
             // 
+            lblID.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblID.AutoSize = true;
             lblID.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             lblID.ForeColor = Color.Gainsboro;
@@ -78,6 +81,7 @@
             // 
             // lblNombre
             // 
+            lblNombre.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             lblNombre.ForeColor = Color.Gainsboro;
@@ -90,8 +94,9 @@
             // 
             // guna2Button1
             // 
+            guna2Button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2Button1.BorderRadius = 8;
-            guna2Button1.CustomizableEdges = customizableEdges3;
+            guna2Button1.CustomizableEdges = customizableEdges1;
             guna2Button1.DisabledState.BorderColor = Color.DarkGray;
             guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -101,7 +106,7 @@
             guna2Button1.ForeColor = Color.White;
             guna2Button1.Location = new Point(486, 257);
             guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2Button1.Size = new Size(151, 23);
             guna2Button1.TabIndex = 129;
             guna2Button1.Text = "Cambiar contraseña";
@@ -109,6 +114,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(515, 25);
             pictureBox1.Name = "pictureBox1";

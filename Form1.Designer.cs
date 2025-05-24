@@ -111,7 +111,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1200, 750);
+            panel1.Size = new Size(1300, 750);
             panel1.TabIndex = 0;
             // 
             // PanelPrincipal
@@ -120,7 +120,7 @@
             PanelPrincipal.Dock = DockStyle.Fill;
             PanelPrincipal.Location = new Point(250, 35);
             PanelPrincipal.Name = "PanelPrincipal";
-            PanelPrincipal.Size = new Size(950, 715);
+            PanelPrincipal.Size = new Size(1050, 715);
             PanelPrincipal.TabIndex = 145;
             PanelPrincipal.Paint += PanelPrincipal_Paint;
             // 
@@ -518,7 +518,7 @@
             guna2CustomGradientPanel1.Location = new Point(0, 0);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2CustomGradientPanel1.Size = new Size(1200, 35);
+            guna2CustomGradientPanel1.Size = new Size(1300, 35);
             guna2CustomGradientPanel1.TabIndex = 141;
             guna2CustomGradientPanel1.MouseDown += guna2CustomGradientPanel1_MouseDown_1;
             // 
@@ -529,7 +529,7 @@
             btnMaximizar.Cursor = Cursors.Hand;
             btnMaximizar.ErrorImage = (Image)resources.GetObject("btnMaximizar.ErrorImage");
             btnMaximizar.Image = (Image)resources.GetObject("btnMaximizar.Image");
-            btnMaximizar.Location = new Point(1132, 7);
+            btnMaximizar.Location = new Point(1232, 7);
             btnMaximizar.Name = "btnMaximizar";
             btnMaximizar.Size = new Size(25, 25);
             btnMaximizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -544,7 +544,7 @@
             btnRestaurar.Cursor = Cursors.Hand;
             btnRestaurar.ErrorImage = (Image)resources.GetObject("btnRestaurar.ErrorImage");
             btnRestaurar.Image = (Image)resources.GetObject("btnRestaurar.Image");
-            btnRestaurar.Location = new Point(1132, 7);
+            btnRestaurar.Location = new Point(1232, 7);
             btnRestaurar.Name = "btnRestaurar";
             btnRestaurar.Size = new Size(25, 25);
             btnRestaurar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -560,7 +560,7 @@
             bntMinimizar.Cursor = Cursors.Hand;
             bntMinimizar.ErrorImage = (Image)resources.GetObject("bntMinimizar.ErrorImage");
             bntMinimizar.Image = (Image)resources.GetObject("bntMinimizar.Image");
-            bntMinimizar.Location = new Point(1101, 7);
+            bntMinimizar.Location = new Point(1201, 7);
             bntMinimizar.Name = "bntMinimizar";
             bntMinimizar.Size = new Size(25, 25);
             bntMinimizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -575,7 +575,7 @@
             btnCerrar.Cursor = Cursors.Hand;
             btnCerrar.ErrorImage = (Image)resources.GetObject("btnCerrar.ErrorImage");
             btnCerrar.Image = (Image)resources.GetObject("btnCerrar.Image");
-            btnCerrar.Location = new Point(1163, 7);
+            btnCerrar.Location = new Point(1263, 7);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(25, 25);
             btnCerrar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -589,7 +589,7 @@
             Btnrest.BackColor = Color.Transparent;
             Btnrest.Cursor = Cursors.Hand;
             Btnrest.ErrorImage = null;
-            Btnrest.Location = new Point(2132, 7);
+            Btnrest.Location = new Point(2232, 7);
             Btnrest.Name = "Btnrest";
             Btnrest.Size = new Size(25, 25);
             Btnrest.SizeMode = PictureBoxSizeMode.Zoom;
@@ -603,7 +603,7 @@
             Btnmaximi.BackColor = Color.Transparent;
             Btnmaximi.Cursor = Cursors.Hand;
             Btnmaximi.ErrorImage = null;
-            Btnmaximi.Location = new Point(2132, 7);
+            Btnmaximi.Location = new Point(2232, 7);
             Btnmaximi.Name = "Btnmaximi";
             Btnmaximi.Size = new Size(25, 25);
             Btnmaximi.SizeMode = PictureBoxSizeMode.Zoom;
@@ -616,7 +616,7 @@
             Btnmini.BackColor = Color.Transparent;
             Btnmini.Cursor = Cursors.Hand;
             Btnmini.ErrorImage = null;
-            Btnmini.Location = new Point(2101, 7);
+            Btnmini.Location = new Point(2201, 7);
             Btnmini.Name = "Btnmini";
             Btnmini.Size = new Size(25, 25);
             Btnmini.SizeMode = PictureBoxSizeMode.Zoom;
@@ -629,7 +629,7 @@
             btncerrarr.BackColor = Color.Transparent;
             btncerrarr.Cursor = Cursors.Hand;
             btncerrarr.ErrorImage = null;
-            btncerrarr.Location = new Point(2163, 7);
+            btncerrarr.Location = new Point(2263, 7);
             btncerrarr.Name = "btncerrarr";
             btncerrarr.Size = new Size(25, 25);
             btncerrarr.SizeMode = PictureBoxSizeMode.Zoom;
@@ -642,10 +642,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(1200, 750);
+            ClientSize = new Size(1300, 750);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            MinimumSize = new Size(1200, 500);
+            MinimumSize = new Size(1300, 500);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
