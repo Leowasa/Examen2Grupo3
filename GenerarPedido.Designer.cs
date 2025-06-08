@@ -134,7 +134,7 @@
             // 
             // lblDescuento
             // 
-            lblDescuento.Anchor = AnchorStyles.Right;
+            lblDescuento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblDescuento.AutoSize = true;
             lblDescuento.ForeColor = Color.Gainsboro;
             lblDescuento.Location = new Point(762, 746);
@@ -145,7 +145,7 @@
             // 
             // lblTotal
             // 
-            lblTotal.Anchor = AnchorStyles.Right;
+            lblTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblTotal.AutoSize = true;
             lblTotal.ForeColor = Color.Gainsboro;
             lblTotal.Location = new Point(762, 761);
@@ -156,7 +156,7 @@
             // 
             // lblSubtotal
             // 
-            lblSubtotal.Anchor = AnchorStyles.Right;
+            lblSubtotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblSubtotal.AutoSize = true;
             lblSubtotal.ForeColor = Color.Gainsboro;
             lblSubtotal.Location = new Point(761, 731);
@@ -520,6 +520,7 @@
             // 
             // Confirmar
             // 
+            Confirmar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Confirmar.BorderRadius = 8;
             Confirmar.CustomizableEdges = customizableEdges19;
             Confirmar.DisabledState.BorderColor = Color.DarkGray;

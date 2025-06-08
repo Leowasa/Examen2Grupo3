@@ -17,7 +17,7 @@ namespace ejemplo
         public Form1(Datos.Usuarios UsuarioActual)
         {
             InitializeComponent();
-            // En el constructor de Form1 o en el diseñador
+          
             PanelPrincipal.AutoScroll = true;
             this.UsuarioActual = UsuarioActual;
             customizemenu();
@@ -25,8 +25,7 @@ namespace ejemplo
             lblUsuario.Text = UsuarioActual.Username;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.DoubleBuffered = true;
-            // this.FormBorderStyle = FormBorderStyle.None; // Elimina el borde del formulario
-            // this.Region = CrearRegionRedondeada(30);
+           
         }
         public Form1()
         {
@@ -276,5 +275,6 @@ namespace ejemplo
         {
 
         }
+
     }
 }
