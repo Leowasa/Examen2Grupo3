@@ -13,7 +13,7 @@ namespace ejemplo
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int IParam);
-
+        //
         public Form1(Datos.Usuarios UsuarioActual)
         {
             InitializeComponent();
