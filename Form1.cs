@@ -17,7 +17,7 @@ namespace ejemplo
         public Form1(Datos.Usuarios UsuarioActual)
         {
             InitializeComponent();
-          
+
             PanelPrincipal.AutoScroll = true;
             this.UsuarioActual = UsuarioActual;
             customizemenu();
@@ -25,14 +25,14 @@ namespace ejemplo
             lblUsuario.Text = UsuarioActual.Username;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.DoubleBuffered = true;
-           
+
         }
         public Form1()
         {
             InitializeComponent();
             customizemenu();
         }
-        
+
         private void customizemenu()
         {
             panelhistorial.Visible = false;
@@ -276,5 +276,9 @@ namespace ejemplo
 
         }
 
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
