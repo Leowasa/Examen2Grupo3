@@ -85,7 +85,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(12, 200);
+            label4.Location = new Point(12, 140);
             label4.Name = "label4";
             label4.Size = new Size(87, 15);
             label4.TabIndex = 153;
@@ -104,7 +104,7 @@
             guna2Button1.FillColor = SystemColors.HotTrack;
             guna2Button1.Font = new Font("Segoe UI", 9F);
             guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(12, 365);
+            guna2Button1.Location = new Point(11, 302);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2Button1.Size = new Size(111, 36);
@@ -125,7 +125,7 @@
             guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Font = new Font("Segoe UI", 9F);
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(12, 218);
+            guna2TextBox4.Location = new Point(12, 158);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
             guna2TextBox4.SelectedText = "";
@@ -181,7 +181,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.ForeColor = Color.White;
-            label5.Location = new Point(11, 256);
+            label5.Location = new Point(11, 196);
             label5.Name = "label5";
             label5.Size = new Size(128, 15);
             label5.TabIndex = 145;
@@ -192,11 +192,12 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(12, 141);
+            label3.Location = new Point(215, 183);
             label3.Name = "label3";
             label3.Size = new Size(108, 15);
             label3.TabIndex = 144;
             label3.Text = " Correo Electronico";
+            label3.Visible = false;
             // 
             // label2
             // 
@@ -234,7 +235,7 @@
             guna2ComboBox1.IntegralHeight = false;
             guna2ComboBox1.ItemHeight = 20;
             guna2ComboBox1.Items.AddRange(new object[] { "Natural", "Juridico" });
-            guna2ComboBox1.Location = new Point(12, 327);
+            guna2ComboBox1.Location = new Point(12, 267);
             guna2ComboBox1.Name = "guna2ComboBox1";
             guna2ComboBox1.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2ComboBox1.Size = new Size(181, 26);
@@ -253,13 +254,14 @@
             guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Font = new Font("Segoe UI", 9F);
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(12, 159);
+            guna2TextBox3.Location = new Point(215, 201);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
             guna2TextBox3.SelectedText = "";
             guna2TextBox3.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2TextBox3.Size = new Size(181, 23);
             guna2TextBox3.TabIndex = 148;
+            guna2TextBox3.Visible = false;
             // 
             // guna2TextBox5
             // 
@@ -274,7 +276,7 @@
             guna2TextBox5.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox5.Font = new Font("Segoe UI", 9F);
             guna2TextBox5.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox5.Location = new Point(11, 274);
+            guna2TextBox5.Location = new Point(11, 214);
             guna2TextBox5.Name = "guna2TextBox5";
             guna2TextBox5.PasswordChar = '*';
             guna2TextBox5.PlaceholderText = "";
@@ -288,7 +290,7 @@
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
             label6.ForeColor = Color.White;
-            label6.Location = new Point(11, 309);
+            label6.Location = new Point(11, 249);
             label6.Name = "label6";
             label6.Size = new Size(39, 15);
             label6.TabIndex = 156;
@@ -448,7 +450,7 @@
             AutoSize = true;
             BackgroundImage = Properties.Resources.Fondo;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(268, 413);
+            ClientSize = new Size(268, 350);
             Controls.Add(guna2TextBox4);
             Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(label6);

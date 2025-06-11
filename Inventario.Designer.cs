@@ -35,6 +35,9 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inventario));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
@@ -49,6 +52,7 @@
             PrecioUnitario = new DataGridViewTextBoxColumn();
             Editar = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
+            btnMoneda = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -189,7 +193,7 @@
             Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             Categoria.DataPropertyName = "Categoria";
             Categoria.FlatStyle = FlatStyle.Flat;
-            Categoria.HeaderText = "Categoria";
+            Categoria.HeaderText = "Ubicacion";
             Categoria.Name = "Categoria";
             Categoria.ReadOnly = true;
             // 
@@ -213,7 +217,7 @@
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             PrecioUnitario.DefaultCellStyle = dataGridViewCellStyle2;
-            PrecioUnitario.HeaderText = "PrecioUnitario";
+            PrecioUnitario.HeaderText = "Precio Unitario";
             PrecioUnitario.Name = "PrecioUnitario";
             // 
             // Editar
@@ -234,12 +238,34 @@
             Eliminar.Resizable = DataGridViewTriState.True;
             Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
+            // btnMoneda
+            // 
+            btnMoneda.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnMoneda.BorderRadius = 8;
+            btnMoneda.CustomizableEdges = customizableEdges5;
+            btnMoneda.DisabledState.BorderColor = Color.DarkGray;
+            btnMoneda.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnMoneda.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnMoneda.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnMoneda.FillColor = SystemColors.HotTrack;
+            btnMoneda.Font = new Font("Segoe UI", 9F);
+            btnMoneda.ForeColor = Color.White;
+            btnMoneda.Image = (Image)resources.GetObject("btnMoneda.Image");
+            btnMoneda.ImageSize = new Size(32, 32);
+            btnMoneda.Location = new Point(697, 125);
+            btnMoneda.Name = "btnMoneda";
+            btnMoneda.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnMoneda.Size = new Size(43, 30);
+            btnMoneda.TabIndex = 158;
+            btnMoneda.Click += guna2Button1_Click;
+            // 
             // Inventario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(965, 788);
+            Controls.Add(btnMoneda);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(guna2Button2);
@@ -272,6 +298,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewImageColumn dataGridViewImageColumn1;
         private DataGridViewImageColumn dataGridViewImageColumn2;
+        private Guna.UI2.WinForms.Guna2Button btnMoneda;
         private DataGridViewTextBoxColumn ID;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn Categoria;

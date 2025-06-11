@@ -53,6 +53,11 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GenerarPedido));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel3 = new Panel();
             Cliente = new Label();
             lblID = new Label();
@@ -88,6 +93,8 @@
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             Confirmar = new Guna.UI2.WinForms.Guna2Button();
+            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
+            btneliminar = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -107,9 +114,9 @@
             Cliente.ForeColor = Color.Gainsboro;
             Cliente.Location = new Point(25, 9);
             Cliente.Name = "Cliente";
-            Cliente.Size = new Size(159, 34);
+            Cliente.Size = new Size(145, 34);
             Cliente.TabIndex = 123;
-            Cliente.Text = "Pedido Nº: ";
+            Cliente.Text = "Venta Nº: ";
             Cliente.TextAlign = ContentAlignment.TopCenter;
             // 
             // lblID
@@ -136,10 +143,11 @@
             // 
             lblDescuento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblDescuento.AutoSize = true;
+            lblDescuento.Font = new Font("Microsoft Sans Serif", 9.75F);
             lblDescuento.ForeColor = Color.Gainsboro;
-            lblDescuento.Location = new Point(762, 746);
+            lblDescuento.Location = new Point(761, 883);
             lblDescuento.Name = "lblDescuento";
-            lblDescuento.Size = new Size(69, 15);
+            lblDescuento.Size = new Size(78, 16);
             lblDescuento.TabIndex = 118;
             lblDescuento.Text = "Descuento: ";
             // 
@@ -147,10 +155,11 @@
             // 
             lblTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("Microsoft Sans Serif", 9.75F);
             lblTotal.ForeColor = Color.Gainsboro;
-            lblTotal.Location = new Point(762, 761);
+            lblTotal.Location = new Point(762, 899);
             lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(38, 15);
+            lblTotal.Size = new Size(44, 16);
             lblTotal.TabIndex = 117;
             lblTotal.Text = "Total: ";
             // 
@@ -158,10 +167,11 @@
             // 
             lblSubtotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblSubtotal.AutoSize = true;
+            lblSubtotal.Font = new Font("Microsoft Sans Serif", 9.75F);
             lblSubtotal.ForeColor = Color.Gainsboro;
-            lblSubtotal.Location = new Point(761, 731);
+            lblSubtotal.Location = new Point(762, 867);
             lblSubtotal.Name = "lblSubtotal";
-            lblSubtotal.Size = new Size(57, 15);
+            lblSubtotal.Size = new Size(62, 16);
             lblSubtotal.TabIndex = 116;
             lblSubtotal.Text = "Subtotal: ";
             // 
@@ -171,16 +181,16 @@
             label4.ForeColor = Color.Gainsboro;
             label4.Location = new Point(32, 168);
             label4.Name = "label4";
-            label4.Size = new Size(95, 15);
+            label4.Size = new Size(99, 15);
             label4.TabIndex = 114;
-            label4.Text = "fecha del Pedido";
+            label4.Text = "fecha de la venta:";
             // 
             // label10
             // 
             label10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label10.AutoSize = true;
             label10.ForeColor = Color.Gainsboro;
-            label10.Location = new Point(761, 331);
+            label10.Location = new Point(764, 251);
             label10.Name = "label10";
             label10.Size = new Size(60, 15);
             label10.TabIndex = 112;
@@ -221,11 +231,12 @@
             label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.ForeColor = Color.Gainsboro;
-            label3.Location = new Point(761, 264);
+            label3.Location = new Point(545, 273);
             label3.Name = "label3";
             label3.Size = new Size(108, 15);
             label3.TabIndex = 106;
             label3.Text = "Correo Electronico:";
+            label3.Visible = false;
             // 
             // label2
             // 
@@ -355,13 +366,14 @@
             guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox3.Font = new Font("Segoe UI", 9F);
             guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(761, 284);
+            guna2TextBox3.Location = new Point(545, 293);
             guna2TextBox3.Name = "guna2TextBox3";
             guna2TextBox3.PlaceholderText = "";
             guna2TextBox3.SelectedText = "";
             guna2TextBox3.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2TextBox3.Size = new Size(181, 23);
             guna2TextBox3.TabIndex = 134;
+            guna2TextBox3.Visible = false;
             // 
             // guna2TextBox4
             // 
@@ -376,7 +388,7 @@
             guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox4.Font = new Font("Segoe UI", 9F);
             guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(761, 349);
+            guna2TextBox4.Location = new Point(764, 269);
             guna2TextBox4.Name = "guna2TextBox4";
             guna2TextBox4.PlaceholderText = "";
             guna2TextBox4.SelectedText = "";
@@ -425,7 +437,7 @@
             dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle4.SelectionForeColor = Color.White;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridView1.Size = new Size(930, 148);
+            dataGridView1.Size = new Size(930, 334);
             dataGridView1.TabIndex = 136;
             // 
             // Column1
@@ -451,7 +463,7 @@
             // Columna4
             // 
             Columna4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Columna4.HeaderText = "Categoria";
+            Columna4.HeaderText = "Ubicacion";
             Columna4.Name = "Columna4";
             Columna4.ReadOnly = true;
             // 
@@ -530,7 +542,7 @@
             Confirmar.FillColor = SystemColors.HotTrack;
             Confirmar.Font = new Font("Segoe UI", 9F);
             Confirmar.ForeColor = Color.White;
-            Confirmar.Location = new Point(19, 765);
+            Confirmar.Location = new Point(19, 894);
             Confirmar.Name = "Confirmar";
             Confirmar.ShadowDecoration.CustomizableEdges = customizableEdges20;
             Confirmar.Size = new Size(111, 23);
@@ -538,13 +550,55 @@
             Confirmar.Text = "Confirmar";
             Confirmar.Click += btnConfirmar_Click;
             // 
+            // guna2Button3
+            // 
+            guna2Button3.BorderRadius = 8;
+            guna2Button3.CustomizableEdges = customizableEdges21;
+            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button3.FillColor = SystemColors.HotTrack;
+            guna2Button3.Font = new Font("Segoe UI", 9F);
+            guna2Button3.ForeColor = Color.White;
+            guna2Button3.Image = (Image)resources.GetObject("guna2Button3.Image");
+            guna2Button3.ImageSize = new Size(30, 27);
+            guna2Button3.Location = new Point(279, 494);
+            guna2Button3.Name = "guna2Button3";
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            guna2Button3.Size = new Size(53, 23);
+            guna2Button3.TabIndex = 159;
+            guna2Button3.Click += guna2Button3_Click;
+            // 
+            // btneliminar
+            // 
+            btneliminar.BorderRadius = 8;
+            btneliminar.CustomizableEdges = customizableEdges23;
+            btneliminar.DisabledState.BorderColor = Color.DarkGray;
+            btneliminar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btneliminar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btneliminar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btneliminar.FillColor = SystemColors.HotTrack;
+            btneliminar.Font = new Font("Segoe UI", 9F);
+            btneliminar.ForeColor = Color.White;
+            btneliminar.Image = (Image)resources.GetObject("btneliminar.Image");
+            btneliminar.ImageSize = new Size(19, 19);
+            btneliminar.Location = new Point(338, 494);
+            btneliminar.Name = "btneliminar";
+            btneliminar.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            btneliminar.Size = new Size(53, 23);
+            btneliminar.TabIndex = 160;
+            btneliminar.Click += btneliminar_Click;
+            // 
             // GenerarPedido
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(45, 66, 91);
-            ClientSize = new Size(965, 800);
+            ClientSize = new Size(965, 929);
+            Controls.Add(btneliminar);
+            Controls.Add(guna2Button3);
             Controls.Add(Confirmar);
             Controls.Add(guna2Button5);
             Controls.Add(guna2Button4);
@@ -615,11 +669,6 @@
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private DataGridViewTextBoxColumn Column4;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Columna4;
-        private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column7;
         private Label label14;
@@ -628,13 +677,20 @@
         private Label label20;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private Guna.UI2.WinForms.Guna2Button guna2Button5;
-        private Guna.UI2.WinForms.Guna2Button guna2Button6;
+        private Guna.UI2.WinForms.Guna2Button btneliminar;
         private Label lblDescuento;
         private Label lblTotal;
         private Label lblSubtotal;
-        private DataGridViewTextBoxColumn PrecioUnit;
-        private DataGridViewTextBoxColumn Total;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox5;
         private Guna.UI2.WinForms.Guna2Button Confirmar;
+        private Guna.UI2.WinForms.Guna2Button guna2Button3;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Columna4;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn PrecioUnit;
+        private DataGridViewTextBoxColumn Total;
     }
 }

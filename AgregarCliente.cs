@@ -137,7 +137,7 @@ namespace Examen2Grupo3
             {
 
                 // Expresión regular para validar correos electrónicos  
-                string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+               // string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
                 int nuevoId = int.Parse(guna2TextBox1.Text); // Suponiendo que el ID se ingresa en `guna2TextBox1`
                 if (!EsIdUnico(nuevoId, Clientes, IdOriginal))
@@ -158,12 +158,12 @@ namespace Examen2Grupo3
                     MessageBox.Show("Por favor seleccione un valor en el ComboBox.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
-                //validar el correo ingresado
+               /* //validar el correo ingresado
                 else if (!Regex.IsMatch(guna2TextBox3.Text, patronCorreo))
                 {
                     MessageBox.Show("El correo ingresado no es válido. Por favor, ingrese un correo válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
-                }
+                }*/
                 //los datos son correctos, guardar en DatosClientes
                 else
                 {
@@ -173,7 +173,6 @@ namespace Examen2Grupo3
                         ID = int.Parse(guna2TextBox1.Text), 
                         Nombre = guna2TextBox2.Text,
                         Direccion = guna2TextBox4.Text,
-                        Correo = guna2TextBox3.Text,
                         Tipo = guna2ComboBox1.SelectedItem?.ToString() ?? string.Empty 
 
                     };
@@ -201,7 +200,7 @@ namespace Examen2Grupo3
                 guna2TextBox1.Text = clientes.ID.ToString();
                 guna2TextBox2.Text = clientes.Nombre;
                 guna2TextBox4.Text = clientes.Direccion;
-                guna2TextBox3.Text = clientes.Correo;
+              
                 guna2ComboBox1.Text = clientes.Tipo;
             }
             catch

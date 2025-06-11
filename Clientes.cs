@@ -88,9 +88,9 @@ namespace ejemplo
                         {
                             ID = int.Parse(datos[0]),
                             Nombre = datos[1],
-                            Correo = datos[2],
-                            Direccion = datos[3],
-                            Tipo = datos[4]
+                        
+                            Direccion = datos[2],
+                            Tipo = datos[3]
                         };
 
                         cliente.Add(clientes);

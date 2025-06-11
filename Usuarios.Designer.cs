@@ -218,7 +218,7 @@
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Location = new Point(23, 135);
             guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "IngresarID o Username...";
+            guna2TextBox1.PlaceholderText = "Ingresar ID o Username...";
             guna2TextBox1.SelectedText = "";
             guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2TextBox1.Size = new Size(164, 23);

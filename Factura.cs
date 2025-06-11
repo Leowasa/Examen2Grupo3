@@ -72,7 +72,6 @@ namespace Examen2Grupo3
             label9.Text = "Nombre: " + orden.Cliente.Nombre;       
             label12.Text = "ID: " + orden.Cliente.ID.ToString();
             label11.Text = "Direccion: " + orden.Cliente.Direccion;
-            label10.Text = "Correo Electronico: " + orden.Cliente.Correo;
 
             switch (Opcion)
             {

@@ -32,15 +32,20 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FacturasHistorial));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Cliente = new Label();
             dataGridView1 = new DataGridView();
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            btnMoneda = new Guna.UI2.WinForms.Guna2Button();
             Numero = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Fechas = new DataGridViewButtonColumn();
             Total = new DataGridViewTextBoxColumn();
+            Ver = new DataGridViewImageColumn();
             Exportar = new DataGridViewImageColumn();
             Eliminar2 = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -56,7 +61,7 @@
             Cliente.Name = "Cliente";
             Cliente.Size = new Size(505, 70);
             Cliente.TabIndex = 112;
-            Cliente.Text = "Historial de Facturas";
+            Cliente.Text = "Historial de Ventas";
             Cliente.TextAlign = ContentAlignment.TopCenter;
             // 
             // dataGridView1
@@ -78,7 +83,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Numero, Nombre, Fechas, Total, Exportar, Eliminar2 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Numero, Nombre, Fechas, Total, Ver, Exportar, Eliminar2 });
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(12, 161);
@@ -109,12 +114,32 @@
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox1.Location = new Point(12, 132);
             guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "ngresar Numero o Nombre del Cliente...";
+            guna2TextBox1.PlaceholderText = "Ingresar Numero o Nombre del Cliente...";
             guna2TextBox1.SelectedText = "";
             guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2TextBox1.Size = new Size(239, 23);
             guna2TextBox1.TabIndex = 149;
             guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
+            // 
+            // btnMoneda
+            // 
+            btnMoneda.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnMoneda.BorderRadius = 8;
+            btnMoneda.CustomizableEdges = customizableEdges3;
+            btnMoneda.DisabledState.BorderColor = Color.DarkGray;
+            btnMoneda.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnMoneda.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnMoneda.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnMoneda.FillColor = SystemColors.HotTrack;
+            btnMoneda.Font = new Font("Segoe UI", 9F);
+            btnMoneda.ForeColor = Color.White;
+            btnMoneda.Image = (Image)resources.GetObject("btnMoneda.Image");
+            btnMoneda.ImageSize = new Size(32, 32);
+            btnMoneda.Location = new Point(910, 125);
+            btnMoneda.Name = "btnMoneda";
+            btnMoneda.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnMoneda.Size = new Size(43, 30);
+            btnMoneda.TabIndex = 159;
             // 
             // Numero
             // 
@@ -152,6 +177,15 @@
             Total.HeaderText = "Monto Total";
             Total.Name = "Total";
             // 
+            // Ver
+            // 
+            Ver.HeaderText = "Ver detalles";
+            Ver.Image = Properties.Resources.icons8_view_details_241;
+            Ver.Name = "Ver";
+            Ver.ReadOnly = true;
+            Ver.Resizable = DataGridViewTriState.True;
+            Ver.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
             // Exportar
             // 
             Exportar.HeaderText = "Exportar";
@@ -176,6 +210,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(965, 788);
+            Controls.Add(btnMoneda);
             Controls.Add(guna2TextBox1);
             Controls.Add(Cliente);
             Controls.Add(dataGridView1);
@@ -194,10 +229,12 @@
         private DataGridViewTextBoxColumn Clientes;
         private DataGridViewTextBoxColumn Fecha;
         private DataGridViewImageColumn Eliminar;
+        private Guna.UI2.WinForms.Guna2Button btnMoneda;
         private DataGridViewTextBoxColumn Numero;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewButtonColumn Fechas;
         private DataGridViewTextBoxColumn Total;
+        private DataGridViewImageColumn Ver;
         private DataGridViewImageColumn Exportar;
         private DataGridViewImageColumn Eliminar2;
     }

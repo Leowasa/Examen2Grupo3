@@ -22,6 +22,7 @@ namespace Examen2Grupo3
         private Producto ProductoNuevo;
         List<Producto> listaProductos = new List<Producto>();
         private Usuarios usuarioActual = new Usuarios();
+        int opcion = 0;
         private List<Producto> inventarioOriginal = new List<Producto>();
         public GenerarPedido(Usuarios usuarioActual)
         {
@@ -31,7 +32,7 @@ namespace Examen2Grupo3
             dataGridView1.Columns["PrecioUnit"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
             CargarInventario("Inventario.json");
-            Cliente.Text = "Pedido Nº: " + CargarNum();//actualiza el numero del pedido conforme se generen mas
+            Cliente.Text = "Venta Nº: " + CargarNum();//actualiza el numero del pedido conforme se generen mas
             this.usuarioActual = usuarioActual;//carga el usuario actual para registrarlo como encargado
             lblEncargado.Text += usuarioActual.Username;
             lblNombre.Text += usuarioActual.Nombre;
@@ -99,7 +100,7 @@ namespace Examen2Grupo3
                 {
                     Nombre = guna2TextBox1.Text,
                     ID = int.Parse(guna2TextBox2.Text),
-                    Correo = guna2TextBox3.Text,
+                 
                     Direccion = guna2TextBox4.Text,
 
                 };
@@ -135,7 +136,7 @@ namespace Examen2Grupo3
             }
         }
 
-      
+
         private void LimpiarTextBox()//si el usuario presiona el btn para limpiar todos los campos del cliente 
         {
             foreach (Control control in this.Controls)
@@ -168,7 +169,8 @@ namespace Examen2Grupo3
             lblDescuento.Text = "Descuento: ---";
             lblTotal.Text = "Total: ---";
             GuardarInventario("Inventario.json");
-            pedido.Productos.Clear(); // Limpiar la lista de productos del pedido actual
+            if (pedido.Productos != null)
+                pedido.Productos.Clear(); // Limpiar la lista de productos del pedido actual
 
         }
 
@@ -191,7 +193,7 @@ namespace Examen2Grupo3
             guna2TextBox1.Text = Clientes.Nombre;
             guna2TextBox2.Text = Clientes.ID.ToString();
             guna2TextBox4.Text = Clientes.Direccion;
-            guna2TextBox3.Text = Clientes.Correo;
+     
         }
 
 
@@ -233,11 +235,11 @@ namespace Examen2Grupo3
                 }
                 catch
                 {
-                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los campos requeridos",  "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error al ingresar los datos. Verifique que haya ingresado correctamente los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
-   
+
         }
         public void Descuento()//en esta funcion se aplican los montos
         {
@@ -281,11 +283,76 @@ namespace Examen2Grupo3
             lblDescuento.Text = "Descuento: ";
             lblSubtotal.Text = "Subtotal: ";
             lblTotal.Text = "Total: ";
-            Cliente.Text = "Pedido Nº: " + CargarNum();
+            Cliente.Text = "Venta Nº: " + CargarNum();
 
-            MessageBox.Show("Pedido generado exitosamente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Venta generado exitosamente!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
+        }
+
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+
+            opcion++;
+            if (pedido.Productos == null && moneda.bolivares == 0) return;
+
+            if (opcion == 1 && moneda.bolivares != 0)//cambia de dolares a bs
+            {
+                foreach (var producto in pedido.Productos)
+                {
+                    producto.PrecioUnitario = producto.PrecioUnitario / moneda.bolivares; // Cambia aquí la lógica según lo que necesites
+                }
+            }
+
+            if (opcion == 2 && moneda.bolivares != 0)
+            {
+                foreach (var producto in pedido.Productos)
+                {
+                    producto.PrecioUnitario = producto.PrecioUnitario * moneda.bolivares; // Cambia aquí la lógica según lo que necesites
+                }
+                opcion = 0;
+            }
+
+
+            // Refresca el DataGridView
+            dataGridView1.Rows.Clear();
+            foreach (var producto in pedido.Productos)
+            {
+                dataGridView1.Rows.Add(
+                    producto.ID,
+                    producto.Nombre,
+                    producto.Categoria,
+                    producto.Descripcion,
+                    producto.Cantidad,
+                    producto.PrecioUnitario,
+                    producto.Cantidad * producto.PrecioUnitario
+                );
+            }
+
+            // Si tienes cálculos de totales, actualízalos
+            Descuento();
+        }
+        private int ObtenerIndice()
+        {
+            int indice=0;
+            if (dataGridView1.CurrentRow != null)
+            {
+                 indice = dataGridView1.CurrentRow.Index;
+                return indice;
+                // Usar 'indice'
+            }
+            return 2;
+           
+        }
+
+        private void btneliminar_Click(object sender, EventArgs e)
+        {
+            int indice = ObtenerIndice();
+            if (indice >= 0) 
+            {
+                try { dataGridView1.Rows.RemoveAt(indice); } catch { }
+              
+            }
         }
     }
 }

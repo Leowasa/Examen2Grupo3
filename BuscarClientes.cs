@@ -53,7 +53,6 @@ namespace Examen2Grupo3
                 {
                     Clientes.ID = int.Parse(idValue);
                     Clientes.Nombre = nombreValue;
-                    Clientes.Correo = correoValue;
                     Clientes.Direccion = direccionValue;
 
                     // Dispara el evento enviando el cliente seleccionado  

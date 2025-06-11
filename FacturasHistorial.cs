@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using static Examen2Grupo3.Datos;
 using System.Text.Json;
 using System.Collections;
+using ejemplo;
 
 namespace Examen2Grupo3
 {
@@ -32,7 +33,7 @@ namespace Examen2Grupo3
             dataGridView1.DataSource = bindingSource;
             dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
-            CargarFacturas("Ordenes.json");
+            CargarFacturas("pedidos.json");
             cargarEmpresa();
         }
         public void CargarFacturas(string rutaArchivo)
@@ -157,7 +158,7 @@ namespace Examen2Grupo3
             htmlContent = htmlContent.Replace("@p", Actual.Cliente.ID.ToString());
             htmlContent = htmlContent.Replace("@4", Actual.Cliente.Nombre);
             htmlContent = htmlContent.Replace("@otrodato", Actual.Cliente.Direccion);
-            htmlContent = htmlContent.Replace("@si", Actual.Cliente.Correo);
+           
 
             //Datos del usuario
             htmlContent = htmlContent.Replace("@IDusuario", Actual.Encargado.ID.ToString());
@@ -252,8 +253,20 @@ namespace Examen2Grupo3
         {
            
             string json = JsonConvert.SerializeObject(pedidos, Newtonsoft.Json.Formatting.Indented);
-            File.WriteAllText("Ordenes.Json", json);
-            CargarFacturas("Ordenes.Json");
+            File.WriteAllText("pedidos.Json", json);
+            CargarFacturas("pedidos.Json");
+        }
+        public void AbrirOtroFormulario(Pedido seleccionadot, int opcion)
+        {
+            Form1 principal = (Form1)Application.OpenForms["Form1"];
+            if (principal != null)
+            {
+
+                principal.AbrirFormulario(new Factura(seleccionadot, 1, UsuarioActual)); // Abre el formulario Factura Con los detalles del pedido
+
+
+
+            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)//obtener la celda seleccionada
@@ -294,6 +307,14 @@ namespace Examen2Grupo3
                     }
                 }
                 else eliminar(e); return;
+
+            }
+            else if (e.ColumnIndex == dataGridView1.Columns["Ver"].Index && e.RowIndex >= 0)
+            {
+                if (pedidos[e.RowIndex] != null)
+                {
+                    AbrirOtroFormulario(pedidos[e.RowIndex], 1);
+                }
 
             }
 

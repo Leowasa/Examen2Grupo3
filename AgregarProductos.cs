@@ -20,7 +20,7 @@ namespace Examen2Grupo3
             Productos = productos;
             InitializeComponent();
         }
-        public bool EsIdProductoUnico(int id, List<Producto> productos, int? idActual = null)
+        public bool EsIdProductoUnico(string id, List<Producto> productos, string? idActual = null)
         {
             // Excluir el ID actual de la validación si se está editando
             return !productos.Any(p => p.ID == id && p.ID != idActual);
@@ -30,7 +30,7 @@ namespace Examen2Grupo3
         {
             try
             {
-                int nuevoId = int.Parse(guna2TextBox1.Text); // Suponiendo que el ID se ingresa en `guna2TextBox1`
+                string nuevoId = guna2TextBox1.Text; // Suponiendo que el ID se ingresa en `guna2TextBox1`
                 //validacion para que el ID sea mayor o igual a 3
                 if (guna2TextBox1.Text.Trim().Length < 3)
                 {
@@ -47,9 +47,11 @@ namespace Examen2Grupo3
                 {
                     //si los campos son correctos, agregar
                     producto = new Producto();
-                    producto.ID = int.Parse(guna2TextBox1.Text);
+                    producto.ID = guna2TextBox1.Text;
                     producto.Nombre = guna2TextBox2.Text;
                     producto.Descripcion = guna2TextBox3.Text;
+                    if (barratxt.Text != string.Empty) { producto.IDbarra = barratxt.Text; }
+
                     producto.Categoria = guna2TextBox4.Text;
                     producto.PrecioUnitario = decimal.Parse(guna2TextBox6.Text);
                     producto.Cantidad = int.Parse(guna2TextBox5.Text);
@@ -79,19 +81,20 @@ namespace Examen2Grupo3
             this.Close();
         }
 
-        public void SetDatosProducto(string id, string nombre, string categoria, string Cantidad, string descripcion, string precio)
+        public void SetDatosProducto(string id, string barra,string nombre, string categoria, string Cantidad, string descripcion, string precio)
         {
             //Rellenar los textboxes al editar un producto
             try
             {
                 guna2TextBox1.Text = id;
+                barratxt.Text = barra;
                 guna2TextBox2.Text = nombre;
                 guna2TextBox4.Text = categoria;
                 guna2TextBox3.Text = descripcion;
                 guna2TextBox5.Text = Cantidad;
                 guna2TextBox6.Text = precio;
                 // Actualiza el ID del producto actual para la validación
-                producto.ID = int.Parse(id);
+                producto.ID = id;
             }
             catch
             {
@@ -102,13 +105,15 @@ namespace Examen2Grupo3
         {
             Producto productoEditado = new Producto
             {
-                ID = int.Parse(guna2TextBox1.Text),
+                ID = guna2TextBox1.Text,
+            
                 Nombre = guna2TextBox2.Text,
                 Categoria = guna2TextBox4.Text,
                 Descripcion = guna2TextBox3.Text,
                 PrecioUnitario = decimal.Parse(guna2TextBox6.Text),
                 Cantidad = int.Parse(guna2TextBox5.Text)
             };
+            if (barratxt.Text!=string.Empty) { productoEditado.IDbarra = barratxt.Text; }
             return productoEditado;
         }
 
@@ -130,10 +135,7 @@ namespace Examen2Grupo3
 
         private void guna2TextBox1_KeyPress(object sender, KeyPressEventArgs e)//para prohibir al usuario ingresar caracteres en el ID
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true; // Bloquea la entrada de caracteres no numéricos
-            }
+           
         }
     }
 

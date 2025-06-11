@@ -13,6 +13,7 @@ namespace Examen2Grupo3
         Datos.Usuarios Usuarioactual = new Datos.Usuarios();
         private BindingSource bindingSource = new BindingSource();
         private List<Producto> inventarioOriginal = new List<Producto>();
+        string opcion = "$";
 
         [SupportedOSPlatform("windows6.1")]
         public Inventario(Usuarios usuarioactual)
@@ -24,7 +25,7 @@ namespace Examen2Grupo3
             dataGridView1.DataSource = bindingSource;
             if (dataGridView1.Columns["Total"] != null)
                 dataGridView1.Columns["Total"].Visible = false;
-
+            CargarMoneda();
             CargarInventario("Inventario.Json");
             Usuarioactual = usuarioactual;
             ControlUsuario1(usuarioactual);//restringo las funciones mostradas al usuario ingresado
@@ -55,23 +56,23 @@ namespace Examen2Grupo3
                     }
                     else return;//cancelar la operacion si la operacion no fue fallida
                 }
-                DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
-
+              
                 Agregar_Productos formEditar = new Agregar_Productos(inventario, 1);//obtengo los datos del productos desde la fila seleccionada y opero la edicion
                 formEditar.SetDatosProducto(
-                    filaSeleccionada.Cells["ID"].Value.ToString() ?? "0",
-                    filaSeleccionada.Cells["Nombre"].Value.ToString() ?? "",
-                    filaSeleccionada.Cells["Categoria"].Value.ToString() ?? "",
+                    inventario[e.RowIndex].ID,
+                     inventario[e.RowIndex].IDbarra,
+                     inventario[e.RowIndex].Nombre,
+                     inventario[e.RowIndex].Categoria,
 
-                    filaSeleccionada.Cells["Stock"].Value.ToString() ?? "",
-                     filaSeleccionada.Cells["Descripcion"].Value.ToString() ?? "",
-                    filaSeleccionada.Cells["PrecioUnitario"].Value.ToString() ?? ""
+                   inventario[e.RowIndex].Cantidad.ToString(),
+                      inventario[e.RowIndex].Descripcion,
+                     inventario[e.RowIndex].PrecioUnitario.ToString()
                 );
 
                 formEditar.ShowDialog();
                 if (formEditar.DialogResult == DialogResult.OK)//si la operacion fue exitosa. Cargar los datos y despues guardar
                 {
-                    DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
+                   
                     Producto productoEditado = formEditar.ObtenerProductoEditado();
                     inventario[e.RowIndex] = productoEditado;
                     GuardarInventario("Inventario.Json");
@@ -125,7 +126,7 @@ namespace Examen2Grupo3
 
 
         }
-     
+
 
 
         private void BuscarElemento(string textoBusqueda)
@@ -141,7 +142,8 @@ namespace Examen2Grupo3
                 string filtro = textoBusqueda.ToLower();
                 var filtrados = inventarioOriginal.Where(p =>
                     p.ID.ToString().Contains(filtro) ||
-                    (p.Nombre != null && p.Nombre.ToLower().Contains(filtro))
+                    (p.Nombre != null && p.Nombre.ToLower().Contains(filtro)) ||
+                    (p.IDbarra != null && p.IDbarra.ToLower().Contains(filtro))
                 ).ToList();
 
                 bindingSource.DataSource = filtrados;
@@ -152,9 +154,17 @@ namespace Examen2Grupo3
         {
             if (File.Exists(rutaArchivo))
             {
-                string json = File.ReadAllText(rutaArchivo);
-                inventario = JsonSerializer.Deserialize<List<Producto>>(json) ?? new List<Producto>();
-                inventarioOriginal = new List<Producto>(inventario); // Copia original
+                try 
+                {
+                    string json = File.ReadAllText(rutaArchivo);
+                    inventario = JsonSerializer.Deserialize<List<Producto>>(json) ?? new List<Producto>();
+                    inventarioOriginal = new List<Producto>(inventario); // Copia original
+
+                }
+                catch (Exception ex) 
+                {
+                   
+                }
 
                 bindingSource.DataSource = inventario;
                 bindingSource.ResetBindings(false);
@@ -215,7 +225,7 @@ namespace Examen2Grupo3
                         // Crea un nuevo objeto Producto y asigna los valores leídos del CSV
                         Producto producto = new Producto
                         {
-                            ID = int.Parse(datos[0]),
+                            ID = datos[0],
                             Nombre = datos[1],
                             Categoria = datos[2],
                             Descripcion = datos[3],
@@ -295,6 +305,7 @@ namespace Examen2Grupo3
                         PrecioUnitario = formProductos.producto.PrecioUnitario,
                         Cantidad = formProductos.producto.Cantidad
                     };
+                    if (formProductos.producto.IDbarra != string.Empty) ProductoNuevo.IDbarra = formProductos.producto.IDbarra;    
                     inventario.Add(ProductoNuevo);
                     bindingSource.ResetBindings(false); // Notifica al DataGridView que hay un nuevo elemento
                     GuardarInventario("Inventario.Json");
@@ -327,6 +338,74 @@ namespace Examen2Grupo3
         {
 
         }
+        private void cambiarFormatt() 
+        {
 
+      
+            if (opcion == "bs")//bolivares a dolares
+            {
+                foreach (var a in inventario)
+                {
+                    a.PrecioUnitario = a.PrecioUnitario*moneda.bolivares;
+
+
+                }
+                dataGridView1.Columns["PrecioUnitario"].DefaultCellStyle.Format = "C2";
+                dataGridView1.Columns["PrecioUnitario"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-US");
+
+                bindingSource.ResetBindings(false);
+                opcion = "$";
+
+            }
+            else if (opcion == "$") //dolares a bolivares
+            {
+               
+                
+                    foreach (var a in inventario)
+                    {
+                        a.PrecioUnitario = a.PrecioUnitario/moneda.bolivares;
+                    }
+                    dataGridView1.Columns["PrecioUnitario"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("es-VE");
+                    dataGridView1.Columns["PrecioUnitario"].DefaultCellStyle.Format = "c";
+               
+
+                bindingSource.ResetBindings(false);
+                opcion = "bs";
+            }
+
+
+        }
+        public void CargarMoneda()
+        {
+            if (File.Exists("moneda.Json"))
+            {
+                try
+                {
+                    string json = File.ReadAllText("moneda.Json");
+                    decimal prueba = JsonSerializer.Deserialize<decimal>(json);
+                    if (prueba != 0) moneda.bolivares = prueba;
+                    else moneda.bolivares = 0;
+
+
+                   // txtBolivares.Text = moneda.bolivares.ToString("F2"); // Formatear a dos decimales
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
+            }
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            if (moneda.bolivares==0) 
+            {
+                MessageBox.Show("La tasa de cambio no está disponible en este momento. Por favor defina una tasa de cambio para el dólar.","Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            cambiarFormatt();
+        }
     }
 }

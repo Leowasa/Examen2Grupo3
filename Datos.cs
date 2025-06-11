@@ -4,7 +4,11 @@ namespace Examen2Grupo3
 {
     public class Datos
     {
-
+        public class moneda 
+        {
+            static public decimal bolivares { get; set; }
+            static public decimal dolares { get; set; }
+        }
         public class Pedido
         {
             public DateTime Fecha { get; set; }
@@ -27,7 +31,7 @@ namespace Examen2Grupo3
         {
             public string Nombre { get; set; }
             public string Direccion { get; set; }
-            public string Correo { get; set; }
+          //  public string Correo { get; set; }
             public int ID { get; set; }
             public string direccion { get; set; }
             public string Tipo { get; set; }
@@ -36,7 +40,8 @@ namespace Examen2Grupo3
 
         public class Producto
         {
-            public int ID { get; set; }
+            public string ID { get; set; }
+            public string IDbarra { get; set; }
             public string Nombre { get; set; }
             public string Descripcion { get; set; }
             public string Categoria { get; set; }
@@ -63,10 +68,7 @@ namespace Examen2Grupo3
             public string Website { get; set; }
 
         }
-        public void CargarUsuarios()
-        {
-
-        }
+      
     }
 
 }

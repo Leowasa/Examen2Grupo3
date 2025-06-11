@@ -2,6 +2,10 @@ using Examen2Grupo3;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using static Examen2Grupo3.Datos;
+using System.Text.Json;
+using System.util;
+using Examen2Grupo3.Properties;
 
 namespace ejemplo
 {
@@ -25,12 +29,16 @@ namespace ejemplo
             lblUsuario.Text = UsuarioActual.Username;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.DoubleBuffered = true;
+            CargarMoneda();
 
         }
         public Form1()
         {
             InitializeComponent();
             customizemenu();
+            CargarMoneda();
+         // Examen2Grupo3.Properties.Resources.
+
         }
 
         private void customizemenu()
@@ -187,7 +195,8 @@ namespace ejemplo
 
         private void btnHistorial_Click_1(object sender, EventArgs e)
         {
-            showmenu(panelhistorial);
+            customizemenu();
+            AbrirFormulario(new FacturasHistorial(UsuarioActual));
         }
 
         private void btnVentas_Click(object sender, EventArgs e)
@@ -279,6 +288,35 @@ namespace ejemplo
         private void guna2Button1_Click(object sender, EventArgs e)
         {
 
+            AbrirFormulario(new Moneda());
+        }
+
+        private void btnmoneda_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new Moneda());
+        }
+        public void CargarMoneda()
+        {
+            if (File.Exists("moneda.Json"))
+            {
+                try
+                {
+                    string json = File.ReadAllText("moneda.Json");
+                    decimal prueba = JsonSerializer.Deserialize<decimal>(json);
+                    if (prueba != 0) moneda.bolivares = prueba;
+                    else moneda.bolivares = 0;
+
+
+                 
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
+            }
         }
     }
-}
+    }
+

@@ -28,65 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            dataGridView1 = new DataGridView();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             Cliente = new Label();
             guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
+            dataGridView1 = new DataGridView();
             ID = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
-            CorreoElectronico = new DataGridViewButtonColumn();
             Direccion = new DataGridViewTextBoxColumn();
             Tipo = new DataGridViewTextBoxColumn();
             Editar = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AccessibleRole = AccessibleRole.TitleBar;
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToResizeColumns = false;
-            dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.HotTrack;
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeight = 40;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, CorreoElectronico, Direccion, Tipo, Editar, Eliminar });
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.SteelBlue;
-            dataGridView1.Location = new Point(12, 161);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Size = new Size(941, 615);
-            dataGridView1.TabIndex = 99;
-            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // Cliente
             // 
@@ -168,6 +131,41 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.AccessibleRole = AccessibleRole.TitleBar;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.HotTrack;
+            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.ColumnHeadersHeight = 40;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Direccion, Tipo, Editar, Eliminar });
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.SteelBlue;
+            dataGridView1.Location = new Point(12, 161);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.Size = new Size(941, 615);
+            dataGridView1.TabIndex = 152;
+            // 
             // ID
             // 
             ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -182,15 +180,6 @@
             Nombre.DataPropertyName = "Nombre";
             Nombre.HeaderText = "Nombre";
             Nombre.Name = "Nombre";
-            // 
-            // CorreoElectronico
-            // 
-            CorreoElectronico.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            CorreoElectronico.DataPropertyName = "Correo";
-            CorreoElectronico.FlatStyle = FlatStyle.Flat;
-            CorreoElectronico.HeaderText = "Correo Electronico";
-            CorreoElectronico.Name = "CorreoElectronico";
-            CorreoElectronico.ReadOnly = true;
             // 
             // Direccion
             // 
@@ -230,25 +219,24 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(965, 788);
+            Controls.Add(dataGridView1);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(guna2Button2);
             Controls.Add(guna2TextBox2);
             Controls.Add(Cliente);
-            Controls.Add(dataGridView1);
             Cursor = Cursors.IBeam;
             FormBorderStyle = FormBorderStyle.None;
             Name = "Clientes";
             Text = "Clientes";
             Load += Clientes_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private DataGridView dataGridView1;
         private Label Cliente;
         private DataGridViewTextBoxColumn Cedula;
         private DataGridViewButtonColumn Usuariosd;
@@ -260,9 +248,9 @@
         private DataGridViewImageColumn Column3;
         public PictureBox pictureBox1;
         public Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
+        private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn ID;
         private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewButtonColumn CorreoElectronico;
         private DataGridViewTextBoxColumn Direccion;
         private DataGridViewTextBoxColumn Tipo;
         private DataGridViewImageColumn Editar;

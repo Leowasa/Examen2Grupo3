@@ -44,12 +44,12 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuscarProducto));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuscarProducto));
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             guna2TextBox6 = new Guna.UI2.WinForms.Guna2TextBox();
             label5 = new Label();
             btnConfirmar = new Guna.UI2.WinForms.Guna2Button();
@@ -64,7 +64,12 @@
             label1 = new Label();
             ID = new Label();
             dataGridView1 = new DataGridView();
-            guna2TextBox7 = new Guna.UI2.WinForms.Guna2TextBox();
+            ID2 = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Categoria = new DataGridViewTextBoxColumn();
+            Descripcion = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            PrecioUnit = new DataGridViewTextBoxColumn();
             Cliente = new Label();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             pictureBox2 = new PictureBox();
@@ -77,12 +82,7 @@
             Btnmaximi = new PictureBox();
             Btnmini = new PictureBox();
             btncerrarr = new PictureBox();
-            ID2 = new DataGridViewTextBoxColumn();
-            Nombre = new DataGridViewTextBoxColumn();
-            Categoria = new DataGridViewTextBoxColumn();
-            Descripcion = new DataGridViewTextBoxColumn();
-            Cantidad = new DataGridViewTextBoxColumn();
-            PrecioUnit = new DataGridViewTextBoxColumn();
+            guna2TextBox7 = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -126,9 +126,9 @@
             label5.ForeColor = Color.White;
             label5.Location = new Point(818, 103);
             label5.Name = "label5";
-            label5.Size = new Size(58, 15);
+            label5.Size = new Size(60, 15);
             label5.TabIndex = 153;
-            label5.Text = "Categoria";
+            label5.Text = "Ubicacion";
             // 
             // btnConfirmar
             // 
@@ -351,28 +351,59 @@
             dataGridView1.TabIndex = 155;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             // 
-            // guna2TextBox7
+            // ID2
             // 
-            guna2TextBox7.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            guna2TextBox7.BackColor = Color.Transparent;
-            guna2TextBox7.BorderRadius = 6;
-            guna2TextBox7.CustomizableEdges = customizableEdges15;
-            guna2TextBox7.DefaultText = "";
-            guna2TextBox7.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox7.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox7.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox7.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox7.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox7.Font = new Font("Segoe UI", 9F);
-            guna2TextBox7.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox7.Location = new Point(4, 77);
-            guna2TextBox7.Name = "guna2TextBox7";
-            guna2TextBox7.PlaceholderText = "Ingrese un ID o nombre...";
-            guna2TextBox7.SelectedText = "";
-            guna2TextBox7.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2TextBox7.Size = new Size(173, 20);
-            guna2TextBox7.TabIndex = 156;
-            guna2TextBox7.TextChanged += guna2TextBox7_TextChanged;
+            ID2.DataPropertyName = "ID";
+            ID2.HeaderText = "ID";
+            ID2.Name = "ID2";
+            ID2.ReadOnly = true;
+            ID2.Resizable = DataGridViewTriState.False;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.DataPropertyName = "Nombre";
+            Nombre.HeaderText = "Nombre";
+            Nombre.Name = "Nombre";
+            Nombre.ReadOnly = true;
+            Nombre.Resizable = DataGridViewTriState.False;
+            // 
+            // Categoria
+            // 
+            Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Categoria.DataPropertyName = "Categoria";
+            Categoria.HeaderText = "Ubicacion";
+            Categoria.Name = "Categoria";
+            Categoria.ReadOnly = true;
+            Categoria.Resizable = DataGridViewTriState.False;
+            // 
+            // Descripcion
+            // 
+            Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Descripcion.DataPropertyName = "Descripcion";
+            Descripcion.HeaderText = "Descripcion";
+            Descripcion.Name = "Descripcion";
+            Descripcion.ReadOnly = true;
+            Descripcion.Resizable = DataGridViewTriState.False;
+            // 
+            // Cantidad
+            // 
+            Cantidad.DataPropertyName = "Cantidad";
+            Cantidad.HeaderText = "stock";
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            Cantidad.Resizable = DataGridViewTriState.False;
+            // 
+            // PrecioUnit
+            // 
+            PrecioUnit.DataPropertyName = "PrecioUnitario";
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            PrecioUnit.DefaultCellStyle = dataGridViewCellStyle2;
+            PrecioUnit.HeaderText = "Precio unit";
+            PrecioUnit.Name = "PrecioUnit";
+            PrecioUnit.ReadOnly = true;
+            PrecioUnit.Resizable = DataGridViewTriState.False;
             // 
             // Cliente
             // 
@@ -402,7 +433,7 @@
             guna2CustomGradientPanel1.Controls.Add(Btnmaximi);
             guna2CustomGradientPanel1.Controls.Add(Btnmini);
             guna2CustomGradientPanel1.Controls.Add(btncerrarr);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges17;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges15;
             guna2CustomGradientPanel1.Dock = DockStyle.Top;
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(26, 32, 40);
             guna2CustomGradientPanel1.FillColor2 = SystemColors.HotTrack;
@@ -410,7 +441,7 @@
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(0, 80, 200);
             guna2CustomGradientPanel1.Location = new Point(0, 0);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
             guna2CustomGradientPanel1.Size = new Size(1224, 25);
             guna2CustomGradientPanel1.TabIndex = 158;
             guna2CustomGradientPanel1.MouseDown += guna2CustomGradientPanel1_MouseDown;
@@ -554,59 +585,28 @@
             btncerrarr.TabIndex = 146;
             btncerrarr.TabStop = false;
             // 
-            // ID2
+            // guna2TextBox7
             // 
-            ID2.DataPropertyName = "ID";
-            ID2.HeaderText = "ID";
-            ID2.Name = "ID2";
-            ID2.ReadOnly = true;
-            ID2.Resizable = DataGridViewTriState.False;
-            // 
-            // Nombre
-            // 
-            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.DataPropertyName = "Nombre";
-            Nombre.HeaderText = "Nombre";
-            Nombre.Name = "Nombre";
-            Nombre.ReadOnly = true;
-            Nombre.Resizable = DataGridViewTriState.False;
-            // 
-            // Categoria
-            // 
-            Categoria.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Categoria.DataPropertyName = "Categoria";
-            Categoria.HeaderText = "Categoria";
-            Categoria.Name = "Categoria";
-            Categoria.ReadOnly = true;
-            Categoria.Resizable = DataGridViewTriState.False;
-            // 
-            // Descripcion
-            // 
-            Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Descripcion.DataPropertyName = "Descripcion";
-            Descripcion.HeaderText = "Descripcion";
-            Descripcion.Name = "Descripcion";
-            Descripcion.ReadOnly = true;
-            Descripcion.Resizable = DataGridViewTriState.False;
-            // 
-            // Cantidad
-            // 
-            Cantidad.DataPropertyName = "Cantidad";
-            Cantidad.HeaderText = "stock";
-            Cantidad.Name = "Cantidad";
-            Cantidad.ReadOnly = true;
-            Cantidad.Resizable = DataGridViewTriState.False;
-            // 
-            // PrecioUnit
-            // 
-            PrecioUnit.DataPropertyName = "PrecioUnitario";
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            PrecioUnit.DefaultCellStyle = dataGridViewCellStyle2;
-            PrecioUnit.HeaderText = "Precio unit";
-            PrecioUnit.Name = "PrecioUnit";
-            PrecioUnit.ReadOnly = true;
-            PrecioUnit.Resizable = DataGridViewTriState.False;
+            guna2TextBox7.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            guna2TextBox7.BackColor = Color.Transparent;
+            guna2TextBox7.BorderRadius = 6;
+            guna2TextBox7.CustomizableEdges = customizableEdges17;
+            guna2TextBox7.DefaultText = "";
+            guna2TextBox7.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            guna2TextBox7.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            guna2TextBox7.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox7.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            guna2TextBox7.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox7.Font = new Font("Segoe UI", 9F);
+            guna2TextBox7.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2TextBox7.Location = new Point(4, 77);
+            guna2TextBox7.Name = "guna2TextBox7";
+            guna2TextBox7.PlaceholderText = "Ingrese un ID o nombre...";
+            guna2TextBox7.SelectedText = "";
+            guna2TextBox7.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            guna2TextBox7.Size = new Size(156, 20);
+            guna2TextBox7.TabIndex = 156;
+            guna2TextBox7.TextChanged += guna2TextBox7_TextChanged;
             // 
             // BuscarProducto
             // 

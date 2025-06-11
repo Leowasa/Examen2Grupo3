@@ -60,7 +60,8 @@ namespace Examen2Grupo3
                 string filtro = textoBusqueda.ToLower();
                 var filtrados = listaProductos.Where(p =>
                     p.ID.ToString().Contains(filtro) ||
-                    (p.Nombre != null && p.Nombre.ToLower().Contains(filtro))
+                    (p.Nombre != null && p.Nombre.ToLower().Contains(filtro)) ||
+                    (p.IDbarra != null && p.IDbarra.ToLower().Contains(filtro))
                 ).ToList();
 
                 bindingSource.DataSource = filtrados;
@@ -69,7 +70,7 @@ namespace Examen2Grupo3
         }
         private void guna2TextBox7_TextChanged(object sender, EventArgs e)//barra de busqueda
         {
-            BuscarElemento(guna2TextBox2.Text);
+            BuscarElemento(guna2TextBox7.Text);
         }
 
       
@@ -123,7 +124,7 @@ namespace Examen2Grupo3
             Producto = new Producto();
             try
             {
-                Producto.ID = int.Parse(guna2TextBox1.Text);
+                Producto.ID = guna2TextBox1.Text;
                 Producto.Nombre = guna2TextBox2.Text;
                 Producto.Categoria = guna2TextBox4.Text;
                 Producto.Descripcion = guna2TextBox3.Text;
